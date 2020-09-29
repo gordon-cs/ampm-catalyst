@@ -9,4 +9,4 @@
 User stories are marked as Issues, and tagged as "user story".  
 [Requirements](https://docs.google.com/document/d/1vdRwV_Ovzk_n92TyGibwH8Zn-K3C0krRfsE6m6DEKAw/edit?usp=sharing "Requirements")
 ## Lo-Fi UI ##
-_To Do_
+https://docs.google.com/document/d/1Kj0V1loV2aNhajn99328095gdSpKu9AeVIH6QiALkWw/edit
