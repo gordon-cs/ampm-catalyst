@@ -13,7 +13,7 @@ User stories are marked as Issues, and tagged as "user story".
 https://docs.google.com/document/d/1Kj0V1loV2aNhajn99328095gdSpKu9AeVIH6QiALkWw/edit
 
 ## Tool Proposal ##
-[Document] (https://docs.google.com/document/d/1qImiFCCVp_iIEAPC8l6XtmqPo7CcKpHbPF31TauXOmQ/edit?ts=5f7a5c2a# "Document")
+[Google doc] (https://docs.google.com/document/d/1qImiFCCVp_iIEAPC8l6XtmqPo7CcKpHbPF31TauXOmQ/edit?ts=5f7a5c2a# "Google doc")
 
 [Java Style Guide](https://google.github.io/styleguide/javaguide.html "Java Style Guide")
 
