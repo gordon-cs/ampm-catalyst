@@ -6,6 +6,9 @@
 package hello_world;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,17 +17,27 @@ import javafx.scene.control.Label;
 
 /**
  *
- * @author johnz
+ * @author John Zhu and Ben Abbett
  */
 public class FXMLDocumentController implements Initializable {
+    private ResultSet rs;
     
     @FXML
     private Label label;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("Connect to database");
-        label.setText("Hello World!");
+    private void handleButtonAction(ActionEvent event) throws SQLException {        
+        // Test connection to database when the button is pressed.
+        rs = Hello_World.getStatement().executeQuery("SELECT * FROM hello");
+        
+        // Retrive result of query
+        rs.next();
+        String title = rs.getString("title");
+        String body = rs.getString("body");
+
+        // Set the new label's value
+        label.setText(title + " " + body + "\n" + LocalDateTime.now().toString());
+        
     }
     
     @Override
