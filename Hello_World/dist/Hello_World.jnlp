@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Hello_World.jar" size="5063" download="eager" />
+    <jar href="Hello_World.jar" size="4474" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.21.jar" size="2397321" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="hello_world.Hello_World"  name="Hello_World" />
