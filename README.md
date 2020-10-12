@@ -10,11 +10,17 @@ User stories are marked as Issues, and tagged as "user story".
 [Requirements](https://docs.google.com/document/d/1vdRwV_Ovzk_n92TyGibwH8Zn-K3C0krRfsE6m6DEKAw/edit?usp=sharing "Requirements")
 
 ## Lo-Fi UI ##
-https://docs.google.com/document/d/1Kj0V1loV2aNhajn99328095gdSpKu9AeVIH6QiALkWw/edit
+[First Version](https://docs.google.com/document/d/1Kj0V1loV2aNhajn99328095gdSpKu9AeVIH6QiALkWw/edit)
 
 ## Tool Proposal ##
-[Google Doc](https://docs.google.com/document/d/1qImiFCCVp_iIEAPC8l6XtmqPo7CcKpHbPF31TauXOmQ/edit?ts=5f7a5c2a# "Google doc")
+[Tool Proposal Doc](https://docs.google.com/document/d/1qImiFCCVp_iIEAPC8l6XtmqPo7CcKpHbPF31TauXOmQ/edit?ts=5f7a5c2a# "Google doc")
 
 [Java Style Guide](https://google.github.io/styleguide/javaguide.html "Java Style Guide")
 
 [MySQL Style Guide](https://dev.mysql.com/doc/dev/mysql-server/8.0.12/PAGE_CODING_GUIDELINES.html "MySQL Style Guide")
+
+# How-To #
+This project is compiled to a .jar file, and can be run by simply double-clicking.
+1. Ensure that you have the correct version of Java downloaded. You can dowload it [here](https://www.java.com/en/download/).
+2. Visit the 'Releases' section in the sidebar of this page. 
+3. Follow the instructions there.
