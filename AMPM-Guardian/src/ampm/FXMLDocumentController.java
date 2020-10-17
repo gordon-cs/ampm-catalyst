@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hello_world;
+package ampm;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -28,7 +28,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws SQLException {        
         // Test connection to database when the button is pressed.
-        rs = Hello_World.getStatement().executeQuery("SELECT * FROM hello");
+        rs = AMPMGuardian.getStatement().executeQuery("SELECT * FROM hello");
         
         // Retrive result of query
         rs.next();

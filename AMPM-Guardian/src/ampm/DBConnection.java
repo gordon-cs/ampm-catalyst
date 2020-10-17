@@ -5,7 +5,7 @@
  * Copied (with slight modification) from https://netbeans.org/project_downloads/www/MyDBConnection.java
  */
 
-package hello_world;
+package ampm;
 
 import java.sql.*;
 import java.util.Properties;

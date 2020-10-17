@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hello_world;
+package ampm;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author johnz
  */
-public class Hello_World extends Application {
+public class AMPMGuardian extends Application {
     
     private static DBConnection db;
     private static Connection conn;

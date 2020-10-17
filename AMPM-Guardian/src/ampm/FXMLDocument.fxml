@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="hello_world.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ampm.FXMLDocumentController">
   <children>
     <Button id="queryButton" fx:id="button" layoutX="110.0" layoutY="292.0" onAction="#handleButtonAction" text="Query Database" />
     <Label id="queryResultLabel" fx:id="label" layoutX="40.0" layoutY="76.0" minHeight="16.0" minWidth="69.0" prefHeight="150.0" prefWidth="273.0" />
