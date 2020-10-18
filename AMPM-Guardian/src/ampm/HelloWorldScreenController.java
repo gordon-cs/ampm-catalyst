@@ -19,7 +19,7 @@ import javafx.scene.control.Label;
  *
  * @author John Zhu and Ben Abbett
  */
-public class FXMLDocumentController implements Initializable {
+public class HelloWorldScreenController implements Initializable {
     private ResultSet rs;
     
     @FXML

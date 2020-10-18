@@ -17,16 +17,32 @@ import java.util.Properties;
 public class DBConnection {
     
     private Connection myConnection;
-    
+    private static DBConnection dbConnection = null;
     /** Creates a new instance of DBConnection */
     public DBConnection() {
-
+        
     }
+      // static method to create/get singleton instance of DBConnection class 
+    public static DBConnection getInstance() {
+      
+        if (dbConnection == null) 
+            dbConnection = new DBConnection(); 
+  
+        return dbConnection; 
+    } 
     
-    public void init(){
+    /**Creates the DBConnection instance by logging in with a specified user/pass
+     * combination. 
+     * 
+     * @param user String. The username to use for the database
+     * @param pass String. The corresponding password
+     */
+    public Boolean init(String user, String pass){
+        Boolean success = true;
+        
         Properties connectionProps = new Properties();
-        connectionProps.put("user", "ampmadmin");
-        connectionProps.put("password", "thepasswordispassword");
+        connectionProps.put("user", user);
+        connectionProps.put("password", pass);
         
         // after the port info (3306), you need to put "/helloworld" to select
         // the database. 
@@ -40,13 +56,11 @@ public class DBConnection {
             myConnection = DriverManager.getConnection(dbURL, connectionProps);
         }
         catch(Exception e){
+            success = false;
             System.out.println("Failed to get connection");
             e.printStackTrace();
         }
-    }
-    
-    public Connection getMyConnection(){
-        return myConnection;
+        return success; 
     }
     
     public void close(ResultSet rs){
@@ -60,7 +74,7 @@ public class DBConnection {
         }
     }
     
-     public void close(java.sql.Statement stmt){
+    public void close(java.sql.Statement stmt){
         
         if(stmt != null){
             try {
@@ -79,5 +93,5 @@ public class DBConnection {
         catch(Exception e){}     
     }
   }
-    
+  
 }
