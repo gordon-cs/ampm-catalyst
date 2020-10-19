@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -90,10 +91,12 @@ public class AddClientScreenController implements Initializable {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Invalid email address");
         }
-        System.out.println(phoneNumber);
+        //System.out.println(phoneNumber);
+        //DataFormat datefrmat = new SimpleDataFormat("yyyy/MM/dd HH:mm:ss");
         //SQL command to insert client information to the database
-        rs = DBConnection.getStatement().executeQuery("INSERT INTO Client VALUES '"+firstName.getText()+","
+        rs = DBConnection.getStatement().executeQuery("INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES '"+firstName.getText()+","
                 +lastName.getText()+","+phoneNumber.getText()+","+emailAddress.getText()+"'");
+        //maybe need use try catch?
     } 
     
     public boolean isValidName(String username){      
