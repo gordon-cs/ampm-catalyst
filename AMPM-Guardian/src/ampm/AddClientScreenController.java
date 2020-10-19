@@ -8,6 +8,7 @@ package ampm;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class AddClientScreenController implements Initializable {
     }    
     @FXML
     private void addNewClient(MouseEvent event) throws SQLException {
+       PreparedStatement preparedStatement=null;
         //Input should not be empty
         if(firstName.getText().isEmpty()|| lastName.getText().isEmpty()
                 ||phoneNumber.getText().isEmpty()||emailAddress.getText().isEmpty())
@@ -95,9 +97,16 @@ public class AddClientScreenController implements Initializable {
         //DataFormat datefrmat = new SimpleDataFormat("yyyy/MM/dd HH:mm:ss");
         //SQL command to insert client information to the database
         else{
-            rs = DBConnection.getStatement().executeQuery("INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES '"+firstName.getText()+","
-                +lastName.getText()+","+phoneNumber.getText()+","+emailAddress.getText()+"'");
-        //maybe need use try catch?
+            String sql ="INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES '"+firstName.getText()+","
+                +lastName.getText()+","+phoneNumber.getText()+","+emailAddress.getText()+"'";
+            try {
+                preparedStatement=dbConnection.getConnection().prepareStatement(sql);
+                preparedStatement.executeUpdate(sql);
+                System.out.println("A new client was inserted successfully!");
+            } catch (SQLException e) {
+            // TODO: handle exception
+                System.out.println("A new client was insertion failed!");
+            }
         }
     } 
     
