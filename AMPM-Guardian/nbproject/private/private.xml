@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AMPMGuardian.java</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/nbproject/jfx-impl.xml</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/manifest.mf</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/build.xml</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/nbproject/genfiles.properties</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/nbproject/project.properties</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/nbproject/build-impl.xml</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/nbproject/project.xml</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBConnection.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AddClientScreen.fxml</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AddClientScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/HelloWorldScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/LoginScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AMPMGuardian.java</file>
         </group>
     </open-files>
 </project-private>

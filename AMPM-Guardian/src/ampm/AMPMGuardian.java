@@ -25,7 +25,11 @@ public class AMPMGuardian extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+<<<<<<< Updated upstream
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+=======
+        Parent root = FXMLLoader.load(getClass().getResource("AddClientScreen.fxml"));
+>>>>>>> Stashed changes
         
         Scene scene = new Scene(root);
         
