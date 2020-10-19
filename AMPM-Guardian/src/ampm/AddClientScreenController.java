@@ -94,9 +94,11 @@ public class AddClientScreenController implements Initializable {
         //System.out.println(phoneNumber);
         //DataFormat datefrmat = new SimpleDataFormat("yyyy/MM/dd HH:mm:ss");
         //SQL command to insert client information to the database
-        rs = DBConnection.getStatement().executeQuery("INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES '"+firstName.getText()+","
+        else{
+            rs = DBConnection.getStatement().executeQuery("INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES '"+firstName.getText()+","
                 +lastName.getText()+","+phoneNumber.getText()+","+emailAddress.getText()+"'");
         //maybe need use try catch?
+        }
     } 
     
     public boolean isValidName(String username){      
