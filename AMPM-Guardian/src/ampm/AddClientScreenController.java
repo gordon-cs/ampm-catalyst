@@ -67,7 +67,6 @@ public class AddClientScreenController implements Initializable {
     }    
     @FXML
     private void addNewClient(MouseEvent event) throws SQLException {
-       PreparedStatement preparedStatement=null;
         //Input should not be empty
         if(firstName.getText().isEmpty()|| lastName.getText().isEmpty()
                 ||phoneNumber.getText().isEmpty()||emailAddress.getText().isEmpty())
@@ -97,14 +96,16 @@ public class AddClientScreenController implements Initializable {
         //DataFormat datefrmat = new SimpleDataFormat("yyyy/MM/dd HH:mm:ss");
         //SQL command to insert client information to the database
         else{
-            String sql ="INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES '"+firstName.getText()+","
-                +lastName.getText()+","+phoneNumber.getText()+","+emailAddress.getText()+"'";
+            PreparedStatement preparedStatement;
+            String sql ="INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES ('"+firstName.getText()+"','"
+                +lastName.getText()+"','"+emailAddress.getText()+"','"+phoneNumber.getText()+"')";
             try {
                 preparedStatement=dbConnection.getConnection().prepareStatement(sql);
                 preparedStatement.executeUpdate(sql);
                 System.out.println("A new client was inserted successfully!");
             } catch (SQLException e) {
             // TODO: handle exception
+                e.printStackTrace();
                 System.out.println("A new client was insertion failed!");
             }
         }
