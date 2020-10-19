@@ -87,9 +87,14 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private void handleOnKeyTyped(KeyEvent event) {
+        // If there's nothing in the textbox, just show the most recent clients
         String currSearch = clientSearchField.getText();
-        items = FXCollections.observableArrayList();
+        if (currSearch.length() == 0) {
+            setupListView();
+            return;
+        }
         
+        items = FXCollections.observableArrayList();
         clients.forEach(client -> {
             if (client.length() >= currSearch.length()) {
                 if (client.substring(0,currSearch.length()).equalsIgnoreCase(currSearch)) {
@@ -104,11 +109,11 @@ public class HomeScreenController implements Initializable {
     private void handleNewClientClicked(MouseEvent event) {
             // Launch the new client stage
             Stage homeStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("NewClient.fxml"));
+//            Parent root = FXMLLoader.load(getClass().getResource("NewClient.fxml"));
         
-            Scene scene = new Scene(root);
-            homeStage.setScene(scene);
-            homeStage.show();
+//            Scene scene = new Scene(root);
+//            homeStage.setScene(scene);
+//            homeStage.show();
             
     }
     
