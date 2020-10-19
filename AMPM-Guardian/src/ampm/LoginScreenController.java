@@ -5,19 +5,24 @@
  */
 package ampm;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -50,7 +55,7 @@ public class LoginScreenController implements Initializable {
     }    
     
     @FXML
-    private void handleLoginClick(MouseEvent event) throws SQLException {  
+    private void handleLoginClick(MouseEvent event) throws SQLException, IOException {  
         System.out.println(passField.getText());
         Boolean success = dbConnection.init(userField.getText(), passField.getText());
         if (!success) {
@@ -59,6 +64,20 @@ public class LoginScreenController implements Initializable {
         } else {
             invalidLabel.setVisible(false);
             System.out.println("Success");
+            
+            // Launch the homescreen stage
+            Stage homeStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        
+            Scene scene = new Scene(root);
+            homeStage.setScene(scene);
+            homeStage.show();
+            
+            // TODO: Need to find a way to close stages from a controller class.
+            // this doesn't seem to be working right now.
+            Stage loginStage = new Stage();
+            loginStage.setScene(AMPMGuardian.loginScene);
+            loginStage.hide();
         }
     } 
 }

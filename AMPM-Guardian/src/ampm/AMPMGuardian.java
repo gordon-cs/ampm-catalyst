@@ -18,10 +18,7 @@ import javafx.stage.Stage;
  * @author johnz
  */
 public class AMPMGuardian extends Application {
-    
-    private static DBConnection db;
-    private static Connection conn;
-    private static Statement stmt;
+    public static Scene loginScene;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -29,16 +26,9 @@ public class AMPMGuardian extends Application {
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        loginScene = scene;
+        
         stage.show();
-        
-        // Create the DB connection
-//        db = new DBConnection();
-//        db.init(); this will get moved to the login class
-//        conn = db.getMyConnection();
-        
-        // Create the statement for running sql queries.
-//        stmt = conn.createStatement();
-        
     }
 
     /**
@@ -46,19 +36,5 @@ public class AMPMGuardian extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-    
-    /* Getters for the class variables */
-    
-    public static DBConnection getDB() {
-        return db;
-    }
-    
-    public static Connection getConnection() {
-        return conn;
-    }
-    
-    public static Statement getStatement() {
-        return stmt;
     }
 }

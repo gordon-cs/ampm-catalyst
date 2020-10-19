@@ -16,8 +16,10 @@ import java.util.Properties;
  */
 public class DBConnection {
     
-    private Connection myConnection;
+    private static Connection conn;
     private static DBConnection dbConnection = null;
+    private static Statement stmt;
+    
     /** Creates a new instance of DBConnection */
     public DBConnection() {
         
@@ -44,16 +46,17 @@ public class DBConnection {
         connectionProps.put("user", user);
         connectionProps.put("password", pass);
         
-        // after the port info (3306), you need to put "/helloworld" to select
+        // after the port info (3306), you need to put "/AMPM" to select
         // the database. 
-        String dbURL = "jdbc:mysql://ampm-database.c9frur6iyppq.us-east-2.rds.amazonaws.com:3306/helloworld";
+        String dbURL = "jdbc:mysql://ampm-database.c9frur6iyppq.us-east-2.rds.amazonaws.com:3306/AMPM";
         
         try {
             // forname needs to be called once to establish the driver.
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             // connect to the DB using the url and props
-            myConnection = DriverManager.getConnection(dbURL, connectionProps);
+            conn = DriverManager.getConnection(dbURL, connectionProps);
+            stmt = conn.createStatement();
         }
         catch(Exception e){
             success = false;
@@ -84,14 +87,21 @@ public class DBConnection {
         }
     }
      
-  public void destroy(){
+    public void destroy(){
       
-    if (myConnection != null){
-        try {
-            myConnection.close();
+        if (conn != null){
+            try {
+                conn.close();
+            }
+            catch(Exception e){}     
         }
-        catch(Exception e){}     
     }
-  }
-  
+    
+    public static Statement getStatement() {
+        return stmt;
+    }
+    
+    public static Connection getConnection() {
+        return conn;
+    }
 }
