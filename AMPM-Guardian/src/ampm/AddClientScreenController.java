@@ -5,6 +5,8 @@
  */
 package ampm;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -47,16 +49,18 @@ public class AddClientScreenController implements Initializable {
     private TextField lastName;
     @FXML
     private TextField phoneNumber;
+    private TextField cellPhoneNumber;
     @FXML
     private TextField emailAddress;
 
     @FXML
     private Button addClientButton;
-    
+
     @FXML
     private Label infoLabel;
-    
+
     DBConnection dbConnection;
+
     /**
      * Initializes the controller class.
      */
@@ -64,81 +68,91 @@ public class AddClientScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         dbConnection = new DBConnection();
 
-    }    
+    }
+
+    /**
+     *
+     * @param event for onMouseClicked Get string for firstName,lastName,
+     * phoneNumber, emailAddress in TextField, and check if there are valid.
+     * Insert client info to database if all the data is valid.
+     * @throws SQLException
+     */
     @FXML
     private void addNewClient(MouseEvent event) throws SQLException {
         //Input should not be empty
-        if(firstName.getText().isEmpty()|| lastName.getText().isEmpty()
-                ||phoneNumber.getText().isEmpty()||emailAddress.getText().isEmpty())
-        {
+        if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
+                || phoneNumber.getText().isEmpty() || emailAddress.getText().isEmpty()) {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Please fill all the information");
-        }
-        //Validating the input of name
-        else if(!isValidName(firstName.getText())||!isValidName(lastName.getText()))
-        {
+        } //Validating the input of name
+        else if (!isValidName(firstName.getText()) || !isValidName(lastName.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Invalid Name");
-        }
-        //Validating the input of phone number
-        else if(!isValidPhone(phoneNumber.getText()))
-        {
+        } //Validating the input of phone number
+        else if (!isValidPhone(phoneNumber.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Invalid phone number");
-        }
-        //Validating the input of email
-        else if(!isValidEmail(emailAddress.getText()))
-        {
+        } //Validating the input of email
+        else if (!isValidEmail(emailAddress.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Invalid email address");
-        }
-        //System.out.println(phoneNumber);
-        //DataFormat datefrmat = new SimpleDataFormat("yyyy/MM/dd HH:mm:ss");
-        //SQL command to insert client information to the database
-        else{
+        } //else if (!(cellPhoneNumber.getText().isEmpty())) {
+            //System.out.println("Not empty");
+        //} //SQL command to insert client information to the database
+        else {
+            //Fortmat for date
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
             PreparedStatement preparedStatement;
-            String sql ="INSERT INTO Client (FirstName, LastName, Email, Phone) VALUES ('"+firstName.getText()+"','"
-                +lastName.getText()+"','"+emailAddress.getText()+"','"+phoneNumber.getText()+"')";
+            String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified) VALUES ('" + firstName.getText() + "','"
+                    + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "')";
             try {
-                preparedStatement=dbConnection.getConnection().prepareStatement(sql);
+                preparedStatement = dbConnection.getConnection().prepareStatement(sql);
                 preparedStatement.executeUpdate(sql);
-                System.out.println("A new client was inserted successfully!");
+                infoLabel.setText("A new client was inserted successfully!");
             } catch (SQLException e) {
-            // TODO: handle exception
+                // TODO: handle exception
                 e.printStackTrace();
-                System.out.println("A new client was insertion failed!");
+                infoLabel.setText("A new client was insertion failed!");
             }
+            
         }
-    } 
-    
-    public boolean isValidName(String username){      
-       String regex="[A-Za-z\\s]+";      
-        Pattern pat = Pattern.compile(regex); 
+    }
+
+    public boolean isValidName(String username) {
+        String regex = "[A-Za-z\\s]+";
+        Pattern pat = Pattern.compile(regex);
         return username.matches(regex);//returns true if input and regex matches otherwise false;
     }
-    
+
     public boolean isValidPhone(String phoneNo) {
-	//validate phone numbers of format "1234567890"
-	if (phoneNo.matches("\\d{10}")) return true;
-	//validating phone number with -, . or spaces
-	else if(phoneNo.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")) return true;
-	//validating phone number with extension length from 3 to 5
-	else if(phoneNo.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}")) return true;
-	//validating phone number where area code is in braces ()
-	else if(phoneNo.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")) return true;
-	//return false if nothing matches the input
-	else return false;		
+        //validate phone numbers of format "1234567890"
+        if (phoneNo.matches("\\d{10}")) {
+            return true;
+        } //validating phone number with -, . or spaces
+        else if (phoneNo.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")) {
+            return true;
+        } //validating phone number with extension length from 3 to 5
+        else if (phoneNo.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}")) {
+            return true;
+        } //validating phone number where area code is in braces ()
+        else if (phoneNo.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")) {
+            return true;
+        } //return false if nothing matches the input
+        else {
+            return false;
+        }
     }
-   
-    public boolean isValidEmail(String email) 
-    { 
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
-                            "[a-zA-Z0-9_+&*-]+)*@" + 
-                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
-                            "A-Z]{2,7}$"; 
-                              
-        Pattern pat = Pattern.compile(emailRegex); 
-        return pat.matcher(email).matches(); //returns true if input and regex matches otherwise false;
-    } 
+
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
+                + "[a-zA-Z0-9_+&*-]+)*@"
+                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+                + "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        //returns true if input and regex matches otherwise false;
+        return pat.matcher(email).matches();
+    }
 
 }
