@@ -49,6 +49,7 @@ public class AddClientScreenController implements Initializable {
     private TextField lastName;
     @FXML
     private TextField phoneNumber;
+    @FXML
     private TextField cellPhoneNumber;
     @FXML
     private TextField emailAddress;
@@ -60,6 +61,10 @@ public class AddClientScreenController implements Initializable {
     private Label infoLabel;
 
     DBConnection dbConnection;
+    //Format for date
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    PreparedStatement preparedStatement;
 
     /**
      * Initializes the controller class.
@@ -91,19 +96,33 @@ public class AddClientScreenController implements Initializable {
         } //Validating the input of phone number
         else if (!isValidPhone(phoneNumber.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid phone number");
+            infoLabel.setText("Invalid home phone number");
         } //Validating the input of email
         else if (!isValidEmail(emailAddress.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Invalid email address");
-        } //else if (!(cellPhoneNumber.getText().isEmpty())) {
-            //System.out.println("Not empty");
-        //} //SQL command to insert client information to the database
+        } else if (!(cellPhoneNumber.getText().isEmpty())) {
+            if (!isValidPhone(cellPhoneNumber.getText())) {
+                infoLabel.setStyle("-fx-text-fill:red");
+                infoLabel.setText("Invalid cell phone number");
+            } else {
+                Date date = new Date();
+                String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified,Cell) VALUES ('" + firstName.getText() + "','"
+                        + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "','"+cellPhoneNumber.getText()+"')";
+                try {
+                    preparedStatement = dbConnection.getConnection().prepareStatement(sql);
+                    preparedStatement.executeUpdate(sql);
+                    infoLabel.setText("A new client was inserted successfully!");
+                } catch (SQLException e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                    infoLabel.setText("A new client was insertion failed!");
+                }
+            }
+        } //SQL command to insert client information to the database
         else {
             //Fortmat for date
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
-            PreparedStatement preparedStatement;
             String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified) VALUES ('" + firstName.getText() + "','"
                     + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "')";
             try {
@@ -115,7 +134,7 @@ public class AddClientScreenController implements Initializable {
                 e.printStackTrace();
                 infoLabel.setText("A new client was insertion failed!");
             }
-            
+
         }
     }
 
