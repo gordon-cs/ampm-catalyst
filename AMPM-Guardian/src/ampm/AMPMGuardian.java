@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author johnz
+ * @author John and Ben 
  */
 public class AMPMGuardian extends Application {
     public static Scene loginScene;

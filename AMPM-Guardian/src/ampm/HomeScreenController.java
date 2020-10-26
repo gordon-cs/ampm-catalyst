@@ -5,6 +5,7 @@
  */
 package ampm;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -106,14 +107,15 @@ public class HomeScreenController implements Initializable {
     }
     
     @FXML
-    private void handleNewClientClicked(MouseEvent event) {
+    private void handleNewClientClicked(MouseEvent event) throws IOException {
             // Launch the new client stage
             Stage homeStage = new Stage();
-//            Parent root = FXMLLoader.load(getClass().getResource("NewClient.fxml"));
-        
-//            Scene scene = new Scene(root);
-//            homeStage.setScene(scene);
-//            homeStage.show();
+            Parent root = FXMLLoader.load(getClass().getResource("AddClientScreen.fxml"));
+
+            Scene scene = new Scene(root);
+            homeStage.setScene(scene);
+            homeStage.show();
+
             
     }
     
