@@ -19,7 +19,7 @@ import javafx.scene.control.Label;
  *
  * @author John Zhu and Ben Abbett
  */
-public class FXMLDocumentController implements Initializable {
+public class HelloWorldScreenController implements Initializable {
     private ResultSet rs;
     
     @FXML
@@ -28,7 +28,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws SQLException {        
         // Test connection to database when the button is pressed.
-        rs = AMPMGuardian.getStatement().executeQuery("SELECT * FROM hello");
+        rs = DBConnection.getStatement().executeQuery("SELECT * FROM hello");
         
         // Retrive result of query
         rs.next();
