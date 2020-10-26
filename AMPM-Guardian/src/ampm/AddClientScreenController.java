@@ -41,7 +41,6 @@ import javafx.stage.Stage;
  */
 public class AddClientScreenController implements Initializable {
 
-    //private ResultSet rs;
     private ResultSet rs;
     @FXML
     private TextField firstName;
@@ -77,13 +76,15 @@ public class AddClientScreenController implements Initializable {
 
     /**
      *
-     * @param event for onMouseClicked Get string for firstName,lastName,
-     * phoneNumber, emailAddress in TextField, and check if there are valid.
-     * Insert client info to database if all the data is valid.
+     * @param event for onMouseClicked Get string for first name,last name,
+     * phone number, email address,and cellphone number(optional) in TextField,
+     * and check if there are valid. Insert client info to database if all the
+     * data is valid.
      * @throws SQLException
      */
     @FXML
     private void addNewClient(MouseEvent event) throws SQLException {
+
         //Input should not be empty
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
                 || phoneNumber.getText().isEmpty() || emailAddress.getText().isEmpty()) {
@@ -106,35 +107,64 @@ public class AddClientScreenController implements Initializable {
                 infoLabel.setStyle("-fx-text-fill:red");
                 infoLabel.setText("Invalid cell phone number");
             } else {
+                String check = "SELECT * FROM Client WHERE FirstName = '" + firstName.getText()
+                        + "' AND LastName = '" + lastName.getText()
+                        + "' AND Email = '" + emailAddress.getText()
+                        + "' AND Phone = '" + phoneNumber.getText() + "';";
+                //Fortmat for date
+                System.out.println(check);
+                preparedStatement = dbConnection.getConnection().prepareStatement(check);
+                rs = preparedStatement.executeQuery(check);
+                if (!isFilled(rs)) {
+                    Date date = new Date();
+                    String sql = "INSERT INTO Client (FirstName, LastName, Email, "
+                            + "Phone, LastModified,Cell) VALUES ('" + firstName.getText()
+                            + "','" + lastName.getText() + "','" + emailAddress.getText()
+                            + "','" + phoneNumber.getText() + "','" + formatter.format(date)
+                            + "','" + cellPhoneNumber.getText() + "')";
+                    try {
+                        preparedStatement = dbConnection.getConnection().prepareStatement(sql);
+                        preparedStatement.executeUpdate(sql);
+                        infoLabel.setStyle("-fx-text-fill:green");
+                        infoLabel.setText("A new client was inserted successfully!");
+                    } catch (SQLException e) {
+                        // TODO: handle exception
+                        e.printStackTrace();
+                        infoLabel.setText("A new client was insertion failed!");
+                    }
+                } else {
+                    infoLabel.setStyle("-fx-text-fill:red");
+                    infoLabel.setText("This client is in the database already.");
+                }
+            }
+        } else {
+            //Command to check if the client is already exist in databse
+            String check = "SELECT * FROM Client WHERE FirstName = '" + firstName.getText()
+                    + "' AND LastName = '" + lastName.getText()
+                    + "' AND Email = '" + emailAddress.getText()
+                    + "' AND Phone = '" + phoneNumber.getText() + "';";
+            //Fortmat for date
+            preparedStatement = dbConnection.getConnection().prepareStatement(check);
+            rs = preparedStatement.executeQuery(check);
+            if (!isFilled(rs)) {
+                //SQL command to insert client information to the database
                 Date date = new Date();
-                String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified,Cell) VALUES ('" + firstName.getText() + "','"
-                        + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "','"+cellPhoneNumber.getText()+"')";
+                String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified) VALUES ('" + firstName.getText() + "','"
+                        + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "')";
                 try {
                     preparedStatement = dbConnection.getConnection().prepareStatement(sql);
                     preparedStatement.executeUpdate(sql);
+                    infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
                 } catch (SQLException e) {
                     // TODO: handle exception
                     e.printStackTrace();
                     infoLabel.setText("A new client was insertion failed!");
                 }
+            } else {
+                infoLabel.setStyle("-fx-text-fill:red");
+                infoLabel.setText("This client is in the database already.");
             }
-        } //SQL command to insert client information to the database
-        else {
-            //Fortmat for date
-            Date date = new Date();
-            String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified) VALUES ('" + firstName.getText() + "','"
-                    + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "')";
-            try {
-                preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-                preparedStatement.executeUpdate(sql);
-                infoLabel.setText("A new client was inserted successfully!");
-            } catch (SQLException e) {
-                // TODO: handle exception
-                e.printStackTrace();
-                infoLabel.setText("A new client was insertion failed!");
-            }
-
         }
     }
 
@@ -174,4 +204,16 @@ public class AddClientScreenController implements Initializable {
         return pat.matcher(email).matches();
     }
 
+    // Check if rs is filled or not
+    public static boolean isFilled(ResultSet rs) {
+        boolean isEmpty = true;
+        try {
+            while (rs.next()) {
+                isEmpty = false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return !isEmpty;
+    }
 }
