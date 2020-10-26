@@ -83,7 +83,7 @@ public class AddClientScreenController implements Initializable {
      * @throws SQLException
      */
     @FXML
-    private void addNewClient(MouseEvent event) throws SQLException {
+    private void addNewClient(MouseEvent event) throws SQLException, IOException {
 
         //Input should not be empty
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
@@ -156,6 +156,9 @@ public class AddClientScreenController implements Initializable {
                     preparedStatement.executeUpdate(sql);
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
+                    
+                    finalizeInsert();
+                 
                 } catch (SQLException e) {
                     // TODO: handle exception
                     e.printStackTrace();
@@ -215,5 +218,21 @@ public class AddClientScreenController implements Initializable {
             e.printStackTrace();
         }
         return !isEmpty;
+    }
+    
+    // Handle the logic after a successful insert. 
+    private void finalizeInsert() throws IOException {
+        // Close current screen
+        Stage stage = (Stage) addClientButton.getScene().getWindow();
+        stage.close();
+        
+        // Open home screen
+        stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
     }
 }

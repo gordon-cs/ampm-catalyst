@@ -73,11 +73,9 @@ public class LoginScreenController implements Initializable {
             homeStage.setScene(scene);
             homeStage.show();
             
-            // TODO: Need to find a way to close stages from a controller class.
-            // this doesn't seem to be working right now.
-            Stage loginStage = new Stage();
-            loginStage.setScene(AMPMGuardian.loginScene);
-            loginStage.hide();
+            // Close the current screen
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
         }
     } 
 }

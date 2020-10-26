@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientScreenController">
-    <children>
-        <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="651.0" prefWidth="574.0">
-            <children>
-                <Label id="welcomeLabel" layoutX="204.0" layoutY="62.0" prefHeight="32.0" prefWidth="189.0" text="Add a new client" textAlignment="CENTER" underline="true">
-                    <font>
-                        <Font size="22.0" />
-                    </font>
-                </Label>
-                <Label id="infoLabel" fx:id="infoLabel" layoutX="185.0" layoutY="132.0" prefWidth="-1.0" text="Please enter your information" />
-                <TextField id="usernameField" fx:id="firstName" layoutX="187.0" layoutY="200.0" prefWidth="200.0" />
-                <Label id="usernameLabel" layoutX="186.0" layoutY="175.0" text="First name" />
-                <TextField id="usernameField" fx:id="lastName" layoutX="187.0" layoutY="260.0" prefWidth="200.0" />
-                <TextField id="usernameField" fx:id="phoneNumber" layoutX="187.0" layoutY="320.0" prefWidth="200.0" />
-                <TextField id="usernameField" fx:id="cellPhoneNumber" layoutX="187.0" layoutY="380.0" prefWidth="200.0" />
-                <TextField id="usernameField" fx:id="emailAddress" layoutX="187.0" layoutY="440.0" prefWidth="200.0" />
-                <Label id="usernameLabel" layoutX="186.0" layoutY="235.0" text="Last name" />
-                <Label id="phoneNumberLabel" layoutX="186.0" layoutY="295.0" text="Home Phone" />
-                <Label id="cellPhoneNumberLabel" layoutX="186.0" layoutY="355.0" text="Cell Phone (Optinal)" />
-                <Label id="emailLabel" layoutX="186.0" layoutY="415.0" text="Email" />
-                <Button fx:id="addClientButton" layoutX="260" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#addNewClient" text="Add" />
-            </children>
-        </AnchorPane>
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ampm.AddClientScreenController">
+  <children>
+    <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="651.0" prefWidth="574.0">
+      <children>
+        <Label id="welcomeLabel" layoutX="204.0" layoutY="62.0" prefHeight="32.0" prefWidth="189.0" text="Add a New Client" textAlignment="CENTER" underline="true">
+          <font>
+            <Font size="22.0" />
+          </font>
+        </Label>
+        <Label fx:id="infoLabel" layoutX="185.0" layoutY="132.0" prefWidth="-1.0" text="Please enter client's information" />
+        <TextField id="usernameField" fx:id="firstName" layoutX="187.0" layoutY="200.0" prefWidth="200.0" />
+        <Label id="usernameLabel" layoutX="186.0" layoutY="175.0" text="First name" />
+        <TextField id="usernameField" fx:id="lastName" layoutX="187.0" layoutY="260.0" prefWidth="200.0" />
+        <TextField id="usernameField" fx:id="phoneNumber" layoutX="187.0" layoutY="320.0" prefWidth="200.0" />
+        <TextField id="usernameField" fx:id="cellPhoneNumber" layoutX="187.0" layoutY="380.0" prefWidth="200.0" />
+        <TextField id="usernameField" fx:id="emailAddress" layoutX="187.0" layoutY="440.0" prefWidth="200.0" />
+        <Label id="usernameLabel" layoutX="186.0" layoutY="235.0" text="Last name" />
+        <Label id="phoneNumberLabel" layoutX="186.0" layoutY="295.0" text="Home Phone" />
+        <Label id="cellPhoneNumberLabel" layoutX="186.0" layoutY="355.0" text="Cell Phone (Optional)" />
+        <Label id="emailLabel" layoutX="186.0" layoutY="415.0" text="Email" />
+        <Button fx:id="addClientButton" layoutX="260.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#addNewClient" text="Add" />
+      </children>
+    </AnchorPane>
+  </children>
 </AnchorPane>
