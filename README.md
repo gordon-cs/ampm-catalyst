@@ -24,3 +24,6 @@ This project is compiled to a .jar file, and can be run by simply double-clickin
 1. Ensure that you have the correct version of Java downloaded. You can dowload it [here](https://www.java.com/en/download/).
 2. Visit the 'Releases' section in the sidebar of this page. 
 3. Follow the instructions there.
+
+## MVP Description ##
+[MVP Doc](https://docs.google.com/document/d/1ooMS2eGzZhjH0P4QjiAvzMcNtHR76UceHalA__00Zr0/edit?usp=sharing "MVP Doc")
