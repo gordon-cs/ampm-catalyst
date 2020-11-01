@@ -36,32 +36,40 @@ public class DBOffline implements Serializable {
         return dbOffline; 
     } 
     
+    public static void createMockTables() throws SQLException {
+        createMockClients();
+    }
+    
+    /**Creates a mocked version of the resultset you would get if selecting the list of clients
+     * from the database for the homescreen.
+     * 
+     * @throws SQLException 
+     */
     public static void createMockClients() throws SQLException {
         MockResultSet rs = new MockResultSet("Client");
         
         // Add all the columns to the rs
-        rs.addColumn("UserID");
+//        rs.addColumn("UserID");
         rs.addColumn("FirstName");
         rs.addColumn("LastName");
-        rs.addColumn("Email");
-        rs.addColumn("Phone");
+//        rs.addColumn("Email");
+//        rs.addColumn("Phone");
         rs.addColumn("LastModified");
-        rs.addColumn("Cell");
+//        rs.addColumn("Cell");
         
         ResultSet realRS = DBConnection.getClients();
         
+        // Save the real DB values into the fake DB
         while (realRS.next()) {
             rs.next();
             
-            // Save the real DB values into the fake DB
-            rs.updateInt("UserID", realRS.getInt("UserID"));
+//            rs.updateInt("UserID", realRS.getInt("UserID"));
             rs.updateString("FirstName", realRS.getString("FirstName"));
             rs.updateString("LastName", realRS.getString("LastName"));
-            rs.updateString("Email", realRS.getString("Email"));
-            rs.updateString("Phone", realRS.getString("Phone"));
+//            rs.updateString("Email", realRS.getString("Email"));
+//            rs.updateString("Phone", realRS.getString("Phone"));
             rs.updateDate("LastModified", realRS.getDate("LastModified"));
-            rs.updateString("Cell", realRS.getString("Cell"));
+//            rs.updateString("Cell", realRS.getString("Cell"));
         }
-
     }
 }

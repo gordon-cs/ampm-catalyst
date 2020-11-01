@@ -79,7 +79,14 @@ public class DBConnection {
     }
     
     private Boolean initOffline(String username, String password) {
+        // We need to ensure it isn't the first time that the system has been used
+        //      if it is, the system can't be used (no downloaded data or way to do auth)
         
+        // We need to make sure there is a saved username/pw hash and use it to verify
+
+        // Assuming user/pass was correct, we 
+        
+        return false;
     }
     
     public void close(ResultSet rs){
