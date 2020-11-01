@@ -53,7 +53,7 @@ public class HomeScreenController implements Initializable {
             // TODO
             System.out.print(DBConnection.getStatement());
             
-            rs = DBConnection.getStatement().executeQuery("Select  FirstName, LastName, LastModified from Client");
+            rs = DBConnection.getStatement().executeQuery("Select FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
             clients = new ArrayList<String>();
             addResultToClients(rs);
             setupListView();
