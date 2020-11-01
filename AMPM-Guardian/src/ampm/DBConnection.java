@@ -7,6 +7,10 @@
 
 package ampm;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.*;
 import java.util.Properties;
 
@@ -19,6 +23,7 @@ public class DBConnection {
     private static Connection conn;
     private static DBConnection dbConnection = null;
     private static Statement stmt;
+    private static Boolean offlineMode;
     
     /** Creates a new instance of DBConnection */
     public DBConnection() {
@@ -40,6 +45,12 @@ public class DBConnection {
      * @param pass String. The corresponding password
      */
     public Boolean init(String user, String pass){
+        // First, check to see if there is even an internet connection available
+        if (!internetAvailable()) {
+            // No connection, we should start the offline procedure
+            initOffline(user, pass);
+        }
+        
         Boolean success = true;
         
         Properties connectionProps = new Properties();
@@ -63,7 +74,12 @@ public class DBConnection {
             System.out.println("Failed to get connection");
             e.printStackTrace();
         }
+        offlineMode = false;
         return success; 
+    }
+    
+    private Boolean initOffline(String username, String password) {
+        
     }
     
     public void close(ResultSet rs){
@@ -106,13 +122,47 @@ public class DBConnection {
     }
     
     public static ResultSet getClients() throws SQLException {
+        if (offlineMode) {
+            // if we are in offline mode, then we should probably 
+        }
         return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client");
     } 
     
+    /** This method can be called to determine if the DBConnection has been invalidated.
+     * If we have a connection, it should return true, if we lost the connection or the 
+     * connection was interrupted, it will return false.
+     * 
+     * @return true if there was no interruption, false if the connection was lost
+     * @throws SQLException 
+     */
     public static Boolean isOnline() throws SQLException {
-//        ResultSet rs = stmt.executeQuery("select * from Client limit 1");
-//        System.out.println(rs);
         return conn.isValid(3);
     }
+    
+    /** This code should be called to check if there is an internet connection
+     * available. 
+     * 
+     * @return true if internet is available, false otherwise
+     */
+    private static Boolean internetAvailable() {
+        try {
+            URL url = new URL("http://www.google.com");
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            System.out.println("Internet is connected");
+            return true;
+        } catch (MalformedURLException e) {
+            System.out.println("Internet is not connected");
+            return false;
+        } catch (IOException e) {
+            System.out.println("Internet is not connected");
+            return false;
+        }
+    }
+    
+    public static void startOfflineMode() {
+        offlineMode = true;
+    }
+     
     
 }
