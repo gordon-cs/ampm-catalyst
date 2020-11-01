@@ -104,4 +104,15 @@ public class DBConnection {
     public static Connection getConnection() {
         return conn;
     }
+    
+    public static ResultSet getClients() throws SQLException {
+        return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client");
+    } 
+    
+    public static Boolean isOnline() throws SQLException {
+//        ResultSet rs = stmt.executeQuery("select * from Client limit 1");
+//        System.out.println(rs);
+        return conn.isValid(3);
+    }
+    
 }
