@@ -40,6 +40,8 @@ public class HomeScreenController implements Initializable {
     ListView<String> clientListView;
     @FXML
     Button newClientButton;
+    @FXML
+    Button testButton;
     
     private ResultSet rs;
     private ArrayList<String> clients;
@@ -53,7 +55,8 @@ public class HomeScreenController implements Initializable {
             // TODO
             System.out.print(DBConnection.getStatement());
             
-            rs = DBConnection.getStatement().executeQuery("Select FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
+            // should be able to do this from the DBConnection class
+            rs = DBConnection.getClients();
             clients = new ArrayList<String>();
             addResultToClients(rs);
             setupListView();
@@ -120,6 +123,15 @@ public class HomeScreenController implements Initializable {
             Stage stage = (Stage) newClientButton.getScene().getWindow();
             stage.close();  
             
+    }
+    
+    @FXML
+    private void handleTestButtonClicked(MouseEvent event) throws IOException, SQLException {
+        if (DBConnection.isOnline()) {
+            System.out.println("connected");
+        } else {
+            System.out.println("not connected");
+        }
     }
     
 }

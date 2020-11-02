@@ -9,17 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,10 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -143,7 +134,7 @@ public class AddClientScreenController implements Initializable {
                     + "' AND LastName = '" + lastName.getText()
                     + "' AND Email = '" + emailAddress.getText()
                     + "' AND Phone = '" + phoneNumber.getText() + "';";
-            //Fortmat for date
+            //Format for date
             preparedStatement = dbConnection.getConnection().prepareStatement(check);
             rs = preparedStatement.executeQuery(check);
             if (!isFilled(rs)) {
@@ -200,8 +191,8 @@ public class AddClientScreenController implements Initializable {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
                 + "[a-zA-Z0-9_+&*-]+)*@"
                 + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
-                + "A-Z]{2,7}$";
-
+                + "A-Z]{2,7}$"
+;
         Pattern pat = Pattern.compile(emailRegex);
         //returns true if input and regex matches otherwise false;
         return pat.matcher(email).matches();
