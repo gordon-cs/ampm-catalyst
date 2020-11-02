@@ -128,7 +128,11 @@ public class DBConnection {
     public static Connection getConnection() {
         return conn;
     }
-
+    /**
+     * Get recent client in the database
+     * @return
+     * @throws SQLException 
+     */
     public static ResultSet getClients() throws SQLException {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
@@ -136,14 +140,42 @@ public class DBConnection {
         return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
     }
 
-    public void addNewClients(String firstName, String lastName,
-            String emailAddress, String phoneNumber, String date) throws SQLException {
+    /**
+     * Check database to see if that client is exist already
+     * @return
+     * @throws SQLException 
+     */
+    public static ResultSet checkClients(String firstName, String lastName, String emailAddress, String phoneNumber) throws SQLException {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
         }
+        return stmt.executeQuery("SELECT * FROM Client WHERE FirstName = '" + firstName
+                        + "' AND LastName = '" + lastName
+                        + "' AND Email = '" + emailAddress
+                        + "' AND Phone = '" + phoneNumber + "'");
+    }
+
+    /**
+     * This method will add new client to database base on the 6 variables
+     *
+     * @param firstName
+     * @param lastName
+     * @param emailAddress
+     * @param phoneNumber
+     * @param date
+     * @param cellPhoneNumber
+     * @throws SQLException
+     */
+    public void addNewClients(String firstName, String lastName,
+            String emailAddress, String phoneNumber, String date, String cellPhoneNumber) throws SQLException {
+        if (offlineMode) {
+            // if we are in offline mode, then we should probably 
+        }
+
         stmt.executeUpdate("INSERT INTO Client (FirstName, LastName, Email,"
-                + " Phone, LastModified) VALUES ('" + firstName + "','"+ lastName 
-                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "')");
+                + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
+                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "')");
+
     }
 
     /**
