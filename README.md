@@ -8,7 +8,9 @@
 ## User Stories and Requirements ##
 User stories are marked as Issues, and tagged as "user story".  
 [Requirements](https://docs.google.com/document/d/1vdRwV_Ovzk_n92TyGibwH8Zn-K3C0krRfsE6m6DEKAw/edit?usp=sharing "Requirements")
+
 [User Study 1](https://docs.google.com/document/d/1UERlNgIoHxl68XqYbGrYuaPp8OCaRHEC8RYNWhgraxc/edit# "User Study 1")
+
 [User Study 2](https://docs.google.com/document/d/10hyUQfsOMol8BvJGSaJhaU6sWFTDcQA_A_e-TigmrJg/edit# "User Study 2")
 
 ## Lo-Fi UI ##
