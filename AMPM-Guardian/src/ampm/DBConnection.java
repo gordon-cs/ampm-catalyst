@@ -132,7 +132,7 @@ public class DBConnection {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
         }
-        return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client");
+        return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
     } 
     
     /** This method can be called to determine if the DBConnection has been invalidated.
