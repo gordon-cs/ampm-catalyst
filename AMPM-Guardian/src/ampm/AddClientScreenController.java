@@ -140,11 +140,9 @@ public class AddClientScreenController implements Initializable {
             if (!isFilled(rs)) {
                 //SQL command to insert client information to the database
                 Date date = new Date();
-                String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified) VALUES ('" + firstName.getText() + "','"
-                        + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "')";
                 try {
-                    preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-                    preparedStatement.executeUpdate(sql);
+                    dbConnection.addNewClients(firstName.getText(), lastName.getText(), 
+                            emailAddress.getText(), phoneNumber.getText(), formatter.format(date));
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
                     
