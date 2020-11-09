@@ -7,7 +7,6 @@ package ampm;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
-import com.mockrunner.mock.jdbc.MockResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -68,17 +67,26 @@ public class DBOffline implements Serializable {
         return stmt.executeQuery("Select  FirstName, LastName, LastModified from AMPM.Client ORDER BY LastModified DESC");
     } 
     
+    public void addNewClients(String firstName, String lastName,
+            String emailAddress, String phoneNumber, String date, String cellPhoneNumber) throws SQLException {
+
+        stmt.executeUpdate("INSERT INTO Client (FirstName, LastName, Email,"
+                + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
+                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "')");
+
+    }
+    
     /** Should download any new data from the remote database and upload
      *  any data from the local database.
      * 
      * @throws SQLException 
      */
-    public static void sync() throws SQLException {
-        // Check if the remote DB is accessible
-        if (!DBConnection.isOnline()) {
-            throw new ConnectionException("No connection");
-        }
-        
-    }
+//    public static void sync() throws SQLException {
+//        // Check if the remote DB is accessible
+//        if (!DBConnection.isOnline()) {
+//            throw new ConnectionException("No connection");
+//        }
+//        
+//    }
     
 }
