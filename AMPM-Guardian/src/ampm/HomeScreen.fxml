@@ -42,7 +42,7 @@
         <AnchorPane prefHeight="89.0" prefWidth="807.0" BorderPane.alignment="TOP_CENTER">
           <children>
             <Label fx:id="welcomeLabel" text="Welcome Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-            <Button fx:id="syncButton" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" text="Sync Database" />
+            <Button fx:id="syncButton" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#handleSyncButtonClicked" text="Sync Database" />
           </children>
           <BorderPane.margin>
             <Insets top="30.0" />

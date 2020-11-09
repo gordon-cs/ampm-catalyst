@@ -142,4 +142,9 @@ public class HomeScreenController implements Initializable {
         }
     }
     
+    @FXML
+    private void handleSyncButtonClicked(MouseEvent event) {
+        DBOffline.sync();
+    }
+    
 }

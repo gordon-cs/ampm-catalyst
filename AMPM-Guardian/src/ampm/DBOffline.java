@@ -28,7 +28,8 @@ public class DBOffline implements Serializable {
     public DBOffline() {
         
     }
-      // static method to create/get singleton instance of DBOffline class 
+    
+    // static method to create/get singleton instance of DBOffline class 
     public static DBOffline getInstance() {
       
         if (dbOffline == null) 
@@ -67,5 +68,17 @@ public class DBOffline implements Serializable {
         return stmt.executeQuery("Select  FirstName, LastName, LastModified from AMPM.Client ORDER BY LastModified DESC");
     } 
     
+    /** Should download any new data from the remote database and upload
+     *  any data from the local database.
+     * 
+     * @throws SQLException 
+     */
+    public static void sync() throws SQLException {
+        // Check if the remote DB is accessible
+        if (!DBConnection.isOnline()) {
+            throw new ConnectionException("No connection");
+        }
+        
+    }
     
 }
