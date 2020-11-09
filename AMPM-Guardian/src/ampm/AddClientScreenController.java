@@ -98,26 +98,19 @@ public class AddClientScreenController implements Initializable {
                 infoLabel.setStyle("-fx-text-fill:red");
                 infoLabel.setText("Invalid cell phone number");
             } else {
-                String check = "SELECT * FROM Client WHERE FirstName = '" + firstName.getText()
-                        + "' AND LastName = '" + lastName.getText()
-                        + "' AND Email = '" + emailAddress.getText()
-                        + "' AND Phone = '" + phoneNumber.getText() + "';";
-                //Fortmat for date
-                System.out.println(check);
-                preparedStatement = dbConnection.getConnection().prepareStatement(check);
-                rs = preparedStatement.executeQuery(check);
+            //Command to check if the client is already exist in databse
+                rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
+                        emailAddress.getText(), phoneNumber.getText());
                 if (!isFilled(rs)) {
                     Date date = new Date();
-                    String sql = "INSERT INTO Client (FirstName, LastName, Email, "
-                            + "Phone, LastModified,Cell) VALUES ('" + firstName.getText()
-                            + "','" + lastName.getText() + "','" + emailAddress.getText()
-                            + "','" + phoneNumber.getText() + "','" + formatter.format(date)
-                            + "','" + cellPhoneNumber.getText() + "')";
                     try {
-                        preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-                        preparedStatement.executeUpdate(sql);
+                        dbConnection.addNewClients(firstName.getText(), lastName.getText(),
+                                emailAddress.getText(), phoneNumber.getText(),
+                                formatter.format(date), cellPhoneNumber.getText());
                         infoLabel.setStyle("-fx-text-fill:green");
                         infoLabel.setText("A new client was inserted successfully!");
+
+                        finalizeInsert();
                     } catch (SQLException e) {
                         // TODO: handle exception
                         e.printStackTrace();
@@ -130,26 +123,19 @@ public class AddClientScreenController implements Initializable {
             }
         } else {
             //Command to check if the client is already exist in databse
-            String check = "SELECT * FROM Client WHERE FirstName = '" + firstName.getText()
-                    + "' AND LastName = '" + lastName.getText()
-                    + "' AND Email = '" + emailAddress.getText()
-                    + "' AND Phone = '" + phoneNumber.getText() + "';";
-            //Format for date
-            preparedStatement = dbConnection.getConnection().prepareStatement(check);
-            rs = preparedStatement.executeQuery(check);
+              rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
+                        emailAddress.getText(), phoneNumber.getText());
             if (!isFilled(rs)) {
                 //SQL command to insert client information to the database
                 Date date = new Date();
-                String sql = "INSERT INTO Client (FirstName, LastName, Email, Phone, LastModified) VALUES ('" + firstName.getText() + "','"
-                        + lastName.getText() + "','" + emailAddress.getText() + "','" + phoneNumber.getText() + "','" + formatter.format(date) + "')";
                 try {
-                    preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-                    preparedStatement.executeUpdate(sql);
+                    dbConnection.addNewClients(firstName.getText(), lastName.getText(),
+                            emailAddress.getText(), phoneNumber.getText(), formatter.format(date), null);
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
-                    
+
                     finalizeInsert();
-                 
+
                 } catch (SQLException e) {
                     // TODO: handle exception
                     e.printStackTrace();
@@ -191,8 +177,7 @@ public class AddClientScreenController implements Initializable {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
                 + "[a-zA-Z0-9_+&*-]+)*@"
                 + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
-                + "A-Z]{2,7}$"
-;
+                + "A-Z]{2,7}$";
         Pattern pat = Pattern.compile(emailRegex);
         //returns true if input and regex matches otherwise false;
         return pat.matcher(email).matches();
@@ -210,13 +195,13 @@ public class AddClientScreenController implements Initializable {
         }
         return !isEmpty;
     }
-    
+
     // Handle the logic after a successful insert. 
     private void finalizeInsert() throws IOException {
         // Close current screen
         Stage stage = (Stage) addClientButton.getScene().getWindow();
         stage.close();
-        
+
         // Open home screen
         stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
@@ -224,6 +209,6 @@ public class AddClientScreenController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
+
     }
 }
