@@ -1,11 +1,458 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
-    
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="755.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Basic Info">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="708.0">
+               <children>
+                  <Label layoutX="34.0" layoutY="24.0" prefHeight="49.0" prefWidth="152.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Basic Info">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="111.0" text="First Name">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="60.0" layoutY="142.0" prefHeight="23.0" prefWidth="149.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="283.0" layoutY="142.0" prefHeight="23.0" prefWidth="149.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="283.0" layoutY="111.0" text="Last Name">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="524.0" layoutY="111.0" text="Date of Birth">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="60.0" layoutY="241.0" prefHeight="23.0" prefWidth="149.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="60.0" layoutY="210.0" text="Email Address">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="283.0" layoutY="241.0" prefHeight="23.0" prefWidth="149.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="283.0" layoutY="210.0" text="Phone Number">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="524.0" layoutY="241.0" prefHeight="23.0" prefWidth="149.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="524.0" layoutY="210.0" text="Account #">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="599.0" layoutY="334.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Next">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <DatePicker layoutX="524.0" layoutY="142.0" prefHeight="23.0" prefWidth="162.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Alerts">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
+               <children>
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Alerts">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="105.0" layoutY="93.0" text="Alert 1:">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="143.0" layoutY="133.0" text="Select Type">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <MenuButton layoutX="239.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Allerge">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </MenuButton>
+                  <Label layoutX="143.0" layoutY="175.0" text="Discrption">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextArea layoutX="239.0" layoutY="175.0" prefHeight="74.0" prefWidth="178.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextArea>
+                  <Button layoutX="289.0" layoutY="276.0" mnemonicParsing="false" text="Add New Alert">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="609.0" layoutY="344.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Next">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="514.0" layoutY="344.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Prev">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Providers">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
+               <children>
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="148.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Providers">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="157.0" layoutY="85.0" text="Provider 1:">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="201.0" layoutY="113.0" text="Type">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <MenuButton layoutX="260.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <Label layoutX="200.0" layoutY="151.0" text="Name">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="322.0" layoutY="290.0" mnemonicParsing="false" text="Add New Provider">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="609.0" layoutY="344.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Next">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="514.0" layoutY="344.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Prev">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="200.0" layoutY="184.0" text="Reason">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="260.0" layoutY="147.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <MenuButton layoutX="260.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <Label layoutX="328.0" layoutY="217.0" text="or">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="264.0" layoutY="243.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Diagnoses">
+         <content>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="841.0" prefWidth="693.0">
+                     <children>
+                        <Label layoutX="24.0" layoutY="22.0" prefHeight="49.0" prefWidth="148.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Diagnose">
+                           <font>
+                              <Font name="System Bold" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="172.0" layoutY="94.0" text="Description">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="262.0" layoutY="90.0" prefHeight="25.0" prefWidth="153.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                        <DatePicker layoutX="261.0" layoutY="122.0" prefHeight="26.0" prefWidth="171.0" />
+                        <Label layoutX="160.0" layoutY="131.0" text="Diagosed When">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="180.0" layoutY="165.0" text="By Who">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <MenuButton layoutX="259.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="432.0" layoutY="165.0" text="or">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <RadioButton layoutX="474.0" layoutY="165.0" mnemonicParsing="false" text="No Provider">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </RadioButton>
+                        <Label layoutX="98.0" layoutY="197.0" prefHeight="28.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Medication">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <RadioButton layoutX="173.0" layoutY="251.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="59.0" text="Genric">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton layoutX="173.0" layoutY="283.0" mnemonicParsing="false" text="Specific">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </RadioButton>
+                        <Label layoutX="98.0" layoutY="337.0" prefHeight="28.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Monitoring">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <MenuButton layoutX="259.0" layoutY="392.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="180.0" layoutY="396.0" text="Pick Type">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="98.0" layoutY="453.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Therapy">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="415.0" layoutY="515.0" text="or">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <MenuButton layoutX="259.0" layoutY="511.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="180.0" layoutY="515.0" text="Type">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="457.0" layoutY="511.0" prefHeight="25.0" prefWidth="153.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="179.0" layoutY="550.0" text="Therapist">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <MenuButton layoutX="258.0" layoutY="546.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="414.0" layoutY="550.0" text="or">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="457.0" layoutY="546.0" mnemonicParsing="false" text="Add New ">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <TextArea layoutX="275.0" layoutY="586.0" prefHeight="74.0" prefWidth="178.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextArea>
+                        <Label layoutX="179.0" layoutY="586.0" text="Discrption">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="91.0" layoutY="698.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Add New">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <MenuButton layoutX="222.0" layoutY="700.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label layoutX="414.0" layoutY="704.0" text="to     *Dignosis name*  ">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="497.0" layoutY="767.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Prev">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="592.0" layoutY="767.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Next">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </content>
+      </Tab>
+      <Tab text="Preventative">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
+               <children>
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Preventative">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="170.0" layoutY="113.0" text="Description">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <MenuButton layoutX="260.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <Button layoutX="322.0" layoutY="290.0" mnemonicParsing="false" text="Add New Preventative">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="609.0" layoutY="344.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Next">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="514.0" layoutY="344.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Prev">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <RadioButton layoutX="170.0" layoutY="171.0" mnemonicParsing="false" text="Done">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton layoutX="170.0" layoutY="216.0" mnemonicParsing="false" text="Not Done">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
