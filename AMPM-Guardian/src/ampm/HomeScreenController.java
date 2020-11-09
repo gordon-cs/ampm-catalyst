@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -42,6 +43,10 @@ public class HomeScreenController implements Initializable {
     Button newClientButton;
     @FXML
     Button testButton;
+    @FXML
+    private Button syncButton;
+    @FXML
+    private Label welcomeLabel;
     
     private ResultSet rs;
     private ArrayList<String> clients;
@@ -56,11 +61,14 @@ public class HomeScreenController implements Initializable {
             System.out.print(DBConnection.getStatement());
             
             // should be able to do this from the DBConnection class
-            rs = DBConnection.getClients();
+//            rs = DBConnection.getClients();
+            rs = DBOffline.getClients();
             clients = new ArrayList<String>();
             addResultToClients(rs);
             setupListView();
             
+            // Get the currently logged in user and update the label
+//            welcomeLabel.setText("Welcome " + DBConnection.getCurrentUser()); UNCOMMENT WHEN DONE TESTING OFFLINE DB
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
