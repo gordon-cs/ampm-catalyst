@@ -8,20 +8,21 @@ package ampm;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import com.mockrunner.mock.jdbc.MockResultSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
 
-/** This class represents the offline database. It can be saved (serializable) and 
- * handles the authentication and syncing procedures.
+/** This class handles the offline database (a local Apache Derby instance packaged
+ * alongside the .jar).
  *
  * @author benab
  */
 public class DBOffline implements Serializable {
     private static DBOffline dbOffline = null;
-    
-    // A resultset containing the entire clientTable
-    private static ResultSet clientTable = null; 
-    
-    Boolean isSynced;
+    private static Connection conn;
+    private static Statement stmt;
 
     /** Creates a new instance of DBOffline */
     public DBOffline() {
@@ -36,40 +37,35 @@ public class DBOffline implements Serializable {
         return dbOffline; 
     } 
     
-    public static void createMockTables() throws SQLException {
-        createMockClients();
+    public static Boolean init(String user, String password) {
+        Boolean success = true;
+        
+        Properties connectionProps = new Properties();
+        connectionProps.put("user", "ampmadmin"); // Replace these when done testing
+        connectionProps.put("password", "thepasswordispassword");
+        
+        // Setup the URL the db is located at
+        String dbURL = "jdbc:derby://localhost:1527/ampm-database-local/";
+        
+        try {
+            // forname needs to be called once to establish the driver.
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            
+            // connect to the DB using the url and props
+            conn = DriverManager.getConnection(dbURL, connectionProps);
+            stmt = conn.createStatement();
+        }
+        catch(Exception e){
+            success = false;
+            System.out.println("Failed to get connection");
+            e.printStackTrace();
+        }
+        return success; 
     }
     
-    /**Creates a mocked version of the resultset you would get if selecting the list of clients
-     * from the database for the homescreen.
-     * 
-     * @throws SQLException 
-     */
-    public static void createMockClients() throws SQLException {
-        MockResultSet rs = new MockResultSet("Client");
-        
-        // Add all the columns to the rs
-//        rs.addColumn("UserID");
-        rs.addColumn("FirstName");
-        rs.addColumn("LastName");
-//        rs.addColumn("Email");
-//        rs.addColumn("Phone");
-        rs.addColumn("LastModified");
-//        rs.addColumn("Cell");
-        
-        ResultSet realRS = DBConnection.getClients();
-        
-        // Save the real DB values into the fake DB
-        while (realRS.next()) {
-            rs.next();
-            
-//            rs.updateInt("UserID", realRS.getInt("UserID"));
-            rs.updateString("FirstName", realRS.getString("FirstName"));
-            rs.updateString("LastName", realRS.getString("LastName"));
-//            rs.updateString("Email", realRS.getString("Email"));
-//            rs.updateString("Phone", realRS.getString("Phone"));
-            rs.updateDate("LastModified", realRS.getDate("LastModified"));
-//            rs.updateString("Cell", realRS.getString("Cell"));
-        }
-    }
+    public static ResultSet getClients() throws SQLException {
+        return stmt.executeQuery("Select  FirstName, LastName, LastModified from AMPM.Client ORDER BY LastModified DESC");
+    } 
+    
+    
 }

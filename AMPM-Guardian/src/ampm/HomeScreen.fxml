@@ -9,28 +9,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="807.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ampm.HomeScreenController">
   <children>
-    <MenuBar prefWidth="807.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <BorderPane prefHeight="508.0" prefWidth="807.0" style="&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+    <BorderPane prefHeight="508.0" prefWidth="807.0" style="&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
-        <SplitPane dividerPositions="0.4308300395256917" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <SplitPane dividerPositions="0.4172661870503597" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
           <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               <children>
@@ -57,6 +38,36 @@
           </children>
         </VBox>
       </left>
+      <top>
+        <AnchorPane prefHeight="89.0" prefWidth="807.0" BorderPane.alignment="TOP_CENTER">
+          <children>
+            <Label fx:id="welcomeLabel" text="Welcome Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+            <Button fx:id="syncButton" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" text="Sync Database" />
+          </children>
+          <BorderPane.margin>
+            <Insets top="30.0" />
+          </BorderPane.margin>
+        </AnchorPane>
+      </top>
     </BorderPane>
+    <MenuBar prefWidth="807.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem disable="false" mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
   </children>
 </AnchorPane>
