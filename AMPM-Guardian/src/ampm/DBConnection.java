@@ -166,7 +166,7 @@ public class DBConnection {
      * @param cellPhoneNumber
      * @throws SQLException
      */
-    public void addNewClients(String firstName, String lastName,
+    public static void addNewClients(String firstName, String lastName,
             String emailAddress, String phoneNumber, String date, String cellPhoneNumber) throws SQLException {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
