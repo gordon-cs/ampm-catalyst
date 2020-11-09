@@ -24,6 +24,7 @@ public class DBConnection {
     private static DBConnection dbConnection = null;
     private static Statement stmt;
     private static Boolean offlineMode;
+    private static String currentUser;
     
     /** Creates a new instance of DBConnection */
     public DBConnection() {
@@ -74,6 +75,7 @@ public class DBConnection {
             System.out.println("Failed to get connection");
             e.printStackTrace();
         }
+        currentUser = user;
         offlineMode = false;
         return success; 
     }
@@ -159,16 +161,20 @@ public class DBConnection {
             System.out.println("Internet is connected");
             return true;
         } catch (MalformedURLException e) {
-            System.out.println("Internet is not connected");
+            System.out.println("Internet is not connected, bad URL");
             return false;
         } catch (IOException e) {
-            System.out.println("Internet is not connected");
+            System.out.println("Internet is not connectedm=, bad IO");
             return false;
         }
     }
     
     public static void startOfflineMode() {
         offlineMode = true;
+    }
+    
+    public static String getCurrentUser() {
+        return currentUser;
     }
      
     
