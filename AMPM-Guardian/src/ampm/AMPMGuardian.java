@@ -7,6 +7,7 @@ package ampm;
 
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
  */
 public class AMPMGuardian extends Application {
     public static Scene loginScene;
+    private static List<Client> clients;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -36,5 +38,17 @@ public class AMPMGuardian extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public static List<Client> getClients() {
+        return clients;
+    }
+    
+    public static void addClientToList(Client client) {
+        clients.add(client);
+    }
+    
+    public static void removeClientFromList(Client client) {
+        clients.remove(client);
     }
 }

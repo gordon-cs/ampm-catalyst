@@ -28,7 +28,7 @@ public class HelloWorldScreenController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws SQLException {        
         // Test connection to database when the button is pressed.
-        rs = DBConnection.getStatement().executeQuery("SELECT * FROM hello");
+        rs = DBOnline.getStatement().executeQuery("SELECT * FROM hello");
         
         // Retrive result of query
         rs.next();

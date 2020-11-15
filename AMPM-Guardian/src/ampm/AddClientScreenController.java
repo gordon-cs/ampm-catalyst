@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.fxml.FXML;
@@ -50,7 +51,8 @@ public class AddClientScreenController implements Initializable {
     @FXML
     private Label infoLabel;
 
-    DBConnection dbConnection;
+    DBOnline dbOnline;
+    
     //Format for date
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -61,7 +63,7 @@ public class AddClientScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dbConnection = new DBConnection();
+        dbOnline = new DBOnline();
 
     }
 
@@ -99,14 +101,15 @@ public class AddClientScreenController implements Initializable {
                 infoLabel.setText("Invalid cell phone number");
             } else {
             //Command to check if the client is already exist in databse
-                rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
+                rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
                         emailAddress.getText(), phoneNumber.getText());
                 if (!isFilled(rs)) {
                     Date date = new Date();
+                    Timestamp timestamp = new Timestamp(date.getTime());
                     try {
-                        dbConnection.addNewClients(firstName.getText(), lastName.getText(),
+                        dbOnline.addNewClients(firstName.getText(), lastName.getText(),
                                 emailAddress.getText(), phoneNumber.getText(),
-                                formatter.format(date), cellPhoneNumber.getText());
+                                timestamp, cellPhoneNumber.getText());
                         infoLabel.setStyle("-fx-text-fill:green");
                         infoLabel.setText("A new client was inserted successfully!");
 
@@ -114,7 +117,7 @@ public class AddClientScreenController implements Initializable {
                     } catch (SQLException e) {
                         // TODO: handle exception
                         e.printStackTrace();
-                        infoLabel.setText("A new client was insertion failed!");
+                        infoLabel.setText("New client creation failed!");
                     }
                 } else {
                     infoLabel.setStyle("-fx-text-fill:red");
@@ -123,14 +126,15 @@ public class AddClientScreenController implements Initializable {
             }
         } else {
             //Command to check if the client is already exist in databse
-              rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
+              rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
                         emailAddress.getText(), phoneNumber.getText());
             if (!isFilled(rs)) {
                 //SQL command to insert client information to the database
                 Date date = new Date();
+                Timestamp time = new Timestamp(date.getTime());
                 try {
-                    dbConnection.addNewClients(firstName.getText(), lastName.getText(),
-                            emailAddress.getText(), phoneNumber.getText(), formatter.format(date), null);
+                    dbOnline.addNewClients(firstName.getText(), lastName.getText(),
+                            emailAddress.getText(), phoneNumber.getText(), time, null);
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
 
@@ -139,7 +143,7 @@ public class AddClientScreenController implements Initializable {
                 } catch (SQLException e) {
                     // TODO: handle exception
                     e.printStackTrace();
-                    infoLabel.setText("A new client was insertion failed!");
+                    infoLabel.setText("New client creation failed!");
                 }
             } else {
                 infoLabel.setStyle("-fx-text-fill:red");

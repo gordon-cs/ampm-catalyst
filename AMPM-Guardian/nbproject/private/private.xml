@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AMPMGuardian.java</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBConnection.java</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/LoginScreenController.java</file>
             <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBOffline.java</file>
+            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/Client.java</file>
             <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/HomeScreenController.java</file>
         </group>
     </open-files>

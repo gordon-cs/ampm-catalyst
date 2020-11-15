@@ -8,13 +8,18 @@ package ampm;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** This class handles the offline database (a local Apache Derby instance packaged
- * alongside the .jar).
+ * alongside the .jar). 
  *
  * @author benab
  */
@@ -37,12 +42,11 @@ public class DBOffline implements Serializable {
         return dbOffline; 
     } 
     
-    public static Boolean init(String user, String password) {
-        Boolean success = true;
+    public void init(String user, String password) {
         
         Properties connectionProps = new Properties();
-        connectionProps.put("user", "ampmadmin"); // Replace these when done testing
-        connectionProps.put("password", "thepasswordispassword");
+        connectionProps.put("user", user); // Replace these when done testing
+        connectionProps.put("password", password);
         
         // Setup the URL the db is located at
         String dbURL = "jdbc:derby://localhost:1527/ampm-database-local/";
@@ -56,37 +60,191 @@ public class DBOffline implements Serializable {
             stmt = conn.createStatement();
         }
         catch(Exception e){
-            success = false;
             System.out.println("Failed to get connection");
             e.printStackTrace();
         }
-        return success; 
     }
     
-    public static ResultSet getClients() throws SQLException {
+    private static ResultSet getClients() throws SQLException {
         return stmt.executeQuery("Select  FirstName, LastName, LastModified from AMPM.Client ORDER BY LastModified DESC");
     } 
     
     public void addNewClients(String firstName, String lastName,
-            String emailAddress, String phoneNumber, String date, String cellPhoneNumber) throws SQLException {
+                              String emailAddress, String phoneNumber, 
+                              Timestamp date, String cellPhoneNumber) throws SQLException {
 
-        stmt.executeUpdate("INSERT INTO Client (FirstName, LastName, Email,"
+        stmt.executeUpdate("INSERT INTO AMPM.Client (FirstName, LastName, Email,"
                 + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
-                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "')");
+                + "','" + emailAddress + "','" + phoneNumber + "','" + date.toString() + "','" + cellPhoneNumber + "')");
 
     }
     
+    private static void executeStatement(String statement) throws SQLException {
+        stmt.executeUpdate(statement);
+    }
+    
+    public boolean isClientInDB(Client client) {
+        return false;
+    }
+    
+    public List<Client> getClientListFromDB() throws SQLException {
+        // Get all the clients
+        ResultSet rs = stmt.executeQuery("Select  * from AMPM.Client ORDER BY LastModified DESC");
+        
+        // Create the return list
+        List<Client> clientList = new ArrayList<Client>();
+        
+        // Loop through offline results and create a full list of clients
+        while (rs.next()) {
+            String clientID = rs.getString("ClientID");
+            String firstName = rs.getString("FirstName");
+            String lastName = rs.getString("LastName");
+            String email = rs.getString("Email");
+            String phone = rs.getString("Phone");
+            Timestamp lastModified = rs.getTimestamp("LastModified");
+            String cell = rs.getString("Cell");
+            
+            // Create a new client and add it to the list
+            Client client = new Client(clientID, firstName, lastName, email, phone, lastModified, cell);
+            clientList.add(client);
+        }
+        
+        return clientList;
+    }
+    
+    public static void updateRemoteClient(Client client) {
+        DBOnline dbOnline = new DBOnline();
+        System.out.println(client.getSQLUpdate());
+        try {
+            dbOnline.executeStatement(client.getSQLUpdate());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBOffline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateLocalClient(Client client) {
+        try {
+            executeStatement(client.getSQLUpdate());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBOffline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /** Should download any new data from the remote database and upload
-     *  any data from the local database.
+     *  any data from the local database. Assumes the remote DB is accessible.
      * 
      * @throws SQLException 
      */
-//    public static void sync() throws SQLException {
-//        // Check if the remote DB is accessible
-//        if (!DBConnection.isOnline()) {
-//            throw new ConnectionException("No connection");
-//        }
-//        
-//    }
-    
+    public void sync() throws SQLException {
+        DBOnline dbOnline = new DBOnline();
+        
+        // Start with the client table
+        ResultSet rsOnline = dbOnline.getClients();
+        // Get the local list of clients
+        List<Client> rsOffline = this.getClientListFromDB();
+        
+//        // Loop through the remote client table and check for new clients
+//        while (rsOnline.next()) {
+//            
+//            String onlineClientID = rsOnline.getString("ClientID");
+//            Date onlineLastModified = rsOnline.getDate("LastModified");
+//            System.out.println("Working on ClientID " + onlineClientID);
+//            for (Client client : rsOffline) {
+//                
+//                System.out.println("Checking " + client.getFullName());
+//                
+//                // Check to see if this is in the database,
+//                // if it is, we should check that the last modified fields match
+//                if (onlineClientID.equals(client.getID())) {
+//                    
+//                    Date offlineLastModified = client.getLastModified();
+//                    // Doesn't match last modified, should update the most recent one
+//                    if (onlineLastModified != offlineLastModified) {
+//                        
+//                        // Most recent is online
+//                        if (onlineLastModified.after(offlineLastModified)) {
+//                           // Pull this client's changes to the local DB
+//                           System.out.println("Updating the local client");
+//                           updateLocalClient(rsOnline);
+//                        } 
+//                        // Most recent is offline  
+//                        else {
+//                           // Put the local client's changes on the remote server
+//                           System.out.println("updating the remote client");
+//                           updateRemoteClient(client);
+//                        }
+//                    
+//                    }
+//                    // We found the client, so we can stop the inner for loop
+//                    break; 
+//                }
+//            } 
+//        } // instead of this, we're gonna try something else
+        
+        List<Client> offlineClients = getClientListFromDB();
+        List<Client> onlineClients = dbOnline.getClientListFromDB();
+        
+        System.out.println("Looking for recently modified clients in the two databases");
+        for (Client onlineClient : onlineClients) {
+            for (Client offlineClient : offlineClients) {
+                if (onlineClient.getID().equals(offlineClient.getID())) {
+                    Timestamp offlineLastModified = offlineClient.getLastModified();
+                    Timestamp onlineLastModified = onlineClient.getLastModified();
+                    if (!onlineLastModified.equals(offlineLastModified)) {
+                        
+                        // Most recent is online
+                        if (onlineLastModified.after(offlineLastModified)) {
+                          // Pull this client's changes to the local DB
+                           System.out.println("Updating the local client");
+                           updateLocalClient(onlineClient);
+                        } 
+                        // Most recent is offline  
+                        else {
+                           // Put the local client's changes on the remote server
+                           System.out.println("updating the remote client");
+                           updateRemoteClient(offlineClient);
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        System.out.println("Looking for clients not in the online database");
+        // Check to see if there are new offline clients
+        for (Client offlineClient : offlineClients) {
+            // If this offline client is NOT in the online client list
+            if (!isInClientList(offlineClient, onlineClients)) {
+                System.out.println("Adding " + offlineClient.getFullName() + ", id: " + offlineClient.getID());
+                System.out.println(offlineClient.getSQLInsert());
+
+                dbOnline.executeStatement(offlineClient.getSQLInsert());
+            }
+        }
+        
+        System.out.println("Looking for clients not in the offline database");
+        // Check to see if there are new online clients
+        for (Client onlineClient : onlineClients) {
+            // If this online client is NOT in the offline client list
+            if (!isInClientList(onlineClient, offlineClients)) {
+                System.out.println("Adding " + onlineClient.getFullName() + ", id: " + onlineClient.getID());
+                System.out.println(onlineClient.getSQLInsert());
+
+                executeStatement(onlineClient.getSQLInsert());
+            }
+        }
+        
+    }
+
+    /** Check to see if a client's id is contained in the given client list
+     * 
+     * @return 
+     */
+    private Boolean isInClientList(Client searchClient, List<Client> clientList) {
+        for (Client client : clientList) {
+            if (searchClient.getID().equals(client.getID()))
+                return true;
+        }
+        return false;
+    }
 }

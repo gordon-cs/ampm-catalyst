@@ -1,4 +1,5 @@
-    /*
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,8 +51,9 @@ public class HomeScreenController implements Initializable {
     private Label welcomeLabel;
     
     private ResultSet rs;
-    private ArrayList<String> clients;
+    private List<Client> clients;
     private ObservableList<String> items;
+    private DBManager dbManager;
     /**
      * Initializes the controller class.
      */
@@ -58,17 +61,21 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            System.out.print(DBConnection.getStatement());
+            System.out.print(DBOnline.getStatement());
             
-            // should be able to do this from the DBConnection class
-//            rs = DBConnection.getClients();
-            rs = DBOffline.getClients();
-            clients = new ArrayList<String>();
-            addResultToClients(rs);
-            setupListView();
+            dbManager = new DBManager();
+            // should be able to do this from the DBOnline class
+//            rs = DBOnline.getClients();
+//            rs = DBOffline.getClients();
+//            clients =setupListView(dbManager.getClients());
+            clients = dbManager.getClients();
+            setupListView(clients);
+//            clients = new ArrayList<String>();
+//            addResultToClients(rs);
+//            setupListView();
             
             // Get the currently logged in user and update the label
-//            welcomeLabel.setText("Welcome " + DBConnection.getCurrentUser()); UNCOMMENT WHEN DONE TESTING OFFLINE DB
+//            welcomeLabel.setText("Welcome " + DBOnline.getCurrentUser()); UNCOMMENT WHEN DONE TESTING OFFLINE DB
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,22 +84,23 @@ public class HomeScreenController implements Initializable {
     
     private void addResultToClients(ResultSet rs) throws SQLException {
         while (rs.next()) {
-            clients.add(rs.getString("FirstName") + " " + rs.getString("LastName"));
+            System.out.println("add result to client was called. shouldnt have been though");
+//            clients.add(rs.getString("FirstName") + " " + rs.getString("LastName"));
         }
     }
     
-    private void setupListView() {
+    private void setupListView(List<Client> clientList) {
         items = FXCollections.observableArrayList();
         clientListView.setItems(items);
         
-        // Add the first 10 clients to the ListView
-        if (clients.size() > 10) {
-            clients.subList(0, 10).forEach(client -> {
-                items.add(client);
+        // Add the first 10 clients to the listview
+        if (clientList.size() > 10) {
+            clientList.subList(0, 10).forEach(client -> {
+                items.add(client.getFullName());
             });
         } else {
-            clients.forEach(client -> {
-                items.add(client);
+            clientList.forEach(client -> {
+                items.add(client.getFullName());
             });
         }
     }
@@ -102,15 +110,15 @@ public class HomeScreenController implements Initializable {
         // If there's nothing in the textbox, just show the most recent clients
         String currSearch = clientSearchField.getText();
         if (currSearch.length() == 0) {
-            setupListView();
+            setupListView(clients);
             return;
         }
         
         items = FXCollections.observableArrayList();
         clients.forEach(client -> {
-            if (client.length() >= currSearch.length()) {
-                if (client.substring(0,currSearch.length()).equalsIgnoreCase(currSearch)) {
-                    items.add(client);
+            if (client.getFullName().length() >= currSearch.length()) {
+                if (client.getFullName().substring(0,currSearch.length()).equalsIgnoreCase(currSearch)) {
+                    items.add(client.getFullName());
                 }
             }
         });
@@ -135,7 +143,7 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private void handleTestButtonClicked(MouseEvent event) throws IOException, SQLException {
-        if (DBConnection.isOnline()) {
+        if (DBOnline.isOnline()) {
             System.out.println("connected");
         } else {
             System.out.println("not connected");
@@ -144,7 +152,7 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private void handleSyncButtonClicked(MouseEvent event) {
-        DBOffline.sync();
+//        DBOffline.sync();
     }
     
 }

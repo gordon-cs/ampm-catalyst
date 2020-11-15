@@ -11,50 +11,46 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
+    
 /**
  *
  * @author noniko
  */
-public class DBConnection {
+public class DBOnline {
 
     private static Connection conn;
-    private static DBConnection dbConnection = null;
+    private static DBOnline dbConnection = null;
     private static Statement stmt;
-    private static Boolean offlineMode;
     private static String currentUser;
   
     /**
      * Creates a new instance of DBConnection
      */
-    public DBConnection() {
+    public DBOnline() {
 
     }
-    // static method to create/get singleton instance of DBConnection class 
+    // static method to create/get singleton instance of DBOnline class 
 
-    public static DBConnection getInstance() {
+    public static DBOnline getInstance() {
 
         if (dbConnection == null) {
-            dbConnection = new DBConnection();
+            dbConnection = new DBOnline();
         }
 
         return dbConnection;
     }
 
     /**
-     * Creates the DBConnection instance by logging in with a specified
-     * user/pass combination.
+     * Creates the DBOnline instance by logging in with a specified
+ user/pass combination.
      *
      * @param user String. The username to use for the database
      * @param pass String. The corresponding password
      */
     public Boolean init(String user, String pass) {
-        // First, check to see if there is even an internet connection available
-        if (!internetAvailable()) {
-            // No connection, we should start the offline procedure
-            initOffline(user, pass);
-        }
 
         Boolean success = true;
 
@@ -79,17 +75,7 @@ public class DBConnection {
             e.printStackTrace();
         }
         currentUser = user;
-        offlineMode = false;
         return success;
-    }
-
-    private Boolean initOffline(String username, String password) {
-        // We need to ensure it isn't the first time that the system has been used
-        //      if it is, the system can't be used (no downloaded data or way to do auth)
-
-        // We need to make sure there is a saved username/pw hash and use it to verify
-        // Assuming user/pass was correct, we 
-        return false;
     }
 
     public void close(ResultSet rs) {
@@ -130,17 +116,49 @@ public class DBConnection {
     public static Connection getConnection() {
         return conn;
     }
+    
     /**
-     * Get recent client in the database
+     * Get recent clients in the database
      * @return
      * @throws SQLException 
      */
-    public static ResultSet getClients() throws SQLException {
-        if (offlineMode) {
-            // if we are in offline mode, then we should probably 
-        }
-        return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
+    public ResultSet getClients() throws SQLException {
+        return stmt.executeQuery("Select * from AMPM.Client ORDER BY LastModified DESC");
     }
+    
+    
+    /**
+     * Get a full list of the clients in the database. Stored in List<Client> object
+     * @return
+     * @throws SQLException 
+     */
+    public List<Client> getClientListFromDB() throws SQLException {
+        // Get all the clients
+        ResultSet rs = stmt.executeQuery("Select * from AMPM.Client ORDER BY LastModified DESC");
+        
+        // Create the return list
+        List<Client> clientList = new ArrayList<Client>();
+        
+        // Loop through the online results and create a full list of clients
+        while (rs.next()) {
+            String clientID = rs.getString("ClientID");
+            String firstName = rs.getString("FirstName");
+            String lastName = rs.getString("LastName");
+            String email = rs.getString("Email");
+            String phone = rs.getString("Phone");
+            Timestamp lastModified = rs.getTimestamp("LastModified");
+            String cell = rs.getString("Cell");
+            
+            // Create a new client and add it to the list
+            Client client = new Client(clientID, firstName, lastName, email, phone, lastModified, cell);
+            clientList.add(client);
+        }
+        
+        return clientList;
+    
+    }
+    
+    
 
     /**
      * Check database to see if that client is exist already
@@ -148,10 +166,7 @@ public class DBConnection {
      * @throws SQLException 
      */
     public static ResultSet checkClients(String firstName, String lastName, String emailAddress, String phoneNumber) throws SQLException {
-        if (offlineMode) {
-            // if we are in offline mode, then we should probably 
-        }
-        return stmt.executeQuery("SELECT * FROM Client WHERE FirstName = '" + firstName
+        return stmt.executeQuery("SELECT * FROM AMPM.Client WHERE FirstName = '" + firstName
                         + "' AND LastName = '" + lastName
                         + "' AND Email = '" + emailAddress
                         + "' AND Phone = '" + phoneNumber + "'");
@@ -169,15 +184,16 @@ public class DBConnection {
      * @throws SQLException
      */
     public void addNewClients(String firstName, String lastName,
-            String emailAddress, String phoneNumber, String date, String cellPhoneNumber) throws SQLException {
-        if (offlineMode) {
-            // if we are in offline mode, then we should probably 
-        }
+            String emailAddress, String phoneNumber, Timestamp date, String cellPhoneNumber) throws SQLException {
 
-        stmt.executeUpdate("INSERT INTO Client (FirstName, LastName, Email,"
+        stmt.executeUpdate("INSERT INTO AMPM.Client (FirstName, LastName, Email,"
                 + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
-                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "')");
+                + "','" + emailAddress + "','" + phoneNumber + "','" + date.toString() + "','" + cellPhoneNumber + "')");
 
+    }
+    
+    public void executeStatement(String statement) throws SQLException {
+        stmt.executeUpdate(statement);
     }
 
     /**
@@ -210,16 +226,14 @@ public class DBConnection {
             System.out.println("Internet is not connected, bad URL");
             return false;
         } catch (IOException e) {
-            System.out.println("Internet is not connectedm=, bad IO");
+            System.out.println("Internet is not connected, bad IO");
             return false;
         }
     }
 
-    public static void startOfflineMode() {
-        offlineMode = true;
-    }
-  
     public static String getCurrentUser() {
         return currentUser;
     }
+    
+
 }

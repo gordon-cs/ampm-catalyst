@@ -40,7 +40,7 @@ public class LoginScreenController implements Initializable {
     @FXML
     private Label invalidLabel;
     
-    DBConnection dbConnection; // should remove (replace w/ static reference)
+    DBOnline dbConnection; // should remove (replace w/ static reference)
     /**
      * Initializes the controller class.
      */
@@ -50,7 +50,7 @@ public class LoginScreenController implements Initializable {
         BooleanBinding formIsFilled = passField.textProperty().isEmpty()
                             .or(userField.textProperty().isEmpty());
         loginButton.disableProperty().bind(formIsFilled);
-        dbConnection = new DBConnection(); // should change to static reference
+        dbConnection = new DBOnline(); // should change to static reference
                 
     }    
     
@@ -58,10 +58,12 @@ public class LoginScreenController implements Initializable {
     private void handleLoginClick(MouseEvent event) throws SQLException, IOException {  
         System.out.println(passField.getText());
 //        Boolean success = dbConnection.init(userField.getText(), passField.getText());
-        Boolean success = DBOffline.init(userField.getText(), passField.getText()); // Test offline db
+//        Boolean success = DBOffline.init(userField.getText(), passField.getText()); // Test offline db
+        Boolean success = DBManager.init(userField.getText(), passField.getText());
+        
         if (!success) {
             invalidLabel.setVisible(true);
-            System.out.println("Failure");
+            System.out.println("Login failure");
         } else {
             invalidLabel.setVisible(false);
             System.out.println("Success");
