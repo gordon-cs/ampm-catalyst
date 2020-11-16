@@ -107,17 +107,22 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private void handleOnKeyTyped(KeyEvent event) {
+        System.out.println("key pressed " + event.getCharacter());
+        System.out.println("text: " + event.getText());
+        
         // If there's nothing in the textbox, just show the most recent clients
-        String currSearch = clientSearchField.getText();
+        String currSearch = clientSearchField.getText()+event.getCharacter();
         if (currSearch.length() == 0) {
             setupListView(clients);
             return;
         }
-        
+        System.out.println("search is now: " + currSearch + " of length: " + currSearch.length());
         items = FXCollections.observableArrayList();
         clients.forEach(client -> {
             if (client.getFullName().length() >= currSearch.length()) {
+                System.out.println("checking " + client.getFullName());
                 if (client.getFullName().substring(0,currSearch.length()).equalsIgnoreCase(currSearch)) {
+                    System.out.println(client.getFullName().substring(0,currSearch.length()) + " is the same as " + currSearch);
                     items.add(client.getFullName());
                 }
             }
