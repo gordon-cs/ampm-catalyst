@@ -33,7 +33,15 @@ public class Client {
         this.lastModified = lastModified;
         this.cell = cell;
         
-        // Should throw an exception if any of the values are 'bad'
+    }
+    
+    Client(String firstName, String lastName, String email, String phone, Timestamp lastModified, String cell) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.lastModified = lastModified;
+        this.cell = cell;
     }
     
     /**
@@ -100,30 +108,32 @@ public class Client {
         String sqlUpdate;
 
         if ("".equalsIgnoreCase(cell) || cell == null) {
-            sqlUpdate = "UPDATE AMPM.Client SET FirstName=\"" + this.firstName + "\", "
-                        + "LastName=\"" + this.lastName + "\", "
-                        + "Email=\"" + this.email + "\", "
-                        + "Phone=\"" + this.phone + "\", "
-                        + "LastModified=\"" + this.lastModified +"\", "
+            sqlUpdate = "UPDATE AMPM.Client SET FirstName='" + this.firstName + "', "
+                        + "LastName='" + this.lastName + "', "
+                        + "Email='" + this.email + "', "
+                        + "Phone='" + this.phone + "', "
+                        + "LastModified='" + this.lastModified +"', "
                         + "Cell=NULL "
                         + "WHERE ClientID=" + this.clientID +"";
         } else {
-            sqlUpdate = "UPDATE AMPM.Client SET FirstName=\"" + this.firstName + "\", "
-                        + "LastName=\"" + this.lastName + "\", "
-                        + "Email=\"" + this.email + "\", "
-                        + "Phone=\"" + this.phone + "\", "
-                        + "LastModified=\"" + this.lastModified +"\", "
-                        + "Cell=\"" + this.cell +"\" "
+            sqlUpdate = "UPDATE AMPM.Client SET FirstName='" + this.firstName + "', "
+                        + "LastName='" + this.lastName + "', "
+                        + "Email='" + this.email + "', "
+                        + "Phone='" + this.phone + "', "
+                        + "LastModified='" + this.lastModified +"', "
+                        + "Cell='" + this.cell +"' "
                         + "WHERE ClientID=" + this.clientID +"";
         }
         return sqlUpdate;
     }
     
     public String getSQLSelect() {
-        return "SELECT * FROM AMPM.Client WHERE FirstName=\"" + this.firstName + "\", "
-            + "LastName=\"" + this.lastName + "\", "
-            + "Email=\"" + this.email + "\", "
-            + "Phone=\"" + this.phone + "\"";
+        String sqlSelect = "SELECT * FROM AMPM.Client WHERE (FirstName='" + this.firstName + "' AND "
+                         + "LastName='" + this.lastName + "' AND "
+                         + "Email='" + this.email + "' AND "
+                         + "Phone='" + this.phone + "')";
+        System.out.println(sqlSelect);
+        return sqlSelect;
     }
     
     public String getCell() {

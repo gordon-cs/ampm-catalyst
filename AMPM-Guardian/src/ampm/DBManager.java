@@ -113,10 +113,18 @@ public class DBManager {
      */
     public Boolean isInDatabase(Client client) throws SQLException {
         ResultSet rs = dbOffline.queryDB(client.getSQLSelect());
-
-        if (rs.last()) {
-            return false;
+        
+        if ( rs.next()) {
+            return true;
         }
-        return true;
+        return false;
+    }
+    
+    public void insertClient(Client client) throws SQLException {
+        DBOffline.executeStatement(client.getSQLInsert());
+        if (isOnline) {
+            dbOnline.executeStatement(client.getSQLInsert());
+        }
+        
     }
 }

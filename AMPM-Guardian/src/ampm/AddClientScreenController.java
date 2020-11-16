@@ -105,17 +105,19 @@ public class AddClientScreenController implements Initializable {
             //Command to check if the client is already exist in databse
                 Date date = new Date();
                 Timestamp timestamp = new Timestamp(date.getTime());
+                Long id = date.getTime();
                 /** Modify this so that we can generate ClientIDs on the fly **/
-//                Client newClient = new Client(firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), timestamp, cellPhoneNumber.getText());
-//                Boolean isInDatabase = dbManager.isInDatabase(newClient);
+                Client newClient = new Client( id.intValue()+"", firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), timestamp, cellPhoneNumber.getText());
+                Boolean isInDatabase = dbManager.isInDatabase(newClient);
                 
-                rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
-                        emailAddress.getText(), phoneNumber.getText());
-                if (!isFilled(rs)) {
+//                rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
+//                        emailAddress.getText(), phoneNumber.getText());
+                if (/*!isFilled(rs)*/ !isInDatabase) {
                     try {
-                        dbOnline.addNewClients(firstName.getText(), lastName.getText(),
-                                emailAddress.getText(), phoneNumber.getText(),
-                                timestamp, cellPhoneNumber.getText());
+//                        dbOnline.addNewClients(firstName.getText(), lastName.getText(),
+//                                emailAddress.getText(), phoneNumber.getText(),
+//                                timestamp, cellPhoneNumber.getText());
+                        dbManager.insertClient(newClient);
                         infoLabel.setStyle("-fx-text-fill:green");
                         infoLabel.setText("A new client was inserted successfully!");
 
@@ -132,15 +134,23 @@ public class AddClientScreenController implements Initializable {
             }
         } else {
             //Command to check if the client is already exist in databse
-              rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
-                        emailAddress.getText(), phoneNumber.getText());
-            if (!isFilled(rs)) {
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            /** Modify this so that we can generate ClientIDs on the fly **/
+            Long id = date.getTime();
+            Client newClient = new Client(id.intValue()+"", firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), timestamp, "");
+            Boolean isInDatabase = dbManager.isInDatabase(newClient);
+            
+//              rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
+//                        emailAddress.getText(), phoneNumber.getText());
+            if (/*!isFilled(rs)*/ !isInDatabase) {
                 //SQL command to insert client information to the database
-                Date date = new Date();
-                Timestamp time = new Timestamp(date.getTime());
+//                Date date = new Date();
+//                Timestamp time = new Timestamp(date.getTime());
                 try {
-                    dbOnline.addNewClients(firstName.getText(), lastName.getText(),
-                            emailAddress.getText(), phoneNumber.getText(), time, null);
+                    dbManager.insertClient(newClient);
+//                    dbOnline.addNewClients(firstName.getText(), lastName.getText(),
+//                            emailAddress.getText(), phoneNumber.getText(), time, null);
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
 

@@ -79,7 +79,7 @@ public class DBOffline implements Serializable {
 
     }
     
-    private static void executeStatement(String statement) throws SQLException {
+    public static void executeStatement(String statement) throws SQLException {
         stmt.executeUpdate(statement);
     }
     
