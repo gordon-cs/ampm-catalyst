@@ -24,7 +24,6 @@ public class DBOnline {
     private static Connection conn;
     private static DBOnline dbConnection = null;
     private static Statement stmt;
-    private static String currentUser;
   
     /**
      * Creates a new instance of DBConnection
@@ -74,7 +73,6 @@ public class DBOnline {
             System.out.println("Failed to get connection");
             e.printStackTrace();
         }
-        currentUser = user;
         return success;
     }
 
@@ -157,8 +155,6 @@ public class DBOnline {
         return clientList;
     
     }
-    
-    
 
     /**
      * Check database to see if that client is exist already
@@ -229,10 +225,6 @@ public class DBOnline {
             System.out.println("Internet is not connected, bad IO");
             return false;
         }
-    }
-
-    public static String getCurrentUser() {
-        return currentUser;
     }
     
 

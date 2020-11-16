@@ -69,7 +69,7 @@ public class Client {
     public String getSQLInsert() {
         String sqlInsert;
         
-        if ("".equals(cell)) {
+        if ("".equals(cell) || cell == null) {
             sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified) Values (" 
                 + this.clientID + ",'" 
                 + this.firstName + "', '"
@@ -79,7 +79,7 @@ public class Client {
                 + this.lastModified + "')";
         }
         else {
-        sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified) Values (" 
+            sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified) Values (" 
                 + this.clientID + ",'" 
                 + this.firstName + "', '"
                 + this.lastName + "', '"
@@ -98,16 +98,28 @@ public class Client {
      */
     public String getSQLUpdate() {
         String sqlUpdate;
-        
-        sqlUpdate = "UPDATE AMPM.Client SET FirstName=\"" + this.firstName + "\", "
-                    + "LastName=\"" + this.lastName + "\", "
-                    + "Email=\"" + this.email + "\", "
-                    + "Phone=\"" + this.phone + "\", "
-                    + "LastModified=\"" + this.lastModified +"\", "
-                    + "Cell=\"" + this.cell +"\" "
-                    + "WHERE ClientID=" + this.clientID +"";
-    
+
+        if ("".equalsIgnoreCase(cell) || cell == null) {
+            sqlUpdate = "UPDATE AMPM.Client SET FirstName=\"" + this.firstName + "\", "
+                        + "LastName=\"" + this.lastName + "\", "
+                        + "Email=\"" + this.email + "\", "
+                        + "Phone=\"" + this.phone + "\", "
+                        + "LastModified=\"" + this.lastModified +"\", "
+                        + "Cell=NULL "
+                        + "WHERE ClientID=" + this.clientID +"";
+        } else {
+            sqlUpdate = "UPDATE AMPM.Client SET FirstName=\"" + this.firstName + "\", "
+                        + "LastName=\"" + this.lastName + "\", "
+                        + "Email=\"" + this.email + "\", "
+                        + "Phone=\"" + this.phone + "\", "
+                        + "LastModified=\"" + this.lastModified +"\", "
+                        + "Cell=\"" + this.cell +"\" "
+                        + "WHERE ClientID=" + this.clientID +"";
+        }
         return sqlUpdate;
     }
     
+    public String getCell() {
+        return cell;
+    }
 }

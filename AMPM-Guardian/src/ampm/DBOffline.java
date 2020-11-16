@@ -137,50 +137,7 @@ public class DBOffline implements Serializable {
      */
     public void sync() throws SQLException {
         DBOnline dbOnline = new DBOnline();
-        
-        // Start with the client table
-        ResultSet rsOnline = dbOnline.getClients();
-        // Get the local list of clients
-        List<Client> rsOffline = this.getClientListFromDB();
-        
-//        // Loop through the remote client table and check for new clients
-//        while (rsOnline.next()) {
-//            
-//            String onlineClientID = rsOnline.getString("ClientID");
-//            Date onlineLastModified = rsOnline.getDate("LastModified");
-//            System.out.println("Working on ClientID " + onlineClientID);
-//            for (Client client : rsOffline) {
-//                
-//                System.out.println("Checking " + client.getFullName());
-//                
-//                // Check to see if this is in the database,
-//                // if it is, we should check that the last modified fields match
-//                if (onlineClientID.equals(client.getID())) {
-//                    
-//                    Date offlineLastModified = client.getLastModified();
-//                    // Doesn't match last modified, should update the most recent one
-//                    if (onlineLastModified != offlineLastModified) {
-//                        
-//                        // Most recent is online
-//                        if (onlineLastModified.after(offlineLastModified)) {
-//                           // Pull this client's changes to the local DB
-//                           System.out.println("Updating the local client");
-//                           updateLocalClient(rsOnline);
-//                        } 
-//                        // Most recent is offline  
-//                        else {
-//                           // Put the local client's changes on the remote server
-//                           System.out.println("updating the remote client");
-//                           updateRemoteClient(client);
-//                        }
-//                    
-//                    }
-//                    // We found the client, so we can stop the inner for loop
-//                    break; 
-//                }
-//            } 
-//        } // instead of this, we're gonna try something else
-        
+              
         List<Client> offlineClients = getClientListFromDB();
         List<Client> onlineClients = dbOnline.getClientListFromDB();
         
@@ -191,7 +148,9 @@ public class DBOffline implements Serializable {
                     Timestamp offlineLastModified = offlineClient.getLastModified();
                     Timestamp onlineLastModified = onlineClient.getLastModified();
                     if (!onlineLastModified.equals(offlineLastModified)) {
+                        int diff = onlineLastModified.compareTo(offlineLastModified);
                         
+                        System.out.println("the difference: " + onlineLastModified.toString() + ", " + offlineLastModified.toString());
                         // Most recent is online
                         if (onlineLastModified.after(offlineLastModified)) {
                           // Pull this client's changes to the local DB
@@ -228,6 +187,7 @@ public class DBOffline implements Serializable {
             // If this online client is NOT in the offline client list
             if (!isInClientList(onlineClient, offlineClients)) {
                 System.out.println("Adding " + onlineClient.getFullName() + ", id: " + onlineClient.getID());
+                System.out.println(onlineClient.getCell());
                 System.out.println(onlineClient.getSQLInsert());
 
                 executeStatement(onlineClient.getSQLInsert());

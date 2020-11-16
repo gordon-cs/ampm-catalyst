@@ -59,23 +59,14 @@ public class HomeScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            System.out.print(DBOnline.getStatement());
-            
+        try {           
             dbManager = new DBManager();
-            // should be able to do this from the DBOnline class
-//            rs = DBOnline.getClients();
-//            rs = DBOffline.getClients();
-//            clients =setupListView(dbManager.getClients());
+
             clients = dbManager.getClients();
             setupListView(clients);
-//            clients = new ArrayList<String>();
-//            addResultToClients(rs);
-//            setupListView();
-            
+           
             // Get the currently logged in user and update the label
-//            welcomeLabel.setText("Welcome " + DBOnline.getCurrentUser()); UNCOMMENT WHEN DONE TESTING OFFLINE DB
+            welcomeLabel.setText("Welcome " + dbManager.getCurrentUser());
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,8 +98,6 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private void handleOnKeyTyped(KeyEvent event) {
-        System.out.println("key pressed " + event.getCharacter());
-        System.out.println("text: " + event.getText());
         
         // If there's nothing in the textbox, just show the most recent clients
         String currSearch = clientSearchField.getText()+event.getCharacter();
@@ -116,13 +105,11 @@ public class HomeScreenController implements Initializable {
             setupListView(clients);
             return;
         }
-        System.out.println("search is now: " + currSearch + " of length: " + currSearch.length());
+
         items = FXCollections.observableArrayList();
         clients.forEach(client -> {
             if (client.getFullName().length() >= currSearch.length()) {
-                System.out.println("checking " + client.getFullName());
                 if (client.getFullName().substring(0,currSearch.length()).equalsIgnoreCase(currSearch)) {
-                    System.out.println(client.getFullName().substring(0,currSearch.length()) + " is the same as " + currSearch);
                     items.add(client.getFullName());
                 }
             }

@@ -23,6 +23,8 @@ public class DBManager {
     private static DBOnline dbOnline;
     private static DBOffline dbOffline;
     private static Boolean isOnline;
+    private static String currUser;
+    
     /** Creates a new instance of the database manager*/
     public DBManager() {
         
@@ -64,6 +66,7 @@ public class DBManager {
                 success = false;
             }
         }
+        currUser = user;
         return success;
     }
     
@@ -95,5 +98,9 @@ public class DBManager {
             System.out.println("Internet is not connected, bad IO");
             return false;
         }
+    }
+    
+    public String getCurrentUser() {
+        return currUser;
     }
 }
