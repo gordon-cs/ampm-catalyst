@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -102,5 +103,20 @@ public class DBManager {
     
     public String getCurrentUser() {
         return currUser;
+    }
+    
+    /** Checks to see if the given client is in the database. Only need to check the
+     *  local one. 
+     * 
+     * @param client
+     * @return 
+     */
+    public Boolean isInDatabase(Client client) throws SQLException {
+        ResultSet rs = dbOffline.queryDB(client.getSQLSelect());
+
+        if (rs.last()) {
+            return false;
+        }
+        return true;
     }
 }

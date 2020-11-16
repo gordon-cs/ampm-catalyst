@@ -83,6 +83,10 @@ public class DBOffline implements Serializable {
         stmt.executeUpdate(statement);
     }
     
+    public ResultSet queryDB(String query) throws SQLException {
+        return stmt.executeQuery(query);
+    }
+    
     public boolean isClientInDB(Client client) {
         return false;
     }

@@ -52,6 +52,7 @@ public class AddClientScreenController implements Initializable {
     private Label infoLabel;
 
     DBOnline dbOnline;
+    DBManager dbManager;
     
     //Format for date
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -64,6 +65,7 @@ public class AddClientScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dbOnline = new DBOnline();
+        dbManager = new DBManager();
 
     }
 
@@ -101,11 +103,15 @@ public class AddClientScreenController implements Initializable {
                 infoLabel.setText("Invalid cell phone number");
             } else {
             //Command to check if the client is already exist in databse
+                Date date = new Date();
+                Timestamp timestamp = new Timestamp(date.getTime());
+                /** Modify this so that we can generate ClientIDs on the fly **/
+//                Client newClient = new Client(firstName.getText(), lastName.getText(), emailAddress.getText(), phoneNumber.getText(), timestamp, cellPhoneNumber.getText());
+//                Boolean isInDatabase = dbManager.isInDatabase(newClient);
+                
                 rs = dbOnline.checkClients(firstName.getText(), lastName.getText(),
                         emailAddress.getText(), phoneNumber.getText());
                 if (!isFilled(rs)) {
-                    Date date = new Date();
-                    Timestamp timestamp = new Timestamp(date.getTime());
                     try {
                         dbOnline.addNewClients(firstName.getText(), lastName.getText(),
                                 emailAddress.getText(), phoneNumber.getText(),

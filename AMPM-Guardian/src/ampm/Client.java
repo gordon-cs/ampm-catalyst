@@ -119,6 +119,13 @@ public class Client {
         return sqlUpdate;
     }
     
+    public String getSQLSelect() {
+        return "SELECT * FROM AMPM.Client WHERE FirstName=\"" + this.firstName + "\", "
+            + "LastName=\"" + this.lastName + "\", "
+            + "Email=\"" + this.email + "\", "
+            + "Phone=\"" + this.phone + "\"";
+    }
+    
     public String getCell() {
         return cell;
     }

@@ -167,7 +167,7 @@ public class DBOnline {
                         + "' AND Email = '" + emailAddress
                         + "' AND Phone = '" + phoneNumber + "'");
     }
-
+    
     /**
      * This method will add new client to database base on the 6 variables
      *
