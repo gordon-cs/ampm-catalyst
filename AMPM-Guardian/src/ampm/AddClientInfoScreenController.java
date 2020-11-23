@@ -135,12 +135,56 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private Button addNewAlert;
 
+    private ResultSet rs;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Set up MenuItem 
+
+        //Set up if the information is filled 
+        //Set up client info in basic info tab
+        basicInfoSetUp();
+        diagnoseTabSetUp();
+        preventativeTabSetUp();
+        providersTabSetUp();
+        familyHistoryTabSetUp();
+        medicalEquipmentTabSetUp();
+        alertsTabSetUp();
     }
 
+    private void basicInfoSetUp() {
+        firstName.setText("John");
+        lastName.setText("Zhu");
+        phoneNumber.setText("test");
+        emailAddress.setText("test");
+        accountNumber.setText("");
+    }
+
+    private void diagnoseTabSetUp() {
+
+    }
+
+    private void preventativeTabSetUp() {
+
+    }
+
+    private void providersTabSetUp() {
+
+    }
+    
+    private void familyHistoryTabSetUp(){
+        
+    }
+    
+    private void medicalEquipmentTabSetUp(){
+        
+    }
+    
+    private void alertsTabSetUp(){
+        
+    }
 }
