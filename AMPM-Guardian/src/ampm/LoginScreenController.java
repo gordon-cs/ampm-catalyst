@@ -25,7 +25,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class. Manges LoginScreen.fxml, which allows users 
+ * to login to the system (and begins the process of initializing the database). 
  *
  * @author benab
  */

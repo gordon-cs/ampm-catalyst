@@ -21,6 +21,7 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               <children>
                 <Button fx:id="testButton" layoutX="248.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#handleTestButtonClicked" text="TEST CONNECTION" />
+                <Button fx:id="printButton" layoutX="271.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#handlePrintButtonClicked" text="Test Printing" />
               </children>
             </AnchorPane>
           </items>

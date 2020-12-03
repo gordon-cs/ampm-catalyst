@@ -1,9 +1,3 @@
-/*
- * MyDBConnection.java
- *
- * Created on 2005/01/16, 10:50
- * Copied (with slight modification) from https://netbeans.org/project_downloads/www/MyDBConnection.java
- */
 package ampm;
 
 import java.io.IOException;
@@ -15,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
     
-/**
+/** Singleton that manages the remote database. In charge of initialization, 
+ *  inserts, queries, updates, etc. 
  *
- * @author noniko
+ * Inspired by code from https://netbeans.org/project_downloads/www/MyDBConnection.java
  */
 public class DBOnline {
 
@@ -31,8 +26,8 @@ public class DBOnline {
     public DBOnline() {
 
     }
+    
     // static method to create/get singleton instance of DBOnline class 
-
     public static DBOnline getInstance() {
 
         if (dbConnection == null) {
@@ -43,8 +38,7 @@ public class DBOnline {
     }
 
     /**
-     * Creates the DBOnline instance by logging in with a specified
- user/pass combination.
+     * Creates the DBOnline instance by logging in with a specified user/pass combination.
      *
      * @param user String. The username to use for the database
      * @param pass String. The corresponding password
@@ -180,7 +174,8 @@ public class DBOnline {
      * @throws SQLException
      */
     public void addNewClients(String firstName, String lastName,
-            String emailAddress, String phoneNumber, Timestamp date, String cellPhoneNumber) throws SQLException {
+                              String emailAddress, String phoneNumber, 
+                              Timestamp date, String cellPhoneNumber) throws SQLException {
 
         stmt.executeUpdate("INSERT INTO AMPM.Client (FirstName, LastName, Email,"
                 + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
@@ -207,10 +202,10 @@ public class DBOnline {
 
     /**
      * This code should be called to check if there is an internet connection
-     * available.
+     * available. 
      *
      * @return true if internet is available, false otherwise
-     */
+     */ 
     private static Boolean internetAvailable() {
         try {
             URL url = new URL("http://www.google.com");

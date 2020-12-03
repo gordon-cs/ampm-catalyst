@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.sql.Timestamp;
-//import java.text.SimpleDateFormat;
 
-/** This class represents a single client in the system
+/** This class represents a single client in the system. The client is not dependent
+ *  of the database (doesn't matter if it's stored online or offline).
  *
  * @author benab
  */
@@ -43,31 +38,7 @@ public class Client {
         this.lastModified = lastModified;
         this.cell = cell;
     }
-    
-    /**
-     * Update this objects last modified field.
-     * @param lastModified 
-     */
-    public void updateLastModified(Timestamp lastModified) {
-        this.lastModified = lastModified;
-    }
- 
-    /**
-     * Returns the full name of a client
-     * @return 
-     */
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-    
-    public String getID() {
-        return clientID;
-    }
-    
-    public Timestamp getLastModified() {
-        return lastModified;
-    }
-    
+       
     
     /**
      * Generates the sql string that can be used to insert this client
@@ -101,8 +72,8 @@ public class Client {
     
     /**
      * Generates the sql string that can be used to update this client
-     * into the Client table
-     * @return 
+     * into the Client table. 
+     * @return The string that contains the SQL for updating client info.
      */
     public String getSQLUpdate() {
         String sqlUpdate;
@@ -127,6 +98,13 @@ public class Client {
         return sqlUpdate;
     }
     
+    
+    /**
+     * Generates the sql string that can be used to select this client
+     * from the Client table. Useful for checking to see if it already exists in
+     * the database
+     * @return The string that contains the SQL for selecting itself.
+     */
     public String getSQLSelect() {
         String sqlSelect = "SELECT * FROM AMPM.Client WHERE (FirstName='" + this.firstName + "' AND "
                          + "LastName='" + this.lastName + "' AND "
@@ -134,6 +112,33 @@ public class Client {
                          + "Phone='" + this.phone + "')";
         System.out.println(sqlSelect);
         return sqlSelect;
+    }
+    
+    /** Getters + Setters **/
+    
+    /**
+     * Update this objects last modified field. Timestamp is in the format: 
+     *  yyyy-mm-dd hh:mm:ss
+     * @param lastModified 
+     */
+    public void updateLastModified(Timestamp lastModified) {
+        this.lastModified = lastModified;
+    }
+ 
+    /**
+     * Returns the full name of a client
+     * @return 
+     */
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+    
+    public String getID() {
+        return clientID;
+    }
+    
+    public Timestamp getLastModified() {
+        return lastModified;
     }
     
     public String getCell() {

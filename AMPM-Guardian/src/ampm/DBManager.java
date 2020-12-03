@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.io.IOException;
@@ -15,10 +10,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author benab
- */
+/** The database manager class is in charge of setting up the databases on initialization. 
+ *  It can be used to figures out if the remote database is accessible, and depending on the result will
+ *  initialize the correct database(s). Anytime a class wants to do something to a 
+ *  database, it should do it through this class.
+ * 
+ **/
 public class DBManager {
     private static DBManager dbManager = null;
     private static DBOnline dbOnline;

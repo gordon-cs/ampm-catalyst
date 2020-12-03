@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.io.IOException;
@@ -32,11 +26,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class. Manages the home screen (HomeScreen.fxml) and its functionality.
+ * 
  *
  * @author benab
  */
 public class HomeScreenController implements Initializable {
+    // The FXML tags. Note: @FXML needs to be in front of every single individual tag,
+    //  if it isnt, then the whole thing will give weird errors.
     @FXML
     TextField clientSearchField;
     @FXML
@@ -49,6 +46,8 @@ public class HomeScreenController implements Initializable {
     private Button syncButton;
     @FXML
     private Label welcomeLabel;
+    @FXML
+    private Button printButton;
     
     private ResultSet rs;
     private List<Client> clients;
@@ -72,14 +71,7 @@ public class HomeScreenController implements Initializable {
         }
         
     } 
-    
-    private void addResultToClients(ResultSet rs) throws SQLException {
-        while (rs.next()) {
-            System.out.println("add result to client was called. shouldnt have been though");
-//            clients.add(rs.getString("FirstName") + " " + rs.getString("LastName"));
-        }
-    }
-    
+        
     private void setupListView(List<Client> clientList) {
         items = FXCollections.observableArrayList();
         clientListView.setItems(items);
@@ -98,7 +90,6 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private void handleOnKeyTyped(KeyEvent event) {
-        
         // If there's nothing in the textbox, just show the most recent clients
         String currSearch = clientSearchField.getText()+event.getCharacter();
         if (currSearch.length() == 0) {
@@ -145,6 +136,11 @@ public class HomeScreenController implements Initializable {
     @FXML
     private void handleSyncButtonClicked(MouseEvent event) {
 //        DBOffline.sync();
+    }
+    
+    @FXML
+    private void handlePrintButtonClicked(MouseEvent event) {
+        System.out.println("Printing");
     }
     
 }

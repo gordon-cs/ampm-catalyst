@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.io.Serializable;
@@ -19,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /** This class handles the offline database (a local Apache Derby instance packaged
- * alongside the .jar). 
+ * alongside the .jar). This database should always be accessible. 
  *
  * @author benab
  */
@@ -85,10 +80,6 @@ public class DBOffline implements Serializable {
     
     public ResultSet queryDB(String query) throws SQLException {
         return stmt.executeQuery(query);
-    }
-    
-    public boolean isClientInDB(Client client) {
-        return false;
     }
     
     public List<Client> getClientListFromDB() throws SQLException {
