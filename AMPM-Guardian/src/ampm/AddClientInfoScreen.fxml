@@ -38,11 +38,6 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="524.0" layoutY="111.0" text="Date of Birth">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
                   <TextField fx:id="emailAddress" layoutX="60.0" layoutY="241.0" prefHeight="23.0" prefWidth="149.0">
                      <font>
                         <Font size="12.0" />
@@ -73,7 +68,6 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dateOfBirth" layoutX="524.0" layoutY="142.0" prefHeight="23.0" prefWidth="162.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -99,7 +93,7 @@
                            </font>
                         </TextField>
                         <DatePicker fx:id="diagosedDate" layoutX="261.0" layoutY="122.0" prefHeight="26.0" prefWidth="171.0" />
-                        <Label layoutX="160.0" layoutY="131.0" text="Diagosed When">
+                        <Label layoutX="160.0" layoutY="131.0" text="Diagnosed When">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -109,16 +103,6 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="432.0" layoutY="165.0" text="or">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <RadioButton fx:id="diagonsisNone" layoutX="474.0" layoutY="165.0" mnemonicParsing="false" text="No Provider">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </RadioButton>
                         <Label layoutX="98.0" layoutY="197.0" prefHeight="28.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Medication">
                            <font>
                               <Font name="System Bold" size="18.0" />
@@ -248,22 +232,17 @@
             </ScrollPane>
          </content>
       </Tab>
-      <Tab text="Preventative">
+      <Tab text="Preventive">
          <content>
             <ScrollPane prefHeight="518.0" prefWidth="755.0">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="767.0" prefWidth="720.0">
                      <children>
-                        <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Preventative">
+                        <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Preventive">
                            <font>
                               <Font name="System Bold" size="32.0" />
                            </font>
-                        </Label>
-                        <Label layoutX="144.0" layoutY="104.0" prefHeight="28.0" prefWidth="96.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Preventive">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
+                        </Label>      
                         <Label layoutX="184.0" layoutY="145.0" text="Type/Name">
                            <font>
                               <Font size="12.0" />
@@ -279,7 +258,7 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="preventiveDateDone" layoutX="274.0" layoutY="166.0" prefHeight="26.0" prefWidth="171.0" />
+                        <DatePicker fx:id="preventiveDateDone" layoutX="274.0" layoutY="170.0" prefHeight="26.0" prefWidth="171.0" />
                         <TextField fx:id="preventivePrescribedBy" layoutX="277.0" layoutY="198.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
@@ -290,7 +269,7 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="preventiveNextDueDate" layoutX="274.0" layoutY="223.0" prefHeight="26.0" prefWidth="171.0" />
+                        <DatePicker fx:id="preventiveNextDueDate" layoutX="274.0" layoutY="230.0" prefHeight="26.0" prefWidth="171.0" />
                         <Label layoutX="176.0" layoutY="240.0" text="Next Due Date">
                            <font>
                               <Font size="12.0" />
