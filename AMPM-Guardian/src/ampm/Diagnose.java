@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.util.Date;
 
 /**
- *
+ * This one is for diagnoses in add client info screen
  * @author john.zhu
  */
 public class Diagnose {
     // The private values for this object, each one represents a col in the DB
-
     private String clientID;
     private String description;
     private Date diagnosedDate;
@@ -26,66 +20,38 @@ public class Diagnose {
         this.byWho = byWho;
     }
 
-    /**
-     * Update type of medical equipment.
-     *
-     * @param type
-     */
+    // Update the description of this diagnose
     public void updateDescription(String type) {
         this.description = description;
     }
 
-    /**
-     * Update who prescribed medical equipment.
-     *
-     * @param prescribedBy
-     */
+    // Update the diagnosed date
     public void updatedDiagnosedDate(Date diagnosedDate) {
         this.diagnosedDate = diagnosedDate;
     }
 
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param
-     */
+    // Update the doctor for this client
     public void updateByWho(String bywho) {
         this.byWho = bywho;
     }
 
-    /**
-     * Returns the diagnosis of client
-     *
-     * @return
-     */
+    // Returns the description of this diagnose
     public String getDescrption() {
         return description;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the diagnosed date
     public Date getDiagnosedDate() {
         return diagnosedDate;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns the doctor for this client
     public String getByWho() {
         return byWho;
     }
 
-    /**
-     * Generates the sql string that can be used to insert this client info into
-     * the Providers table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to insert this client info into
+    // the Diagnose table
     public String getSQLInsert() {
         String sqlInsert;
 
@@ -97,16 +63,12 @@ public class Diagnose {
         return sqlInsert;
     }
 
-    /**
-     * Generates the sql string that can be used to update this provide info
-     * into the Provide table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to update this provide info
+    // into the Diagnose table
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Prevention SET Description='" + this.description + "',"
+        sqlUpdate = "UPDATE AMPM.Diagnose SET Description='" + this.description + "',"
                 + "DiagnosedDate='" + this.diagnosedDate + "', "
                 + "ByWho='" + this.byWho + "'"
                 + "WHERE ClientID='" + this.clientID + "'";

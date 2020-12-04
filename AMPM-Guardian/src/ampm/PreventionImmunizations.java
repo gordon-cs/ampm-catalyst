@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.util.Date;
 
 /**
- *
+ * This one is for prevention immunizations in add client info screen
  * @author john.zhu
  */
 public class PreventionImmunizations {
@@ -28,84 +23,48 @@ public class PreventionImmunizations {
         this.whereGiven = whereGiven;
     }
 
-    /**
-     * Update type of medical equipment.
-     *
-     * @param type
-     */
+    // Update the type of preventive immunization
     public void updateType(String type) {
         this.type = type;
     }
 
-    /**
-     * Update who prescribed medical equipment.
-     *
-     * @param prescribedBy
-     */
+    // Update the name of preventive immunization for 
     public void updateName(String name) {
         this.name = name;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Update the date that immunizations given
     public void updateDateGiven(Date dateGiven) {
         this.dateGiven = dateGiven;
     }
 
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param
-     */
+    // Update the place that immunizations given
     public void updatewhereGiven(String whereGiven) {
         this.whereGiven = whereGiven;
     }
 
-    /**
-     * Returns the diagnosis of client
-     *
-     * @return
-     */
+    // Returns the type of preventive immunization
     public String getType() {
         return type;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns the name of preventive immunization for 
     public String getName() {
         return name;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the date that immunizations given
     public Date getDateGiven() {
         return dateGiven;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns the place that immunizations given
     public String getWhereGiven() {
         return whereGiven;
     }
 
-    /**
-     * Generates the sql string that can be used to insert this client info into
-     * the Providers table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to insert this client info into
+    // the Providers table
     public String getSQLInsert() {
         String sqlInsert;
 
@@ -118,12 +77,8 @@ public class PreventionImmunizations {
         return sqlInsert;
     }
 
-    /**
-     * Generates the sql string that can be used to update this provide info
-     * into the Provide table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to update this provide info
+    // into the Provide table
     public String getSQLUpdate() {
         String sqlUpdate;
 

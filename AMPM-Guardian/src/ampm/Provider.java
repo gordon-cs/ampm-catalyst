@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 /**
@@ -10,8 +5,8 @@ package ampm;
  * @author john.zhu
  */
 public class Provider {
-
     // The private values for this object, each one represents a col in the DB
+    
     private String clientID;
     private String type;
     private String providerName;
@@ -26,84 +21,48 @@ public class Provider {
         this.nameOfPANP = nameOfPANP;
     }
 
-    /**
-     * Update type for provide.
-     *
-     * @param type
-     */
+    // Update the type of provide
     public void updateType(String type) {
         this.type = type;
     }
 
-    /**
-     * Update provider name.
-     *
-     * @param providerName
-     */
+    // Update the name of provider
     public void updateProviderName(String providerName) {
         this.providerName = providerName;
     }
 
-    /**
-     * Update nurse name.
-     *
-     * @param nurseName
-     */
+    // Update the nurse name.
     public void updateNurseName(String nurseName) {
         this.nurseName = nurseName;
     }
 
-    /**
-     * Update PA/NP name.
-     *
-     * @param nameOfPANP
-     */
+    //Update the PA/NP name.
     public void updateNameOfPANP(String nameOfPANP) {
         this.nameOfPANP = nameOfPANP;
     }
 
-    /**
-     * Returns the type of provide
-     *
-     * @return
-     */
+    // Returns the type of provide
     public String getType() {
         return type;
     }
 
-    /**
-     * Returns the name of provider
-     *
-     * @return
-     */
+    // Returns the name of provider
     public String getProviderName() {
         return providerName;
     }
 
-    /**
-     * Returns the name of nurse
-     *
-     * @return
-     */
+    // Returns the name of nurse
     public String getNurseName() {
         return nurseName;
     }
 
-    /**
-     * Returns the name of PA/NP
-     *
-     * @return
-     */
+    // Returns the name of PA/NP
     public String getNameOfPANP() {
         return nameOfPANP;
     }
 
-    /**
-     * Generates the sql string that can be used to insert this client info into
-     * the Providers table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to insert this client info into
+    // the Providers table
     public String getSQLInsert() {
         String sqlInsert;
 
@@ -116,12 +75,8 @@ public class Provider {
         return sqlInsert;
     }
 
-    /**
-     * Generates the sql string that can be used to update this provide info
-     * into the Provide table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to update this provide info
+    // into the Provide table
     public String getSQLUpdate() {
         String sqlUpdate;
 

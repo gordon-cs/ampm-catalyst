@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 import java.util.Date;
@@ -32,120 +27,68 @@ public class Preventive {
         this.frequency = frequency;
     }
 
-    /**
-     * Update type of medical equipment.
-     *
-     * @param type
-     */
+    // Update type of preventive
     public void updateType(String type) {
         this.type = type;
     }
 
-    /**
-     * Update who prescribed medical equipment.
-     *
-     * @param
-     */
+    // Update the date done of preventive
     public void updateDateDone(Date dateDone) {
         this.dateDone = dateDone;
     }
 
-    /**
-     * Update who prescribed medical equipment.
-     *
-     * @param prescribedBy
-     */
+    // Update who prescribed client this preventive
     public void updatePrescribedBy(String prescribedBy) {
         this.prescribedBy = prescribedBy;
     }
 
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param usedFor
-     */
+    // Update the next due date
     public void updateNextDueDate(Date nextDueDate) {
         this.nextDueDate = nextDueDate;
     }
 
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param usedFor
-     */
+    // Update the source
     public void updateSource(String source) {
         this.nextDueDate = nextDueDate;
     }
 
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param usedFor
-     */
+    // Update the frequency
     public void updateFrequency(String frequency) {
         this.frequency = frequency;
     }
 
-    /**
-     * Returns the diagnosis of client
-     *
-     * @return
-     */
+    // Returns the type of preventive
     public String getType() {
         return type;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns the date done of preventive
     public Date getDateDone() {
         return dateDone;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns who prescribed client this preventive
     public String getPrescribedBy() {
         return prescribedBy;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns the next due date
     public Date getNextDueDate() {
         return nextDueDate;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the source
     public String getSource() {
         return source;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns the frequency
     public String getFrequency() {
         return frequency;
     }
 
-    /**
-     * Generates the sql string that can be used to insert this client info into
-     * the Providers table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to insert this client info into
+    // the Preventive table
     public String getSQLInsert() {
         String sqlInsert;
 
@@ -160,12 +103,9 @@ public class Preventive {
         return sqlInsert;
     }
 
-    /**
-     * Generates the sql string that can be used to update this provide info
-     * into the Provide table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to update this provide info
+    // into the Preventive table
+
     public String getSQLUpdate() {
         String sqlUpdate;
 

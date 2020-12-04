@@ -30,102 +30,58 @@ public class MedicalEquipment {
         this.notes = notes;
     }
 
-    /**
-     * Update type of medical equipment.
-     *
-     * @param type
-     */
+    // Update type of medical equipment
     public void updateType(String type) {
         this.type = type;
     }
 
-    /**
-     * Update who prescribed medical equipment.
-     *
-     * @param prescribedBy
-     */
+    // Update who prescribed medical equipment
     public void updatePrescribedBy(String prescribedBy) {
         this.prescribedBy = prescribedBy;
     }
 
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param usedFor
-     */
+    // Update the use of medical equipment
     public void updateUsedFor(String usedFor) {
         this.usedFor = usedFor;
     }
 
-     /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the date that medical equipemnt start used
     public void updateStartDate(Date startDate) {
         this.startDate = startDate;
     }
     
-    /**
-     * Update the use of medical equipment.
-     *
-     * @param usedFor
-     */
+    // Update the notes of medical equipment
     public void updateNote(String notes) {
         this.notes = notes;
     }
 
-    /**
-     * Returns the diagnosis of client
-     *
-     * @return
-     */
+    // Returns the type of medical equipment.
     public String getType() {
         return type;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    // Returns who prescribed medical equipment
     public String getPrescribedBy() {
         return prescribedBy;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the medical equipment used for
     public String getUsedFor() {
         return usedFor;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the date that medical equipemnt start used
     public Date getStartDate() {
         return startDate;
     }
 
-    /**
-     * Returns the relation of relative
-     *
-     * @return
-     */
+    //Returns the notes about medical equipment
     public String getNotes() {
         return notes;
     }
 
-    /**
-     * Generates the sql string that can be used to insert this client info into
-     * the Providers table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to insert this client info into
+    // the Medical Equipment table
     public String getSQLInsert() {
         String sqlInsert;
 
@@ -139,12 +95,8 @@ public class MedicalEquipment {
         return sqlInsert;
     }
 
-    /**
-     * Generates the sql string that can be used to update this provide info
-     * into the Provide table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to update this provide info
+    // into the Provide table
     public String getSQLUpdate() {
         String sqlUpdate;
 

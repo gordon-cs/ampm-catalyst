@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ampm;
 
 /**
- *
- * @author john.zhu
+ * This one is for alert in add client info screen
+ * @author John Zhu
  */
 public class Alert {
     // The private values for this object, each one represents a col in the DB
@@ -23,71 +18,41 @@ public class Alert {
         this.description = description;
     }
 
-    /**
-     * Update type for alert.
-     *
-     * @param type
-     */
+    // Update type for alert
     public void updateType(String type) {
         this.type = type;
     }
 
-    /**
-     * Update detail of alert.
-     *
-     * @param detail
-     */
+    // Update detail of alert
     public void updateDetail(String detail) {
         this.detail = detail;
     }
 
-    /**
-     * Update description of alert.
-     *
-     * @param description
-     */
+    // Update description of alert
     public void updateDescription(String description) {
         this.description = description;
     }
 
-
-
-    /**
-     * Returns the type of provide
-     *
-     * @return
-     */
+    // Returns the type of provide
     public String getType() {
         return type;
     }
 
-    /**
-     * Returns the detail of Alert
-     *
-     * @return
-     */
+    // Returns the detail of Alert
     public String getDetail() {
         return detail;
     }
 
-    /**
-     * Returns the description of Alert
-     *
-     * @return
-     */
+    // Returns the description of Alert
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Generates the sql string that can be used to insert this client info into
-     * the Providers table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to insert this client info into
+    // the Providers table 
     public String getSQLInsert() {
         String sqlInsert;
-
+        
         sqlInsert = "INSERT INTO AMPM.Provider (ClientID,) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
@@ -96,12 +61,8 @@ public class Alert {
         return sqlInsert;
     }
 
-    /**
-     * Generates the sql string that can be used to update this provide info
-     * into the Provide table
-     *
-     * @return
-     */
+    // Generates the sql string that can be used to update this provide info
+    // into the Provide table
     public String getSQLUpdate() {
         String sqlUpdate;
 
