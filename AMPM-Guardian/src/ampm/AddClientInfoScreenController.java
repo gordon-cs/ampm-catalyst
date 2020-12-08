@@ -137,21 +137,23 @@ public class AddClientInfoScreenController implements Initializable {
 
     private ResultSet rs;
     private String name;
+    DBConnection dbConnection;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //Set up MenuItem 
-
-        //Set up if the information is filled 
-        //Set up client info in basic info tab
+        dbConnection = new DBConnection();
     }
 
-    private void basicInfoSetUp() {
-        firstName.setText(name);
+    private void basicInfoSetUp(String fname, String lname, String email, String phone, String clientID) {
+        firstName.setText(fname);
+        lastName.setText(lname);
+        phoneNumber.setText(email);
+        emailAddress.setText(phone);
+        accountNumber.setText(clientID);
+
     }
 
     private void diagnoseTabSetUp() {
@@ -159,7 +161,7 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     private void preventativeTabSetUp() {
-
+        
     }
 
     private void providersTabSetUp() {
@@ -178,14 +180,34 @@ public class AddClientInfoScreenController implements Initializable {
 
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws SQLException {
+        dbConnection = new DBConnection();
+
+        //Get name that passed by home screen
         this.name = name;
-        basicInfoSetUp();
-        diagnoseTabSetUp();
-        preventativeTabSetUp();
-        providersTabSetUp();
-        familyHistoryTabSetUp();
-        medicalEquipmentTabSetUp();
-        alertsTabSetUp();
+
+        //Seperate name to first name and last name
+        String[] arr = name.split(" ");
+        String fname = arr[0];
+        String lname = arr[1];
+
+        //Set client with first name and last name 
+        Client thisClient = new Client(fname, lname);
+        ResultSet rs = dbConnection.executeStatement(thisClient.getByName());
+
+        //Get clientID from result set
+        if (rs.next()) {
+            String clientID = rs.getString("ClientID");
+            String email = rs.getString("Email");
+            String phone = rs.getString("Phone");
+            basicInfoSetUp(fname, lname, email, phone, clientID);
+            diagnoseTabSetUp();
+            preventativeTabSetUp();
+            providersTabSetUp();
+            familyHistoryTabSetUp();
+            medicalEquipmentTabSetUp();
+            alertsTabSetUp();
+        }
     }
+
 }

@@ -137,7 +137,7 @@ public class HomeScreenController implements Initializable {
     }
 
     @FXML
-    private void handleNewClientInfoClicked(MouseEvent event) throws IOException {
+    private void handleNewClientInfoClicked(MouseEvent event) throws IOException, SQLException {
         if (!this.clientListView.getSelectionModel().getSelectedItem().isEmpty()) {
             String name = this.clientListView.getSelectionModel().getSelectedItem();
             // Launch the new client stage

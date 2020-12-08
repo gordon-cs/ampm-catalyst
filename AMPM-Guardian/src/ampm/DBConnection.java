@@ -128,10 +128,12 @@ public class DBConnection {
     public static Connection getConnection() {
         return conn;
     }
+
     /**
      * Get recent client in the database
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static ResultSet getClients() throws SQLException {
         if (offlineMode) {
@@ -142,19 +144,24 @@ public class DBConnection {
 
     /**
      * Check database to see if that client is exist already
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static ResultSet checkClients(String firstName, String lastName, String emailAddress, String phoneNumber) throws SQLException {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
         }
         return stmt.executeQuery("SELECT * FROM Client WHERE FirstName = '" + firstName
-                        + "' AND LastName = '" + lastName
-                        + "' AND Email = '" + emailAddress
-                        + "' AND Phone = '" + phoneNumber + "'");
+                + "' AND LastName = '" + lastName
+                + "' AND Email = '" + emailAddress
+                + "' AND Phone = '" + phoneNumber + "'");
     }
 
+    public static ResultSet executeStatement(String statement) throws SQLException {
+        return stmt.executeQuery(statement);
+    }
+    
     /**
      * This method will add new client to database base on the 6 variables
      *
