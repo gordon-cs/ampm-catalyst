@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="807.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ampm.HomeScreenController">
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.HomeScreenController">
   <children>
     <MenuBar prefWidth="807.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <menus>
@@ -33,13 +33,17 @@
         <SplitPane dividerPositions="0.4308300395256917" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
           <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+              
               <children>
-                <Button fx:id="newClientButton" layoutX="276.0" layoutY="94.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="99.0" text="New Client" />
+                <Button fx:id="newClientInfoButton" layoutX="487.0" layoutY="173.0" mnemonicParsing="false" onMouseClicked="#handleNewClientInfoClicked" prefWidth="150.0" text="Add Client Info" />
+                        <Label fx:id="clientName" layoutX="24.0" layoutY="24.0" prefHeight="21.0" prefWidth="110.0" text="Client Name" />
               </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               <children>
-                <Button fx:id="testButton" layoutX="248.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#handleTestButtonClicked" text="TEST CONNECTION" />
+                <Button fx:id="testButton" layoutX="344.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleTestButtonClicked" text="TEST CONNECTION" />
+                        <Button fx:id="newClientButton" layoutX="494.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="150.0" text="Add Client" />
+    
               </children>
             </AnchorPane>
           </items>
@@ -49,7 +53,7 @@
         <VBox prefHeight="508.0" prefWidth="154.0">
           <children>
             <TextField fx:id="clientSearchField" onKeyTyped="#handleOnKeyTyped" prefWidth="200.0" promptText="Search for client" />
-            <ListView fx:id="clientListView" prefHeight="400.0" prefWidth="154.00009999999747" VBox.vgrow="ALWAYS">
+            <ListView fx:id="clientListView" onMouseClicked="#handleClientListAction" prefHeight="400.0" prefWidth="154.00009999999747" VBox.vgrow="ALWAYS">
               <VBox.margin>
                 <Insets />
               </VBox.margin>

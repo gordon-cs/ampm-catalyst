@@ -136,6 +136,7 @@ public class AddClientInfoScreenController implements Initializable {
     private Button addNewAlert;
 
     private ResultSet rs;
+    private String name;
 
     /**
      * Initializes the controller class.
@@ -147,21 +148,10 @@ public class AddClientInfoScreenController implements Initializable {
 
         //Set up if the information is filled 
         //Set up client info in basic info tab
-        basicInfoSetUp();
-        diagnoseTabSetUp();
-        preventativeTabSetUp();
-        providersTabSetUp();
-        familyHistoryTabSetUp();
-        medicalEquipmentTabSetUp();
-        alertsTabSetUp();
     }
 
     private void basicInfoSetUp() {
-        firstName.setText("John");
-        lastName.setText("Zhu");
-        phoneNumber.setText("test");
-        emailAddress.setText("test");
-        accountNumber.setText("");
+        firstName.setText(name);
     }
 
     private void diagnoseTabSetUp() {
@@ -175,16 +165,27 @@ public class AddClientInfoScreenController implements Initializable {
     private void providersTabSetUp() {
 
     }
-    
-    private void familyHistoryTabSetUp(){
-        
+
+    private void familyHistoryTabSetUp() {
+
     }
-    
-    private void medicalEquipmentTabSetUp(){
-        
+
+    private void medicalEquipmentTabSetUp() {
+
     }
-    
-    private void alertsTabSetUp(){
-        
+
+    private void alertsTabSetUp() {
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        basicInfoSetUp();
+        diagnoseTabSetUp();
+        preventativeTabSetUp();
+        providersTabSetUp();
+        familyHistoryTabSetUp();
+        medicalEquipmentTabSetUp();
+        alertsTabSetUp();
     }
 }
