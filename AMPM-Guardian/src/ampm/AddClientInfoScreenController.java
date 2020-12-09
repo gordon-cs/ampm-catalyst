@@ -23,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioButton;
@@ -53,7 +54,7 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField emailAddress;
     @FXML
-    private TextField accountNumber;
+    private Label accountNumber;
     @FXML
     private DatePicker dateOfBirth;
     //Diagnose Tab
@@ -156,28 +157,33 @@ public class AddClientInfoScreenController implements Initializable {
 
     }
 
-    private void diagnoseTabSetUp() {
+    private void diagnoseTabSetUp(String clientID) {
 
     }
 
-    private void preventativeTabSetUp() {
-        
-    }
-
-    private void providersTabSetUp() {
+    private void preventativeTabSetUp(String clientID) {
 
     }
 
-    private void familyHistoryTabSetUp() {
+    private void providersTabSetUp(String clientID) {
 
     }
 
-    private void medicalEquipmentTabSetUp() {
+    private void familyHistoryTabSetUp(String clientID) {
 
     }
 
-    private void alertsTabSetUp() {
+    private void medicalEquipmentTabSetUp(String clientID) {
 
+    }
+
+    private void alertsTabSetUp(String clientID) throws SQLException {
+        Alert alert = new Alert(clientID);
+        System.out.println(clientID);
+        ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
+        if (rs.next()) {
+            alertsSpecific.setText(rs.getString("AlertSpecific"));
+        }
     }
 
     public void setName(String name) throws SQLException {
@@ -201,12 +207,12 @@ public class AddClientInfoScreenController implements Initializable {
             String email = rs.getString("Email");
             String phone = rs.getString("Phone");
             basicInfoSetUp(fname, lname, email, phone, clientID);
-            diagnoseTabSetUp();
-            preventativeTabSetUp();
-            providersTabSetUp();
-            familyHistoryTabSetUp();
-            medicalEquipmentTabSetUp();
-            alertsTabSetUp();
+            diagnoseTabSetUp(clientID);
+            preventativeTabSetUp(clientID);
+            providersTabSetUp(clientID);
+            familyHistoryTabSetUp(clientID);
+            medicalEquipmentTabSetUp(clientID);
+            alertsTabSetUp(clientID);
         }
     }
 

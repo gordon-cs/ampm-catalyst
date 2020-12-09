@@ -7,11 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="755.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="755.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
   <tabs>
     <Tab fx:id="tab0" text="Basic Info">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="708.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="755.0">
                <children>
                   <Label layoutX="34.0" layoutY="24.0" prefHeight="49.0" prefWidth="152.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Basic Info">
                      <font>
@@ -58,16 +58,13 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="accountNumber" layoutX="524.0" layoutY="241.0" prefHeight="23.0" prefWidth="149.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
                   <Label layoutX="524.0" layoutY="210.0" text="Account #">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
+                  <Label fx:id="accountNumber" layoutX="507.0" layoutY="244.0" prefHeight="16.0" prefWidth="123.0" />
+                  <Button fx:id="saveBasicInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -92,8 +89,8 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <DatePicker fx:id="diagosedDate" layoutX="261.0" layoutY="122.0" prefHeight="26.0" prefWidth="171.0" />
-                        <Label layoutX="160.0" layoutY="131.0" text="Diagnosed When">
+                        <DatePicker fx:id="diagosedDate" layoutX="261.0" layoutY="125.0" prefHeight="26.0" prefWidth="171.0" />
+                        <Label layoutX="156.0" layoutY="131.0" text="Diagnosed When">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -226,6 +223,7 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
+                        <Button layoutX="621.0" layoutY="579.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                      </children>
                   </AnchorPane>
               </content>
@@ -234,9 +232,9 @@
       </Tab>
       <Tab text="Preventive">
          <content>
-            <ScrollPane prefHeight="518.0" prefWidth="755.0">
+            <ScrollPane prefHeight="493.0" prefWidth="755.0">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="767.0" prefWidth="720.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="691.0" prefWidth="720.0">
                      <children>
                         <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Preventive">
                            <font>
@@ -248,7 +246,7 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="preventiveType" layoutX="277.0" layoutY="141.0" prefHeight="25.0" prefWidth="153.0">
+                        <TextField fx:id="preventiveType" layoutX="277.0" layoutY="140.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -258,18 +256,18 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="preventiveDateDone" layoutX="274.0" layoutY="170.0" prefHeight="26.0" prefWidth="171.0" />
-                        <TextField fx:id="preventivePrescribedBy" layoutX="277.0" layoutY="198.0" prefHeight="25.0" prefWidth="153.0">
+                        <DatePicker fx:id="preventiveDateDone" layoutX="275.0" layoutY="169.0" prefHeight="26.0" prefWidth="171.0" />
+                        <TextField fx:id="preventivePrescribedBy" layoutX="277.0" layoutY="205.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="184.0" layoutY="202.0" text="Prescribed by">
+                        <Label layoutX="179.0" layoutY="210.0" text="Prescribed by">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="preventiveNextDueDate" layoutX="274.0" layoutY="230.0" prefHeight="26.0" prefWidth="171.0" />
+                        <DatePicker fx:id="preventiveNextDueDate" layoutX="275.0" layoutY="234.0" prefHeight="26.0" prefWidth="171.0" />
                         <Label layoutX="176.0" layoutY="240.0" text="Next Due Date">
                            <font>
                               <Font size="12.0" />
@@ -336,6 +334,7 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
+                        <Button layoutX="648.0" layoutY="650.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                      </children>
                   </AnchorPane>
                </content>
@@ -370,7 +369,7 @@
                         <MenuItem mnemonicParsing="false" text="Action 2" />
                      </items>
                   </MenuButton>
-                  <Label layoutX="177.0" layoutY="151.0" text="Provider Name">
+                  <Label layoutX="174.0" layoutY="152.0" text="Provider Name">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -385,26 +384,27 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="providerName" layoutX="260.0" layoutY="147.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="providerName" layoutX="262.0" layoutY="147.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nurseName" layoutX="260.0" layoutY="179.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="nurseName" layoutX="262.0" layoutY="178.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nameOfPANP" layoutX="262.0" layoutY="223.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="nameOfPANP" layoutX="262.0" layoutY="215.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="179.0" layoutY="227.0" text="PA/NP Name">
+                  <Label layoutX="179.0" layoutY="220.0" text="PA/NP Name">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
+                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children>
             </AnchorPane>
          </content>
@@ -448,11 +448,12 @@
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="223.0" layoutY="177.0" text="Age">
+                  <Label layoutX="224.0" layoutY="178.0" text="Age">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
+                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children>
             </AnchorPane>
          </content>
@@ -496,22 +497,23 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="medicalEquipNotes" layoutX="262.0" layoutY="255.0" prefHeight="74.0" prefWidth="178.0">
+                  <TextArea fx:id="medicalEquipNotes" layoutX="272.0" layoutY="256.0" prefHeight="74.0" prefWidth="178.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextArea>
-                  <Label layoutX="209.0" layoutY="256.0" text="Notes">
+                  <Label layoutX="219.0" layoutY="256.0" text="Notes">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="medicalEquipStartDate" layoutX="263.0" layoutY="196.0" prefHeight="26.0" prefWidth="171.0" />
+                  <DatePicker fx:id="medicalEquipStartDate" layoutX="272.0" layoutY="207.0" prefHeight="26.0" prefWidth="171.0" />
                   <Label layoutX="196.0" layoutY="213.0" text="Start  Date">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
+                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children>
             </AnchorPane>
          </content>
@@ -525,17 +527,17 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="105.0" layoutY="93.0" text="Alert 1:">
+                  <Label layoutX="136.0" layoutY="94.0" text="Alert 1:">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="143.0" layoutY="133.0" text="Select Type">
+                  <Label layoutX="184.0" layoutY="133.0" text="Select Type">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <MenuButton fx:id="alertsType" layoutX="239.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Allerge">
+                  <MenuButton fx:id="alertsType" layoutX="271.0" layoutY="128.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Allerge">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -544,31 +546,32 @@
                         <Font size="12.0" />
                      </font>
                   </MenuButton>
-                  <Label layoutX="147.0" layoutY="226.0" text="Discrption">
+                  <Label layoutX="189.0" layoutY="221.0" text="Discrption">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="altersDescrption" layoutX="238.0" layoutY="218.0" prefHeight="74.0" prefWidth="178.0">
+                  <TextArea fx:id="altersDescrption" layoutX="270.0" layoutY="210.0" prefHeight="74.0" prefWidth="178.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextArea>
-                  <Button fx:id="addNewAlert" layoutX="281.0" layoutY="326.0" mnemonicParsing="false" text="Add New Alert">
+                  <Button fx:id="addNewAlert" layoutX="299.0" layoutY="326.0" mnemonicParsing="false" text="Add New Alert">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="alertsSpecific" layoutX="239.0" layoutY="167.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="alertsSpecific" layoutX="271.0" layoutY="166.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="153.0" layoutY="171.0" text="Specific">
+                  <Label layoutX="195.0" layoutY="171.0" text="Specific">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
+                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children></AnchorPane>
       </content>
     </Tab>

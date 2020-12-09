@@ -2,9 +2,11 @@ package ampm;
 
 /**
  * This one is for alert in add client info screen
+ *
  * @author John Zhu
  */
 public class Alert {
+
     // The private values for this object, each one represents a col in the DB
     private String clientID;
     private String type;
@@ -16,6 +18,10 @@ public class Alert {
         this.type = type;
         this.detail = detail;
         this.description = description;
+    }
+
+    Alert(String clientID) {
+        this.clientID = clientID;
     }
 
     // Update type for alert
@@ -52,7 +58,7 @@ public class Alert {
     // the Providers table 
     public String getSQLInsert() {
         String sqlInsert;
-        
+
         sqlInsert = "INSERT INTO AMPM.Provider (ClientID,) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
@@ -75,9 +81,9 @@ public class Alert {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Client WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID='"
                 + this.clientID + "'";
-        
+
         System.out.println(sqlSelect);
         return sqlSelect;
     }
