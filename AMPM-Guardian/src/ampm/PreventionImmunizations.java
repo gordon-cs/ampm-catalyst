@@ -69,21 +69,21 @@ public class PreventionImmunizations {
     }
 
     // Generates the sql string that can be used to insert this client info into
-    // the Providers table
+    // the PreventionImmunizations table
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID,) Values ('"
+        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID, Type, Name, DateGiven, whereGiven) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
-                + this.name + "'+'"
-                + this.dateGiven + "'+'"
+                + this.name + "','"
+                + this.dateGiven + "','"
                 + this.whereGiven + "')";
         return sqlInsert;
     }
 
-    // Generates the sql string that can be used to update this provide info
-    // into the Provide table
+    // Generates the sql string that can be used to update this client info
+    // into the PreventionImmunizations table
     public String getSQLUpdate() {
         String sqlUpdate;
 

@@ -70,11 +70,11 @@ public class Provider {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Provider (ClientID,) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Provider (ClientID,Type, Provider, Nurse, PANP) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
-                + this.providerName + "'+'"
-                + this.nurseName + "'+'"
+                + this.providerName + "','"
+                + this.nurseName + "','"
                 + this.nameOfPANP + "')";
         return sqlInsert;
     }
@@ -85,9 +85,9 @@ public class Provider {
         String sqlUpdate;
 
         sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
-                + "ProvideName='" + this.providerName + "', "
-                + "NurseName='" + this.nurseName + "', "
-                + "NameOfPANP='" + this.nameOfPANP + "'"
+                + "Provider='" + this.providerName + "', "
+                + "Nurse='" + this.nurseName + "', "
+                + "PANP='" + this.nameOfPANP + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 
         return sqlUpdate;

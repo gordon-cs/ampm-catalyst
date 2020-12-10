@@ -10,7 +10,7 @@ public class Monitor {
     private String reason;
     private String specific;
 
-    Monitor(String clientID, String type, String reason, String specific) {
+    Monitor(String clientID, String reason, String specific) {
         this.clientID = clientID;
         this.reason = reason;
         this.specific = specific;
@@ -46,7 +46,7 @@ public class Monitor {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Monitor (ClientID,) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Monitor (ClientID, For, Specific) Values ('"
                 + this.clientID + "','"
                 + this.reason + "','"
                 + this.specific + "')";

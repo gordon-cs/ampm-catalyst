@@ -61,10 +61,10 @@ public class Diagnose {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Diagnose (ClientID,) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Diagnose (ClientID, Diagnosis, StartDate, DiagnosedBy) Values ('"
                 + this.clientID + "','"
-                + this.description + "'+'"
-                + this.diagnosedDate + "'+'"
+                + this.description + "','"
+                + this.diagnosedDate + "','"
                 + this.byWho + "')";
         return sqlInsert;
     }
@@ -74,9 +74,9 @@ public class Diagnose {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Diagnose SET Description='" + this.description + "',"
-                + "DiagnosedDate='" + this.diagnosedDate + "', "
-                + "ByWho='" + this.byWho + "'"
+        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis='" + this.description + "',"
+                + "StartDate='" + this.diagnosedDate + "', "
+                + "DiagnosedBy='" + this.byWho + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 
         return sqlUpdate;

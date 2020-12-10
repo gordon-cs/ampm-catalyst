@@ -62,12 +62,12 @@ public class FamilyHistory {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.FamilyHistory (ClientID,) Values ('"
+        sqlInsert = "INSERT INTO AMPM.FamilyHistory (ClientID, Diagnoses, Relation, Age, Died) Values ('"
                 + this.clientID + "','"
                 + this.diagnosis + "','"
-                + this.relation + "'+'"
-                + this.exist + "'+'"
-                + this.age + "')";
+                + this.relation + "','"
+                + this.age + "','"
+                + this.exist + "')";
         return sqlInsert;
     }
 
@@ -76,10 +76,10 @@ public class FamilyHistory {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Type='" + this.diagnosis + "',"
+        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + this.diagnosis + "',"
                 + "Relation='" + this.relation + "', "
-                + "Exist='" + this.exist + "', "
-                + "Age='" + this.age + "'"
+                + "Age='" + this.age + "', "
+                + "Died='" + this.exist + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 
         return sqlUpdate;

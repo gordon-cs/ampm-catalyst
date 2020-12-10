@@ -39,6 +39,27 @@ public class Medication {
         this.clientID = clientID;
     }
 
+    // Generates the sql string that can be used to insert this client info into
+    // the medication table
+    public String getSQLInsert() {
+        String sqlInsert;
+
+        sqlInsert = "INSERT INTO AMPM.Medication (ClientID, Class,GenericName, BrandName,Dose, "
+                + "Frequency,StartDate,PrescribedBy,UsedFor,DateStopped,Provider) Values ('"
+                + this.clientID + "','"
+                + this.medicationClass + "',"
+                + this.genericName + "', "
+                + this.brandName + "', "
+                + this.dose + "', "
+                + this.frequency + "', "
+                + this.startDate + "', "
+                + this.prescribedBy + "', "
+                + this.usedFor + "', "
+                + this.prescribedBy + "', "
+                + this.dateStopped + "')";
+        return sqlInsert;
+    }
+
     // Generates the sql string that can be used to update this provide info
     // into the Provide table
     public String getSQLUpdate() {

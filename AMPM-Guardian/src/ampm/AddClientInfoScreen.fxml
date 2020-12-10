@@ -64,11 +64,11 @@
                      </font>
                   </Label>
                   <Label fx:id="accountNumber" layoutX="507.0" layoutY="244.0" prefHeight="16.0" prefWidth="123.0" />
-                  <Button fx:id="saveBasicInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveBasicInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveBasicTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab fx:id="tabDiagnose" text="Diagnoses">
+      <Tab fx:id="saveDiagnose" text="Diagnoses">
          <content>
             <ScrollPane prefHeight="446.0" prefWidth="755.0">
               <content>
@@ -199,7 +199,7 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="635.0" layoutY="424.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <Button fx:id="saveDiagnoseInfo" layoutX="635.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#saveDiagnoseTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                         <TextField fx:id="monitorSpecific" layoutX="255.0" layoutY="323.0" />
                      </children>
                   </AnchorPane>
@@ -381,7 +381,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveProviderInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveProviderTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children>
             </AnchorPane>
          </content>

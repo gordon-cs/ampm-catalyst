@@ -139,7 +139,7 @@ public class DBConnection {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
         }
-        return stmt.executeQuery("Select  FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
+        return stmt.executeQuery("Select FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
     }
 
     /**
@@ -162,6 +162,7 @@ public class DBConnection {
         return stmt.executeQuery(statement);
     }
     
+
     /**
      * This method will add new client to database base on the 6 variables
      *
@@ -183,6 +184,10 @@ public class DBConnection {
                 + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
                 + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "')");
 
+    }
+
+    public void addInfo(String statement) throws SQLException {
+        stmt.executeUpdate(statement);
     }
 
     /**

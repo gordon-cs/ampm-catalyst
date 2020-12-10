@@ -10,7 +10,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,8 +58,6 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField emailAddress;
     @FXML
     private Label accountNumber;
-    @FXML
-    private DatePicker dateOfBirth;
 
 //Diagnose Tab
     @FXML
@@ -162,6 +162,7 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField medicationProvider;
 
     private String name;
+    private String clientID;
     DBConnection dbConnection;
 
     /**
@@ -172,32 +173,32 @@ public class AddClientInfoScreenController implements Initializable {
         dbConnection = new DBConnection();
     }
 
-    private void basicInfoSetUp(String fname, String lname, String email, String phone, String clientID) {
+    private void basicInfoSetUp(String fname, String lname, String email, String phone) {
         firstName.setText(fname);
         lastName.setText(lname);
         phoneNumber.setText(email);
         emailAddress.setText(phone);
-        accountNumber.setText(clientID);
+        accountNumber.setText(this.clientID);
 
     }
 
-    private void diagnoseTabSetUp(String clientID) throws SQLException {
-        Diagnose diagnose = new Diagnose(clientID);
+    private void diagnoseTabSetUp() throws SQLException {
+        Diagnose diagnose = new Diagnose(this.clientID);
         ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelect());
         if (rs.next()) {
             diagnoseDescription.setText(rs.getString("Diagnosis"));
             diagnosisDoctor.setText(rs.getString("DiagnosedBy"));
         }
 
-        Monitor monitor = new Monitor(clientID);
+        Monitor monitor = new Monitor(this.clientID);
         ResultSet rs2 = dbConnection.executeStatement(monitor.getSQLSelect());
         if (rs2.next()) {
             monitorSpecific.setText(rs2.getString("Specific"));
         }
     }
 
-    private void preventativeTabSetUp(String clientID) throws SQLException {
-        Preventive preventive = new Preventive(clientID);
+    private void preventativeTabSetUp() throws SQLException {
+        Preventive preventive = new Preventive(this.clientID);
         ResultSet rs = dbConnection.executeStatement(preventive.getSQLSelect());
         if (rs.next()) {
             preventiveType.setText(rs.getString("PreventiveType"));
@@ -206,7 +207,7 @@ public class AddClientInfoScreenController implements Initializable {
             preventiveFrequency.setText(rs.getString("Frequency"));
         }
 
-        PreventionImmunizations preventionImmunizations = new PreventionImmunizations(clientID);
+        PreventionImmunizations preventionImmunizations = new PreventionImmunizations(this.clientID);
         ResultSet rs2 = dbConnection.executeStatement(preventionImmunizations.getSQLSelect());
         if (rs2.next()) {
             preventionImmunType.setText(rs2.getString("Type"));
@@ -215,8 +216,8 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
-    private void providersTabSetUp(String clientID) throws SQLException {
-        Provider provider = new Provider(clientID);
+    private void providersTabSetUp() throws SQLException {
+        Provider provider = new Provider(this.clientID);
         ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
         if (rs.next()) {
             provideType.setText(rs.getString("Type"));
@@ -226,8 +227,8 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
-    private void familyHistoryTabSetUp(String clientID) throws SQLException {
-        FamilyHistory familyHistory = new FamilyHistory(clientID);
+    private void familyHistoryTabSetUp() throws SQLException {
+        FamilyHistory familyHistory = new FamilyHistory(this.clientID);
         ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
         if (rs.next()) {
             familyDiagnosis.setText(rs.getString("Diagnoses"));
@@ -236,8 +237,8 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
-    private void medicalEquipmentTabSetUp(String clientID) throws SQLException {
-        MedicalEquipment medicalEquipment = new MedicalEquipment(clientID);
+    private void medicalEquipmentTabSetUp() throws SQLException {
+        MedicalEquipment medicalEquipment = new MedicalEquipment(this.clientID);
         ResultSet rs = dbConnection.executeStatement(medicalEquipment.getSQLSelect());
         if (rs.next()) {
             medicalEquipType.setText(rs.getString("EquipType"));
@@ -247,17 +248,17 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
-    private void alertsTabSetUp(String clientID) throws SQLException {
-        Alert alert = new Alert(clientID);
+    private void alertsTabSetUp() throws SQLException {
+        Alert alert = new Alert(this.clientID);
         ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
         if (rs.next()) {
             alertsSpecific.setText(rs.getString("AlertSpecific"));
-            altersDescrption.setText(rs.getString("AlertDescption"));
+            altersDescrption.setText(rs.getString("AlertDescription"));
         }
     }
 
-    private void medicationTabSetUp(String clientID) throws SQLException {
-        Medication medicaiton = new Medication(clientID);
+    private void medicationTabSetUp() throws SQLException {
+        Medication medicaiton = new Medication(this.clientID);
         ResultSet rs = dbConnection.executeStatement(medicaiton.getSQLSelect());
         if (rs.next()) {
 
@@ -269,6 +270,59 @@ public class AddClientInfoScreenController implements Initializable {
             medicationPrescribedBy.setText(rs.getString("PrescribedBy"));
             medicationUsedFor.setText(rs.getString("UsedFor"));
             medicationProvider.setText(rs.getString("Provider"));
+        }
+    }
+
+    //Update client basic info
+    @FXML
+    private void saveBasicTab(MouseEvent event) throws SQLException, IOException {
+        Client updateInfo = new Client(this.clientID, firstName.getText(), lastName.getText(),
+                emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime()),
+                 null);
+        System.out.println(updateInfo.getSQLUpdate());
+        dbConnection.addInfo(updateInfo.getSQLUpdate());
+
+    }
+    
+     //Insert or update diagnose info to database
+    @FXML
+    private void saveDiagnoseTab(MouseEvent event) throws SQLException, IOException {
+        Diagnose diagnose = new Diagnose(this.clientID);
+        ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelect());
+        Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(),null, diagnosisDoctor.getText());
+        if (rs.next()) {
+            System.out.println(diagnoseInfo.getSQLUpdate());
+            dbConnection.addInfo(diagnoseInfo.getSQLUpdate());
+        } else {
+            System.out.println(diagnoseInfo.getSQLInsert());
+            dbConnection.addInfo(diagnoseInfo.getSQLInsert());
+        }
+        Monitor monitor = new Monitor(this.clientID);
+        ResultSet rs2 = dbConnection.executeStatement(monitor.getSQLSelect());
+        Monitor monitorInfo = new Monitor(this.clientID,diagnoseDescription.getText(),monitorSpecific.getText());
+        if (rs2.next()) {
+            System.out.println(monitorInfo.getSQLUpdate());
+            dbConnection.addInfo(monitorInfo.getSQLUpdate());
+        } else {
+            System.out.println(monitorInfo.getSQLInsert());
+            dbConnection.addInfo(monitorInfo.getSQLInsert());
+        }
+
+    }
+
+    //Insert or update provider info to database
+    @FXML
+    private void saveProviderTab(MouseEvent event) throws SQLException, IOException {
+        Provider provider = new Provider(this.clientID);
+        ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
+        Provider providerInfo = new Provider(this.clientID, provideType.getText(), providerName.getText(),
+                nurseName.getText(), nameOfPANP.getText());
+        if (rs.next()) {
+            System.out.println(providerInfo.getSQLUpdate());
+            dbConnection.addInfo(providerInfo.getSQLUpdate());
+        } else {
+            System.out.println(providerInfo.getSQLInsert());
+            dbConnection.addInfo(providerInfo.getSQLInsert());
         }
     }
 
@@ -289,17 +343,17 @@ public class AddClientInfoScreenController implements Initializable {
 
         //Get clientID from result set
         if (rs.next()) {
-            String clientID = rs.getString("ClientID");
+            this.clientID = rs.getString("ClientID");
             String email = rs.getString("Email");
             String phone = rs.getString("Phone");
-            basicInfoSetUp(fname, lname, email, phone, clientID);
-            diagnoseTabSetUp(clientID);
-            preventativeTabSetUp(clientID);
-            providersTabSetUp(clientID);
-            familyHistoryTabSetUp(clientID);
-            medicalEquipmentTabSetUp(clientID);
-            alertsTabSetUp(clientID);
-            medicationTabSetUp(clientID);
+            basicInfoSetUp(fname, lname, email, phone);
+            diagnoseTabSetUp();
+            preventativeTabSetUp();
+            providersTabSetUp();
+            familyHistoryTabSetUp();
+            medicalEquipmentTabSetUp();
+            alertsTabSetUp();
+            medicationTabSetUp();
         }
     }
 
