@@ -30,6 +30,11 @@ public class MedicalEquipment {
         this.notes = notes;
     }
 
+    MedicalEquipment(String clientID) {
+        this.clientID = clientID;
+        ;
+    }
+
     // Update type of medical equipment
     public void updateType(String type) {
         this.type = type;
@@ -49,7 +54,7 @@ public class MedicalEquipment {
     public void updateStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    
+
     // Update the notes of medical equipment
     public void updateNote(String notes) {
         this.notes = notes;
@@ -111,7 +116,7 @@ public class MedicalEquipment {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.MedicalEqui WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID='"
                 + this.clientID + "'";
 
         System.out.println(sqlSelect);

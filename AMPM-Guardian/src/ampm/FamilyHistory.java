@@ -1,10 +1,12 @@
 package ampm;
 
 /**
- * This one is for family history in add client info screen 
+ * This one is for family history in add client info screen
+ *
  * @author John Zhu
  */
 public class FamilyHistory {
+
     // The private values for this object, each one represents a col in the DB
     private String clientID;
     private String diagnosis;
@@ -18,6 +20,10 @@ public class FamilyHistory {
         this.relation = relation;
         this.exist = exist;
         this.age = age;
+    }
+
+    FamilyHistory(String clientID) {
+        this.clientID = clientID;
     }
 
     // Update diagnosis for client family history
@@ -78,9 +84,9 @@ public class FamilyHistory {
 
         return sqlUpdate;
     }
-    
+
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Client WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID='"
                 + this.clientID + "'";
 
         System.out.println(sqlSelect);

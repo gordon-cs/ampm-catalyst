@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * This one is for prevention immunizations in add client info screen
+ *
  * @author john.zhu
  */
 public class PreventionImmunizations {
@@ -21,6 +22,10 @@ public class PreventionImmunizations {
         this.name = name;
         this.dateGiven = dateGiven;
         this.whereGiven = whereGiven;
+    }
+
+    PreventionImmunizations(String clientID) {
+        this.clientID = clientID;
     }
 
     // Update the type of preventive immunization
@@ -68,7 +73,7 @@ public class PreventionImmunizations {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Prevention (ClientID,) Values ('"
+        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID,) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.name + "'+'"
@@ -82,7 +87,7 @@ public class PreventionImmunizations {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Prevention SET Type='" + this.type + "',"
+        sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
                 + "Name='" + this.name + "', "
                 + "DateGiven='" + this.dateGiven + "', "
                 + "whereGiven='" + this.whereGiven + "'"
@@ -92,7 +97,7 @@ public class PreventionImmunizations {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Prevention WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID='"
                 + this.clientID + "'";
 
         System.out.println(sqlSelect);

@@ -44,7 +44,8 @@ public class AddClientInfoScreenController implements Initializable {
 
     @FXML
     private TabPane tabPane;
-    //Basic Info Tab
+
+//Basic Info Tab
     @FXML
     private TextField firstName;
     @FXML
@@ -57,7 +58,8 @@ public class AddClientInfoScreenController implements Initializable {
     private Label accountNumber;
     @FXML
     private DatePicker dateOfBirth;
-    //Diagnose Tab
+
+//Diagnose Tab
     @FXML
     private TextField diagnoseDescription;
     @FXML
@@ -67,14 +69,11 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private RadioButton diagonsisNone;
     @FXML
-    private RadioButton medicationGeneric;
-    @FXML
-    private RadioButton medicationSpecific;
-    @FXML
-    private MenuButton monitoringType;
+    private TextField monitorSpecific;
     @FXML
     private MenuButton addNewDiagnoseType;
-    //Preventative Tab
+
+//Preventive Tab
     @FXML
     private TextField preventiveType;
     @FXML
@@ -95,7 +94,8 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField preventionImmunName;
     @FXML
     private TextField preventionImmunLocation;
-    //Providers Tab
+
+//Providers Tab
     @FXML
     private MenuButton provideType;
     @FXML
@@ -106,16 +106,18 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField nameOfPANP;
     @FXML
     private Button addNewProvider;
-    //Family History Tab
+
+//Family History Tab
     @FXML
-    private TextField familyDiagnos;
+    private TextField familyDiagnosis;
     @FXML
     private TextField familyRelation;
     @FXML
     private TextField familyRealtionAge;
     @FXML
     private Button addNewRelative;
-    //Medical Equipment Tab
+
+//Medical Equipment Tab
     @FXML
     private TextField medicalEquipType;
     @FXML
@@ -126,7 +128,8 @@ public class AddClientInfoScreenController implements Initializable {
     private DatePicker medicalEquipStartDate;
     @FXML
     private TextArea medicalEquipNotes;
-    //Alerts Tab
+
+//Alerts Tab
     @FXML
     private MenuButton alertsType;
     @FXML
@@ -136,7 +139,28 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private Button addNewAlert;
 
-    private ResultSet rs;
+//Medication Tab
+    @FXML
+    private TextField medicationClass;
+    @FXML
+    private TextField medicationGenericName;
+    @FXML
+    private TextField medicationBrandName;
+    @FXML
+    private TextField medicationDose;
+    @FXML
+    private TextField medicationFrequency;
+    @FXML
+    private DatePicker medicationStartDate;
+    @FXML
+    private TextField medicationPrescribedBy;
+    @FXML
+    private TextField medicationUsedFor;
+    @FXML
+    private DatePicker medicationStopedDate;
+    @FXML
+    private TextField medicationProvider;
+
     private String name;
     DBConnection dbConnection;
 
@@ -157,36 +181,98 @@ public class AddClientInfoScreenController implements Initializable {
 
     }
 
-    private void diagnoseTabSetUp(String clientID) {
+    private void diagnoseTabSetUp(String clientID) throws SQLException {
+        Diagnose diagnose = new Diagnose(clientID);
+        ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelect());
+        if (rs.next()) {
+            diagnoseDescription.setText(rs.getString("Diagnosis"));
+            diagnosisDoctor.setText(rs.getString("DiagnosedBy"));
+        }
 
+        Monitor monitor = new Monitor(clientID);
+        ResultSet rs2 = dbConnection.executeStatement(monitor.getSQLSelect());
+        if (rs2.next()) {
+            monitorSpecific.setText(rs2.getString("Specific"));
+        }
     }
 
-    private void preventativeTabSetUp(String clientID) {
+    private void preventativeTabSetUp(String clientID) throws SQLException {
+        Preventive preventive = new Preventive(clientID);
+        ResultSet rs = dbConnection.executeStatement(preventive.getSQLSelect());
+        if (rs.next()) {
+            preventiveType.setText(rs.getString("PreventiveType"));
+            preventivePrescribedBy.setText(rs.getString("PrescribedBy"));
+            preventiveSource.setText(rs.getString("Source"));
+            preventiveFrequency.setText(rs.getString("Frequency"));
+        }
 
+        PreventionImmunizations preventionImmunizations = new PreventionImmunizations(clientID);
+        ResultSet rs2 = dbConnection.executeStatement(preventionImmunizations.getSQLSelect());
+        if (rs2.next()) {
+            preventionImmunType.setText(rs2.getString("Type"));
+            preventionImmunName.setText(rs2.getString("Name"));
+            preventionImmunLocation.setText(rs2.getString("WhereGiven"));
+        }
     }
 
-    private void providersTabSetUp(String clientID) {
-
+    private void providersTabSetUp(String clientID) throws SQLException {
+        Provider provider = new Provider(clientID);
+        ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
+        if (rs.next()) {
+            provideType.setText(rs.getString("Type"));
+            providerName.setText(rs.getString("Provider"));
+            nurseName.setText(rs.getString("Nurse"));
+            nameOfPANP.setText(rs.getString("PANP"));
+        }
     }
 
-    private void familyHistoryTabSetUp(String clientID) {
-
+    private void familyHistoryTabSetUp(String clientID) throws SQLException {
+        FamilyHistory familyHistory = new FamilyHistory(clientID);
+        ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
+        if (rs.next()) {
+            familyDiagnosis.setText(rs.getString("Diagnoses"));
+            familyRelation.setText(rs.getString("Relation"));
+            familyRealtionAge.setText(rs.getString("Age"));
+        }
     }
 
-    private void medicalEquipmentTabSetUp(String clientID) {
-
+    private void medicalEquipmentTabSetUp(String clientID) throws SQLException {
+        MedicalEquipment medicalEquipment = new MedicalEquipment(clientID);
+        ResultSet rs = dbConnection.executeStatement(medicalEquipment.getSQLSelect());
+        if (rs.next()) {
+            medicalEquipType.setText(rs.getString("EquipType"));
+            medicalEquipPrescribe.setText(rs.getString("PrescribedBy"));
+            medicalEquipReason.setText(rs.getString("UsedFor"));
+            medicalEquipNotes.setText(rs.getString("Notes"));
+        }
     }
 
     private void alertsTabSetUp(String clientID) throws SQLException {
         Alert alert = new Alert(clientID);
-        System.out.println(clientID);
         ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
         if (rs.next()) {
             alertsSpecific.setText(rs.getString("AlertSpecific"));
+            altersDescrption.setText(rs.getString("AlertDescption"));
         }
     }
 
-    public void setName(String name) throws SQLException {
+    private void medicationTabSetUp(String clientID) throws SQLException {
+        Medication medicaiton = new Medication(clientID);
+        ResultSet rs = dbConnection.executeStatement(medicaiton.getSQLSelect());
+        if (rs.next()) {
+
+            medicationClass.setText(rs.getString("Class"));
+            medicationGenericName.setText(rs.getString("GenericName"));
+            medicationBrandName.setText(rs.getString("BrandName"));
+            medicationDose.setText(rs.getString("Dose"));
+            medicationFrequency.setText(rs.getString("Frequency"));
+            medicationPrescribedBy.setText(rs.getString("PrescribedBy"));
+            medicationUsedFor.setText(rs.getString("UsedFor"));
+            medicationProvider.setText(rs.getString("Provider"));
+        }
+    }
+
+    public void setUp(String name) throws SQLException {
         dbConnection = new DBConnection();
 
         //Get name that passed by home screen
@@ -213,6 +299,7 @@ public class AddClientInfoScreenController implements Initializable {
             familyHistoryTabSetUp(clientID);
             medicalEquipmentTabSetUp(clientID);
             alertsTabSetUp(clientID);
+            medicationTabSetUp(clientID);
         }
     }
 

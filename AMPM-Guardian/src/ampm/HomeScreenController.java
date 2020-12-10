@@ -145,7 +145,7 @@ public class HomeScreenController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddClientInfoScreen.fxml"));
             Parent root = loader.load();
             AddClientInfoScreenController ac = loader.getController();
-            ac.setName(name);
+            ac.setUp(name);
             Scene scene = new Scene(root);
             homeStage.setScene(scene);
             homeStage.show();

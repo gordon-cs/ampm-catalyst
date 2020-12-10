@@ -6,7 +6,7 @@ package ampm;
  */
 public class Provider {
     // The private values for this object, each one represents a col in the DB
-    
+
     private String clientID;
     private String type;
     private String providerName;
@@ -19,6 +19,10 @@ public class Provider {
         this.providerName = providerName;
         this.nurseName = nurseName;
         this.nameOfPANP = nameOfPANP;
+    }
+
+    Provider(String clientID) {
+        this.clientID = clientID;
     }
 
     // Update the type of provide
@@ -80,7 +84,7 @@ public class Provider {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Client SET Type='" + this.type + "',"
+        sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
                 + "ProvideName='" + this.providerName + "', "
                 + "NurseName='" + this.nurseName + "', "
                 + "NameOfPANP='" + this.nameOfPANP + "'"
@@ -90,9 +94,9 @@ public class Provider {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Client WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID='"
                 + this.clientID + "'";
-        
+
         System.out.println(sqlSelect);
         return sqlSelect;
     }

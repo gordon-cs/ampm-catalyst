@@ -27,6 +27,10 @@ public class Preventive {
         this.frequency = frequency;
     }
 
+    Preventive(String clientID) {
+        this.clientID = clientID;
+    }
+
     // Update type of preventive
     public void updateType(String type) {
         this.type = type;
@@ -105,11 +109,10 @@ public class Preventive {
 
     // Generates the sql string that can be used to update this provide info
     // into the Preventive table
-
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.MedicalEquipment SET Type='" + this.type + "',"
+        sqlUpdate = "UPDATE AMPM.Preventive SET Type='" + this.type + "',"
                 + "DateDone='" + this.dateDone + "', "
                 + "PrescribedBy='" + this.prescribedBy + "', "
                 + "NextDueDate='" + this.nextDueDate + "', "
@@ -121,7 +124,7 @@ public class Preventive {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.MedicalEqui WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID='"
                 + this.clientID + "'";
 
         System.out.println(sqlSelect);

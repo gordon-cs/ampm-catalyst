@@ -4,9 +4,11 @@ import java.util.Date;
 
 /**
  * This one is for diagnoses in add client info screen
+ *
  * @author john.zhu
  */
 public class Diagnose {
+
     // The private values for this object, each one represents a col in the DB
     private String clientID;
     private String description;
@@ -18,6 +20,10 @@ public class Diagnose {
         this.description = description;
         this.diagnosedDate = diagnosedDate;
         this.byWho = byWho;
+    }
+
+    Diagnose(String clientID) {
+        this.clientID = clientID;
     }
 
     // Update the description of this diagnose
