@@ -96,13 +96,13 @@ public class Preventive {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Preventive (ClientID, PreventiveType, DateDone, "
-                + "PrescribedBy, NextDueDate, Source, Frequency) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Preventive (ClientID, PreventiveType, "
+                + "PrescribedBy, Source, Frequency) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
-                + this.dateDone + "','"
+                //+ null + "','"
                 + this.prescribedBy + "','"
-                + this.nextDueDate + "','"
+                //+ null + "','"
                 + this.source + "','"
                 + this.frequency + "')";
         return sqlInsert;
@@ -114,9 +114,9 @@ public class Preventive {
         String sqlUpdate;
 
         sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType='" + this.type + "',"
-                + "DateDone='" + this.dateDone + "', "
+                //+ "DateDone='" + "0000-00-00" + "', "
                 + "PrescribedBy='" + this.prescribedBy + "', "
-                + "NextDueDate='" + this.nextDueDate + "', "
+                //+ "NextDueDate='" + "0000-00-00" + "', "
                 + "Source='" + this.source + "', "
                 + "Frequency='" + this.frequency + "'"
                 + "WHERE ClientID='" + this.clientID + "'";

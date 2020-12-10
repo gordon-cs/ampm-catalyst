@@ -311,7 +311,7 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="648.0" layoutY="650.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <Button fx:id="savePreventiveInfo" layoutX="648.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#savePreventiveTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                      </children>
                   </AnchorPane>
                </content>
@@ -430,7 +430,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveFamilyHistoryInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children>
             </AnchorPane>
          </content>
@@ -490,7 +490,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveMedicalEquipInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" onMouseClicked="#saveMedicalEquipTab" text="Save" />
                </children>
             </AnchorPane>
          </content>
@@ -548,7 +548,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveAlertInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" onMouseClicked="#saveAlertTab" text="Save" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -597,7 +597,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveMedicalInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" onMouseClicked="#saveMedicalTab" text="Save" />
                   <Label layoutX="213.0" layoutY="213.0" text="Dose">
                      <font>
                         <Font size="12.0" />

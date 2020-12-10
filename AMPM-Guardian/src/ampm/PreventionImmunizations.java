@@ -73,11 +73,11 @@ public class PreventionImmunizations {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID, Type, Name, DateGiven, whereGiven) Values ('"
+        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID, Type, Name, whereGiven) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.name + "','"
-                + this.dateGiven + "','"
+                //+ null + "','"
                 + this.whereGiven + "')";
         return sqlInsert;
     }
@@ -89,7 +89,7 @@ public class PreventionImmunizations {
 
         sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
                 + "Name='" + this.name + "', "
-                + "DateGiven='" + this.dateGiven + "', "
+               // + "DateGiven='" + null + "', "
                 + "whereGiven='" + this.whereGiven + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 

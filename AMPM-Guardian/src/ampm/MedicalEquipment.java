@@ -90,12 +90,12 @@ public class MedicalEquipment {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.MedicalEquipment (ClientID, EquipType, PrescribedBy, UsedFor, StartDate, Notes) Values ('"
+        sqlInsert = "INSERT INTO AMPM.MedicalEquipment (ClientID, EquipType, PrescribedBy, UsedFor, Notes) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.prescribedBy + "','"
                 + this.usedFor + "','"
-                + this.startDate + "','"
+                //+ this.startDate + "','"
                 + this.notes + "')";
         return sqlInsert;
     }
@@ -108,7 +108,7 @@ public class MedicalEquipment {
         sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType='" + this.type + "',"
                 + "PrescribedBy='" + this.prescribedBy + "', "
                 + "UsedFor='" + this.usedFor + "', "
-                + "StartDate='" + this.usedFor + "', "
+                //+ "StartDate='" + this.usedFor + "', "
                 + "Notes='" + this.startDate + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 

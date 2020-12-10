@@ -11,10 +11,10 @@ public class FamilyHistory {
     private String clientID;
     private String diagnosis;
     private String relation;
-    private Boolean exist;
+    private String exist;
     private String age;
 
-    FamilyHistory(String clientID, String diagonoses, String relation, Boolean exist, String age) {
+    FamilyHistory(String clientID, String diagonoses, String relation, String exist, String age) {
         this.clientID = clientID;
         this.diagnosis = diagnosis;
         this.relation = relation;
@@ -37,7 +37,7 @@ public class FamilyHistory {
     }
 
     // Update the existence of this relative. if this relative is dead, then give age for this relative
-    public void updateExist(Boolean exist, String age) {
+    public void updateExist(String exist, String age) {
         this.exist = exist;
         this.age = age;
     }
@@ -53,7 +53,7 @@ public class FamilyHistory {
     }
 
     // Returns the description of Alert
-    public Boolean getExist() {
+    public String getExist() {
         return exist;
     }
 

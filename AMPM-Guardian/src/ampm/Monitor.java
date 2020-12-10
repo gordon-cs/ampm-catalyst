@@ -46,7 +46,7 @@ public class Monitor {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Monitor (ClientID, For, Specific) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Monitor (ClientID, ReasonFor, SpecificName) Values ('"
                 + this.clientID + "','"
                 + this.reason + "','"
                 + this.specific + "')";
@@ -58,9 +58,9 @@ public class Monitor {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Monitor SET For='" + this.reason + "',"
-                + "Specific='" + this.specific + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.Monitor SET ReasonFor='" + this.reason + "', "
+                + "SpecificName='" + this.specific + "'"
+                + " WHERE ClientID='" + this.clientID + "'";
 
         return sqlUpdate;
     }

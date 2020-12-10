@@ -45,18 +45,17 @@ public class Medication {
         String sqlInsert;
 
         sqlInsert = "INSERT INTO AMPM.Medication (ClientID, Class,GenericName, BrandName,Dose, "
-                + "Frequency,StartDate,PrescribedBy,UsedFor,DateStopped,Provider) Values ('"
+                + "Frequency,PrescribedBy,UsedFor,Provider) Values ('"
                 + this.clientID + "','"
-                + this.medicationClass + "',"
-                + this.genericName + "', "
-                + this.brandName + "', "
-                + this.dose + "', "
-                + this.frequency + "', "
-                + this.startDate + "', "
-                + this.prescribedBy + "', "
-                + this.usedFor + "', "
-                + this.prescribedBy + "', "
-                + this.dateStopped + "')";
+                + this.medicationClass + "','"
+                + this.genericName + "', '"
+                + this.brandName + "', '"
+                + this.dose + "',' "
+                + this.frequency + "', '"
+                //+ this.startDate + "', "
+                + this.prescribedBy + "', '"
+                + this.usedFor + "', '"
+                + this.prescribedBy + "')";
         return sqlInsert;
     }
 
@@ -70,10 +69,10 @@ public class Medication {
                 + "BrandName='" + this.brandName + "', "
                 + "Dose='" + this.dose + "', "
                 + "Frequency='" + this.frequency + "', "
-                + "StartDate='" + this.startDate + "', "
+                //+ "StartDate='" + this.startDate + "', "
                 + "PrescribedBy='" + this.prescribedBy + "', "
                 + "UsedFor='" + this.usedFor + "', "
-                + "DateStopped='" + this.prescribedBy + "', "
+                //+ "DateStopped='" + this.prescribedBy + "', "
                 + "Provider='" + this.dateStopped + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 

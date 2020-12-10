@@ -59,7 +59,7 @@ public class Alert {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Provider (ClientID, AlertType, AlertSpecific, AlertDescription) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Alert (ClientID, AlertType, AlertSpecific, AlertDescription) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.detail + "','"
@@ -72,8 +72,7 @@ public class Alert {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Client SET AlertType='" + this.type + "',"
-                + "AlertSpecific='" + this.detail + "', "
+        sqlUpdate = "UPDATE AMPM.Alert SET AlertSpecific='" + this.detail + "', "
                 + "AlertDescription='" + this.description + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
 
