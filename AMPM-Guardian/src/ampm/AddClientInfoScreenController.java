@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -116,6 +118,8 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField familyRealtionAge;
     @FXML
     private Button addNewRelative;
+    @FXML
+    private ListView relativeList;
 
 //Medical Equipment Tab
     @FXML
@@ -164,6 +168,7 @@ public class AddClientInfoScreenController implements Initializable {
     private String name;
     private String clientID;
     DBConnection dbConnection;
+    private String familyHistoryListOrder = "0";
 
     /**
      * Initializes the controller class.
@@ -230,11 +235,42 @@ public class AddClientInfoScreenController implements Initializable {
     private void familyHistoryTabSetUp() throws SQLException {
         FamilyHistory familyHistory = new FamilyHistory(this.clientID);
         ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
-        if (rs.next()) {
-            familyDiagnosis.setText(rs.getString("Diagnoses"));
-            familyRelation.setText(rs.getString("Relation"));
-            familyRealtionAge.setText(rs.getString("Age"));
+        //if (rs.next()) {
+        //familyDiagnosis.setText(rs.getString("Diagnoses"));
+        //familyRelation.setText(rs.getString("Relation"));
+        //familyRealtionAge.setText(rs.getString("Age"));
+        //}
+        while (rs.next()) {
+            relativeList.getItems().addAll(rs.getString("Relation"));
         }
+        relativeList.getItems().add("New");
+        relativeList.setOnMouseClicked(e -> {
+            if (relativeList.getSelectionModel().getSelectedItem().equals("New")) {
+                familyDiagnosis.clear();
+                familyRelation.clear();
+                familyRealtionAge.clear();
+                this.familyHistoryListOrder = "0";
+
+            } else {
+                try {
+                    String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID='" + this.clientID + "'AND Relation = '"
+                            + (String) relativeList.getSelectionModel().getSelectedItem() + "'";
+                    System.out.println(query);
+                    ResultSet rs2 = dbConnection.executeStatement(query);
+                    while (rs2.next()) {
+                        familyDiagnosis.setText(rs2.getString("Diagnoses"));
+                        familyRelation.setText(rs2.getString("Relation"));
+                        familyRealtionAge.setText(rs2.getString("Age"));
+                        this.familyHistoryListOrder = rs2.getString("List");
+                        System.out.println(familyHistoryListOrder);
+                    }
+                    rs2.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
     }
 
     private void medicalEquipmentTabSetUp() throws SQLException {
@@ -353,22 +389,27 @@ public class AddClientInfoScreenController implements Initializable {
             System.out.println(providerInfo.getSQLInsert());
             dbConnection.addInfo(providerInfo.getSQLInsert());
         }
+        rs.close();
     }
 
     //Insert or update family history of client info to database
     @FXML
     private void saveFamilyHistoryTab(MouseEvent event) throws SQLException, IOException {
-        FamilyHistory familyHistory = new FamilyHistory(this.clientID);
-        ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
-        FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
-                familyRelation.getText(), null, familyRealtionAge.getText());
-        if (rs.next()) {
-            System.out.println(familyHistoryInfo.getSQLUpdate());
+        if (!this.familyHistoryListOrder.equals("0")) {
+            FamilyHistory familyHistory = new FamilyHistory(this.clientID);
+            ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
+            FamilyHistory familyHistoryInfo = new FamilyHistory(this.familyHistoryListOrder, this.clientID, familyDiagnosis.getText(),
+                    familyRelation.getText(), null, familyRealtionAge.getText());
             dbConnection.addInfo(familyHistoryInfo.getSQLUpdate());
         } else {
-            System.out.println(familyHistoryInfo.getSQLInsert());
+            FamilyHistory familyHistory = new FamilyHistory(this.clientID);
+            ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
+            System.out.println(familyDiagnosis.getText());
+            FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
+                    familyRelation.getText(), null, familyRealtionAge.getText());
             dbConnection.addInfo(familyHistoryInfo.getSQLInsert());
         }
+
     }
 
     //Insert or update family history of client info to database
@@ -408,7 +449,7 @@ public class AddClientInfoScreenController implements Initializable {
         ResultSet rs = dbConnection.executeStatement(medication.getSQLSelect());
         Medication medicationInfo = new Medication(this.clientID, medicationClass.getText(),
                 medicationGenericName.getText(), medicationBrandName.getText(), medicationDose.getText(),
-                 medicationFrequency.getText(), null, medicationPrescribedBy.getText(), 
+                medicationFrequency.getText(), null, medicationPrescribedBy.getText(),
                 medicationUsedFor.getText(), null, medicationProvider.getText());
         if (rs.next()) {
             System.out.println(medicationInfo.getSQLUpdate());
@@ -448,6 +489,7 @@ public class AddClientInfoScreenController implements Initializable {
             alertsTabSetUp();
             medicationTabSetUp();
         }
+
     }
 
 }

@@ -69,7 +69,6 @@ public class Monitor {
         String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 }

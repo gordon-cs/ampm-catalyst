@@ -119,7 +119,6 @@ public class MedicalEquipment {
         String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 

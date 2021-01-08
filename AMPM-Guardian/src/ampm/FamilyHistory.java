@@ -8,13 +8,23 @@ package ampm;
 public class FamilyHistory {
 
     // The private values for this object, each one represents a col in the DB
+    private String listOrder;
     private String clientID;
     private String diagnosis;
     private String relation;
     private String exist;
     private String age;
 
-    FamilyHistory(String clientID, String diagonoses, String relation, String exist, String age) {
+    FamilyHistory(String clientID, String diagnosis, String relation, String exist, String age) {
+        this.clientID = clientID;
+        this.diagnosis = diagnosis;
+        this.relation = relation;
+        this.exist = exist;
+        this.age = age;
+    }
+
+    FamilyHistory(String listOrder, String clientID, String diagnosis, String relation, String exist, String age) {
+        this.listOrder = listOrder;
         this.clientID = clientID;
         this.diagnosis = diagnosis;
         this.relation = relation;
@@ -79,8 +89,9 @@ public class FamilyHistory {
         sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + this.diagnosis + "',"
                 + "Relation='" + this.relation + "', "
                 + "Age='" + this.age + "', "
-                + "Died='" + this.exist + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+                + "Died='" + this.exist + "',"
+                + "ClientID='" + this.clientID + "'"
+                + "WHERE List='" + this.listOrder + "'";
 
         return sqlUpdate;
     }
@@ -88,8 +99,7 @@ public class FamilyHistory {
     public String getSQLSelect() {
         String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID='"
                 + this.clientID + "'";
-
-        System.out.println(sqlSelect);
+        
         return sqlSelect;
     }
 

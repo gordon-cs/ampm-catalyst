@@ -13,7 +13,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="755.0">
                <children>
-                  <Label layoutX="34.0" layoutY="24.0" prefHeight="49.0" prefWidth="152.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Basic Info">
+                  <Label layoutX="34.0" layoutY="24.0" prefHeight="49.0" prefWidth="163.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Basic Info">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -74,7 +74,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="693.0">
                      <children>
-                        <Label layoutX="24.0" layoutY="22.0" prefHeight="49.0" prefWidth="148.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Diagnose">
+                        <Label layoutX="24.0" layoutY="22.0" prefHeight="49.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Diagnose">
                            <font>
                               <Font name="System Bold" size="32.0" />
                            </font>
@@ -322,7 +322,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
                <children>
-                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="148.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Providers">
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="155.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Providers">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -390,47 +390,43 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
                <children>
-                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="218.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Family History">
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="235.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Family History">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Label>
-                  <Button fx:id="addNewRelative" layoutX="297.0" layoutY="222.0" mnemonicParsing="false" text="Add New Relatives">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="familyDiagnosis" layoutX="272.0" layoutY="100.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="familyDiagnosis" layoutX="271.0" layoutY="140.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="182.0" layoutY="104.0" text="Diagnoses">
+                  <Label layoutX="184.0" layoutY="140.0" text="Diagnoses">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="212.0" layoutY="142.0" text="Relation">
+                  <Label layoutX="211.0" layoutY="182.0" text="Relation">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="familyRelation" layoutX="272.0" layoutY="138.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="familyRelation" layoutX="271.0" layoutY="178.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="familyRealtionAge" layoutX="272.0" layoutY="173.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="familyRealtionAge" layoutX="271.0" layoutY="213.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="224.0" layoutY="178.0" text="Age">
+                  <Label layoutX="223.0" layoutY="218.0" text="Age">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="saveFamilyHistoryInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveFamilyHistoryInfo" layoutX="312.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#saveFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <ListView fx:id="relativeList" layoutX="31.0" layoutY="87.0" prefHeight="233.0" prefWidth="120.0" />
                </children>
             </AnchorPane>
          </content>
@@ -490,7 +486,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="saveMedicalEquipInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" onMouseClicked="#saveMedicalEquipTab" text="Save" />
+                  <Button fx:id="saveMedicalEquipInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveMedicalEquipTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children>
             </AnchorPane>
          </content>
@@ -548,7 +544,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="saveAlertInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" onMouseClicked="#saveAlertTab" text="Save" />
+                  <Button fx:id="saveAlertInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveAlertTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -556,7 +552,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
                <children>
-                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="172.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Medication">
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Medication">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -597,7 +593,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="saveMedicalInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" onMouseClicked="#saveMedicalTab" text="Save" />
+                  <Button fx:id="saveMedicalInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveMedicalTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                   <Label layoutX="213.0" layoutY="213.0" text="Dose">
                      <font>
                         <Font size="12.0" />

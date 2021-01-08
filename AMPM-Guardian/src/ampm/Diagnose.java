@@ -86,7 +86,6 @@ public class Diagnose {
         String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 }

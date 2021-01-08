@@ -97,7 +97,6 @@ public class Provider {
         String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 }

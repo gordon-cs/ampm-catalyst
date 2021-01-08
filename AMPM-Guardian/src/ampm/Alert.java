@@ -82,8 +82,7 @@ public class Alert {
     public String getSQLSelect() {
         String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID='"
                 + this.clientID + "'";
-
-        System.out.println(sqlSelect);
+        
         return sqlSelect;
     }
 }

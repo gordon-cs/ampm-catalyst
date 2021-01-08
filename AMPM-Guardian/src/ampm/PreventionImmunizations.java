@@ -100,7 +100,6 @@ public class PreventionImmunizations {
         String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 }

@@ -128,7 +128,6 @@ public class Preventive {
         String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 }
