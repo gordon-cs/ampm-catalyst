@@ -219,11 +219,32 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     private void providersTabSetUp() throws SQLException {
-        Provider provider = new Provider(this.clientID);
-        ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
-        while (rs.next()) {
-            providerList.getItems().addAll(rs.getString("Provider"));
-        }
+        setUpProviderList();
+
+        //Mouse Click event for list view of provider     
+        providerList.setOnMouseClicked(e -> {
+            if (providerList.getSelectionModel().getSelectedItem().equals("New")) {
+                provideType.clear();
+                providerName.clear();
+                nurseName.clear();
+                nameOfPANP.clear();
+            } else {
+                try {
+                    String query = "SELECT * FROM AMPM.Provider WHERE ClientID ='" + this.clientID + "'AND Provider = '"
+                            + (String) providerList.getSelectionModel().getSelectedItem() + "'";
+                    System.out.println(query);
+                    ResultSet rs2 = dbConnection.executeStatement(query);
+                    while (rs2.next()) {
+                        provideType.setText(rs2.getString("Type"));
+                        providerName.setText(rs2.getString("Provider"));
+                        nurseName.setText(rs2.getString("Nurse"));
+                        nameOfPANP.setText(rs2.getString("PANP"));
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         /*
         if (rs.next()) {
             provideType.setText(rs.getString("Type"));
@@ -242,11 +263,9 @@ public class AddClientInfoScreenController implements Initializable {
             relativeSelectBox.getItems().addAll(rs.getString("Relation"));
         }
         rs.close();
-        //Mouse Click event for each in the listview
+        //Select event for relative combo box
         relativeSelectBox.setOnAction(e -> {
             relativeList.getItems().clear();
-            //Clear the textfield when "new" item was clicked
-
             //Auto-fill the textfield based on selected item.
             try {
                 String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID + "'AND Relation = '"
@@ -378,18 +397,19 @@ public class AddClientInfoScreenController implements Initializable {
     //Insert or update provider info to database
     @FXML
     private void saveProviderTab(MouseEvent event) throws SQLException, IOException {
-        Provider provider = new Provider(this.clientID);
-        ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
-        Provider providerInfo = new Provider(this.clientID, provideType.getText(), providerName.getText(),
-                nurseName.getText(), nameOfPANP.getText());
-        if (rs.next()) {
-            System.out.println(providerInfo.getSQLUpdate());
+
+        if (!providerList.getSelectionModel().getSelectedItem().equals("New")) {
+            //Update infomation for current selected relative
+            Provider providerInfo = new Provider(this.clientID, provideType.getText(), (String) providerList.getSelectionModel().getSelectedItem(),
+                    nurseName.getText(), nameOfPANP.getText());
             dbConnection.addInfo(providerInfo.getSQLUpdate());
         } else {
-            System.out.println(providerInfo.getSQLInsert());
+            //Insert infomation for new relative
+            Provider providerInfo = new Provider(this.clientID, provideType.getText(), providerName.getText(),
+                    nurseName.getText(), nameOfPANP.getText());
             dbConnection.addInfo(providerInfo.getSQLInsert());
         }
-        rs.close();
+        setUpProviderList();
     }
 
     //Insert or update family history of client info to database
@@ -497,7 +517,18 @@ public class AddClientInfoScreenController implements Initializable {
         while (rs.next()) {
             relativeList.getItems().addAll(rs.getString("Diagnoses"));
         }
+        rs.close();
         relativeList.getItems().add("New");
     }
 
+    public void setUpProviderList() throws SQLException {
+        Provider provider = new Provider(this.clientID);
+        ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
+        providerList.getItems().clear();
+        while (rs.next()) {
+            providerList.getItems().addAll(rs.getString("Provider"));
+        }
+        rs.close();
+        providerList.getItems().add("New");
+    }
 }

@@ -161,7 +161,6 @@ public class DBConnection {
     public static ResultSet executeStatement(String statement) throws SQLException {
         return stmt.executeQuery(statement);
     }
-    
 
     /**
      * This method will add new client to database base on the 6 variables
