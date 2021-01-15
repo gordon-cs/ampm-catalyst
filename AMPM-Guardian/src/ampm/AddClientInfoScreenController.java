@@ -99,7 +99,7 @@ public class AddClientInfoScreenController implements Initializable {
 
 //Providers Tab
     @FXML
-    private MenuButton provideType;
+    private TextField provideType;
     @FXML
     private TextField providerName;
     @FXML
@@ -107,19 +107,17 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField nameOfPANP;
     @FXML
-    private Button addNewProvider;
+    private ListView providerList;
 
 //Family History Tab
     @FXML
     private TextField familyDiagnosis;
     @FXML
-    private TextField familyRelation;
-    @FXML
     private TextField familyRealtionAge;
     @FXML
-    private Button addNewRelative;
-    @FXML
     private ListView relativeList;
+    @FXML
+    private ComboBox relativeSelectBox;
 
 //Medical Equipment Tab
     @FXML
@@ -168,7 +166,6 @@ public class AddClientInfoScreenController implements Initializable {
     private String name;
     private String clientID;
     DBConnection dbConnection;
-    private String familyHistoryListOrder = "0";
 
     /**
      * Initializes the controller class.
@@ -224,53 +221,56 @@ public class AddClientInfoScreenController implements Initializable {
     private void providersTabSetUp() throws SQLException {
         Provider provider = new Provider(this.clientID);
         ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
+        while (rs.next()) {
+            providerList.getItems().addAll(rs.getString("Provider"));
+        }
+        /*
         if (rs.next()) {
             provideType.setText(rs.getString("Type"));
             providerName.setText(rs.getString("Provider"));
             nurseName.setText(rs.getString("Nurse"));
             nameOfPANP.setText(rs.getString("PANP"));
         }
+         */
     }
 
     private void familyHistoryTabSetUp() throws SQLException {
         FamilyHistory familyHistory = new FamilyHistory(this.clientID);
         ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
-        //if (rs.next()) {
-        //familyDiagnosis.setText(rs.getString("Diagnoses"));
-        //familyRelation.setText(rs.getString("Relation"));
-        //familyRealtionAge.setText(rs.getString("Age"));
-        //}
+        //Put all the family history info in the listview and showed relation in the listview
         while (rs.next()) {
-            relativeList.getItems().addAll(rs.getString("Relation"));
+            relativeSelectBox.getItems().addAll(rs.getString("Relation"));
         }
-        relativeList.getItems().add("New");
+        rs.close();
+        //Mouse Click event for each in the listview
+        relativeSelectBox.setOnAction(e -> {
+            relativeList.getItems().clear();
+            //Clear the textfield when "new" item was clicked
+
+            //Auto-fill the textfield based on selected item.
+            try {
+                String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID + "'AND Relation = '"
+                        + (String) relativeSelectBox.getSelectionModel().getSelectedItem() + "'";
+                System.out.println(query);
+                ResultSet rs2 = dbConnection.executeStatement(query);
+                while (rs2.next()) {
+                    familyDiagnosis.setText(rs2.getString("Diagnoses"));
+                    familyRealtionAge.setText(rs2.getString("Age"));
+                }
+                setUpDiagnosesList();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        });
+        //Select specific diagnosis for 
         relativeList.setOnMouseClicked(e -> {
+            familyDiagnosis.setText((String) relativeList.getSelectionModel().getSelectedItem());
+
             if (relativeList.getSelectionModel().getSelectedItem().equals("New")) {
                 familyDiagnosis.clear();
-                familyRelation.clear();
-                familyRealtionAge.clear();
-                this.familyHistoryListOrder = "0";
-
-            } else {
-                try {
-                    String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID='" + this.clientID + "'AND Relation = '"
-                            + (String) relativeList.getSelectionModel().getSelectedItem() + "'";
-                    System.out.println(query);
-                    ResultSet rs2 = dbConnection.executeStatement(query);
-                    while (rs2.next()) {
-                        familyDiagnosis.setText(rs2.getString("Diagnoses"));
-                        familyRelation.setText(rs2.getString("Relation"));
-                        familyRealtionAge.setText(rs2.getString("Age"));
-                        this.familyHistoryListOrder = rs2.getString("List");
-                        System.out.println(familyHistoryListOrder);
-                    }
-                    rs2.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
             }
         });
-
     }
 
     private void medicalEquipmentTabSetUp() throws SQLException {
@@ -395,21 +395,18 @@ public class AddClientInfoScreenController implements Initializable {
     //Insert or update family history of client info to database
     @FXML
     private void saveFamilyHistoryTab(MouseEvent event) throws SQLException, IOException {
-        if (!this.familyHistoryListOrder.equals("0")) {
-            FamilyHistory familyHistory = new FamilyHistory(this.clientID);
-            ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
-            FamilyHistory familyHistoryInfo = new FamilyHistory(this.familyHistoryListOrder, this.clientID, familyDiagnosis.getText(),
-                    familyRelation.getText(), null, familyRealtionAge.getText());
+        if (!this.relativeList.getSelectionModel().getSelectedItem().equals("New")) {
+            //Update infomation for current selected relative
+            FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
+                    (String) relativeSelectBox.getSelectionModel().getSelectedItem(), null, familyRealtionAge.getText());
             dbConnection.addInfo(familyHistoryInfo.getSQLUpdate());
         } else {
-            FamilyHistory familyHistory = new FamilyHistory(this.clientID);
-            ResultSet rs = dbConnection.executeStatement(familyHistory.getSQLSelect());
-            System.out.println(familyDiagnosis.getText());
+            //Insert infomation for new relative
             FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
-                    familyRelation.getText(), null, familyRealtionAge.getText());
+                    (String) relativeSelectBox.getSelectionModel().getSelectedItem(), null, familyRealtionAge.getText());
             dbConnection.addInfo(familyHistoryInfo.getSQLInsert());
         }
-
+        setUpDiagnosesList();
     }
 
     //Insert or update family history of client info to database
@@ -490,6 +487,17 @@ public class AddClientInfoScreenController implements Initializable {
             medicationTabSetUp();
         }
 
+    }
+
+    public void setUpDiagnosesList() throws SQLException {
+        String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID + "'AND Relation = '"
+                + (String) relativeSelectBox.getSelectionModel().getSelectedItem() + "'";
+        ResultSet rs = dbConnection.executeStatement(query);
+        relativeList.getItems().clear();
+        while (rs.next()) {
+            relativeList.getItems().addAll(rs.getString("Diagnoses"));
+        }
+        relativeList.getItems().add("New");
     }
 
 }

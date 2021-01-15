@@ -23,15 +23,6 @@ public class FamilyHistory {
         this.age = age;
     }
 
-    FamilyHistory(String listOrder, String clientID, String diagnosis, String relation, String exist, String age) {
-        this.listOrder = listOrder;
-        this.clientID = clientID;
-        this.diagnosis = diagnosis;
-        this.relation = relation;
-        this.exist = exist;
-        this.age = age;
-    }
-
     FamilyHistory(String clientID) {
         this.clientID = clientID;
     }
@@ -90,14 +81,13 @@ public class FamilyHistory {
                 + "Relation='" + this.relation + "', "
                 + "Age='" + this.age + "', "
                 + "Died='" + this.exist + "',"
-                + "ClientID='" + this.clientID + "'"
-                + "WHERE List='" + this.listOrder + "'";
+                + "WHERE ClientID='" + this.clientID + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='"
                 + this.clientID + "'";
         
         return sqlSelect;

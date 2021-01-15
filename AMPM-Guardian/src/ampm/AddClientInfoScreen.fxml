@@ -58,11 +58,6 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="524.0" layoutY="210.0" text="Account #">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
                   <Label fx:id="accountNumber" layoutX="507.0" layoutY="244.0" prefHeight="16.0" prefWidth="123.0" />
                   <Button fx:id="saveBasicInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveBasicTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children></AnchorPane>
@@ -100,7 +95,7 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="124.0" layoutY="225.0" prefHeight="28.0" prefWidth="66.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Monitor">
+                        <Label layoutX="107.0" layoutY="225.0" prefHeight="28.0" prefWidth="83.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Monitor">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -175,7 +170,7 @@
                            </font>
                         </Label>
                         -->
-                        <Label layoutX="116.0" layoutY="387.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Add New">
+                        <Label layoutX="101.0" layoutY="387.0" prefHeight="28.0" prefWidth="97.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Add New">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -327,68 +322,60 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Label>
-                  <Label layoutX="157.0" layoutY="85.0" text="Provider 1:">
+                  <Label layoutX="31.0" layoutY="94.0" text="Provider List">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="201.0" layoutY="113.0" text="Type">
+                  <Label layoutX="311.0" layoutY="149.0" text="Type">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <MenuButton fx:id="provideType" layoutX="260.0" layoutY="109.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Primary Care" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                     </items>
-                  </MenuButton>
-                  <Label layoutX="174.0" layoutY="152.0" text="Provider Name">
+                  <Label layoutX="280.0" layoutY="188.0" text="Provider Name">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="addNewProvider" layoutX="302.0" layoutY="287.0" mnemonicParsing="false" text="Add New Provider">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Button>
-                  <Label layoutX="177.0" layoutY="183.0" text="Nurse Name">
+                  <Label layoutX="287.0" layoutY="219.0" text="Nurse Name">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="providerName" layoutX="262.0" layoutY="147.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="providerName" layoutX="372.0" layoutY="183.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nurseName" layoutX="262.0" layoutY="178.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="nurseName" layoutX="372.0" layoutY="214.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nameOfPANP" layoutX="262.0" layoutY="215.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="nameOfPANP" layoutX="372.0" layoutY="251.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="179.0" layoutY="220.0" text="PA/NP Name">
+                  <Label layoutX="289.0" layoutY="256.0" text="PA/NP Name">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="saveProviderInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveProviderTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveProviderInfo" layoutX="372.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#saveProviderTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <ListView fx:id="providerList" layoutX="20.0" layoutY="115.0" prefHeight="241.0" prefWidth="159.0" />
+                  <TextField fx:id="provideType" layoutX="372.0" layoutY="144.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
          </content>
       </Tab>
       <Tab fx:id="tabFamilyHistory" text="Family History">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
+            <AnchorPane fx:id="relativeBox" minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
                <children>
                   <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="235.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Family History">
                      <font>
@@ -410,11 +397,6 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="familyRelation" layoutX="271.0" layoutY="178.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
                   <TextField fx:id="familyRealtionAge" layoutX="271.0" layoutY="213.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
@@ -426,7 +408,8 @@
                      </font>
                   </Label>
                   <Button fx:id="saveFamilyHistoryInfo" layoutX="312.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#saveFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
-                  <ListView fx:id="relativeList" layoutX="31.0" layoutY="87.0" prefHeight="233.0" prefWidth="120.0" />
+                  <ListView fx:id="relativeList" layoutX="31.0" layoutY="119.0" prefHeight="233.0" prefWidth="120.0" />
+                  <ComboBox fx:id="relativeSelectBox" layoutX="273.0" layoutY="178.0" prefWidth="150.0" />
                </children>
             </AnchorPane>
          </content>
@@ -495,7 +478,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
                <children>
-                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Alerts">
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="99.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Alerts">
                      <font>
                         <Font name="System Bold" size="32.0" />
                      </font>
@@ -539,7 +522,7 @@
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="195.0" layoutY="171.0" text="Specific">
+                  <Label layoutX="195.0" layoutY="171.0" text="Details">
                      <font>
                         <Font size="12.0" />
                      </font>
