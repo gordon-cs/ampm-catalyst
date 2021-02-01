@@ -471,27 +471,17 @@ public class AddClientInfoScreenController implements Initializable {
     //Insert or update diagnose info to database
     @FXML
     private void saveDiagnoseTab(MouseEvent event) throws SQLException, IOException {
-        Diagnose diagnose = new Diagnose(this.clientID);
-        ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelect());
-        Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(), null, diagnosisDoctor.getText());
-        if (rs.next()) {
-            System.out.println(diagnoseInfo.getSQLUpdate());
-            dbConnection.addInfo(diagnoseInfo.getSQLUpdate());
+
+        if (!diagnoseList.getSelectionModel().getSelectedItem().equals("New")) {
+            //Update infomation for current selected relative
+            Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), null, diagnosisDoctor.getText());
+            dbConnection.addInfo(diagnoseInfo.getSQLUpdateNewItem(diagnoseDescription.getText()));
         } else {
-            System.out.println(diagnoseInfo.getSQLInsert());
+            //Insert infomation for new relative
+            Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(), null, diagnosisDoctor.getText());
             dbConnection.addInfo(diagnoseInfo.getSQLInsert());
         }
-        Monitor monitor = new Monitor(this.clientID);
-        ResultSet rs2 = dbConnection.executeStatement(monitor.getSQLSelect());
-        Monitor monitorInfo = new Monitor(this.clientID, diagnoseDescription.getText(), monitorSpecific.getText());
-        if (rs2.next()) {
-            System.out.println(monitorInfo.getSQLUpdate());
-            dbConnection.addInfo(monitorInfo.getSQLUpdate());
-        } else {
-            System.out.println(monitorInfo.getSQLInsert());
-            dbConnection.addInfo(monitorInfo.getSQLInsert());
-        }
-
+        setUpDiagnoseList();
     }
 
     //Insert or update preventive info to database

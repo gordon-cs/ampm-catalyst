@@ -82,10 +82,10 @@ public class Diagnose {
         return sqlUpdate;
     }
 
-    public String getSQLUpdateNewDiagnose(String newDiagnosis) {
+    public String getSQLUpdateNewItem(String newItem) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis='" + newDiagnosis + "',"
+        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis='" + newItem + "',"
                 + "StartDate='" + this.diagnosedDate + "', "
                 + "DiagnosedBy='" + this.byWho + "'"
                 + "WHERE ClientID='" + this.clientID + "'"
