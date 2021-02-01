@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="755.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
   <tabs>
     <Tab fx:id="tabBasicInfo" text="Basic Info">
       <content>
@@ -58,7 +58,6 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="accountNumber" layoutX="507.0" layoutY="244.0" prefHeight="16.0" prefWidth="123.0" />
                   <Button fx:id="saveBasicInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveBasicTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                </children></AnchorPane>
       </content>
@@ -67,7 +66,7 @@
          <content>
             <ScrollPane prefHeight="446.0" prefWidth="755.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="693.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="722.0">
                      <children>
                         <Label layoutX="24.0" layoutY="22.0" prefHeight="49.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Diagnose">
                            <font>
@@ -95,96 +94,12 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="107.0" layoutY="225.0" prefHeight="28.0" prefWidth="83.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Monitor">
+                        <Label layoutX="61.0" layoutY="296.0" prefHeight="28.0" prefWidth="83.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Monitor">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="185.0" layoutY="295.0" text="Specific">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <!--
-                        <Label layoutX="98.0" layoutY="453.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Therapy">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="415.0" layoutY="515.0" text="or">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <MenuButton layoutX="259.0" layoutY="511.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </MenuButton>
-                        <Label layoutX="180.0" layoutY="515.0" text="Type">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField layoutX="457.0" layoutY="511.0" prefHeight="25.0" prefWidth="153.0">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="179.0" layoutY="550.0" text="Therapist">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <MenuButton layoutX="258.0" layoutY="546.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </MenuButton>
-                        <Label layoutX="414.0" layoutY="550.0" text="or">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="457.0" layoutY="546.0" mnemonicParsing="false" text="Add New ">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Button>
-                        <TextArea layoutX="275.0" layoutY="586.0" prefHeight="74.0" prefWidth="178.0">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </TextArea>
-                        <Label layoutX="179.0" layoutY="586.0" text="Discrption">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        -->
-                        <Label layoutX="101.0" layoutY="387.0" prefHeight="28.0" prefWidth="97.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Add New">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <MenuButton fx:id="addNewDiagnoseType" layoutX="242.0" layoutY="389.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </MenuButton>
-                        <Label layoutX="432.0" layoutY="394.0" text="to     *Dignosis name*  ">
+                        <Label layoutX="179.0" layoutY="357.0" text="Specific">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -194,8 +109,10 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="saveDiagnoseInfo" layoutX="635.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#saveDiagnoseTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
-                        <TextField fx:id="monitorSpecific" layoutX="255.0" layoutY="323.0" />
+                        <Button fx:id="saveDiagnoseInfo" layoutX="296.0" layoutY="421.0" mnemonicParsing="false" onMouseClicked="#saveDiagnoseTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <TextField fx:id="monitorSpecific" layoutX="244.0" layoutY="353.0" />
+                        <ListView fx:id="diagnoseList" layoutX="31.0" layoutY="81.0" prefHeight="200.0" prefWidth="119.0" />
+                        <ListView fx:id="monitorList" layoutX="31.0" layoutY="333.0" prefHeight="132.0" prefWidth="119.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -204,9 +121,9 @@
       </Tab>
       <Tab fx:id="tabPreventive" text="Preventive">
          <content>
-            <ScrollPane prefHeight="493.0" prefWidth="755.0">
+            <ScrollPane prefHeight="688.0" prefWidth="755.0">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="691.0" prefWidth="720.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="720.0">
                      <children>
                         <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Preventive">
                            <font>
@@ -228,7 +145,6 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="preventiveDateDone" layoutX="275.0" layoutY="169.0" prefHeight="26.0" prefWidth="171.0" />
                         <TextField fx:id="preventivePrescribedBy" layoutX="277.0" layoutY="205.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
@@ -239,7 +155,6 @@
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="preventiveNextDueDate" layoutX="275.0" layoutY="234.0" prefHeight="26.0" prefWidth="171.0" />
                         <Label layoutX="176.0" layoutY="240.0" text="Next Due Date">
                            <font>
                               <Font size="12.0" />
@@ -265,48 +180,77 @@
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="113.0" layoutY="384.0" prefHeight="28.0" prefWidth="226.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Prevention Immunizations">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="preventionImmunType" layoutX="269.0" layoutY="438.0" prefHeight="25.0" prefWidth="153.0">
+                        <Button fx:id="savePreventiveInfo" layoutX="303.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#savePreventiveTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <ListView fx:id="preventiveList" layoutX="31.0" layoutY="103.0" prefHeight="254.0" prefWidth="134.0" />
+                        <TextField fx:id="preventiveDateDone" layoutX="277.0" layoutY="170.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="202.0" layoutY="442.0" text="Type">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="202.0" layoutY="483.0" text="Name">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="preventionImmunName" layoutX="269.0" layoutY="479.0" prefHeight="25.0" prefWidth="153.0">
+                        <TextField fx:id="preventiveNextDueDate" layoutX="277.0" layoutY="235.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <DatePicker fx:id="preventionImmunDateGiven" layoutX="274.0" layoutY="520.0" prefHeight="26.0" prefWidth="171.0" />
-                        <Label layoutX="187.0" layoutY="529.0" text="Data Given">
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </content>
+      </Tab>
+      <Tab fx:id="tabPreventionImmun" text="Prevention Immunization">
+         <content>
+            <ScrollPane prefHeight="493.0" prefWidth="755.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="720.0">
+                     <children>
+                        <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="441.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Prevention Immunizations">
                            <font>
-                              <Font size="12.0" />
+                              <Font name="System Bold" size="32.0" />
                            </font>
                         </Label>
-                        <Label layoutX="191.0" layoutY="575.0" text="Where Given">
-                           <font>
-                              <Font size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="preventionImmunLocation" layoutX="277.0" layoutY="571.0" prefHeight="25.0" prefWidth="153.0">
+                        <TextField fx:id="preventionImmunType" layoutX="343.0" layoutY="145.0" prefHeight="25.0" prefWidth="153.0">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="savePreventiveInfo" layoutX="648.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#savePreventiveTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <Label layoutX="276.0" layoutY="149.0" text="Type">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="276.0" layoutY="190.0" text="Name">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="preventionImmunName" layoutX="343.0" layoutY="186.0" prefHeight="25.0" prefWidth="153.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="261.0" layoutY="236.0" text="Data Given">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="265.0" layoutY="282.0" text="Where Given">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="preventionImmunLocation" layoutX="351.0" layoutY="278.0" prefHeight="25.0" prefWidth="153.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="savePreventionImmunInfo" layoutX="331.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#savePreventionImmunTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <ListView fx:id="preventionImmunList" layoutX="31.0" layoutY="103.0" prefHeight="254.0" prefWidth="134.0" />
+                        <TextField fx:id="preventionImmunDateGiven" layoutX="343.0" layoutY="231.0" prefHeight="25.0" prefWidth="153.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </AnchorPane>
                </content>
@@ -365,6 +309,174 @@
                   <Button fx:id="saveProviderInfo" layoutX="372.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#saveProviderTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                   <ListView fx:id="providerList" layoutX="29.0" layoutY="114.0" prefHeight="241.0" prefWidth="159.0" />
                   <TextField fx:id="provideType" layoutX="372.0" layoutY="144.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+    <Tab fx:id="tabAlert" text="Alerts">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="404.0" prefWidth="758.0">
+               <children>
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="99.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Alerts">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="84.0" text="Alert List:">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="184.0" layoutY="133.0" text="Select Type">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <MenuButton fx:id="alertsType" layoutX="271.0" layoutY="128.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Allerge">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </MenuButton>
+                  <Label layoutX="189.0" layoutY="221.0" text="Discrption">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="altersDescrption" layoutX="270.0" layoutY="210.0" prefHeight="74.0" prefWidth="178.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextArea>
+                  <TextField fx:id="alertsSpecific" layoutX="271.0" layoutY="166.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="195.0" layoutY="171.0" text="Details">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="saveAlertInfo" layoutX="309.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#saveAlertTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <ListView fx:id="alertList" layoutX="25.0" layoutY="106.0" prefHeight="248.0" prefWidth="140.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="tabMedication" text="Medication">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="761.0">
+               <children>
+                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Medication">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medicationClass" layoutX="272.0" layoutY="100.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="187.0" layoutY="142.0" text="Generic Name">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medicationGenericName" layoutX="272.0" layoutY="138.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="medicationBrandName" layoutX="272.0" layoutY="173.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="192.0" layoutY="178.0" text="Brand Name">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="221.0" layoutY="104.0" text="Class">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="197.0" layoutY="279.0" text="Start  Date">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="saveMedicalInfo" layoutX="370.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#saveMedicalTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Label layoutX="213.0" layoutY="213.0" text="Dose">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medicationDose" layoutX="272.0" layoutY="208.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="192.0" layoutY="245.0" text="Frequency">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medicationFrequency" layoutX="272.0" layoutY="240.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="174.0" layoutY="322.0" text="Prescribed by">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medicationPrescribedBy" layoutX="272.0" layoutY="317.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="medicationUsedFor" layoutX="272.0" layoutY="352.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="201.0" layoutY="357.0" text="Used For">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="188.0" layoutY="395.0" text="Data Stopped">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="medicationProvider" layoutX="272.0" layoutY="427.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="204.0" layoutY="432.0" text="Provider">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="medicationList" layoutX="22.0" layoutY="94.0" prefHeight="302.0" prefWidth="145.0" />
+                  <TextField fx:id="medicationStartDate" layoutX="272.0" layoutY="274.0" prefHeight="25.0" prefWidth="153.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="medicationStoppedDate" layoutX="272.0" layoutY="390.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -464,178 +576,18 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="medicalEquipStartDate" layoutX="272.0" layoutY="207.0" prefHeight="26.0" prefWidth="171.0" />
                   <Label layoutX="196.0" layoutY="213.0" text="Start  Date">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="saveMedicalEquipInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveMedicalEquipTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="saveMedicalEquipInfo" layoutX="320.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#saveMedicalEquipTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                   <ListView fx:id="equipmentList" layoutX="21.0" layoutY="77.0" prefHeight="302.0" prefWidth="145.0" />
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-    <Tab fx:id="tabAlert" text="Alerts">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
-               <children>
-                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="99.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Alerts">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="40.0" layoutY="84.0" text="Alert List:">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="184.0" layoutY="133.0" text="Select Type">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <MenuButton fx:id="alertsType" layoutX="271.0" layoutY="128.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Allerge">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </MenuButton>
-                  <Label layoutX="189.0" layoutY="221.0" text="Discrption">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="altersDescrption" layoutX="270.0" layoutY="210.0" prefHeight="74.0" prefWidth="178.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextArea>
-                  <Button fx:id="addNewAlert" layoutX="299.0" layoutY="326.0" mnemonicParsing="false" text="Add New Alert">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="alertsSpecific" layoutX="271.0" layoutY="166.0" prefHeight="25.0" prefWidth="153.0">
+                  <TextField fx:id="medicalEquipStartDate" layoutX="273.0" layoutY="208.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="195.0" layoutY="171.0" text="Details">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="saveAlertInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveAlertTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
-                  <ListView fx:id="alertList" layoutX="25.0" layoutY="106.0" prefHeight="310.0" prefWidth="139.0" />
-               </children></AnchorPane>
-      </content>
-    </Tab>
-      <Tab fx:id="tabMedication" text="Medcation">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
-               <children>
-                  <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Medication">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="medicationClass" layoutX="272.0" layoutY="100.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="187.0" layoutY="142.0" text="Generic Name">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="medicationGenericName" layoutX="272.0" layoutY="138.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="medicationBrandName" layoutX="272.0" layoutY="173.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="192.0" layoutY="178.0" text="Brand Name">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="221.0" layoutY="104.0" text="Class">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="medicationStartDate" layoutX="272.0" layoutY="273.0" prefHeight="26.0" prefWidth="171.0" />
-                  <Label layoutX="197.0" layoutY="279.0" text="Start  Date">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="saveMedicalInfo" layoutX="683.0" layoutY="416.0" mnemonicParsing="false" onMouseClicked="#saveMedicalTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
-                  <Label layoutX="213.0" layoutY="213.0" text="Dose">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="medicationDose" layoutX="272.0" layoutY="208.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="192.0" layoutY="245.0" text="Frequency">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="medicationFrequency" layoutX="272.0" layoutY="240.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="174.0" layoutY="322.0" text="Prescribed by">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="medicationPrescribedBy" layoutX="272.0" layoutY="317.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="medicationUsedFor" layoutX="272.0" layoutY="352.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="201.0" layoutY="357.0" text="Used For">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="188.0" layoutY="395.0" text="Data Stopped">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="medicationStopedDate" layoutX="272.0" layoutY="389.0" prefHeight="26.0" prefWidth="171.0" />
-                  <TextField fx:id="medicationProvider" layoutX="272.0" layoutY="427.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="204.0" layoutY="432.0" text="Provider">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
          </content>

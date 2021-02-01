@@ -11,13 +11,13 @@ public class Preventive {
 
     private String clientID;
     private String type;
-    private Date dateDone;
+    private String dateDone;
     private String prescribedBy;
-    private Date nextDueDate;
+    private String nextDueDate;
     private String source;
     private String frequency;
 
-    Preventive(String clientID, String type, Date dateDone, String prescribedBy, Date nextDueDate, String source, String frequency) {
+    Preventive(String clientID, String type, String dateDone, String prescribedBy, String nextDueDate, String source, String frequency) {
         this.clientID = clientID;
         this.type = type;
         this.dateDone = dateDone;
@@ -37,7 +37,7 @@ public class Preventive {
     }
 
     // Update the date done of preventive
-    public void updateDateDone(Date dateDone) {
+    public void updateDateDone(String dateDone) {
         this.dateDone = dateDone;
     }
 
@@ -47,7 +47,7 @@ public class Preventive {
     }
 
     // Update the next due date
-    public void updateNextDueDate(Date nextDueDate) {
+    public void updateNextDueDate(String nextDueDate) {
         this.nextDueDate = nextDueDate;
     }
 
@@ -67,7 +67,7 @@ public class Preventive {
     }
 
     // Returns the date done of preventive
-    public Date getDateDone() {
+    public String getDateDone() {
         return dateDone;
     }
 
@@ -77,7 +77,7 @@ public class Preventive {
     }
 
     // Returns the next due date
-    public Date getNextDueDate() {
+    public String getNextDueDate() {
         return nextDueDate;
     }
 
@@ -100,9 +100,9 @@ public class Preventive {
                 + "PrescribedBy, Source, Frequency) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
-                //+ null + "','"
+                + this.dateDone + "','"
                 + this.prescribedBy + "','"
-                //+ null + "','"
+                + this.nextDueDate + "','"
                 + this.source + "','"
                 + this.frequency + "')";
         return sqlInsert;
@@ -114,12 +114,27 @@ public class Preventive {
         String sqlUpdate;
 
         sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType='" + this.type + "',"
-                //+ "DateDone='" + "0000-00-00" + "', "
+                + "DateDone='" + this.dateDone + "', "
                 + "PrescribedBy='" + this.prescribedBy + "', "
-                //+ "NextDueDate='" + "0000-00-00" + "', "
+                + "NextDueDate='" + this.nextDueDate + "', "
                 + "Source='" + this.source + "', "
                 + "Frequency='" + this.frequency + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
+
+        return sqlUpdate;
+    }
+
+    public String getSQLUpdateNewType(String newType) {
+        String sqlUpdate;
+
+        sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType='" + newType + "',"
+                + "DateDone='" + this.dateDone + "', "
+                + "PrescribedBy='" + this.prescribedBy + "', "
+                + "NextDueDate='" + this.nextDueDate + "', "
+                + "Source='" + this.source + "', "
+                + "Frequency='" + this.frequency + "'"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND PreventiveType ='" + this.type + "'";
 
         return sqlUpdate;
     }

@@ -86,10 +86,23 @@ public class FamilyHistory {
         return sqlUpdate;
     }
 
+    public String getSQLUpdateNewDiagnoses(String newDiagnoses) {
+        String sqlUpdate;
+
+        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + newDiagnoses + "',"
+                + "Relation='" + this.relation + "', "
+                + "Age='" + this.age + "', "
+                + "Died='" + this.exist + "',"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND Diagnoses ='" + this.diagnosis + "'";
+
+        return sqlUpdate;
+    }
+
     public String getSQLSelect() {
         String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='"
                 + this.clientID + "'";
-        
+
         return sqlSelect;
     }
 

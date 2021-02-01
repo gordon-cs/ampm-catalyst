@@ -13,10 +13,10 @@ public class PreventionImmunizations {
     private String clientID;
     private String type;
     private String name;
-    private Date dateGiven;
+    private String dateGiven;
     private String whereGiven;
 
-    PreventionImmunizations(String clientID, String type, String name, Date dateGiven, String whereGiven) {
+    PreventionImmunizations(String clientID, String type, String name, String dateGiven, String whereGiven) {
         this.clientID = clientID;
         this.type = type;
         this.name = name;
@@ -39,7 +39,7 @@ public class PreventionImmunizations {
     }
 
     // Update the date that immunizations given
-    public void updateDateGiven(Date dateGiven) {
+    public void updateDateGiven(String dateGiven) {
         this.dateGiven = dateGiven;
     }
 
@@ -59,7 +59,7 @@ public class PreventionImmunizations {
     }
 
     // Returns the date that immunizations given
-    public Date getDateGiven() {
+    public String getDateGiven() {
         return dateGiven;
     }
 
@@ -73,11 +73,11 @@ public class PreventionImmunizations {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID, Type, Name, whereGiven) Values ('"
+        sqlInsert = "INSERT INTO AMPM.PreventionImmunizations (ClientID, Type, Name, DateGiven, whereGiven) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.name + "','"
-                //+ null + "','"
+                + this.whereGiven + "','"
                 + this.whereGiven + "')";
         return sqlInsert;
     }
@@ -85,13 +85,22 @@ public class PreventionImmunizations {
     // Generates the sql string that can be used to update this client info
     // into the PreventionImmunizations table
     public String getSQLUpdate() {
-        String sqlUpdate;
-
-        sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
+        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
                 + "Name='" + this.name + "', "
-               // + "DateGiven='" + null + "', "
+                + "DateGiven='" + this.dateGiven + "', "
                 + "whereGiven='" + this.whereGiven + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
+
+        return sqlUpdate;
+    }
+
+    public String getSQLUpdateNewItem(String newItem) {
+        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
+                + "Name='" + newItem + "', "
+                + "DateGiven='" + this.dateGiven + "', "
+                + "whereGiven='" + this.whereGiven + "'"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND Name='" + this.name + "'";
 
         return sqlUpdate;
     }

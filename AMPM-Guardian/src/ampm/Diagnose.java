@@ -82,6 +82,18 @@ public class Diagnose {
         return sqlUpdate;
     }
 
+    public String getSQLUpdateNewDiagnose(String newDiagnosis) {
+        String sqlUpdate;
+
+        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis='" + newDiagnosis + "',"
+                + "StartDate='" + this.diagnosedDate + "', "
+                + "DiagnosedBy='" + this.byWho + "'"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND Diagnosis='" + this.description + "'";
+
+        return sqlUpdate;
+    }
+
     public String getSQLSelect() {
         String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID='"
                 + this.clientID + "'";

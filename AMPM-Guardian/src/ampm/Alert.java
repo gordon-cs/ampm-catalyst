@@ -72,9 +72,21 @@ public class Alert {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Alert SET AlertSpecific='" + this.detail + "', "
+        sqlUpdate = "UPDATE AMPM.Alert SET AlertType ='" + this.type + "',"
+                + "AlertSpecific='" + this.detail + "', "
                 + "AlertDescription='" + this.description + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
+
+        return sqlUpdate;
+    }
+
+    public String getSQLUpdateNewDetail(String newDetail) {
+        String sqlUpdate;
+
+        sqlUpdate = "UPDATE AMPM.Alert SET AlertSpecific='" + newDetail + "', "
+                + "AlertDescription='" + this.description + "'"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND AlertType ='" + this.detail + "'";
 
         return sqlUpdate;
     }
@@ -82,7 +94,7 @@ public class Alert {
     public String getSQLSelect() {
         String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID='"
                 + this.clientID + "'";
-        
+
         return sqlSelect;
     }
 }

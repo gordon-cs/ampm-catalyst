@@ -85,10 +85,10 @@ public class Provider {
         String sqlUpdate;
 
         sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
-                + "Provider='" + this.providerName + "', "
                 + "Nurse='" + this.nurseName + "', "
                 + "PANP='" + this.nameOfPANP + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND Provider='" + this.providerName + "'";
 
         return sqlUpdate;
     }

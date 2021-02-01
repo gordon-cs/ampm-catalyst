@@ -18,10 +18,10 @@ public class MedicalEquipment {
     private String type;
     private String prescribedBy;
     private String usedFor;
-    private Date startDate;
+    private String startDate;
     private String notes;
 
-    MedicalEquipment(String clientID, String type, String prescribedBy, String usedFor, Date startDate, String notes) {
+    MedicalEquipment(String clientID, String type, String prescribedBy, String usedFor, String startDate, String notes) {
         this.clientID = clientID;
         this.type = type;
         this.prescribedBy = prescribedBy;
@@ -51,7 +51,7 @@ public class MedicalEquipment {
     }
 
     // Returns the date that medical equipemnt start used
-    public void updateStartDate(Date startDate) {
+    public void updateStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -76,7 +76,7 @@ public class MedicalEquipment {
     }
 
     // Returns the date that medical equipemnt start used
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
@@ -108,9 +108,21 @@ public class MedicalEquipment {
         sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType='" + this.type + "',"
                 + "PrescribedBy='" + this.prescribedBy + "', "
                 + "UsedFor='" + this.usedFor + "', "
-                //+ "StartDate='" + this.usedFor + "', "
-                + "Notes='" + this.startDate + "'"
+                + "StartDate='" + this.startDate + "', "
+                + "Notes='" + this.notes + "'"
                 + "WHERE ClientID='" + this.clientID + "'";
+
+        return sqlUpdate;
+    }
+
+    public String getSQLUpdateEquipType(String newEquipType) {
+        String sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType='" + newEquipType + "',"
+                + "PrescribedBy='" + this.prescribedBy + "', "
+                + "UsedFor='" + this.usedFor + "', "
+                + "StartDate='" + this.startDate + "', "
+                + "Notes='" + this.notes + "'"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND EquipType ='" + this.type + "'";
 
         return sqlUpdate;
     }
