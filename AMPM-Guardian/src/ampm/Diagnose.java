@@ -12,10 +12,10 @@ public class Diagnose {
     // The private values for this object, each one represents a col in the DB
     private String clientID;
     private String description;
-    private Date diagnosedDate;
+    private String diagnosedDate;
     private String byWho;
 
-    Diagnose(String clientID, String description, Date diagnosedDate, String byWho) {
+    Diagnose(String clientID, String description, String diagnosedDate, String byWho) {
         this.clientID = clientID;
         this.description = description;
         this.diagnosedDate = diagnosedDate;
@@ -32,7 +32,7 @@ public class Diagnose {
     }
 
     // Update the diagnosed date
-    public void updatedDiagnosedDate(Date diagnosedDate) {
+    public void updatedDiagnosedDate(String diagnosedDate) {
         this.diagnosedDate = diagnosedDate;
     }
 
@@ -47,7 +47,7 @@ public class Diagnose {
     }
 
     // Returns the diagnosed date
-    public Date getDiagnosedDate() {
+    public String getDiagnosedDate() {
         return diagnosedDate;
     }
 

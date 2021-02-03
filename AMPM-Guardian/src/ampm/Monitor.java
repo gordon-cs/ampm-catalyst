@@ -60,7 +60,18 @@ public class Monitor {
 
         sqlUpdate = "UPDATE AMPM.Monitor SET ReasonFor='" + this.reason + "', "
                 + "SpecificName='" + this.specific + "'"
-                + " WHERE ClientID='" + this.clientID + "'";
+                + "WHERE ClientID='" + this.clientID + "'";
+
+        return sqlUpdate;
+    }
+
+    public String getSQLEdit(String newName) {
+        String sqlUpdate;
+
+        sqlUpdate = "UPDATE AMPM.Monitor SET ReasonFor='" + this.reason + "', "
+                + "SpecificName='" + newName + "'"
+                + "WHERE ClientID='" + this.clientID + "'"
+                + "AND SpecificName ='" + this.specific + "'";
 
         return sqlUpdate;
     }

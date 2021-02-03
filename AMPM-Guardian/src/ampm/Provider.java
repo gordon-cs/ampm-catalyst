@@ -85,6 +85,19 @@ public class Provider {
         String sqlUpdate;
 
         sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
+                + "Provider='" + this.providerName + "', "
+                + "Nurse='" + this.nurseName + "', "
+                + "PANP='" + this.nameOfPANP + "'"
+                + "WHERE ClientID='" + this.clientID + "'";
+
+        return sqlUpdate;
+    }
+
+    public String getSQLEdit(String newProvider) {
+        String sqlUpdate;
+
+        sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
+                + "Provider='" + newProvider + "', "
                 + "Nurse='" + this.nurseName + "', "
                 + "PANP='" + this.nameOfPANP + "'"
                 + "WHERE ClientID='" + this.clientID + "'"
