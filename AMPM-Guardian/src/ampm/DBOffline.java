@@ -133,17 +133,20 @@ public class DBOffline implements Serializable {
     public void sync() throws SQLException {
         DBOnline dbOnline = new DBOnline();
               
+        // Retrieve the clients from both DBs
         List<Client> offlineClients = getClientListFromDB();
         List<Client> onlineClients = dbOnline.getClientListFromDB();
         
         System.out.println("Looking for recently modified clients in the two databases");
         for (Client onlineClient : onlineClients) {
             for (Client offlineClient : offlineClients) {
+                // Check to see if a client in the online database is the same as one in
+                // the offline one
                 if (onlineClient.getID().equals(offlineClient.getID())) {
                     Timestamp offlineLastModified = offlineClient.getLastModified();
                     Timestamp onlineLastModified = onlineClient.getLastModified();
+                    // Check to see if the timestamps are different
                     if (!onlineLastModified.equals(offlineLastModified)) {
-                        int diff = onlineLastModified.compareTo(offlineLastModified);
                         
                         System.out.println("the difference: " + onlineLastModified.toString() + ", " + offlineLastModified.toString());
                         // Most recent is online
@@ -170,8 +173,7 @@ public class DBOffline implements Serializable {
             // If this offline client is NOT in the online client list
             if (!isInClientList(offlineClient, onlineClients)) {
                 System.out.println("Adding " + offlineClient.getFullName() + ", id: " + offlineClient.getID());
-                System.out.println(offlineClient.getSQLInsert());
-
+                // Put the offline client on the online database 
                 dbOnline.executeStatement(offlineClient.getSQLInsert());
             }
         }
@@ -182,9 +184,7 @@ public class DBOffline implements Serializable {
             // If this online client is NOT in the offline client list
             if (!isInClientList(onlineClient, offlineClients)) {
                 System.out.println("Adding " + onlineClient.getFullName() + ", id: " + onlineClient.getID());
-                System.out.println(onlineClient.getCell());
-                System.out.println(onlineClient.getSQLInsert());
-
+                // Put the online client on the offline db
                 executeStatement(onlineClient.getSQLInsert());
             }
         }

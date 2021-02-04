@@ -4,9 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBManager.java</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AddClientScreenController.java</file>
+            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBOnline.java</file>
+            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/PrintManager.java</file>
             <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBOffline.java</file>
+            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/HelloWorldScreenController.java</file>
+            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/HomeScreenController.java</file>
             <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/Client.java</file>
+            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/LoginScreenController.java</file>
         </group>
     </open-files>
 </project-private>
