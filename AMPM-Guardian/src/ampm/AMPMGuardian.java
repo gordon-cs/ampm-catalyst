@@ -29,6 +29,12 @@ public class AMPMGuardian extends Application {
         loginScene = scene;
         
         stage.show();
+        
+        /* TEST CODE */
+        System.out.println("Starting cards");
+        AlertCard test1 = new AlertCard();
+        System.out.println("Done with cards");
+        /* END TEST */
     }
 
     /**
