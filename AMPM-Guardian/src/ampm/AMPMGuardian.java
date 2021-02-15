@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.jumpmind.symmetric.SymmetricWebServer;
 
 /**
  *
@@ -24,6 +25,22 @@ public class AMPMGuardian extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
         
+        // TEST SYMMETRICDS CODE
+        try {
+            new SymmetricClientNode(new File("client.properties"));
+            SymmetricWebServer node = new SymmetricWebServer("master.properties");
+            node.setWebAppDir("Web"); 
+            node.setJoin(false);
+            node.start();
+            // this will stop the node
+            //node.stop();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+	// END TEST			
+        
+        
         Scene scene = new Scene(root);
         stage.setScene(scene);
         loginScene = scene;
@@ -35,7 +52,7 @@ public class AMPMGuardian extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        launch(args);       
     }
     
     public static List<Client> getClients() {
