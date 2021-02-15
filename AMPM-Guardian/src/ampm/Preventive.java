@@ -145,4 +145,11 @@ public class Preventive {
 
         return sqlSelect;
     }
+
+    public String getSQLSelectByType(String preventiveType) {
+        String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID ='" + this.clientID 
+                + "'AND PreventiveType = '" + preventiveType + "'";
+        
+        return sqlSelect;
+    }
 }

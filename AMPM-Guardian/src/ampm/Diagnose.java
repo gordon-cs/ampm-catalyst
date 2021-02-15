@@ -100,4 +100,11 @@ public class Diagnose {
 
         return sqlSelect;
     }
+
+    public String getSQLSelectByDiagnosis(String diagnosis) {
+        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID ='"  + this.clientID
+                + "'AND Diagnosis = '"  + diagnosis + "'";
+
+        return sqlSelect;
+    }
 }

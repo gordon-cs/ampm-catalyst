@@ -93,7 +93,7 @@ public class Medication {
                 + "UsedFor='" + this.usedFor + "', "
                 + "DateStopped='" + this.dateStopped + "', "
                 + "Provider='" + this.provider + "'"
-                + "WHERE ClientID='" + this.clientID + "'" 
+                + "WHERE ClientID='" + this.clientID + "'"
                 + "AND GenericName='" + this.genericName + "'";
 
         return sqlUpdate;
@@ -104,6 +104,14 @@ public class Medication {
                 + this.clientID + "'";
 
         System.out.println(sqlSelect);
+        return sqlSelect;
+    }
+
+    public String getSQLSelectByGenericName(String name) {
+        String sqlSelect = "SELECT * FROM AMPM.Medication WHERE ClientID ='" + this.clientID 
+                + "'AND GenericName = '"
+                + name + "'";
+        
         return sqlSelect;
     }
 }

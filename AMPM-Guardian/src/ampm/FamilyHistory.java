@@ -106,4 +106,11 @@ public class FamilyHistory {
         return sqlSelect;
     }
 
+    public String getSQLSelectByRelative(String relative) {
+        String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID
+                + "'AND Relation = '"
+                + relative + "'";
+
+        return sqlSelect;
+    }
 }

@@ -82,4 +82,20 @@ public class Monitor {
 
         return sqlSelect;
     }
+
+    public String getSQLSelectByName(String name) {
+        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID
+                + "'AND SpecificName = '"
+                + name + "'";
+
+        return sqlSelect;
+    }
+
+    public String getSQLSelectByReason(String reasonFor) {
+        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID
+                + "'AND ReasonFor = '"
+                + reasonFor + "'";
+
+        return sqlSelect;
+    }
 }
