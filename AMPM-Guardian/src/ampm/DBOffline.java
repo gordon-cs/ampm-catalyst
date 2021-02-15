@@ -60,19 +60,28 @@ public class DBOffline implements Serializable {
         }
     }
     
+    // Gets a list of clients (organized by LastModified) as a result set from
+    // the offline database
     private static ResultSet getClients() throws SQLException {
         return stmt.executeQuery("Select  FirstName, LastName, LastModified from AMPM.Client ORDER BY LastModified DESC");
     } 
     
-    public void addNewClients(String firstName, String lastName,
-                              String emailAddress, String phoneNumber, 
-                              Timestamp date, String cellPhoneNumber) throws SQLException {
-
-        stmt.executeUpdate("INSERT INTO AMPM.Client (FirstName, LastName, Email,"
-                + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
-                + "','" + emailAddress + "','" + phoneNumber + "','" + date.toString() + "','" + cellPhoneNumber + "')");
-
-    }
+    // For the demo: this code smelled bad. I wasn't sure why we needed it. Turns out 
+    // we dont. It is never actually used. 
+    
+//    public void addNewClients(Client client) throws SQLException {
+//        
+////        String firstName, String lastName,
+////                              String emailAddress, String phoneNumber, 
+////                              Timestamp date, String cellPhoneNumber
+//
+//        stmt.executeUpdate(client.getSQLInsert());
+//        
+//        /*stmt.executeUpdate("INSERT INTO AMPM.Client (FirstName, LastName, Email,"
+//                + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
+//                + "','" + emailAddress + "','" + phoneNumber + "','" + date.toString() + "','" + cellPhoneNumber + "')");*/
+//
+//    }
     
     public static void executeStatement(String statement) throws SQLException {
         stmt.executeUpdate(statement);
@@ -82,6 +91,7 @@ public class DBOffline implements Serializable {
         return stmt.executeQuery(query);
     }
     
+    // Returns a list of client objects from the Offline database. 
     public List<Client> getClientListFromDB() throws SQLException {
         // Get all the clients
         ResultSet rs = stmt.executeQuery("Select  * from AMPM.Client ORDER BY LastModified DESC");
