@@ -87,7 +87,7 @@ public class Monitor {
         String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID
                 + "'AND SpecificName = '"
                 + name + "'";
-
+        
         return sqlSelect;
     }
 

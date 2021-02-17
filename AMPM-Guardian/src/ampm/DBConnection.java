@@ -159,6 +159,7 @@ public class DBConnection {
     }
 
     public static ResultSet executeStatement(String statement) throws SQLException {
+        System.out.println(statement);
         return stmt.executeQuery(statement);
     }
 
@@ -187,6 +188,7 @@ public class DBConnection {
 
     public void addInfo(String statement) throws SQLException {
         stmt.executeUpdate(statement);
+        System.out.println(statement);
     }
 
     /**

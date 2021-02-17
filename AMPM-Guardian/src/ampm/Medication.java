@@ -103,7 +103,6 @@ public class Medication {
         String sqlSelect = "SELECT * FROM AMPM.Medication WHERE ClientID='"
                 + this.clientID + "'";
 
-        System.out.println(sqlSelect);
         return sqlSelect;
     }
 
