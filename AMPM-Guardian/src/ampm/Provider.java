@@ -112,4 +112,12 @@ public class Provider {
 
         return sqlSelect;
     }
+
+    public String getSQLSelectByProvider(String provider) {
+        String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID ='" + this.clientID
+                + "'AND Provider = '"
+                + provider + "'";
+
+        return sqlSelect;
+    }
 }

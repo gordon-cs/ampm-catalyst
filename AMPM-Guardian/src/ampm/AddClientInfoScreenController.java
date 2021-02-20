@@ -145,7 +145,7 @@ public class AddClientInfoScreenController implements Initializable {
 
 //Alerts Tab
     @FXML
-    private MenuButton alertsType;
+    private TextField alertsType;
     @FXML
     private TextField alertsSpecific;
     @FXML
@@ -197,57 +197,60 @@ public class AddClientInfoScreenController implements Initializable {
         lastName.setText(lname);
         phoneNumber.setText(phone);
         emailAddress.setText(email);
-        phoneNumber.setEditable(false);
-        firstName.setEditable(false);
-        lastName.setEditable(false);
-        emailAddress.setEditable(false);
+        //phoneNumber.setEditable(false);
+        //firstName.setEditable(false);
+        //lastName.setEditable(false);
+        //emailAddress.setEditable(false);
 
     }
 
     //Set up the TextField and ListView in Diagnose tab and make TextField uneditable before click edit button or new in the ListView
     private void diagnoseTabSetUp() throws SQLException {
         setUpDiagnoseList();
+        Diagnose diagnose = new Diagnose(this.clientID);
         diagnoseList.setOnMouseClicked(e -> {
-            if (diagnoseList.getSelectionModel().getSelectedItem().equals("New")) {
-                //Clear the TextField and monitor information for create new item
+            /*if (diagnoseList.getSelectionModel().getSelectedItem().equals("New")) {
+                //Clear the TextField and monitor infomration for create new item
                 diagnoseDescription.clear();
                 diagnosisDoctor.clear();
                 monitorList.getItems().clear();
                 monitorSpecific.clear();
 
                 //Make TextField editable
-                diagnoseDescription.setEditable(true);
-                diagnosisDoctor.setEditable(true);
+                //diagnoseDescription.setEditable(true);
+                //diagnosisDoctor.setEditable(true);
             } else {
-                try {
-                    setUpMonitorList();
-                    //Show the releated information when click one item in ListView
-                    String query = "SELECT * FROM AMPM.Diagnose WHERE ClientID ='" + this.clientID + "'AND Diagnosis = '"
-                            + (String) diagnoseList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
-                    while (rs.next()) {
-                        diagnoseDescription.setText(rs.getString("Diagnosis"));
-                        diagnosisDoctor.setText(rs.getString("DiagnosedBy"));
-                    }
-                    //Make TextField editable
-                    diagnoseDescription.setEditable(false);
-                    diagnosisDoctor.setEditable(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+             */
+            try {
+                setUpMonitorList();
+                //Show the releated information when click one item in ListView
+                ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelectByDiagnosis(
+                        (String) diagnoseList.getSelectionModel().getSelectedItem()));
+                while (rs.next()) {
+                    diagnoseDescription.setText(rs.getString("Diagnosis"));
+                    diagnosisDoctor.setText(rs.getString("DiagnosedBy"));
                 }
+                //Make TextField editable
+                //diagnoseDescription.setEditable(false);
+                //diagnosisDoctor. (false);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        });
-        monitorList.setOnMouseClicked(e -> {
+        }
+        );
+        Monitor monitor = new Monitor(this.clientID);
+
+        monitorList.setOnMouseClicked(e
+                -> {
             if (monitorList.getSelectionModel().getSelectedItem().equals("New")) {
                 monitorSpecific.clear();
-                monitorSpecific.setEditable(true);
+                //monitorSpecific.setEditable(true);
 
             } else {
                 try {
                     //Show the releated information when click one item in ListView
-                    String query = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID + "'AND SpecificName = '"
-                            + (String) monitorList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
+                    ResultSet rs = dbConnection.executeStatement(monitor.getSQLSelectByName(
+                            (String) monitorList.getSelectionModel().getSelectedItem()));
                     while (rs.next()) {
                         monitorSpecific.setText(rs.getString("SpecificName"));
                     }
@@ -256,13 +259,15 @@ public class AddClientInfoScreenController implements Initializable {
                     ex.printStackTrace();
                 }
             }
-        });
+        }
+        );
 
     }
 
     //Set up the TextField and ListView in Preventive tab and make TextField uneditable before click edit button or new in the ListView
     private void preventativeTabSetUp() throws SQLException {
         setUpPreventiveList();
+        Preventive preventive = new Preventive(this.clientID);
         preventiveList.setOnMouseClicked(e -> {
             if (preventiveList.getSelectionModel().getSelectedItem().equals("New")) {
                 //Clear the TextField for create new item
@@ -274,19 +279,17 @@ public class AddClientInfoScreenController implements Initializable {
                 preventiveFrequency.clear();
 
                 //Make TextField editable
-                preventiveType.setEditable(true);
-                preventiveDateDone.setEditable(true);
-                preventivePrescribedBy.setEditable(true);
-                preventiveNextDueDate.setEditable(true);
-                preventiveSource.setEditable(true);
-                preventiveFrequency.setEditable(true);
-                                
+                //preventiveType.setEditable(true);
+                //preventiveDateDone.setEditable(true);
+                //preventivePrescribedBy.setEditable(true);
+                //preventiveNextDueDate.setEditable(true);
+                //preventiveSource.setEditable(true);
+                //preventiveFrequency.setEditable(true);
             } else {
                 try {
                     //Show the releated information when click one item in ListView
-                    String query = "SELECT * FROM AMPM.Preventive WHERE ClientID ='" + this.clientID + "'AND PreventiveType = '"
-                            + (String) preventiveList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
+                    ResultSet rs = dbConnection.executeStatement(preventive.getSQLSelectByType(
+                            (String) preventiveList.getSelectionModel().getSelectedItem()));
                     while (rs.next()) {
                         preventiveType.setText(rs.getString("PreventiveType"));
                         preventiveDateDone.setText(rs.getString("DateDone"));
@@ -297,12 +300,12 @@ public class AddClientInfoScreenController implements Initializable {
 
                     }
                     //Make TextField uneditable
-                    preventiveType.setEditable(false);
-                    preventiveDateDone.setEditable(false);
-                    preventivePrescribedBy.setEditable(false);
-                    preventiveNextDueDate.setEditable(false);
-                    preventiveSource.setEditable(false);
-                    preventiveFrequency.setEditable(false);
+                    //preventiveType.setEditable(false);
+                    //preventiveDateDone.setEditable(false);
+                    //preventivePrescribedBy.setEditable(false);
+                    //preventiveNextDueDate.setEditable(false);
+                    //preventiveSource.setEditable(false);
+                    //preventiveFrequency.setEditable(false);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -313,6 +316,7 @@ public class AddClientInfoScreenController implements Initializable {
     //Set up the TextField and ListView in Prevention Immunizations tab and make TextField uneditable before click edit button or new in the ListView
     private void preventationImmunTabSetUp() throws SQLException {
         setUpPreventionImmunList();
+        PreventionImmunizations preventionImmun = new PreventionImmunizations(this.clientID);
         preventionImmunList.setOnMouseClicked(e -> {
             if (preventionImmunList.getSelectionModel().getSelectedItem().equals("New")) {
                 //Clear the TextField for create new item
@@ -322,16 +326,15 @@ public class AddClientInfoScreenController implements Initializable {
                 preventionImmunLocation.clear();
 
                 //Make TextField editable
-                preventionImmunType.setEditable(true);
-                preventionImmunDateGiven.setEditable(true);
-                preventionImmunName.setEditable(true);
-                preventionImmunLocation.setEditable(true);
+                //preventionImmunType.setEditable(true);
+                //preventionImmunDateGiven.setEditable(true);
+                //preventionImmunName.setEditable(true);
+                //preventionImmunLocation.setEditable(true);
             } else {
                 try {
                     //Show the releated information when click one item in ListView
-                    String query = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='" + this.clientID + "'AND Name = '"
-                            + (String) preventionImmunList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
+                    ResultSet rs = dbConnection.executeStatement(preventionImmun.getSQLSelectByDiagnosisName(
+                            (String) preventionImmunList.getSelectionModel().getSelectedItem()));
                     while (rs.next()) {
                         preventionImmunType.setText(rs.getString("Type"));
                         preventionImmunName.setText(rs.getString("Name"));
@@ -340,10 +343,10 @@ public class AddClientInfoScreenController implements Initializable {
                     }
 
                     //Make TextField uneditable
-                    preventionImmunType.setEditable(false);
-                    preventionImmunDateGiven.setEditable(false);
-                    preventionImmunName.setEditable(false);
-                    preventionImmunLocation.setEditable(false);
+                    //preventionImmunType.setEditable(false);
+                    //preventionImmunDateGiven.setEditable(false);
+                    //preventionImmunName.setEditable(false);
+                    //preventionImmunLocation.setEditable(false);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -354,7 +357,7 @@ public class AddClientInfoScreenController implements Initializable {
     //Set up the TextField and ListView in Provider tab and make TextField uneditable before click edit button or new in the ListView
     private void providersTabSetUp() throws SQLException {
         setUpProviderList();
-
+        Provider provider = new Provider(this.clientID);
         //Mouse Click event for list view of provider     
         providerList.setOnMouseClicked(e -> {
             if (providerList.getSelectionModel().getSelectedItem().equals("New")) {
@@ -363,25 +366,24 @@ public class AddClientInfoScreenController implements Initializable {
                 nurseName.clear();
                 nameOfPANP.clear();
 
-                provideType.setEditable(true);
-                providerName.setEditable(true);
-                nurseName.setEditable(true);
-                nameOfPANP.setEditable(true);
+                //provideType.setEditable(true);
+                //providerName.setEditable(true);
+                //nurseName.setEditable(true);
+                //nameOfPANP.setEditable(true);
             } else {
                 try {
-                    String query = "SELECT * FROM AMPM.Provider WHERE ClientID ='" + this.clientID + "'AND Provider = '"
-                            + (String) providerList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
+                    ResultSet rs = dbConnection.executeStatement(provider.getSQLSelectByProvider(
+                            (String) providerList.getSelectionModel().getSelectedItem()));
                     while (rs.next()) {
                         provideType.setText(rs.getString("Type"));
                         providerName.setText(rs.getString("Provider"));
                         nurseName.setText(rs.getString("Nurse"));
                         nameOfPANP.setText(rs.getString("PANP"));
                     }
-                    provideType.setEditable(false);
-                    providerName.setEditable(false);
-                    nurseName.setEditable(false);
-                    nameOfPANP.setEditable(false);
+                    //provideType.setEditable(false);
+                    //providerName.setEditable(false);
+                    //nurseName.setEditable(false);
+                    //nameOfPANP.setEditable(false);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -405,21 +407,20 @@ public class AddClientInfoScreenController implements Initializable {
                 "Maternal Uncle",
                 "Paternal Uncle"
         );
-
+        FamilyHistory family = new FamilyHistory(this.clientID);
         //Select event for relative combo box
         relativeSelectBox.setOnAction(e -> {
             relativeList.getItems().clear();
             //Auto-fill the textfield based on selected item.
             try {
-                String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID + "'AND Relation = '"
-                        + (String) relativeSelectBox.getSelectionModel().getSelectedItem() + "'";
-                ResultSet rs = dbConnection.executeStatement(query);
+                ResultSet rs = dbConnection.executeStatement(family.getSQLSelectByRelative(
+                        (String) relativeSelectBox.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
                     familyDiagnosis.setText(rs.getString("Diagnoses"));
                     familyRealtionAge.setText(rs.getString("Age"));
                 }
-                familyDiagnosis.setEditable(false);
-                familyRealtionAge.setEditable(false);
+                //familyDiagnosis.setEditable(false);
+                //familyRealtionAge.setEditable(false);
                 setUpDiagnosesList();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -429,42 +430,41 @@ public class AddClientInfoScreenController implements Initializable {
         //Mouse Click event for this ListView
         relativeList.setOnMouseClicked(e -> {
             familyDiagnosis.setText((String) relativeList.getSelectionModel().getSelectedItem());
-            familyDiagnosis.setEditable(false);
+            //familyDiagnosis.setEditable(false);
             if (relativeList.getSelectionModel().getSelectedItem().equals("New")) {
                 familyDiagnosis.clear();
-                familyDiagnosis.setEditable(true);
+                //familyDiagnosis.setEditable(true);
             }
         });
     }
 
     private void medicalEquipmentTabSetUp() throws SQLException {
         setUpMedicalEquipList();
-
+        MedicalEquipment medicalEquip = new MedicalEquipment(this.clientID);
         equipmentList.setOnMouseClicked(e -> {
             if (equipmentList.getSelectionModel().getSelectedItem().equals("New")) {
                 medicalEquipType.clear();
                 medicalEquipPrescribe.clear();
                 medicalEquipReason.clear();
                 medicalEquipNotes.clear();
-                medicalEquipType.setEditable(true);
-                medicalEquipPrescribe.setEditable(true);
-                medicalEquipReason.setEditable(true);
-                medicalEquipNotes.setEditable(true);
+                //medicalEquipType.setEditable(true);
+                //medicalEquipPrescribe.setEditable(true);
+                //medicalEquipReason.setEditable(true);
+                //medicalEquipNotes.setEditable(true);
             } else {
                 try {
-                    String query = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID ='" + this.clientID + "'AND EquipType = '"
-                            + (String) equipmentList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
+                    ResultSet rs = dbConnection.executeStatement(medicalEquip.getSQLSelectByType(
+                            (String) equipmentList.getSelectionModel().getSelectedItem()));
                     while (rs.next()) {
                         medicalEquipType.setText(rs.getString("EquipType"));
                         medicalEquipPrescribe.setText(rs.getString("PrescribedBy"));
                         medicalEquipReason.setText(rs.getString("UsedFor"));
                         medicalEquipNotes.setText(rs.getString("Notes"));
                     }
-                    medicalEquipType.setEditable(false);
-                    medicalEquipPrescribe.setEditable(false);
-                    medicalEquipReason.setEditable(false);
-                    medicalEquipNotes.setEditable(false);
+                    //medicalEquipType.setEditable(false);
+                    //medicalEquipPrescribe.setEditable(false);
+                    //medicalEquipReason.setEditable(false);
+                    //medicalEquipNotes.setEditable(false);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -475,35 +475,30 @@ public class AddClientInfoScreenController implements Initializable {
 
     private void alertsTabSetUp() throws SQLException {
         setUpAlertList();
-
+        Alert alert = new Alert(this.clientID);
         alertList.setOnMouseClicked(e -> {
-            if (alertList.getSelectionModel().getSelectedItem().equals("New")) {
-                alertsSpecific.clear();
-                altersDescrption.clear();
-                alertsSpecific.setEditable(true);
-                altersDescrption.setEditable(true);
-            } else {
-                String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
-                try {
-                    String query = "SELECT * FROM AMPM.Alert WHERE ClientID ='" + this.clientID + "'AND AlertSpecific = '"
-                            + alertDetail.substring(alertDetail.indexOf(":") + 1) + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
-                    while (rs.next()) {
-                        alertsSpecific.setText(rs.getString("AlertSpecific"));
-                        altersDescrption.setText(rs.getString("AlertDescription"));
-                    }
-                    alertsSpecific.setEditable(false);
-                    altersDescrption.setEditable(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+
+            String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
+            try {
+                ResultSet rs = dbConnection.executeStatement(alert.getSQLSelectByType(
+                        alertDetail.substring(alertDetail.indexOf(":") + 1)));
+                while (rs.next()) {
+                    alertsType.setText(rs.getString("AlertSpecific"));
+                    alertsSpecific.setText(rs.getString("AlertSpecific"));
+                    altersDescrption.setText(rs.getString("AlertDescription"));
                 }
+                //alertsSpecific.setEditable(false);
+                //altersDescrption.setEditable(false);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
+
         });
     }
 
     private void medicationTabSetUp() throws SQLException {
         setUpMedicationList();
-
+        Medication medication = new Medication(this.clientID);
         medicationList.setOnMouseClicked(e -> {
             if (medicationList.getSelectionModel().getSelectedItem().equals("New")) {
                 medicationClass.clear();
@@ -516,21 +511,20 @@ public class AddClientInfoScreenController implements Initializable {
                 medicationUsedFor.clear();
                 medicationStoppedDate.clear();
                 medicationProvider.clear();
-                medicationClass.setEditable(true);
-                medicationGenericName.setEditable(true);
-                medicationBrandName.setEditable(true);
-                medicationDose.setEditable(true);
-                medicationFrequency.setEditable(true);
-                medicationStartDate.setEditable(true);
-                medicationPrescribedBy.setEditable(true);
-                medicationUsedFor.setEditable(true);
-                medicationStoppedDate.setEditable(true);
-                medicationProvider.setEditable(true);
+                //medicationClass.setEditable(true);
+                //medicationGenericName.setEditable(true);
+                //medicationBrandName.setEditable(true);
+                //medicationDose.setEditable(true);
+                //medicationFrequency.setEditable(true);
+                //medicationStartDate.setEditable(true);
+                //medicationPrescribedBy.setEditable(true);
+                //medicationUsedFor.setEditable(true);
+                //medicationStoppedDate.setEditable(true);
+                //medicationProvider.setEditable(true);
             } else {
                 try {
-                    String query = "SELECT * FROM AMPM.Medication WHERE ClientID ='" + this.clientID + "'AND GenericName = '"
-                            + (String) medicationList.getSelectionModel().getSelectedItem() + "'";
-                    ResultSet rs = dbConnection.executeStatement(query);
+                    ResultSet rs = dbConnection.executeStatement(medication.getSQLSelectByGenericName(
+                            (String) medicationList.getSelectionModel().getSelectedItem()));
                     while (rs.next()) {
                         medicationClass.setText(rs.getString("Class"));
                         medicationGenericName.setText(rs.getString("GenericName"));
@@ -543,16 +537,16 @@ public class AddClientInfoScreenController implements Initializable {
                         medicationStoppedDate.setText(rs.getString("DateStopped"));
                         medicationProvider.setText(rs.getString("Provider"));
                     }
-                    medicationClass.setEditable(false);
-                    medicationGenericName.setEditable(false);
-                    medicationBrandName.setEditable(false);
-                    medicationDose.setEditable(false);
-                    medicationFrequency.setEditable(false);
-                    medicationStartDate.setEditable(false);
-                    medicationPrescribedBy.setEditable(false);
-                    medicationUsedFor.setEditable(false);
-                    medicationStoppedDate.setEditable(false);
-                    medicationProvider.setEditable(false);
+                    //medicationClass.setEditable(false);
+                    //medicationGenericName.setEditable(false);
+                    //medicationBrandName.setEditable(false);
+                    //medicationDose.setEditable(false);
+                    //medicationFrequency.setEditable(false);
+                    //medicationStartDate.setEditable(false);
+                    //medicationPrescribedBy.setEditable(false);
+                    //medicationUsedFor.setEditable(false);
+                    //medicationStoppedDate.setEditable(false);
+                    //medicationProvider.setEditable(false);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -574,22 +568,21 @@ public class AddClientInfoScreenController implements Initializable {
         dbConnection.addInfo(updateInfo.getSQLUpdate());
 
     }
-    
-    
+
     @FXML
     //Make TextField in this tab editable
     private void editBasicTab(MouseEvent event) {
-        firstName.setEditable(true);
-        lastName.setEditable(true);
-        phoneNumber.setEditable(true);
-        emailAddress.setEditable(true);
+        //firstName.setEditable(true);
+        //lastName.setEditable(true);
+        //phoneNumber.setEditable(true);
+        //emailAddress.setEditable(true);
     }
 
     //Insert or update diagnose info to database
     @FXML
     private void saveDiagnoseTab(MouseEvent event) throws SQLException, IOException {
 
-        if (!diagnoseList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (diagnoseList.getSelectionModel().getSelectedIndex() > 0) {
             //Update infomation for current selected relative
             Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), diagosedDate.getText(), diagnosisDoctor.getText());
             dbConnection.addInfo(diagnoseInfo.getSQLUpdateNewItem(diagnoseDescription.getText()));
@@ -600,10 +593,10 @@ public class AddClientInfoScreenController implements Initializable {
         }
         //Reset the ListView (auto update ListView)
         setUpDiagnoseList();
-        diagnoseDescription.setEditable(false);
-        diagnosisDoctor.setEditable(false);
+        //diagnoseDescription.setEditable(false);
+        //diagnosisDoctor.setEditable(false);
 
-        if (!monitorList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (monitorList.getSelectionModel().getSelectedIndex() > 0) {
             //Update infomation for current selected relative
             Monitor monitorInfo = new Monitor(this.clientID, diagnoseDescription.getText(), (String) monitorList.getSelectionModel().getSelectedItem());
             dbConnection.addInfo(monitorInfo.getSQLEdit(monitorSpecific.getText()));
@@ -617,14 +610,19 @@ public class AddClientInfoScreenController implements Initializable {
 
     @FXML
     private void editDiagnoseTab(MouseEvent event) {
-        diagnoseDescription.setEditable(true);
-        diagnosisDoctor.setEditable(true);
+        //diagnoseDescription.setEditable(true);
+        //diagnosisDoctor.setEditable(true);
+        diagnoseDescription.clear();
+        diagnosisDoctor.clear();
+        diagnoseList.getSelectionModel().clearSelection();
+        monitorList.getItems().clear();
+        monitorSpecific.clear();
     }
 
     //Insert or update preventive info to database
     @FXML
     private void savePreventiveTab(MouseEvent event) throws SQLException, IOException {
-        if (!preventiveList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (preventiveList.getSelectionModel().getSelectedIndex() > 0) {
             //Update infomation for current selected relative
             Preventive preventiveInfo = new Preventive(this.clientID, (String) preventiveList.getSelectionModel().getSelectedItem(), preventiveDateDone.getText(),
                     preventivePrescribedBy.getText(), preventiveNextDueDate.getText(), preventiveSource.getText(), preventiveFrequency.getText());
@@ -641,18 +639,25 @@ public class AddClientInfoScreenController implements Initializable {
 
     @FXML
     private void editPreventiveTab(MouseEvent event) {
-        preventiveType.setEditable(true);
-        preventiveDateDone.setEditable(true);
-        preventivePrescribedBy.setEditable(true);
-        preventiveNextDueDate.setEditable(true);
-        preventiveSource.setEditable(true);
-        preventiveFrequency.setEditable(true);
+        //preventiveType.setEditable(true);
+        //preventiveDateDone.setEditable(true);
+        //preventivePrescribedBy.setEditable(true);
+        //preventiveNextDueDate.setEditable(true);
+        //preventiveSource.setEditable(true);
+        //preventiveFrequency.setEditable(true);
+        
+        preventiveType.clear();
+        preventiveDateDone.clear();
+        preventivePrescribedBy.clear();
+        preventiveNextDueDate.clear();
+        preventiveSource.clear();
+        preventiveFrequency.clear();
     }
 
     //Insert or update preventive info to database
     @FXML
     private void savePreventionImmunTab(MouseEvent event) throws SQLException, IOException {
-        if (!preventionImmunList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (preventionImmunList.getSelectionModel().getSelectedIndex() > 0) {
             //Update infomation for current selected relative
             PreventionImmunizations preventionImmunizationsInfo = new PreventionImmunizations(this.clientID, preventionImmunType.getText(),
                     (String) preventionImmunList.getSelectionModel().getSelectedItem(), preventionImmunDateGiven.getText(), preventionImmunLocation.getText());
@@ -664,24 +669,29 @@ public class AddClientInfoScreenController implements Initializable {
             dbConnection.addInfo(preventionImmunizationsInfo.getSQLInsert());
         }
         setUpPreventionImmunList();
-        preventionImmunType.setEditable(false);
-        preventionImmunDateGiven.setEditable(false);
-        preventionImmunName.setEditable(false);
-        preventionImmunLocation.setEditable(false);
+        //preventionImmunType.setEditable(false);
+        //preventionImmunDateGiven.setEditable(false);
+        //preventionImmunName.setEditable(false);
+        //preventionImmunLocation.setEditable(false);
     }
 
     @FXML
     private void editPreventionImmunTab(MouseEvent event) {
-        preventionImmunType.setEditable(true);
-        preventionImmunDateGiven.setEditable(true);
-        preventionImmunName.setEditable(true);
-        preventionImmunLocation.setEditable(true);
+        //preventionImmunType.setEditable(true);
+        //preventionImmunDateGiven.setEditable(true);
+        //preventionImmunName.setEditable(true);
+        //preventionImmunLocation.setEditable(true);
+        preventionImmunType.clear();
+        preventionImmunDateGiven.clear();
+        preventionImmunName.clear();
+        preventionImmunLocation.clear();
+        preventionImmunList.getSelectionModel().clearSelection();
     }
 
     //Insert or update provider info to database
     @FXML
     private void saveProviderTab(MouseEvent event) throws SQLException, IOException {
-        if (!providerList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (providerList.getSelectionModel().getSelectedIndex() > 0) {
             //Update infomation for current selected relative
             Provider providerInfo = new Provider(this.clientID, provideType.getText(),
                     (String) providerList.getSelectionModel().getSelectedItem(), nurseName.getText(), nameOfPANP.getText());
@@ -693,24 +703,30 @@ public class AddClientInfoScreenController implements Initializable {
             dbConnection.addInfo(providerInfo.getSQLInsert());
         }
         setUpProviderList();
-        provideType.setEditable(false);
-        providerName.setEditable(false);
-        nurseName.setEditable(false);
-        nameOfPANP.setEditable(false);
+        //provideType.setEditable(false);
+        //providerName.setEditable(false);
+        //nurseName.setEditable(false);
+        //nameOfPANP.setEditable(false);
     }
 
     @FXML
     private void editProviderTab(MouseEvent event) {
-        provideType.setEditable(true);
-        providerName.setEditable(true);
-        nurseName.setEditable(true);
-        nameOfPANP.setEditable(true);
+        //provideType.setEditable(true);
+        //providerName.setEditable(true);
+        //nurseName.setEditable(true);
+        //nameOfPANP.setEditable(true);
+
+        provideType.clear();
+        providerName.clear();
+        nurseName.clear();
+        nameOfPANP.clear();
+        providerList.getSelectionModel().clearSelection();
     }
 
     //Insert or update family history of client info to database
     @FXML
     private void saveFamilyHistoryTab(MouseEvent event) throws SQLException, IOException {
-        if (!relativeList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (relativeSelectBox.getSelectionModel().getSelectedIndex() > 0) {
             //Update infomation for current selected relative
             FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
                     (String) relativeSelectBox.getSelectionModel().getSelectedItem(), null, familyRealtionAge.getText());
@@ -722,20 +738,22 @@ public class AddClientInfoScreenController implements Initializable {
             dbConnection.addInfo(familyHistoryInfo.getSQLInsert());
         }
         setUpDiagnosesList();
-        familyDiagnosis.setEditable(false);
-        familyRealtionAge.setEditable(false);
+        //familyDiagnosis.setEditable(false);
+        //familyRealtionAge.setEditable(false);
     }
 
     @FXML
     private void editFamilyHistoryTab(MouseEvent event) {
-        familyDiagnosis.setEditable(true);
-        familyRealtionAge.setEditable(true);
+        //familyDiagnosis.setEditable(true);
+        //familyRealtionAge.setEditable(true);
+        familyDiagnosis.clear();
+        familyRealtionAge.clear();
     }
 
     //Insert or update family history of client info to database
     @FXML
     private void saveMedicalEquipTab(MouseEvent event) throws SQLException, IOException {
-        if (!equipmentList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (equipmentList.getSelectionModel().getSelectedIndex() > 0) {
             MedicalEquipment medicalEquipmentInfo = new MedicalEquipment(this.clientID, (String) equipmentList.getSelectionModel().getSelectedItem(),
                     medicalEquipPrescribe.getText(), medicalEquipReason.getText(), null, medicalEquipNotes.getText());
             dbConnection.addInfo(medicalEquipmentInfo.getSQLUpdateEquipType(medicalEquipType.getText()));
@@ -745,83 +763,108 @@ public class AddClientInfoScreenController implements Initializable {
             dbConnection.addInfo(medicalEquipmentInfo.getSQLInsert());
         }
         setUpMedicalEquipList();
-        medicalEquipType.setEditable(false);
-        medicalEquipPrescribe.setEditable(false);
-        medicalEquipReason.setEditable(false);
-        medicalEquipNotes.setEditable(false);
+        //medicalEquipType.setEditable(false);
+        //medicalEquipPrescribe.setEditable(false);
+        //medicalEquipReason.setEditable(false);
+        //medicalEquipNotes.setEditable(false);
     }
 
     @FXML
     private void editMedicalEquipTab(MouseEvent event) {
-        medicalEquipType.setEditable(true);
-        medicalEquipPrescribe.setEditable(true);
-        medicalEquipReason.setEditable(true);
-        medicalEquipNotes.setEditable(true);
+        //medicalEquipType.setEditable(true);
+        //medicalEquipPrescribe.setEditable(true);
+        //medicalEquipReason.setEditable(true);
+        //medicalEquipNotes.setEditable(true);
+        medicalEquipType.clear();
+        medicalEquipPrescribe.clear();
+        medicalEquipReason.clear();
+        medicalEquipNotes.clear();
+        equipmentList.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void saveAlertTab(MouseEvent event) throws SQLException, IOException {
-        if (!alertList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (alertList.getSelectionModel().getSelectedIndex() > 0) {
             String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
-            Alert alertInfo = new Alert(this.clientID, null,
+            Alert alertInfo = new Alert(this.clientID, alertsType.getText(),
                     alertDetail.substring(alertDetail.indexOf(":") + 1), altersDescrption.getText());
             dbConnection.addInfo(alertInfo.getSQLUpdateNewDetail(alertsSpecific.getText()));
         } else {
-            Alert alertInfo = new Alert(this.clientID, null,
+            Alert alertInfo = new Alert(this.clientID, alertsType.getText(),
                     alertsSpecific.getText(), altersDescrption.getText());
             dbConnection.addInfo(alertInfo.getSQLInsert());
         }
         setUpAlertList();
-        alertsSpecific.setEditable(false);
-        altersDescrption.setEditable(false);
+        //alertsSpecific.setEditable(false);
+        //altersDescrption.setEditable(false);
     }
 
     @FXML
     private void editAlertTab(MouseEvent event) {
-        alertsSpecific.setEditable(true);
-        altersDescrption.setEditable(true);
+        //alertsSpecific.setEditable(true);
+        //altersDescrption.setEditable(true);
+        alertsType.clear();
+        alertsSpecific.clear();
+        altersDescrption.clear();
+        alertList.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void saveMedicalTab(MouseEvent event) throws SQLException, IOException {
-        if (!medicationList.getSelectionModel().getSelectedItem().equals("New")) {
+        if (medicationList.getSelectionModel().getSelectedIndex() > 0) {
             Medication medicationInfo = new Medication(this.clientID, medicationClass.getText(),
-                    (String) medicationList.getSelectionModel().getSelectedItem(), medicationBrandName.getText(), medicationDose.getText(),
-                    medicationFrequency.getText(), medicationStartDate.getText(), medicationPrescribedBy.getText(),
-                    medicationUsedFor.getText(), medicationStoppedDate.getText(), medicationProvider.getText());
+                    (String) medicationList.getSelectionModel().getSelectedItem(),
+                    medicationBrandName.getText(), medicationDose.getText(),
+                    medicationFrequency.getText(), medicationStartDate.getText(),
+                    medicationPrescribedBy.getText(), medicationUsedFor.getText(),
+                    medicationStoppedDate.getText(), medicationProvider.getText());
             dbConnection.addInfo(medicationInfo.getSQLUpdateNewItem(medicationGenericName.getText()));
         } else {
             Medication medicationInfo = new Medication(this.clientID, medicationClass.getText(),
-                    medicationGenericName.getText(), medicationBrandName.getText(), medicationDose.getText(),
-                    medicationFrequency.getText(), medicationStartDate.getText(), medicationPrescribedBy.getText(),
-                    medicationUsedFor.getText(), medicationStoppedDate.getText(), medicationProvider.getText());
+                    medicationGenericName.getText(), medicationBrandName.getText(),
+                    medicationDose.getText(), medicationFrequency.getText(),
+                    medicationStartDate.getText(), medicationPrescribedBy.getText(),
+                    medicationUsedFor.getText(), medicationStoppedDate.getText(),
+                    medicationProvider.getText());
             dbConnection.addInfo(medicationInfo.getSQLInsert());
         }
         setUpMedicationList();
-        medicationClass.setEditable(false);
-        medicationGenericName.setEditable(false);
-        medicationBrandName.setEditable(false);
-        medicationDose.setEditable(false);
-        medicationFrequency.setEditable(false);
-        medicationStartDate.setEditable(false);
-        medicationPrescribedBy.setEditable(false);
-        medicationUsedFor.setEditable(false);
-        medicationStoppedDate.setEditable(false);
-        medicationProvider.setEditable(false);
+        //medicationClass.setEditable(false);
+        //medicationGenericName.setEditable(false);
+        // medicationBrandName.setEditable(false);
+        // medicationDose.setEditable(false);
+        // medicationFrequency.setEditable(false);
+        //medicationStartDate.setEditable(false);
+        // medicationPrescribedBy.setEditable(false);
+        // medicationUsedFor.setEditable(false);
+        //medicationStoppedDate.setEditable(false);
+        //medicationProvider.setEditable(false);
     }
 
     @FXML
     private void editMedicalTab(MouseEvent event) {
-        medicationClass.setEditable(true);
-        medicationGenericName.setEditable(true);
-        medicationBrandName.setEditable(true);
-        medicationDose.setEditable(true);
-        medicationFrequency.setEditable(true);
-        medicationStartDate.setEditable(true);
-        medicationPrescribedBy.setEditable(true);
-        medicationUsedFor.setEditable(true);
-        medicationStoppedDate.setEditable(true);
-        medicationProvider.setEditable(true);
+        //medicationClass.setEditable(true);
+        //medicationGenericName.setEditable(true);
+        //medicationBrandName.setEditable(true);
+        //medicationDose.setEditable(true);
+        //medicationFrequency.setEditable(true);
+        //medicationStartDate.setEditable(true);
+        //medicationPrescribedBy.setEditable(true);
+        //medicationUsedFor.setEditable(true);
+        //medicationStoppedDate.setEditable(true);
+        //medicationProvider.setEditable(true);
+
+        medicationClass.clear();
+        medicationGenericName.clear();
+        medicationBrandName.clear();
+        medicationDose.clear();
+        medicationFrequency.clear();
+        medicationStartDate.clear();
+        medicationPrescribedBy.clear();
+        medicationUsedFor.clear();
+        medicationStoppedDate.clear();
+        medicationProvider.clear();
+        medicationList.getSelectionModel().clearSelection();
     }
 
     public void setUp(String name) throws SQLException {
@@ -856,18 +899,17 @@ public class AddClientInfoScreenController implements Initializable {
         }
 
     }
-    
+
     //Set up the ListView for auto update (ListView will update after add or save a new item)
     public void setUpDiagnosesList() throws SQLException {
-        String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID + "'AND Relation = '"
-                + (String) relativeSelectBox.getSelectionModel().getSelectedItem() + "'";
-        ResultSet rs = dbConnection.executeStatement(query);
+        FamilyHistory family = new FamilyHistory(this.clientID);
+        ResultSet rs = dbConnection.executeStatement(family.getSQLSelectByRelative(
+                (String) relativeSelectBox.getSelectionModel().getSelectedItem()));
         relativeList.getItems().clear();
         while (rs.next()) {
             relativeList.getItems().addAll(rs.getString("Diagnoses"));
         }
         rs.close();
-        relativeList.getItems().add("New");
     }
 
     public void setUpProviderList() throws SQLException {
@@ -878,7 +920,6 @@ public class AddClientInfoScreenController implements Initializable {
             providerList.getItems().addAll(rs.getString("Provider"));
         }
         rs.close();
-        providerList.getItems().add("New");
     }
 
     public void setUpMedicalEquipList() throws SQLException {
@@ -889,7 +930,6 @@ public class AddClientInfoScreenController implements Initializable {
             equipmentList.getItems().addAll(rs.getString("EquipType"));
         }
         rs.close();
-        equipmentList.getItems().add("New");
     }
 
     public void setUpAlertList() throws SQLException {
@@ -897,10 +937,10 @@ public class AddClientInfoScreenController implements Initializable {
         ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
         alertList.getItems().clear();
         while (rs.next()) {
-            alertList.getItems().addAll(rs.getString("AlertType") + ":" + rs.getString("AlertSpecific"));
+            alertList.getItems().addAll(rs.getString("AlertType")
+                    + ":" + rs.getString("AlertSpecific"));
         }
         rs.close();
-        alertList.getItems().add("New");
     }
 
     public void setUpMedicationList() throws SQLException {
@@ -911,7 +951,6 @@ public class AddClientInfoScreenController implements Initializable {
             medicationList.getItems().addAll(rs.getString("GenericName"));
         }
         rs.close();
-        medicationList.getItems().add("New");
     }
 
     public void setUpPreventionImmunList() throws SQLException {
@@ -922,7 +961,6 @@ public class AddClientInfoScreenController implements Initializable {
             preventionImmunList.getItems().addAll(rs.getString("Name"));
         }
         rs.close();
-        preventionImmunList.getItems().add("New");
     }
 
     public void setUpPreventiveList() throws SQLException {
@@ -933,7 +971,6 @@ public class AddClientInfoScreenController implements Initializable {
             preventiveList.getItems().addAll(rs.getString("PreventiveType"));
         }
         rs.close();
-        preventiveList.getItems().add("New");
     }
 
     public void setUpDiagnoseList() throws SQLException {
@@ -944,18 +981,20 @@ public class AddClientInfoScreenController implements Initializable {
             diagnoseList.getItems().addAll(rs.getString("Diagnosis"));
         }
         rs.close();
-        diagnoseList.getItems().add("New");
     }
 
     public void setUpMonitorList() throws SQLException {
-        String query = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID + "'AND ReasonFor = '"
-                + (String) diagnoseList.getSelectionModel().getSelectedItem() + "'";
-        ResultSet rs = dbConnection.executeStatement(query);
+        Monitor monitor = new Monitor(this.clientID);
+        ResultSet rs = dbConnection.executeStatement(monitor.getSQLSelectByReason(
+                (String) diagnoseList.getSelectionModel().getSelectedItem()));
         monitorList.getItems().clear();
         while (rs.next()) {
             monitorList.getItems().addAll(rs.getString("SpecificName"));
         }
         rs.close();
-        monitorList.getItems().add("New");
+    }
+
+    public static void main(String[] args) {
+
     }
 }

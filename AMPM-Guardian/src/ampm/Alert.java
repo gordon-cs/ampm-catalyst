@@ -97,4 +97,12 @@ public class Alert {
 
         return sqlSelect;
     }
+
+    public String getSQLSelectByType(String type) {
+        String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID ='" + this.clientID
+                + "'AND AlertSpecific = '"
+                + type + "'";
+
+        return sqlSelect;
+    }
 }

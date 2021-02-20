@@ -111,4 +111,11 @@ public class PreventionImmunizations {
 
         return sqlSelect;
     }
+
+    public String getSQLSelectByDiagnosisName(String diagnosisName) {
+        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='" + this.clientID 
+                + "'AND Name = '" + diagnosisName + "'";
+
+        return sqlSelect;
+    }
 }

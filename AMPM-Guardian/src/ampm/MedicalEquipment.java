@@ -134,4 +134,12 @@ public class MedicalEquipment {
         return sqlSelect;
     }
 
+    public String getSQLSelectByType(String equipType) {
+        String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID ='" + this.clientID
+                + "'AND EquipType = '"
+                + equipType + "'";
+
+        return sqlSelect;
+    }
+
 }

@@ -116,14 +116,14 @@ public class Client {
                 + "LastName='" + this.lastName + "' AND "
                 + "Email='" + this.email + "' AND "
                 + "Phone='" + this.phone + "'";
-        System.out.println(sqlSelect);
+        //System.out.println(sqlSelect);
         return sqlSelect;
     }
 
     public String getByName() {
         String sqlSelect = "SELECT * FROM AMPM.Client WHERE FirstName='" + this.firstName + "' AND "
                 + "LastName='" + this.lastName + "'";
-        System.out.println(sqlSelect);
+        //System.out.println(sqlSelect);
         return sqlSelect;
     }
 
