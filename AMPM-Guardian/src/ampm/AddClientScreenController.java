@@ -49,6 +49,8 @@ public class AddClientScreenController implements Initializable {
 
     @FXML
     private Label infoLabel;
+    @FXML
+    private Label errorLabel;
 
     DBConnection dbConnection;
     //Format for date
@@ -79,24 +81,28 @@ public class AddClientScreenController implements Initializable {
         //Input should not be empty
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
                 || phoneNumber.getText().isEmpty() || emailAddress.getText().isEmpty()) {
-            infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Please fill all the information");
+//            infoLabel.setText("Please fill all the information");
+            showError("Please complete the form");
         } //Validating the input of name
         else if (!isValidName(firstName.getText()) || !isValidName(lastName.getText())) {
-            infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid Name");
+//            infoLabel.setStyle("-fx-text-fill:red");
+//            infoLabel.setText("Invalid Name");
+            showError("Invalid Name");
         } //Validating the input of phone number
         else if (!isValidPhone(phoneNumber.getText())) {
-            infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid home phone number");
+//            infoLabel.setStyle("-fx-text-fill:red");
+//            infoLabel.setText("Invalid home phone number");
+            showError("Invalid home phone number");
         } //Validating the input of email
         else if (!isValidEmail(emailAddress.getText())) {
-            infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid email address");
+//            infoLabel.setStyle("-fx-text-fill:red");
+//            infoLabel.setText("Invalid email address");
+            showError("Invalid email address");
         } else if (!(cellPhoneNumber.getText().isEmpty())) {
             if (!isValidPhone(cellPhoneNumber.getText())) {
-                infoLabel.setStyle("-fx-text-fill:red");
-                infoLabel.setText("Invalid cell phone number");
+//                infoLabel.setStyle("-fx-text-fill:red");
+//                infoLabel.setText("Invalid cell phone number");
+            showError("Invalid cell number");
             } else {
             //Command to check if the client is already exist in databse
                 rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
@@ -148,6 +154,18 @@ public class AddClientScreenController implements Initializable {
         }
     }
 
+    // Displays the given error on the errorLabel
+    private void showError(String type) {
+        toggleLabel();
+        errorLabel.setText(type);
+    }
+    
+    // Toggles the errorLabel between visible/invisible
+    private void toggleLabel() {
+        errorLabel.setVisible(!errorLabel.isVisible());
+    }
+    
+    
     public boolean isValidName(String username) {
         String regex = "[A-Za-z\\s]+";
         Pattern pat = Pattern.compile(regex);

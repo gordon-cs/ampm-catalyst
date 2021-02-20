@@ -72,7 +72,7 @@ public class LoginScreenController implements Initializable {
             Scene scene = new Scene(root);
             homeStage.setScene(scene);
             homeStage.show();
-            
+           
             // Close the current screen
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();

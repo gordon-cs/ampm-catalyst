@@ -209,7 +209,7 @@ public class AddClientInfoScreenController implements Initializable {
         setUpDiagnoseList();
         diagnoseList.setOnMouseClicked(e -> {
             if (diagnoseList.getSelectionModel().getSelectedItem().equals("New")) {
-                //Clear the TextField and monitor infomration for create new item
+                //Clear the TextField and monitor information for create new item
                 diagnoseDescription.clear();
                 diagnosisDoctor.clear();
                 monitorList.getItems().clear();
@@ -280,6 +280,7 @@ public class AddClientInfoScreenController implements Initializable {
                 preventiveNextDueDate.setEditable(true);
                 preventiveSource.setEditable(true);
                 preventiveFrequency.setEditable(true);
+                                
             } else {
                 try {
                     //Show the releated information when click one item in ListView

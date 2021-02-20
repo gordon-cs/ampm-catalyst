@@ -16,7 +16,7 @@
             <Font size="22.0" />
           </font>
         </Label>
-        <Label fx:id="infoLabel" layoutX="185.0" layoutY="132.0" prefWidth="-1.0" text="Please enter client's information" />
+        <Label fx:id="infoLabel" layoutX="185.0" layoutY="132.0" prefWidth="-1.0" text="Please enter the client's information" />
         <TextField id="usernameField" fx:id="firstName" layoutX="187.0" layoutY="200.0" prefWidth="200.0" />
         <Label id="usernameLabel" layoutX="186.0" layoutY="175.0" text="First name" />
         <TextField id="usernameField" fx:id="lastName" layoutX="187.0" layoutY="260.0" prefWidth="200.0" />
@@ -28,6 +28,7 @@
         <Label id="cellPhoneNumberLabel" layoutX="186.0" layoutY="355.0" text="Cell Phone (Optional)" />
         <Label id="emailLabel" layoutX="186.0" layoutY="415.0" text="Email" />
         <Button fx:id="addClientButton" layoutX="260.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#addNewClient" text="Add" />
+        <Label id="errorLabel" disable="false" layoutX="270.0" layoutY="152.0" text="Label" textFill="RED" visible="false" />
       </children>
     </AnchorPane>
   </children>
