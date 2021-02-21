@@ -97,7 +97,7 @@ public class Preventive {
         String sqlInsert;
 
         sqlInsert = "INSERT INTO AMPM.Preventive (ClientID, PreventiveType, "
-                + "PrescribedBy, Source, Frequency) Values ('"
+                + "DateDone, PrescribedBy, NextDueDate, Source, Frequency) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.dateDone + "','"
@@ -105,6 +105,7 @@ public class Preventive {
                 + this.nextDueDate + "','"
                 + this.source + "','"
                 + this.frequency + "')";
+        System.out.println(sqlInsert);
         return sqlInsert;
     }
 
