@@ -68,31 +68,31 @@ public class Monitor {
     public String getSQLEdit(String newName) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Monitor SET ReasonFor='" + this.reason + "', "
-                + "SpecificName='" + newName + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
+        sqlUpdate = "UPDATE AMPM.Monitor SET ReasonFor = '" + this.reason + "', "
+                + "SpecificName = '" + newName + "'"
+                + "WHERE ClientID = '" + this.clientID + "'"
                 + "AND SpecificName ='" + this.specific + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID = '"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByName(String name) {
-        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID = '" + this.clientID
                 + "'AND SpecificName = '"
                 + name + "'";
-        
+
         return sqlSelect;
     }
 
     public String getSQLSelectByReason(String reasonFor) {
-        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID ='" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Monitor WHERE ClientID = '" + this.clientID
                 + "'AND ReasonFor = '"
                 + reasonFor + "'";
 

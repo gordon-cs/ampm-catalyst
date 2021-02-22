@@ -486,7 +486,7 @@ public class AddClientInfoScreenController implements Initializable {
                 ResultSet rs = dbConnection.executeStatement(alert.getSQLSelectByType(
                         alertDetail.substring(alertDetail.indexOf(":") + 1)));
                 while (rs.next()) {
-                    alertsType.setText(rs.getString("AlertSpecific"));
+                    alertsType.setText(rs.getString("AlertType"));
                     alertsSpecific.setText(rs.getString("AlertSpecific"));
                     altersDescrption.setText(rs.getString("AlertDescription"));
                 }
@@ -781,7 +781,7 @@ public class AddClientInfoScreenController implements Initializable {
     private void editMedicalEquipTab(MouseEvent event) {
         //medicalEquipType.setEditable(true);
         //medicalEquipPrescribe.setEditable(true);
-        //medicalEquipReason.setEditable(true);
+        //medicalEquipReason.setEditable(true);     
         //medicalEquipNotes.setEditable(true);
         medicalEquipType.clear();
         medicalEquipPrescribe.clear();

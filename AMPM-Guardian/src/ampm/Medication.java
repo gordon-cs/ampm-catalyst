@@ -45,18 +45,19 @@ public class Medication {
         String sqlInsert;
 
         sqlInsert = "INSERT INTO AMPM.Medication (ClientID, Class, GenericName, BrandName, Dose, "
-                + "Frequency,StartDate, PrescribedBy,UsedFor, DataStopped, Provider) Values ('"
-                + this.clientID + "','"
-                + this.medicationClass + "','"
+                + "Frequency,StartDate, PrescribedBy,UsedFor,DateStopped, Provider) Values ('"
+                + this.clientID + "', '"
+                + this.medicationClass + "', '"
                 + this.genericName + "', '"
                 + this.brandName + "', '"
-                + this.dose + "',' "
+                + this.dose + "', '"
                 + this.frequency + "', '"
-                + this.startDate + "', "
+                + this.startDate + "', '"
                 + this.prescribedBy + "', '"
                 + this.usedFor + "', '"
                 + this.dateStopped + "', '"
                 + this.provider + "')";
+        System.out.println(sqlInsert);
         return sqlInsert;
     }
 
@@ -65,52 +66,51 @@ public class Medication {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Medication SET Class='" + this.medicationClass + "',"
-                + "GenericName='" + this.genericName + "', "
-                + "BrandName='" + this.brandName + "', "
-                + "Dose='" + this.dose + "', "
-                + "Frequency='" + this.frequency + "', "
-                + "StartDate='" + this.startDate + "', "
-                + "PrescribedBy='" + this.prescribedBy + "', "
-                + "UsedFor='" + this.usedFor + "', "
-                + "DateStopped='" + this.dateStopped + "', "
-                + "Provider='" + this.provider + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
-
+        sqlUpdate = "UPDATE AMPM.Medication SET Class = '" + this.medicationClass + "',"
+                + "GenericName = '" + this.genericName + "', "
+                + "BrandName = '" + this.brandName + "', "
+                + "Dose = '" + this.dose + "', "
+                + "Frequency = '" + this.frequency + "', "
+                + "StartDate = '" + this.startDate + "', "
+                + "PrescribedBy = '" + this.prescribedBy + "', "
+                + "UsedFor = '" + this.usedFor + "', "
+                + "DateStopped = '" + this.dateStopped + "', "
+                + "Provider = '" + this.provider + "' "
+                + "WHERE ClientID = '" + this.clientID + "'";
         return sqlUpdate;
     }
 
     public String getSQLUpdateNewItem(String newItem) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Medication SET Class='" + this.medicationClass + "',"
-                + "GenericName='" + newItem + "', "
-                + "BrandName='" + this.brandName + "', "
-                + "Dose='" + this.dose + "', "
-                + "Frequency='" + this.frequency + "', "
-                + "StartDate='" + this.startDate + "', "
-                + "PrescribedBy='" + this.prescribedBy + "', "
-                + "UsedFor='" + this.usedFor + "', "
-                + "DateStopped='" + this.dateStopped + "', "
-                + "Provider='" + this.provider + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
-                + "AND GenericName='" + this.genericName + "'";
-
+        sqlUpdate = "UPDATE AMPM.Medication SET Class = '" + this.medicationClass + "',"
+                + "GenericName = '" + newItem + "', "
+                + "BrandName = '" + this.brandName + "', "
+                + "Dose = '" + this.dose + "', "
+                + "Frequency = '" + this.frequency + "', "
+                + "StartDate = '" + this.startDate + "', "
+                + "PrescribedBy = '" + this.prescribedBy + "', "
+                + "UsedFor = '" + this.usedFor + "', "
+                + "DateStopped = '" + this.dateStopped + "', "
+                + "Provider = '" + this.provider + "' "
+                + "WHERE ClientID = '" + this.clientID + "' "
+                + "AND GenericName = '" + this.genericName + "'";
+        System.out.println(sqlUpdate);
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Medication WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Medication WHERE ClientID  = '"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByGenericName(String name) {
-        String sqlSelect = "SELECT * FROM AMPM.Medication WHERE ClientID ='" + this.clientID 
+        String sqlSelect = "SELECT * FROM AMPM.Medication WHERE ClientID = '" + this.clientID
                 + "'AND GenericName = '"
                 + name + "'";
-        
+
         return sqlSelect;
     }
 }

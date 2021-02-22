@@ -72,10 +72,10 @@ public class Alert {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Alert SET AlertType ='" + this.type + "',"
-                + "AlertSpecific='" + this.detail + "', "
-                + "AlertDescription='" + this.description + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.Alert SET AlertType = '" + this.type + "',"
+                + "AlertSpecific = '" + this.detail + "', "
+                + "AlertDescription = '" + this.description + "'"
+                + "WHERE ClientID = '" + this.clientID + "'";
 
         return sqlUpdate;
     }
@@ -83,23 +83,24 @@ public class Alert {
     public String getSQLUpdateNewDetail(String newDetail) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Alert SET AlertSpecific='" + newDetail + "', "
-                + "AlertDescription='" + this.description + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
-                + "AND AlertType ='" + this.detail + "'";
-
+        sqlUpdate = "UPDATE AMPM.Alert SET AlertSpecific = '" + newDetail + "', "
+                + "AlertDescription = '" + this.description + "', "
+                + "AlertType = '" + this.type + "'"
+                + "WHERE ClientID = '" + this.clientID + "'"
+                + "AND AlertSpecific = '" + this.detail + "'";
+        System.out.println(sqlUpdate);
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID = '"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByType(String type) {
-        String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID ='" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Alert WHERE ClientID = '" + this.clientID
                 + "'AND AlertSpecific = '"
                 + type + "'";
 

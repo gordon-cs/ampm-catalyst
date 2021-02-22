@@ -74,10 +74,10 @@ public class Diagnose {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis='" + this.description + "',"
-                + "StartDate='" + this.diagnosedDate + "', "
-                + "DiagnosedBy='" + this.byWho + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis = '" + this.description + "',"
+                + "StartDate = '" + this.diagnosedDate + "', "
+                + "DiagnosedBy = '" + this.byWho + "'"
+                + "WHERE ClientID = '" + this.clientID + "'";
 
         return sqlUpdate;
     }
@@ -85,25 +85,25 @@ public class Diagnose {
     public String getSQLUpdateNewItem(String newItem) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis='" + newItem + "',"
-                + "StartDate='" + this.diagnosedDate + "', "
-                + "DiagnosedBy='" + this.byWho + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
-                + "AND Diagnosis='" + this.description + "'";
+        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis = '" + newItem + "',"
+                + "StartDate = '" + this.diagnosedDate + "', "
+                + "DiagnosedBy = '" + this.byWho + "'"
+                + "WHERE ClientID = '" + this.clientID + "'"
+                + "AND Diagnosis = '" + this.description + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID = '"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByDiagnosis(String diagnosis) {
-        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID ='"  + this.clientID
-                + "'AND Diagnosis = '"  + diagnosis + "'";
+        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID  = '" + this.clientID
+                + "'AND Diagnosis = '" + diagnosis + "'";
 
         return sqlSelect;
     }

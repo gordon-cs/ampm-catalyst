@@ -84,11 +84,11 @@ public class Provider {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
-                + "Provider='" + this.providerName + "', "
-                + "Nurse='" + this.nurseName + "', "
-                + "PANP='" + this.nameOfPANP + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.Provider SET Type ='" + this.type + "',"
+                + "Provider ='" + this.providerName + "', "
+                + "Nurse ='" + this.nurseName + "', "
+                + "PANP ='" + this.nameOfPANP + "'"
+                + "WHERE ClientID ='" + this.clientID + "'";
 
         return sqlUpdate;
     }
@@ -96,25 +96,25 @@ public class Provider {
     public String getSQLEdit(String newProvider) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Provider SET Type='" + this.type + "',"
-                + "Provider='" + newProvider + "', "
-                + "Nurse='" + this.nurseName + "', "
-                + "PANP='" + this.nameOfPANP + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
-                + "AND Provider='" + this.providerName + "'";
+        sqlUpdate = "UPDATE AMPM.Provider SET Type ='" + this.type + "',"
+                + "Provider ='" + newProvider + "', "
+                + "Nurse ='" + this.nurseName + "', "
+                + "PANP ='" + this.nameOfPANP + "'"
+                + "WHERE ClientID ='" + this.clientID + "'"
+                + "AND Provider ='" + this.providerName + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID ='"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByProvider(String provider) {
-        String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID ='" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Provider WHERE ClientID  ='" + this.clientID
                 + "'AND Provider = '"
                 + provider + "'";
 

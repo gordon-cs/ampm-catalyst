@@ -63,7 +63,7 @@ public class FamilyHistory {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.FamilyHistory (ClientID, Diagnoses, Relation, Age, Died) Values ('"
+        sqlInsert = "INSERT INTO AMPM.FamilyHistory (ClientID, Diagnoses, Relation, Age, Died) Values ( '"
                 + this.clientID + "','"
                 + this.diagnosis + "','"
                 + this.relation + "','"
@@ -77,11 +77,11 @@ public class FamilyHistory {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + this.diagnosis + "',"
-                + "Relation='" + this.relation + "', "
-                + "Age='" + this.age + "', "
-                + "Died='" + this.exist + "',"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses ='" + this.diagnosis + "',"
+                + "Relation ='" + this.relation + "', "
+                + "Age ='" + this.age + "', "
+                + "Died ='" + this.exist + "',"
+                + "WHERE ClientID ='" + this.clientID + "'";
 
         return sqlUpdate;
     }
@@ -89,11 +89,11 @@ public class FamilyHistory {
     public String getSQLUpdateNewDiagnoses(String newDiagnoses) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + newDiagnoses + "',"
-                + "Relation='" + this.relation + "', "
-                + "Age='" + this.age + "', "
-                + "Died='" + this.exist + "',"
-                + "WHERE ClientID='" + this.clientID + "'"
+        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses ='" + newDiagnoses + "',"
+                + "Relation ='" + this.relation + "', "
+                + "Age ='" + this.age + "', "
+                + "Died ='" + this.exist + "',"
+                + "WHERE ClientID ='" + this.clientID + "'"
                 + "AND Diagnoses ='" + this.diagnosis + "'";
 
         return sqlUpdate;

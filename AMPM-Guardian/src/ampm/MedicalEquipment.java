@@ -90,12 +90,12 @@ public class MedicalEquipment {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.MedicalEquipment (ClientID, EquipType, PrescribedBy, UsedFor, Notes) Values ('"
+        sqlInsert = "INSERT INTO AMPM.MedicalEquipment (ClientID, EquipType, PrescribedBy, UsedFor, StartDate, Notes) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.prescribedBy + "','"
                 + this.usedFor + "','"
-                //+ this.startDate + "','"
+                + this.startDate + "','"
                 + this.notes + "')";
         return sqlInsert;
     }
@@ -105,30 +105,30 @@ public class MedicalEquipment {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType='" + this.type + "',"
-                + "PrescribedBy='" + this.prescribedBy + "', "
-                + "UsedFor='" + this.usedFor + "', "
-                + "StartDate='" + this.startDate + "', "
-                + "Notes='" + this.notes + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType ='" + this.type + "',"
+                + "PrescribedBy ='" + this.prescribedBy + "', "
+                + "UsedFor ='" + this.usedFor + "', "
+                + "StartDate ='" + this.startDate + "', "
+                + "Notes ='" + this.notes + "'"
+                + "WHERE ClientID ='" + this.clientID + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLUpdateEquipType(String newEquipType) {
-        String sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType='" + newEquipType + "',"
-                + "PrescribedBy='" + this.prescribedBy + "', "
-                + "UsedFor='" + this.usedFor + "', "
-                + "StartDate='" + this.startDate + "', "
-                + "Notes='" + this.notes + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
+        String sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType ='" + newEquipType + "',"
+                + "PrescribedBy ='" + this.prescribedBy + "', "
+                + "UsedFor ='" + this.usedFor + "', "
+                + "StartDate ='" + this.startDate + "', "
+                + "Notes ='" + this.notes + "'"
+                + "WHERE ClientID ='" + this.clientID + "'"
                 + "AND EquipType ='" + this.type + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID ='"
                 + this.clientID + "'";
 
         return sqlSelect;

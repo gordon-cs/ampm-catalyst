@@ -114,13 +114,13 @@ public class Preventive {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType='" + this.type + "',"
-                + "DateDone='" + this.dateDone + "', "
-                + "PrescribedBy='" + this.prescribedBy + "', "
-                + "NextDueDate='" + this.nextDueDate + "', "
-                + "Source='" + this.source + "', "
-                + "Frequency='" + this.frequency + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType ='" + this.type + "',"
+                + "DateDone ='" + this.dateDone + "', "
+                + "PrescribedBy ='" + this.prescribedBy + "', "
+                + "NextDueDate ='" + this.nextDueDate + "', "
+                + "Source ='" + this.source + "', "
+                + "Frequency ='" + this.frequency + "'"
+                + "WHERE ClientID ='" + this.clientID + "'";
 
         return sqlUpdate;
     }
@@ -128,29 +128,29 @@ public class Preventive {
     public String getSQLUpdateNewType(String newType) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType='" + newType + "',"
-                + "DateDone='" + this.dateDone + "', "
-                + "PrescribedBy='" + this.prescribedBy + "', "
-                + "NextDueDate='" + this.nextDueDate + "', "
-                + "Source='" + this.source + "', "
-                + "Frequency='" + this.frequency + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
-                + "AND PreventiveType ='" + this.type + "'";
+        sqlUpdate = "UPDATE AMPM.Preventive SET PreventiveType ='" + newType + "',"
+                + "DateDone ='" + this.dateDone + "', "
+                + "PrescribedBy ='" + this.prescribedBy + "', "
+                + "NextDueDate ='" + this.nextDueDate + "', "
+                + "Source ='" + this.source + "', "
+                + "Frequency ='" + this.frequency + "'"
+                + "WHERE ClientID ='" + this.clientID + "'"
+                + "AND PreventiveType   ='" + this.type + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID  ='"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByType(String preventiveType) {
-        String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID ='" + this.clientID 
-                + "'AND PreventiveType = '" + preventiveType + "'";
-        
+        String sqlSelect = "SELECT * FROM AMPM.Preventive WHERE ClientID  ='" + this.clientID
+                + "'AND PreventiveType  = '" + preventiveType + "'";
+
         return sqlSelect;
     }
 }

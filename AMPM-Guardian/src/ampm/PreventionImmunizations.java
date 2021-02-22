@@ -85,35 +85,35 @@ public class PreventionImmunizations {
     // Generates the sql string that can be used to update this client info
     // into the PreventionImmunizations table
     public String getSQLUpdate() {
-        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
-                + "Name='" + this.name + "', "
-                + "DateGiven='" + this.dateGiven + "', "
-                + "whereGiven='" + this.whereGiven + "'"
-                + "WHERE ClientID='" + this.clientID + "'";
+        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type ='" + this.type + "',"
+                + "Name ='" + this.name + "', "
+                + "DateGiven ='" + this.dateGiven + "', "
+                + "whereGiven ='" + this.whereGiven + "'"
+                + "WHERE ClientID ='" + this.clientID + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLUpdateNewItem(String newItem) {
-        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type='" + this.type + "',"
-                + "Name='" + newItem + "', "
-                + "DateGiven='" + this.dateGiven + "', "
-                + "whereGiven='" + this.whereGiven + "'"
-                + "WHERE ClientID='" + this.clientID + "'"
-                + "AND Name='" + this.name + "'";
+        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type ='" + this.type + "',"
+                + "Name ='" + newItem + "', "
+                + "DateGiven ='" + this.dateGiven + "', "
+                + "whereGiven ='" + this.whereGiven + "'"
+                + "WHERE ClientID ='" + this.clientID + "'"
+                + "AND Name ='" + this.name + "'";
 
         return sqlUpdate;
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID='"
+        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByDiagnosisName(String diagnosisName) {
-        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='" + this.clientID 
+        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='" + this.clientID
                 + "'AND Name = '" + diagnosisName + "'";
 
         return sqlSelect;

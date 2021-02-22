@@ -85,21 +85,21 @@ public class Client {
         String sqlUpdate;
 
         if ("".equalsIgnoreCase(cell) || cell == null) {
-            sqlUpdate = "UPDATE AMPM.Client SET FirstName='" + this.firstName + "', "
-                    + "LastName='" + this.lastName + "', "
-                    + "Email='" + this.email + "', "
-                    + "Phone='" + this.phone + "', "
-                    + "LastModified='" + this.lastModified + "', "
-                    + "Cell=NULL "
-                    + "WHERE ClientID=" + this.clientID + "";
+            sqlUpdate = "UPDATE AMPM.Client SET FirstName ='" + this.firstName + "', "
+                    + "LastName ='" + this.lastName + "', "
+                    + "Email ='" + this.email + "', "
+                    + "Phone ='" + this.phone + "', "
+                    + "LastModified ='" + this.lastModified + "', "
+                    + "Cell =NULL "
+                    + "WHERE ClientID =" + this.clientID + "";
         } else {
-            sqlUpdate = "UPDATE AMPM.Client SET FirstName='" + this.firstName + "', "
-                    + "LastName='" + this.lastName + "', "
-                    + "Email='" + this.email + "', "
-                    + "Phone='" + this.phone + "', "
-                    + "LastModified='" + this.lastModified + "', "
-                    + "Cell='" + this.cell + "' "
-                    + "WHERE ClientID=" + this.clientID + "";
+            sqlUpdate = "UPDATE AMPM.Client SET FirstName ='" + this.firstName + "', "
+                    + "LastName ='" + this.lastName + "', "
+                    + "Email ='" + this.email + "', "
+                    + "Phone ='" + this.phone + "', "
+                    + "LastModified ='" + this.lastModified + "', "
+                    + "Cell ='" + this.cell + "' "
+                    + "WHERE ClientID =" + this.clientID + "";
         }
         return sqlUpdate;
     }
@@ -112,17 +112,17 @@ public class Client {
      * @return The string that contains the SQL for selecting itself.
      */
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Client WHERE FirstName='" + this.firstName + "' AND "
-                + "LastName='" + this.lastName + "' AND "
-                + "Email='" + this.email + "' AND "
-                + "Phone='" + this.phone + "'";
+        String sqlSelect = "SELECT * FROM AMPM.Client WHERE FirstName ='" + this.firstName + "' AND "
+                + "LastName ='" + this.lastName + "' AND "
+                + "Email ='" + this.email + "' AND "
+                + "Phone ='" + this.phone + "'";
         //System.out.println(sqlSelect);
         return sqlSelect;
     }
 
     public String getByName() {
-        String sqlSelect = "SELECT * FROM AMPM.Client WHERE FirstName='" + this.firstName + "' AND "
-                + "LastName='" + this.lastName + "'";
+        String sqlSelect = "SELECT * FROM AMPM.Client WHERE FirstName ='" + this.firstName + "' AND "
+                + "LastName ='" + this.lastName + "'";
         //System.out.println(sqlSelect);
         return sqlSelect;
     }
