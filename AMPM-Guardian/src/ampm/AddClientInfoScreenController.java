@@ -396,7 +396,7 @@ public class AddClientInfoScreenController implements Initializable {
 
     private void familyHistoryTabSetUp() throws SQLException {
         //Put the relative in the ComboBox
-        relativeSelectBox.getItems().addAll(
+        relativeList.getItems().addAll(
                 "Mother",
                 "Father",
                 "Brother",
@@ -412,12 +412,12 @@ public class AddClientInfoScreenController implements Initializable {
         );
         FamilyHistory family = new FamilyHistory(this.clientID);
         //Select event for relative combo box
-        relativeSelectBox.setOnAction(e -> {
+        relativeList.setOnMouseClicked(e -> {
             relativeList.getItems().clear();
             //Auto-fill the textfield based on selected item.
             try {
                 ResultSet rs = dbConnection.executeStatement(family.getSQLSelectByRelative(
-                        (String) relativeSelectBox.getSelectionModel().getSelectedItem()));
+                        (String) relativeList.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
                     familyDiagnosis.setText(rs.getString("Diagnoses"));
                     familyRealtionAge.setText(rs.getString("Age"));
@@ -431,6 +431,7 @@ public class AddClientInfoScreenController implements Initializable {
 
         });
         //Mouse Click event for this ListView
+        /*
         relativeList.setOnMouseClicked(e -> {
             familyDiagnosis.setText((String) relativeList.getSelectionModel().getSelectedItem());
             //familyDiagnosis.setEditable(false);
@@ -439,6 +440,7 @@ public class AddClientInfoScreenController implements Initializable {
                 //familyDiagnosis.setEditable(true);
             }
         });
+        */
     }
 
     private void medicalEquipmentTabSetUp() throws SQLException {
@@ -913,9 +915,9 @@ public class AddClientInfoScreenController implements Initializable {
         FamilyHistory family = new FamilyHistory(this.clientID);
         ResultSet rs = dbConnection.executeStatement(family.getSQLSelectByRelative(
                 (String) relativeSelectBox.getSelectionModel().getSelectedItem()));
-        relativeList.getItems().clear();
+        //relativeList.getItems().clear();
         while (rs.next()) {
-            relativeList.getItems().addAll(rs.getString("Diagnoses"));
+            //relativeList.getItems().addAll(rs.getString("Diagnoses"));
         }
         rs.close();
     }
