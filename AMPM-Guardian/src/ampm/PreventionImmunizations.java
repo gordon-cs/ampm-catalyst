@@ -3,7 +3,7 @@ package ampm;
 import java.util.Date;
 
 /**
- * This one is for prevention immunizations in add client info screen
+ * This one is for prevention immunizations information
  *
  * @author john.zhu
  */

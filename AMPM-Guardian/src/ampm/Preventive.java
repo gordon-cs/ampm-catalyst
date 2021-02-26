@@ -3,7 +3,7 @@ package ampm;
 import java.util.Date;
 
 /**
- *
+ * This one is for preventive information
  * @author john.zhu
  */
 public class Preventive {

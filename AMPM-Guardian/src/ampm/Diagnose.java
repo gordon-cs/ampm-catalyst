@@ -3,7 +3,7 @@ package ampm;
 import java.util.Date;
 
 /**
- * This one is for diagnoses in add client info screen
+ * This one is for diagnoses information
  *
  * @author john.zhu
  */

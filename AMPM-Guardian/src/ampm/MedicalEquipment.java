@@ -8,7 +8,7 @@ package ampm;
 import java.util.Date;
 
 /**
- *
+ * This is for medical equipment information
  * @author john.zhu
  */
 public class MedicalEquipment {

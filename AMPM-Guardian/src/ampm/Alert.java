@@ -1,7 +1,7 @@
 package ampm;
 
 /**
- * This one is for alert in add client info screen
+ * This one is for client information for alert 
  *
  * @author John Zhu
  */

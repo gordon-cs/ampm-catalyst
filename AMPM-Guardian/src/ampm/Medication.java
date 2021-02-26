@@ -3,7 +3,7 @@ package ampm;
 import java.util.Date;
 
 /**
- *
+ * This is for medication information
  * @author john.zhu
  */
 public class Medication {

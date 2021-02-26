@@ -1,7 +1,7 @@
 package ampm;
 
 /**
- *
+ * This is for monitor information
  * @author John Zhu
  */
 public class Monitor {

@@ -1,7 +1,7 @@
 package ampm;
 
 /**
- *
+ * This one is for provide information
  * @author john.zhu
  */
 public class Provider {

@@ -1,7 +1,7 @@
 package ampm;
 
 /**
- * This one is for family history in add client info screen
+ * This one is for family history information
  *
  * @author John Zhu
  */
