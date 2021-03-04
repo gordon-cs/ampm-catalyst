@@ -3,7 +3,7 @@ package ampm;
 import java.util.Date;
 
 /**
- * This one is for diagnoses information
+ * This one is for diagnosis information
  *
  * @author john.zhu
  */

@@ -413,18 +413,17 @@ public class AddClientInfoScreenController implements Initializable {
         FamilyHistory family = new FamilyHistory(this.clientID);
         //Select event for relative combo box
         relativeList.setOnMouseClicked(e -> {
-            relativeList.getItems().clear();
             //Auto-fill the textfield based on selected item.
             try {
                 ResultSet rs = dbConnection.executeStatement(family.getSQLSelectByRelative(
                         (String) relativeList.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
-                    familyDiagnosis.setText(rs.getString("Diagnoses"));
+                    familyDiagnosis.setText(rs.getString("Diagnosis"));
                     familyRealtionAge.setText(rs.getString("Age"));
                 }
                 //familyDiagnosis.setEditable(false);
                 //familyRealtionAge.setEditable(false);
-                setUpDiagnosesList();
+                setUpDiagnosisList();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -740,14 +739,14 @@ public class AddClientInfoScreenController implements Initializable {
             //Update infomation for current selected relative
             FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
                     (String) relativeSelectBox.getSelectionModel().getSelectedItem(), null, familyRealtionAge.getText());
-            dbConnection.addInfo(familyHistoryInfo.getSQLUpdateNewDiagnoses(familyDiagnosis.getText()));
+            dbConnection.addInfo(familyHistoryInfo.getSQLUpdateNewDiagnosis(familyDiagnosis.getText()));
         } else {
             //Insert infomation for new relative
             FamilyHistory familyHistoryInfo = new FamilyHistory(this.clientID, familyDiagnosis.getText(),
                     (String) relativeSelectBox.getSelectionModel().getSelectedItem(), null, familyRealtionAge.getText());
             dbConnection.addInfo(familyHistoryInfo.getSQLInsert());
         }
-        setUpDiagnosesList();
+        setUpDiagnosisList();
         //familyDiagnosis.setEditable(false);
         //familyRealtionAge.setEditable(false);
     }
@@ -911,13 +910,13 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     //Set up the ListView for auto update (ListView will update after add or save a new item)
-    public void setUpDiagnosesList() throws SQLException {
+    public void setUpDiagnosisList() throws SQLException {
         FamilyHistory family = new FamilyHistory(this.clientID);
         ResultSet rs = dbConnection.executeStatement(family.getSQLSelectByRelative(
                 (String) relativeSelectBox.getSelectionModel().getSelectedItem()));
         //relativeList.getItems().clear();
         while (rs.next()) {
-            //relativeList.getItems().addAll(rs.getString("Diagnoses"));
+            //relativeList.getItems().addAll(rs.getString("Diagnosis"));
         }
         rs.close();
     }
