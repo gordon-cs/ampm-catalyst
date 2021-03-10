@@ -41,7 +41,6 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               <children>
-                <Button fx:id="testButton" layoutX="344.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleTestButtonClicked" text="TEST CONNECTION" />
                         <Button fx:id="newClientButton" layoutX="494.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="150.0" text="Add Client" />
     
               </children>
