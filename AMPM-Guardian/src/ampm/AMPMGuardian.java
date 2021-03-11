@@ -15,29 +15,29 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author John and Ben 
+ * @author John and Ben
  */
 public class AMPMGuardian extends Application {
+
     public static Scene loginScene;
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
-        
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         loginScene = scene;
-        
+
         stage.show();
-        
+
         /* TEST CODE */
 //        System.out.println("Starting cards");
 //        AlertCard test1 = new AlertCard();
 //        System.out.println("Done with cards");
         /* END TEST */
-        
-//        PDFManager test = new PDFManager(null);
-//        System.exit(0); //DELETE THIS AFTER TESTING
+        PDFTest test = new PDFTest();
+        //System.exit(0); //DELETE THIS AFTER TESTING
     }
 
     /**
