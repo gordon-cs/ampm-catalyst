@@ -67,7 +67,9 @@ public class HomeScreenController implements Initializable {
             clients = new ArrayList<String>();
             addResultToClients(rs);
             setupListView();
-
+            PDFTest test = new PDFTest();
+            test.familyHistoryTest("1240", "Stroke");
+            System.out.println("Start");
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }

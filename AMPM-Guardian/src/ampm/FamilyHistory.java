@@ -63,7 +63,7 @@ public class FamilyHistory {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.FamilyHistory (ClientID, Diagnoses, Relation, Age, Died) Values ('"
+        sqlInsert = "INSERT INTO AMPM.FamilyHistory (ClientID, Diagnosis, Relation, Age, Died) Values ('"
                 + this.clientID + "','"
                 + this.diagnosis + "','"
                 + this.relation + "','"
@@ -77,7 +77,7 @@ public class FamilyHistory {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + this.diagnosis + "',"
+        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnosis='" + this.diagnosis + "',"
                 + "Relation='" + this.relation + "', "
                 + "Age='" + this.age + "', "
                 + "Died='" + this.exist + "',"
@@ -86,10 +86,10 @@ public class FamilyHistory {
         return sqlUpdate;
     }
 
-    public String getSQLUpdateNewDiagnoses(String newDiagnoses) {
+    public String getSQLUpdateNewDiagnoses(String newDiagnosis) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnoses='" + newDiagnoses + "',"
+        sqlUpdate = "UPDATE AMPM.FamilyHistory SET Diagnosis='" + newDiagnosis + "',"
                 + "Relation='" + this.relation + "', "
                 + "Age='" + this.age + "', "
                 + "Died='" + this.exist + "',"
@@ -106,4 +106,10 @@ public class FamilyHistory {
         return sqlSelect;
     }
 
+    public String getSQLSelect(String Diagnoses) {
+        String sqlSelect = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='"
+                + this.clientID + "'" + "AND Diagnosis ='" + Diagnoses + "'";
+
+        return sqlSelect;
+    }
 }
