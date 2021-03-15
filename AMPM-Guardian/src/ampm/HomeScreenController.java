@@ -146,8 +146,8 @@ public class HomeScreenController implements Initializable {
             homeStage.setScene(scene);
             homeStage.show();
 
-            // Close the current stage
-            Stage stage = (Stage) newClientButton.getScene().getWindow();
+            //Close the current stage
+            //Stage stage = (Stage) newClientButton.getScene().getWindow();
             //stage.close();  
         }
 

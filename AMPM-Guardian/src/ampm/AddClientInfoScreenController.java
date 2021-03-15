@@ -128,6 +128,8 @@ public class AddClientInfoScreenController implements Initializable {
     private ListView relativeList;
     @FXML
     private TextField familyRelative;
+    @FXML
+    private ListView diagnosesList;
 
 //Medical Equipment Tab
     @FXML
@@ -409,6 +411,8 @@ public class AddClientInfoScreenController implements Initializable {
                 "Paternal Aunt",
                 "Maternal Uncle",
                 "Paternal Uncle"
+        );
+        diagnosesList.getItems().addAll("Stroke"
         );
         FamilyHistory family = new FamilyHistory(this.clientID);
         //Select event for relative combo box
