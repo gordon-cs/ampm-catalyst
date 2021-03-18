@@ -133,6 +133,17 @@ public class HomeScreenController implements Initializable {
     }
 
     @FXML
+    private void handleAddProviderButton(MouseEvent event) throws IOException {
+    // Launch the new client stage
+        Stage homeStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("ComboBoxManage.fxml"));
+
+        Scene scene = new Scene(root);
+        homeStage.setScene(scene);
+        homeStage.show();
+    }
+
+    @FXML
     private void handleNewClientInfoClicked(MouseEvent event) throws IOException, SQLException {
         if (!this.clientListView.getSelectionModel().getSelectedItem().isEmpty()) {
             String name = this.clientListView.getSelectionModel().getSelectedItem();

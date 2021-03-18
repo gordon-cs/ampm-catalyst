@@ -102,9 +102,9 @@ public class AddClientScreenController implements Initializable {
             if (!isValidPhone(cellPhoneNumber.getText())) {
 //                infoLabel.setStyle("-fx-text-fill:red");
 //                infoLabel.setText("Invalid cell phone number");
-            showError("Invalid cell number");
+                showError("Invalid cell number");
             } else {
-            //Command to check if the client is already exist in databse
+                //Command to check if the client is already exist in databse
                 rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
                         emailAddress.getText(), phoneNumber.getText());
                 if (!isFilled(rs)) {
@@ -129,8 +129,8 @@ public class AddClientScreenController implements Initializable {
             }
         } else {
             //Command to check if the client is already exist in databse
-              rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
-                        emailAddress.getText(), phoneNumber.getText());
+            rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
+                    emailAddress.getText(), phoneNumber.getText());
             if (!isFilled(rs)) {
                 //SQL command to insert client information to the database
                 Date date = new Date();
@@ -159,13 +159,12 @@ public class AddClientScreenController implements Initializable {
         toggleLabel();
         errorLabel.setText(type);
     }
-    
+
     // Toggles the errorLabel between visible/invisible
     private void toggleLabel() {
         errorLabel.setVisible(!errorLabel.isVisible());
     }
-    
-    
+
     public boolean isValidName(String username) {
         String regex = "[A-Za-z\\s]+";
         Pattern pat = Pattern.compile(regex);
@@ -221,12 +220,13 @@ public class AddClientScreenController implements Initializable {
         stage.close();
 
         // Open home screen
+        /*
         stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-
+s
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
+         */
     }
 }

@@ -194,7 +194,7 @@
                                 <Font name="System Bold" size="32.0" />
                             </font>
                         </Label>
-                        <Label layoutX="292.0" layoutY="100.0" text="Class">
+                        <Label layoutX="284.0" layoutY="100.0" text="Class">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -204,7 +204,7 @@
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        <Label layoutX="258.0" layoutY="135.0" text="Generic Name">
+                        <Label layoutX="252.0" layoutY="135.0" text="Generic Name">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -214,7 +214,7 @@
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        <Label layoutX="263.0" layoutY="170.0" text="Brand Name">
+                        <Label layoutX="261.0" layoutY="170.0" text="Brand Name">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -274,7 +274,7 @@
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        <Label layoutX="259.0" layoutY="380.0" text="Data Stopped">
+                        <Label layoutX="253.0" layoutY="380.0" text="Date Stopped">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -284,7 +284,7 @@
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        <Label layoutX="275.0" layoutY="415.0" text="Provider">
+                        <Label layoutX="258.0" layoutY="415.0" prefHeight="15.0" prefWidth="77.0" text="Stopped By">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -295,7 +295,7 @@
                             </font>
                         </TextField>
                         <ListView fx:id="medicationList" layoutX="31.0" layoutY="103.0" prefHeight="254.0" prefWidth="134.0" />
-                        <Button fx:id="editMedicalInfo" layoutX="291.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#editMedicalTab" prefHeight="27.0" prefWidth="58.0" text="Edit" />
+                        <Button fx:id="editMedicalInfo" layoutX="291.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#editMedicalTab" prefHeight="27.0" prefWidth="58.0" text="New" />
                         <Button fx:id="saveMedicalInfo" layoutX="370.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#saveMedicalTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                     </children>
                 </AnchorPane>
@@ -519,13 +519,26 @@
                             </font>
                         </Label>
                         <Button fx:id="saveFamilyHistoryInfo" layoutX="348.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#saveFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
-                        <ListView fx:id="relativeList" layoutX="31.0" layoutY="103.0" prefHeight="254.0" prefWidth="134.0" />
                         <Button fx:id="editFamilyHistoryInfo" layoutX="273.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#editFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="New" />
                   <TextField fx:id="familyRelative" layoutX="348.0" layoutY="181.0" prefHeight="25.0" prefWidth="153.0">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </TextField>
+                  <TabPane layoutX="31.0" layoutY="100.0" prefHeight="285.0" prefWidth="166.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Relation">
+                           <content>
+                                    <ListView fx:id="relativeList" prefHeight="256.0" prefWidth="163.0" />
+                           </content>
+                        </Tab>
+                      <Tab text="Diagnosis">
+                           <content>
+                              <ListView fx:id="diagnosesList" prefHeight="200.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
                     </children>
                 </AnchorPane>
             </content>
