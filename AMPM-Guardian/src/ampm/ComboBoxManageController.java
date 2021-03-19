@@ -45,11 +45,11 @@ public class ComboBoxManageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dbConnection = new DBConnection();
-        loadDataFromDatabase();
+        loadDataFromProviderList();
     }
 
     @FXML
-    public void loadDataFromDatabase() {
+    public void loadDataFromProviderList() {
         try {
             // Execute query and store result in a resultset
             items = FXCollections.observableArrayList();
@@ -65,7 +65,6 @@ public class ComboBoxManageController implements Initializable {
             System.err.println("Error" + ex);
         }
 
-        //makes columns editable
         columnType.setCellValueFactory(new PropertyValueFactory<ProviderBox, String>("Type"));
         columnProvider.setCellValueFactory(new PropertyValueFactory<ProviderBox, String>("Provider"));
 
