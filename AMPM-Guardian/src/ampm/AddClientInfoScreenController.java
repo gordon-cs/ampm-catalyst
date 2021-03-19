@@ -1,4 +1,3 @@
-
 package ampm;
 
 import java.io.IOException;
@@ -178,6 +177,7 @@ public class AddClientInfoScreenController implements Initializable {
     private String name;
     private String clientID;
     DBConnection dbConnection;
+    PDFTest pdf;
 
     /**
      * Initializes the controller class.
@@ -185,6 +185,7 @@ public class AddClientInfoScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dbConnection = new DBConnection();
+        pdf = new PDFTest();
     }
 
     //Set up the TextField in BasicInfo tab and make TextField uneditable before click edit button
@@ -569,8 +570,7 @@ public class AddClientInfoScreenController implements Initializable {
         dbConnection.addInfo(updateInfo.getSQLUpdate());
 
     }
-    
-    
+
     @FXML
     //Make TextField in this tab editable
     private void editBasicTab(MouseEvent event) {
@@ -755,6 +755,11 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     @FXML
+    private void printMedicalCard(MouseEvent event) throws SQLException {
+        pdf.printMedication(this.clientID);
+    }
+
+    @FXML
     private void saveAlertTab(MouseEvent event) throws SQLException, IOException {
         if (!alertList.getSelectionModel().getSelectedItem().equals("New")) {
             String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
@@ -851,7 +856,7 @@ public class AddClientInfoScreenController implements Initializable {
         }
 
     }
-    
+
     //Set up the ListView for auto update (ListView will update after add or save a new item)
     public void setUpDiagnosesList() throws SQLException {
         String query = "SELECT * FROM AMPM.FamilyHistory WHERE ClientID ='" + this.clientID + "'AND Relation = '"
