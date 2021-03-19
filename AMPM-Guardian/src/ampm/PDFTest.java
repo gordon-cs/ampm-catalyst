@@ -94,6 +94,7 @@ public class PDFTest {
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             Medication medication = new Medication(clientID);
             ResultSet rs = dbConnection.executeStatement(medication.getSQLSelect());
+            //Use while loop to put the data from database into pdf file
             while (rs.next()) {
                 PDField field = pDAcroForm.getField("Class_" + i);
                 field.setValue(rs.getString("Class"));
@@ -121,6 +122,7 @@ public class PDFTest {
             //field.setValue("This is a second field printed by Java");
             pDDocument.save("C:/Users/johnz/OneDrive/Desktop/MedicationTemp-output.pdf");
             pDDocument.close();
+            //Open file if that exist after save pdf file
             try {
 
                 if ((new File("C:/Users/johnz/OneDrive/Desktop/MedicationTemp-output.pdf")).exists()) {
