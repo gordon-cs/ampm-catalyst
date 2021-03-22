@@ -13,6 +13,7 @@ public class Client {
 
     // The private values for this object, each one represents a col in the DB
     private String clientID;
+    private String newClientID;
     private String firstName;
     private String lastName;
     private String email;
@@ -20,18 +21,6 @@ public class Client {
     private String lastModified;
     private String cell;
     private String DOB;
-
-    Client(String clientID, String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
-
-        this.clientID = clientID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.lastModified = lastModified;
-        this.cell = cell;
-        this.DOB = DOB;
-    }
 
     Client(String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
         this.clientID = DOB.replace("-", "") + firstName.toUpperCase().charAt(0) + lastName.toUpperCase().charAt(0);
@@ -43,6 +32,19 @@ public class Client {
         this.cell = cell;
         this.DOB = DOB;
 
+    }
+
+    Client(String clientID, String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
+
+        this.clientID = clientID;
+        this.newClientID = DOB.replace("-", "") + firstName.toUpperCase().charAt(0) + lastName.toUpperCase().charAt(0);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.lastModified = lastModified;
+        this.cell = cell;
+        this.DOB = DOB;
     }
 
     Client(String firstName, String lastName) {
@@ -97,16 +99,18 @@ public class Client {
                     + "Email ='" + this.email + "', "
                     + "Phone ='" + this.phone + "', "
                     + "LastModified ='" + this.lastModified + "', "
-                    + "Cell =NULL "
-                    + "WHERE ClientID =" + this.clientID + "";
+                    + "Cell = NULL ,"
+                    + "DOB='" + this.DOB + "'"
+                    + "WHERE ClientID ='" + this.clientID + "'";
         } else {
             sqlUpdate = "UPDATE AMPM.Client SET FirstName ='" + this.firstName + "', "
                     + "LastName ='" + this.lastName + "', "
                     + "Email ='" + this.email + "', "
                     + "Phone ='" + this.phone + "', "
                     + "LastModified ='" + this.lastModified + "', "
-                    + "Cell ='" + this.cell + "' "
-                    + "WHERE ClientID =" + this.clientID + "";
+                    + "Cell ='" + this.cell + "', "
+                    + "DOB='" + this.DOB + "'"
+                    + "WHERE ClientID ='" + this.clientID + "'";
         }
         return sqlUpdate;
     }

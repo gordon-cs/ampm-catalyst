@@ -63,6 +63,10 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField emailAddress;
     @FXML
+    private TextField cellPhoneNumber;
+    @FXML
+    private TextField dateOfBirth;
+    @FXML
     private Label accountNumber;
 
 //Diagnose Tab
@@ -198,16 +202,20 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     //Set up the TextField in BasicInfo tab and make TextField uneditable before click edit button
-    private void basicInfoSetUp(String fname, String lname, String email, String phone) {
+    private void basicInfoSetUp(String fname, String lname, String email, String phone, String cellPhone, String DOB) {
         firstName.setText(fname);
         lastName.setText(lname);
         phoneNumber.setText(phone);
         emailAddress.setText(email);
-        phoneNumber.setEditable(false);
+        cellPhoneNumber.setText(cellPhone);
+        dateOfBirth.setText(DOB);
+
         firstName.setEditable(false);
         lastName.setEditable(false);
+        phoneNumber.setEditable(false);
         emailAddress.setEditable(false);
-
+        cellPhoneNumber.setEditable(false);
+        dateOfBirth.setEditable(false);
     }
 
     //Set up the TextField and ListView in Diagnose tab and make TextField uneditable before click edit button or new in the ListView
@@ -579,13 +587,16 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void saveBasicTab(MouseEvent event) throws SQLException, IOException {
 
-        /*
         Client updateInfo = new Client(this.clientID, firstName.getText(), lastName.getText(),
-                emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime(),),
-                null);
-        
+                emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime()).toString(),
+                cellPhoneNumber.getText(), dateOfBirth.getText());
         dbConnection.addInfo(updateInfo.getSQLUpdate());
-         */
+        firstName.setEditable(false);
+        lastName.setEditable(false);
+        phoneNumber.setEditable(false);
+        emailAddress.setEditable(false);
+        cellPhoneNumber.setEditable(false);
+        dateOfBirth.setEditable(false);
     }
 
     @FXML
@@ -595,6 +606,8 @@ public class AddClientInfoScreenController implements Initializable {
         lastName.setEditable(true);
         phoneNumber.setEditable(true);
         emailAddress.setEditable(true);
+        cellPhoneNumber.setEditable(true);
+        dateOfBirth.setEditable(true);
     }
 
     //Insert or update diagnose info to database
@@ -951,7 +964,9 @@ public class AddClientInfoScreenController implements Initializable {
             this.clientID = rs.getString("ClientID");
             String email = rs.getString("Email");
             String phone = rs.getString("Phone");
-            basicInfoSetUp(fname, lname, email, phone);
+            String cell = rs.getString("Cell");
+            String DOB = rs.getString("DOB");
+            basicInfoSetUp(fname, lname, email, phone, cell, DOB);
             diagnoseTabSetUp();
             preventativeTabSetUp();
             preventationImmunTabSetUp();

@@ -3,9 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AMPMGuardian.java</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/LoginScreenController.java</file>
-            <file>file:/C:/Code/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/HomeScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AddClientInfoScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/Alert.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBConnection.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/Monitor.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/DBOnline.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/LoginScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/Client.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/PDFPrint.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/Diagnose.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/HomeScreenController.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/FamilyHistory.java</file>
+            <file>file:/C:/Users/johnz/Documents/GitHub/cps491-2020-abbett-zhu/AMPM-Guardian/src/ampm/AMPMGuardian.java</file>
         </group>
     </open-files>
 </project-private>
