@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ampm.AddClientScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientScreenController">
   <children>
     <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="651.0" prefWidth="574.0">
       <children>
@@ -27,8 +27,10 @@
         <Label id="phoneNumberLabel" layoutX="186.0" layoutY="295.0" text="Home Phone" />
         <Label id="cellPhoneNumberLabel" layoutX="186.0" layoutY="355.0" text="Cell Phone (Optional)" />
         <Label id="emailLabel" layoutX="186.0" layoutY="415.0" text="Email" />
-        <Button fx:id="addClientButton" layoutX="260.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#addNewClient" text="Add" />
+        <Button fx:id="addClientButton" layoutX="262.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#addNewClient" text="Add" />
         <Label id="errorLabel" disable="false" layoutX="270.0" layoutY="152.0" text="Label" textFill="RED" visible="false" />
+            <Label id="emailLabel" layoutX="187.0" layoutY="479.0" text="DOB" />
+            <DatePicker fx:id="dateOfBirth" layoutX="187.0" layoutY="503.0" prefHeight="23.0" prefWidth="200.0" />
       </children>
     </AnchorPane>
   </children>

@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -43,7 +45,8 @@ public class AddClientScreenController implements Initializable {
     private TextField cellPhoneNumber;
     @FXML
     private TextField emailAddress;
-
+    @FXML
+    private DatePicker dateOfBirth;
     @FXML
     private Button addClientButton;
 
@@ -109,10 +112,11 @@ public class AddClientScreenController implements Initializable {
                         emailAddress.getText(), phoneNumber.getText());
                 if (!isFilled(rs)) {
                     Date date = new Date();
+
                     try {
-                        dbConnection.addNewClients(firstName.getText(), lastName.getText(),
-                                emailAddress.getText(), phoneNumber.getText(),
-                                formatter.format(date), cellPhoneNumber.getText());
+                        Client client = new Client(firstName.getText(), lastName.getText(),
+                                emailAddress.getText(), phoneNumber.getText(), formatter.format(date), cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
+                        dbConnection.addInfo(client.getSQLInsert());
                         infoLabel.setStyle("-fx-text-fill:green");
                         infoLabel.setText("A new client was inserted successfully!");
 
@@ -135,8 +139,10 @@ public class AddClientScreenController implements Initializable {
                 //SQL command to insert client information to the database
                 Date date = new Date();
                 try {
-                    dbConnection.addNewClients(firstName.getText(), lastName.getText(),
-                            emailAddress.getText(), phoneNumber.getText(), formatter.format(date), null);
+                    Client client = new Client(firstName.getText(), lastName.getText(),
+                            emailAddress.getText(), phoneNumber.getText(), formatter.format(date), cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
+                    System.out.println(client.getSQLInsert());
+                    dbConnection.addInfo(client.getSQLInsert());
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
 

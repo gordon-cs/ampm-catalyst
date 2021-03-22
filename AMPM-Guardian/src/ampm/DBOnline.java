@@ -5,28 +5,31 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-    
-/** Singleton that manages the remote database. In charge of initialization, 
- *  inserts, queries, updates, etc. 
+
+/**
+ * Singleton that manages the remote database. In charge of initialization,
+ * inserts, queries, updates, etc.
  *
- * Inspired by code from https://netbeans.org/project_downloads/www/MyDBConnection.java
+ * Inspired by code from
+ * https://netbeans.org/project_downloads/www/MyDBConnection.java
  */
 public class DBOnline {
 
     private static Connection conn;
     private static DBOnline dbConnection = null;
     private static Statement stmt;
-  
+
     /**
      * Creates a new instance of DBConnection
      */
     public DBOnline() {
 
     }
-    
+
     // static method to create/get singleton instance of DBOnline class 
     public static DBOnline getInstance() {
 
@@ -38,7 +41,8 @@ public class DBOnline {
     }
 
     /**
-     * Creates the DBOnline instance by logging in with a specified user/pass combination.
+     * Creates the DBOnline instance by logging in with a specified user/pass
+     * combination.
      *
      * @param user String. The username to use for the database
      * @param pass String. The corresponding password
@@ -108,29 +112,31 @@ public class DBOnline {
     public static Connection getConnection() {
         return conn;
     }
-    
+
     /**
      * Get recent clients in the database
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public ResultSet getClients() throws SQLException {
         return stmt.executeQuery("Select * from AMPM.Client ORDER BY LastModified DESC");
     }
-    
-    
+
     /**
-     * Get a full list of the clients in the database. Stored in List<Client> object
+     * Get a full list of the clients in the database. Stored in List<Client>
+     * object
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public List<Client> getClientListFromDB() throws SQLException {
         // Get all the clients
         ResultSet rs = stmt.executeQuery("Select * from AMPM.Client ORDER BY LastModified DESC");
-        
+
         // Create the return list
         List<Client> clientList = new ArrayList<Client>();
-        
+
         // Loop through the online results and create a full list of clients
         while (rs.next()) {
             String clientID = rs.getString("ClientID");
@@ -138,30 +144,31 @@ public class DBOnline {
             String lastName = rs.getString("LastName");
             String email = rs.getString("Email");
             String phone = rs.getString("Phone");
-            Timestamp lastModified = rs.getTimestamp("LastModified");
+            String lastModified = rs.getString("LastModified");
             String cell = rs.getString("Cell");
-            
+            String DOB = rs.getString("DOB");
             // Create a new client and add it to the list
-            Client client = new Client(clientID, firstName, lastName, email, phone, lastModified, cell);
+            Client client = new Client(clientID, firstName, lastName, email, phone, lastModified, cell, DOB);
             clientList.add(client);
         }
-        
+
         return clientList;
-    
+
     }
 
     /**
      * Check database to see if that client is exist already
+     *
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static ResultSet checkClients(String firstName, String lastName, String emailAddress, String phoneNumber) throws SQLException {
         return stmt.executeQuery("SELECT * FROM AMPM.Client WHERE FirstName = '" + firstName
-                        + "' AND LastName = '" + lastName
-                        + "' AND Email = '" + emailAddress
-                        + "' AND Phone = '" + phoneNumber + "'");
+                + "' AND LastName = '" + lastName
+                + "' AND Email = '" + emailAddress
+                + "' AND Phone = '" + phoneNumber + "'");
     }
-    
+
     /**
      * This method will add new client to database base on the 6 variables
      *
@@ -174,15 +181,15 @@ public class DBOnline {
      * @throws SQLException
      */
     public void addNewClients(String firstName, String lastName,
-                              String emailAddress, String phoneNumber, 
-                              Timestamp date, String cellPhoneNumber) throws SQLException {
+            String emailAddress, String phoneNumber,
+            Timestamp date, String cellPhoneNumber) throws SQLException {
 
         stmt.executeUpdate("INSERT INTO AMPM.Client (FirstName, LastName, Email,"
                 + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
                 + "','" + emailAddress + "','" + phoneNumber + "','" + date.toString() + "','" + cellPhoneNumber + "')");
 
     }
-    
+
     public void executeStatement(String statement) throws SQLException {
         stmt.executeUpdate(statement);
     }
@@ -202,10 +209,10 @@ public class DBOnline {
 
     /**
      * This code should be called to check if there is an internet connection
-     * available. 
+     * available.
      *
      * @return true if internet is available, false otherwise
-     */ 
+     */
     private static Boolean internetAvailable() {
         try {
             URL url = new URL("http://www.google.com");
@@ -221,6 +228,5 @@ public class DBOnline {
             return false;
         }
     }
-    
 
 }

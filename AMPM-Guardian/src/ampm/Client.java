@@ -1,6 +1,7 @@
 package ampm;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 /**
  * This class represents a single client in the system. The client is not
@@ -16,10 +17,11 @@ public class Client {
     private String lastName;
     private String email;
     private String phone;
-    private Timestamp lastModified;
+    private String lastModified;
     private String cell;
+    private String DOB;
 
-    Client(String clientID, String firstName, String lastName, String email, String phone, Timestamp lastModified, String cell) {
+    Client(String clientID, String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
 
         this.clientID = clientID;
         this.firstName = firstName;
@@ -28,16 +30,19 @@ public class Client {
         this.phone = phone;
         this.lastModified = lastModified;
         this.cell = cell;
-
+        this.DOB = DOB;
     }
 
-    Client(String firstName, String lastName, String email, String phone, Timestamp lastModified, String cell) {
+    Client(String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
+        this.clientID = DOB.replace("-", "") + firstName.toUpperCase().charAt(0) + lastName.toUpperCase().charAt(0);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.lastModified = lastModified;
         this.cell = cell;
+        this.DOB = DOB;
+
     }
 
     Client(String firstName, String lastName) {
@@ -55,22 +60,24 @@ public class Client {
         String sqlInsert;
 
         if ("".equals(cell) || cell == null) {
-            sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified) Values ("
-                    + this.clientID + ",'"
+            sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified, DOB) Values ('"
+                    + this.clientID + "','"
                     + this.firstName + "', '"
                     + this.lastName + "', '"
                     + this.email + "', '"
                     + this.phone + "', NULL, '"
-                    + this.lastModified + "')";
+                    + this.lastModified + "', '"
+                    + this.DOB + "')";
         } else {
-            sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified) Values ("
-                    + this.clientID + ",'"
+            sqlInsert = "INSERT INTO AMPM.Client (ClientID, FirstName, LastName, Email, Phone, Cell, LastModified, DOB) Values ('"
+                    + this.clientID + "','"
                     + this.firstName + "', '"
                     + this.lastName + "', '"
                     + this.email + "', '"
                     + this.phone + "', '"
                     + this.cell + "', '"
-                    + this.lastModified + "')";
+                    + this.lastModified + "', '"
+                    + this.DOB + "')";
         }
         return sqlInsert;
     }
@@ -136,7 +143,7 @@ public class Client {
      *
      * @param lastModified
      */
-    public void updateLastModified(Timestamp lastModified) {
+    public void updateLastModified(String lastModified) {
         this.lastModified = lastModified;
     }
 
@@ -161,11 +168,16 @@ public class Client {
         return clientID;
     }
 
-    public Timestamp getLastModified() {
+    public String getLastModified() {
         return lastModified;
     }
 
     public String getCell() {
         return cell;
     }
+
+    public String getDOB() {
+        return DOB;
+    }
+
 }

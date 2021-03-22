@@ -49,9 +49,13 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TabPane tabPane;
 
-//Basic Info Tab
     @FXML
     private TextField firstName;
+
+//Basic Info Tab
+    @FXML
+    private TextField clientName, clientName1, clientName2,
+            clientName3, clientName4, clientName5, clientName6, clientName7;
     @FXML
     private TextField lastName;
     @FXML
@@ -574,11 +578,14 @@ public class AddClientInfoScreenController implements Initializable {
     //Update client basic info
     @FXML
     private void saveBasicTab(MouseEvent event) throws SQLException, IOException {
-        Client updateInfo = new Client(this.clientID, firstName.getText(), lastName.getText(),
-                emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime()),
-                null);
-        dbConnection.addInfo(updateInfo.getSQLUpdate());
 
+        /*
+        Client updateInfo = new Client(this.clientID, firstName.getText(), lastName.getText(),
+                emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime(),),
+                null);
+        
+        dbConnection.addInfo(updateInfo.getSQLUpdate());
+         */
     }
 
     @FXML
@@ -921,7 +928,15 @@ public class AddClientInfoScreenController implements Initializable {
 
         //Get name that passed by home screen
         this.name = name;
-
+        //Show client name in every tab
+        clientName.setText(name);
+        clientName1.setText(name);
+        clientName2.setText(name);
+        clientName3.setText(name);
+        clientName4.setText(name);
+        clientName5.setText(name);
+        clientName6.setText(name);
+        clientName7.setText(name);
         //Seperate name to first name and last name
         String[] arr = name.split(" ");
         String fname = arr[0];

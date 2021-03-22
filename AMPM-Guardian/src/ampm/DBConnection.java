@@ -175,14 +175,14 @@ public class DBConnection {
      * @throws SQLException
      */
     public void addNewClients(String firstName, String lastName,
-            String emailAddress, String phoneNumber, String date, String cellPhoneNumber) throws SQLException {
+            String emailAddress, String phoneNumber, String date, String cellPhoneNumber, String DOB) throws SQLException {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
         }
 
         stmt.executeUpdate("INSERT INTO Client (FirstName, LastName, Email,"
-                + " Phone, LastModified, Cell) VALUES ('" + firstName + "','" + lastName
-                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "')");
+                + " Phone, LastModified, Cell,DOB) VALUES ('" + firstName + "','" + lastName
+                + "','" + emailAddress + "','" + phoneNumber + "','" + date + "','" + cellPhoneNumber + "','" + DOB + "')");
 
     }
 
