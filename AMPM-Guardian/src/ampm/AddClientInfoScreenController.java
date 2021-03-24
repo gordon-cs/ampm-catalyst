@@ -68,6 +68,8 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField dateOfBirth;
     @FXML
     private Label accountNumber;
+    @FXML
+    private TextField clientIdentifer;
 
 //Diagnose Tab
     @FXML
@@ -211,6 +213,9 @@ public class AddClientInfoScreenController implements Initializable {
         emailAddress.setText(email);
         cellPhoneNumber.setText(cellPhone);
         dateOfBirth.setText(DOB);
+        clientIdentifer.setText(this.clientID);
+
+        clientIdentifer.setEditable(false);
 
         firstName.setEditable(false);
         lastName.setEditable(false);
@@ -988,6 +993,7 @@ public class AddClientInfoScreenController implements Initializable {
             String phone = rs.getString("Phone");
             String cell = rs.getString("Cell");
             String DOB = rs.getString("DOB");
+            String identifer = rs.getString("ClientID");
             basicInfoSetUp(fname, lname, email, phone, cell, DOB);
             diagnoseTabSetUp();
             preventativeTabSetUp();
@@ -1018,7 +1024,7 @@ public class AddClientInfoScreenController implements Initializable {
         ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
         providerList.getItems().clear();
         while (rs.next()) {
-            providerList.getItems().addAll(rs.getString("Provider"));
+            providerList.getItems().addAll(rs.getString("Type") + ": " + rs.getString("Provider"));
         }
         rs.close();
     }
