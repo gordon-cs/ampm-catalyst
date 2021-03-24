@@ -192,6 +192,7 @@ public class AddClientInfoScreenController implements Initializable {
     private String name;
     private String clientID;
     DBConnection dbConnection;
+    PDFPrint pdfPrint;
 
     /**
      * Initializes the controller class.
@@ -199,6 +200,7 @@ public class AddClientInfoScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dbConnection = new DBConnection();
+        pdfPrint = new PDFPrint();
     }
 
     //Set up the TextField in BasicInfo tab and make TextField uneditable before click edit button
@@ -655,6 +657,11 @@ public class AddClientInfoScreenController implements Initializable {
         monitorSpecific.clear();
     }
 
+    @FXML
+    private void printDiagnoseCard(MouseEvent event) throws SQLException {
+        pdfPrint.printDiagnoses(this.clientID);
+    }
+
     //Insert or update preventive info to database
     @FXML
     private void savePreventiveTab(MouseEvent event) throws SQLException, IOException {
@@ -770,6 +777,11 @@ public class AddClientInfoScreenController implements Initializable {
         providerList.getSelectionModel().clearSelection();
     }
 
+    @FXML
+    private void printProviderCard(MouseEvent event) throws SQLException {
+        pdfPrint.printProviders(this.clientID);
+    }
+
     //Insert or update family history of client info to database
     @FXML
     private void saveFamilyHistoryTab(MouseEvent event) throws SQLException, IOException {
@@ -821,6 +833,7 @@ public class AddClientInfoScreenController implements Initializable {
             }
             setUpMedicalEquipList();
         }
+
         //medicalEquipType.setEditable(false);
         //medicalEquipPrescribe.setEditable(false);
         //medicalEquipReason.setEditable(false);
@@ -828,8 +841,7 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     @FXML
-    private void editMedicalEquipTab(MouseEvent event
-    ) {
+    private void editMedicalEquipTab(MouseEvent event) {
         //medicalEquipType.setEditable(true);
         //medicalEquipPrescribe.setEditable(true);
         //medicalEquipReason.setEditable(true);     
@@ -839,6 +851,11 @@ public class AddClientInfoScreenController implements Initializable {
         medicalEquipReason.clear();
         medicalEquipNotes.clear();
         equipmentList.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void printMedicalCard(MouseEvent event) throws SQLException {
+        pdfPrint.printMedications(this.clientID);
     }
 
     @FXML
@@ -871,6 +888,11 @@ public class AddClientInfoScreenController implements Initializable {
         alertsSpecific.clear();
         altersDescrption.clear();
         alertList.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void printAlertCard(MouseEvent event) throws SQLException {
+        pdfPrint.printAlerts(this.clientID);
     }
 
     @FXML

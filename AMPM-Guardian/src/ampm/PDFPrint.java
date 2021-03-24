@@ -38,13 +38,53 @@ public class PDFPrint {
 
     PreparedStatement preparedStatement;
 
-    public void printMedication(String clientID) throws SQLException {
+    public void printProviders(String clientID) throws SQLException {
+        int i = 1;
+        //System.out.println("1");
+        try {
+            PDDocument pDDocument = PDDocument.load(new File("./src/ProvidersTemp.pdf"));
+            PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
+            Provider provider = new Provider(clientID);
+            ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
+            //System.out.println("2");
+
+            //Use while loop to put the data from database into pdf file
+            while (rs.next()) {
+                PDField field = pDAcroForm.getField("Provider_Type_" + i);
+                field.setValue(rs.getString("Type"));
+                //System.out.println(rs.getString("Type"));
+
+                field = pDAcroForm.getField("Provider_" + i);
+                field.setValue(rs.getString("Provider"));
+                //System.out.println(rs.getString("Provider"));
+
+                field = pDAcroForm.getField("Nurse_" + i);
+                field.setValue(rs.getString("Nurse"));
+                //System.out.println(rs.getString("Nurse"));
+
+                field = pDAcroForm.getField("PANP_" + i);
+                field.setValue(rs.getString("PANP"));
+                //System.out.println(rs.getString("PANP"));
+
+                i++;
+                //System.out.println("3");
+
+            }
+            pDDocument.save("./src/ProvidersCard/ProvidersCard-" + clientID + ".pdf");
+            pDDocument.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void printMedications(String clientID) throws SQLException {
         int i = 1;
         try {
-            PDDocument pDDocument = PDDocument.load(new File("C:/Users/johnz/OneDrive/Desktop/MedicationTemp.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File("./src/MedicationsTemp.pdf"));
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             Medication medication = new Medication(clientID);
             ResultSet rs = dbConnection.executeStatement(medication.getSQLSelect());
+
             //Use while loop to put the data from database into pdf file
             while (rs.next()) {
                 PDField field = pDAcroForm.getField("Class_" + i);
@@ -69,18 +109,20 @@ public class PDFPrint {
                 field.setValue(rs.getString("DateStopped"));
                 i++;
             }
+
             //field = pDAcroForm.getField("txt_2");
             //field.setValue("This is a second field printed by Java");
-            pDDocument.save("C:/Users/johnz/OneDrive/Desktop/MedicationTemp-output.pdf");
+            pDDocument.save("./src/MedicationsCard/MedicationsCard-" + clientID + ".pdf");
             pDDocument.close();
             //Open file if that exist after save pdf file
+            /*
             try {
 
-                if ((new File("C:/Users/johnz/OneDrive/Desktop/MedicationTemp-output.pdf")).exists()) {
+                if ((new File("./src/MedicationCard/MedicationTemp-output-"+clientID+".pdf")).exists()) {
 
                     Process p = Runtime
                             .getRuntime()
-                            .exec("rundll32 url.dll,FileProtocolHandler C:/Users/johnz/OneDrive/Desktop/MedicationTemp-output.pdf");
+                            .exec("rundll32 url.dll,FileProtocolHandler ./src/MedicationCard/MedicationTemp-output-"+clientID+".pdf");
                     p.waitFor();
 
                 } else {
@@ -94,7 +136,73 @@ public class PDFPrint {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+             */
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void printDiagnoses(String clientID) throws SQLException {
+        int i = 1;
+        System.out.println("1");
+        try {
+            PDDocument pDDocument = PDDocument.load(new File("./src/DiagnosesTemp.pdf"));
+            PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
+            Diagnose diagnose = new Diagnose(clientID);
+            ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelect());
+            System.out.println("2");
+
+            //Use while loop to put the data from database into pdf file
+            while (rs.next()) {
+                PDField field = pDAcroForm.getField("Problem List_" + i);
+                field.setValue(rs.getString("Diagnosis"));
+                System.out.println(rs.getString("Diagnosis"));
+
+                field = pDAcroForm.getField("Start Date_" + i);
+                field.setValue(rs.getString("StartDate"));
+                System.out.println(rs.getString("StartDate"));
+
+                field = pDAcroForm.getField("Diagnosed by_" + i);
+                field.setValue(rs.getString("DiagnosedBy"));
+                System.out.println(rs.getString("DiagnosedBy"));
+
+                i++;
+                System.out.println("3");
+
+            }
+            pDDocument.save("./src/DiagnosesCard/DiagnosesCard-" + clientID + ".pdf");
+            pDDocument.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void printAlerts(String clientID) throws SQLException {
+        int i = 1;
+        System.out.println("1");
+        try {
+            PDDocument pDDocument = PDDocument.load(new File("./src/AlertsTemp.pdf"));
+            PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
+            Alert alert = new Alert(clientID);
+            ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
+            System.out.println("2");
+
+            //Use while loop to put the data from database into pdf file
+            while (rs.next()) {
+                PDField field = pDAcroForm.getField("Alert_" + i);
+                field.setValue(rs.getString("AlertType") + ": " + rs.getString("AlertSpecific"));
+                System.out.println(rs.getString("AlertType") + ": " + rs.getString("AlertSpecific"));
+
+                field = pDAcroForm.getField("Reaction_" + i);
+                field.setValue(rs.getString("AlertDescription"));
+                System.out.println(rs.getString("AlertDescription"));
+
+                i++;
+                System.out.println("3");
+
+            }
+            pDDocument.save("./src/AlertsCard/AlertsCard-" + clientID + ".pdf");
+            pDDocument.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
