@@ -16,6 +16,8 @@ User stories are marked as Issues, and tagged as "user story".
 [User Study 2](https://docs.google.com/document/d/10hyUQfsOMol8BvJGSaJhaU6sWFTDcQA_A_e-TigmrJg/edit# "User Study 2")
 
 [User Study 3](https://docs.google.com/document/d/10yDb-z404JCbA01byUB0MJegy5Nsp0ED9EAR1FnDdEw/edit# "User Study 3")
+
+[User Study 4](https://docs.google.com/document/d/11f2kpARExBvvzGFm9_1_0MmH-t8_I92mRso0jyvn6c4/edit# "User Study 4")
 ## Lo-Fi UI ##
 [First Version](https://docs.google.com/document/d/1Kj0V1loV2aNhajn99328095gdSpKu9AeVIH6QiALkWw/edit)
 
