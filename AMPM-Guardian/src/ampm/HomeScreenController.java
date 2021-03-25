@@ -63,9 +63,6 @@ public class HomeScreenController implements Initializable {
             System.out.print(DBConnection.getStatement());
 
             // should be able to do this from the DBConnection class
-            rs = DBConnection.getClients();
-            clients = new ArrayList<String>();
-            addResultToClients(rs);
             setupListView();
 
         } catch (SQLException ex) {
@@ -73,13 +70,12 @@ public class HomeScreenController implements Initializable {
         }
     }
 
-    private void addResultToClients(ResultSet rs) throws SQLException {
+    public void setupListView() throws SQLException {
+        rs = DBConnection.getClients();
+        clients = new ArrayList<String>();
         while (rs.next()) {
             clients.add(rs.getString("FirstName") + " " + rs.getString("LastName"));
         }
-    }
-
-    private void setupListView() {
         items = FXCollections.observableArrayList();
         clientListView.setItems(items);
 
@@ -101,7 +97,7 @@ public class HomeScreenController implements Initializable {
     }
 
     @FXML
-    private void handleOnKeyTyped(KeyEvent event) {
+    private void handleOnKeyTyped(KeyEvent event) throws SQLException {
         // If there's nothing in the textbox, just show the most recent clients
         String currSearch = clientSearchField.getText();
         if (currSearch.length() == 0) {
@@ -134,7 +130,7 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void handleAddProviderButton(MouseEvent event) throws IOException {
-    // Launch the new client stage
+        // Launch the new client stage
         Stage homeStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("ComboBoxManage.fxml"));
 
@@ -169,7 +165,7 @@ public class HomeScreenController implements Initializable {
         clientName.setText(clientListView.getSelectionModel().getSelectedItem());
 
     }
-
+    /*
     @FXML
     private void handleTestButtonClicked(MouseEvent event) throws IOException, SQLException {
         if (DBConnection.isOnline()) {
@@ -178,5 +174,5 @@ public class HomeScreenController implements Initializable {
             System.out.println("not connected");
         }
     }
-
+     */
 }

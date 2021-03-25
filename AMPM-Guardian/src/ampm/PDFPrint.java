@@ -38,11 +38,12 @@ public class PDFPrint {
 
     PreparedStatement preparedStatement;
 
+    //Print provider ioformation from the database for specific client to pdf file and save it
     public void printProviders(String clientID) throws SQLException {
         int i = 1;
         //System.out.println("1");
         try {
-            PDDocument pDDocument = PDDocument.load(new File("./src/ProvidersTemp.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File("../src/ProvidersTemp.pdf"));
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             Provider provider = new Provider(clientID);
             ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
@@ -70,17 +71,18 @@ public class PDFPrint {
                 //System.out.println("3");
 
             }
-            pDDocument.save("./src/ProvidersCard/ProvidersCard-" + clientID + ".pdf");
+            pDDocument.save("../patient-cards/ProvidersCard/ProvidersCard-" + clientID + ".pdf");
             pDDocument.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //Print medication ioformation from the database for specific client to pdf file and save it
     public void printMedications(String clientID) throws SQLException {
         int i = 1;
         try {
-            PDDocument pDDocument = PDDocument.load(new File("./src/MedicationsTemp.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File("../src/MedicationsTemp.pdf"));
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             Medication medication = new Medication(clientID);
             ResultSet rs = dbConnection.executeStatement(medication.getSQLSelect());
@@ -112,7 +114,7 @@ public class PDFPrint {
 
             //field = pDAcroForm.getField("txt_2");
             //field.setValue("This is a second field printed by Java");
-            pDDocument.save("./src/MedicationsCard/MedicationsCard-" + clientID + ".pdf");
+            pDDocument.save("../patient-cards/MedicationsCard/MedicationsCard-" + clientID + ".pdf");
             pDDocument.close();
             //Open file if that exist after save pdf file
             /*
@@ -142,11 +144,12 @@ public class PDFPrint {
         }
     }
 
+    //Print medication ioformation from the database for specific client to pdf file and save it
     public void printDiagnoses(String clientID) throws SQLException {
         int i = 1;
         System.out.println("1");
         try {
-            PDDocument pDDocument = PDDocument.load(new File("./src/DiagnosesTemp.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File("../src/DiagnosesTemp.pdf"));
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             Diagnose diagnose = new Diagnose(clientID);
             ResultSet rs = dbConnection.executeStatement(diagnose.getSQLSelect());
@@ -170,18 +173,19 @@ public class PDFPrint {
                 System.out.println("3");
 
             }
-            pDDocument.save("./src/DiagnosesCard/DiagnosesCard-" + clientID + ".pdf");
+            pDDocument.save("../patient-cards/DiagnosesCard/DiagnosesCard-" + clientID + ".pdf");
             pDDocument.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //Print alert ioformation from the database for specific client to pdf file and save it
     public void printAlerts(String clientID) throws SQLException {
         int i = 1;
         System.out.println("1");
         try {
-            PDDocument pDDocument = PDDocument.load(new File("./src/AlertsTemp.pdf"));
+            PDDocument pDDocument = PDDocument.load(new File("../src/AlertsTemp.pdf"));
             PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
             Alert alert = new Alert(clientID);
             ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
@@ -201,7 +205,7 @@ public class PDFPrint {
                 System.out.println("3");
 
             }
-            pDDocument.save("./src/AlertsCard/AlertsCard-" + clientID + ".pdf");
+            pDDocument.save("../patient-cards/AlertsCard/AlertsCard-" + clientID + ".pdf");
             pDDocument.close();
         } catch (IOException e) {
             e.printStackTrace();

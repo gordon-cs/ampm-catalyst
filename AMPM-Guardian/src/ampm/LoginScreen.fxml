@@ -7,19 +7,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="415.0000999999975" prefWidth="574.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ampm.LoginScreenController">
-  <children>
-    <Label id="welcomeLabel" layoutX="141.0" layoutY="62.0" prefHeight="-1.0" prefWidth="-1.0" text="Welcome to AMPM Guardian!" textAlignment="CENTER" underline="true">
-      <font>
-        <Font size="22.0" />
-      </font>
-    </Label>
-    <Button fx:id="loginButton" disable="true" layoutX="249.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#handleLoginClick" prefWidth="76.0" text="Login" />
-    <Label id="loginPromptLabel" layoutX="116.0" layoutY="136.0" prefWidth="-1.0" text="Please enter your username and password to begin." />
-    <TextField id="usernameField" fx:id="userField" layoutX="187.0" layoutY="205.0" prefWidth="200.0" />
-    <PasswordField id="passwordField" fx:id="passField" layoutX="186.0" layoutY="264.0" prefWidth="200.0" />
-    <Label id="usernameLabel" layoutX="186.0" layoutY="175.0" text="Username:" />
-    <Label id="passwordLabel" layoutX="186.0" layoutY="244.0" prefWidth="70.0" text="Password:" />
-    <Label fx:id="invalidLabel" layoutX="185.0" layoutY="314.0" prefWidth="-1.0" text="Invalid username or password." textFill="RED" visible="false" />
-  </children>
+<AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="415.0000999999975" prefWidth="574.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.LoginScreenController">
+    <children>
+        <Label id="welcomeLabel" layoutX="141.0" layoutY="62.0" prefHeight="-1.0" prefWidth="-1.0" text="Welcome to AMPM Guardian!" textAlignment="CENTER" underline="true">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <Button fx:id="loginButton" disable="true" layoutX="249.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#handleLoginClick" prefWidth="76.0" text="Login" />
+        <Label id="loginPromptLabel" layoutX="116.0" layoutY="136.0" prefWidth="-1.0" text="Please enter your username and password to begin." />
+        <TextField id="usernameField" fx:id="userField" layoutX="187.0" layoutY="205.0" prefWidth="200.0" />
+        <PasswordField id="passwordField" fx:id="passField" layoutX="186.0" layoutY="264.0" prefWidth="200.0" />
+        <Label id="usernameLabel" layoutX="186.0" layoutY="175.0" text="Username:" />
+        <Label id="passwordLabel" layoutX="186.0" layoutY="244.0" prefWidth="70.0" text="Password:" />
+        <Label fx:id="invalidLabel" layoutX="185.0" layoutY="314.0" prefWidth="-1.0" text="Invalid username or password." textFill="RED" visible="false" />
+        <!--<CheckBox fx:id="showPassword" layoutX="394.0" layoutY="268.0" mnemonicParsing="false" onAction="#showPassword" text="Show Password" />-->
+    </children>
 </AnchorPane>

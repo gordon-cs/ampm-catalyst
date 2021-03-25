@@ -30,7 +30,7 @@
         <Button fx:id="addClientButton" layoutX="262.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#addNewClient" text="Add" />
         <Label id="errorLabel" disable="false" layoutX="270.0" layoutY="152.0" text="Label" textFill="RED" visible="false" />
             <Label id="emailLabel" layoutX="187.0" layoutY="479.0" text="DOB" />
-            <DatePicker fx:id="dateOfBirth" layoutX="187.0" layoutY="503.0" prefHeight="23.0" prefWidth="200.0" />
+            <DatePicker fx:id="dateOfBirth" layoutX="187.0" layoutY="503.0" prefHeight="23.0" prefWidth="200.0" promptText="YYYY-MM-DD" />
       </children>
     </AnchorPane>
   </children>

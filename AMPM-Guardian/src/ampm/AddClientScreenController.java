@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -79,7 +80,7 @@ public class AddClientScreenController implements Initializable {
      * @throws SQLException
      */
     @FXML
-    private void addNewClient(MouseEvent event) throws SQLException, IOException {
+    public void addNewClient(MouseEvent event) throws SQLException, IOException {
 
         //Input should not be empty
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
@@ -141,7 +142,6 @@ public class AddClientScreenController implements Initializable {
                 try {
                     Client client = new Client(firstName.getText(), lastName.getText(),
                             emailAddress.getText(), phoneNumber.getText(), formatter.format(date), cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
-                    System.out.println(client.getSQLInsert());
                     dbConnection.addInfo(client.getSQLInsert());
                     infoLabel.setStyle("-fx-text-fill:green");
                     infoLabel.setText("A new client was inserted successfully!");
@@ -220,19 +220,18 @@ public class AddClientScreenController implements Initializable {
     }
 
     // Handle the logic after a successful insert. 
-    private void finalizeInsert() throws IOException {
+    private void finalizeInsert() throws IOException, SQLException {
         // Close current screen
         Stage stage = (Stage) addClientButton.getScene().getWindow();
         stage.close();
 
-        // Open home screen
-        /*
-        stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-s
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-         */
+        // Refresh home screen listview
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        Parent root = loader.load();
+        ListView clientListView = (ListView) loader.getNamespace().get("clientListView");
+        HomeScreenController hs = loader.getController();
+        clientListView.getItems().clear();
+        hs.setupListView();
+
     }
 }

@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -30,7 +31,7 @@ import javafx.stage.Stage;
  * @author benab
  */
 public class LoginScreenController implements Initializable {
-    
+
     @FXML
     private TextField userField;
     @FXML
@@ -39,8 +40,13 @@ public class LoginScreenController implements Initializable {
     private Button loginButton;
     @FXML
     private Label invalidLabel;
-    
+    @FXML
+    private CheckBox showPassword;
+
     DBConnection dbConnection;
+// For use with PasswordField
+    public static final char BULLET = '\u2022';
+
     /**
      * Initializes the controller class.
      */
@@ -48,14 +54,21 @@ public class LoginScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         BooleanBinding formIsFilled = passField.textProperty().isEmpty()
-                            .or(userField.textProperty().isEmpty());
+                .or(userField.textProperty().isEmpty());
         loginButton.disableProperty().bind(formIsFilled);
         dbConnection = new DBConnection();
-                
-    }    
-    
+
+    }
+
     @FXML
-    private void handleLoginClick(MouseEvent event) throws SQLException, IOException {  
+    private void showPassword(ActionEvent event) {
+        if (showPassword.isSelected()) {
+            passField.setStyle("-fx-echo-char: -;");
+        }
+    }
+
+    @FXML
+    private void handleLoginClick(MouseEvent event) throws SQLException, IOException {
         System.out.println(passField.getText());
         Boolean success = dbConnection.init(userField.getText(), passField.getText());
         if (!success) {
@@ -64,18 +77,18 @@ public class LoginScreenController implements Initializable {
         } else {
             invalidLabel.setVisible(false);
             System.out.println("Success");
-            
+
             // Launch the homescreen stage
             Stage homeStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-        
+
             Scene scene = new Scene(root);
             homeStage.setScene(scene);
             homeStage.show();
-           
+
             // Close the current screen
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();
         }
-    } 
+    }
 }
