@@ -263,25 +263,20 @@ public class AddClientInfoScreenController implements Initializable {
 
         monitorList.setOnMouseClicked(e
                 -> {
-            if (monitorList.getSelectionModel().getSelectedItem().equals("New")) {
-                monitorSpecific.clear();
-                //monitorSpecific.setEditable(true);
+            //monitorSpecific.setEditable(true);
 
-            } else {
-                try {
-                    //Show the releated information when click one item in ListView
-                    ResultSet rs = dbConnection.executeStatement(monitor.getSQLSelectByName(
-                            (String) monitorList.getSelectionModel().getSelectedItem()));
-                    while (rs.next()) {
-                        monitorSpecific.setText(rs.getString("SpecificName"));
-                    }
-                    monitorSpecific.setEditable(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+            try {
+                //Show the releated information when click one item in ListView
+                ResultSet rs = dbConnection.executeStatement(monitor.getSQLSelectByName(
+                        (String) monitorList.getSelectionModel().getSelectedItem()));
+                while (rs.next()) {
+                    monitorSpecific.setText(rs.getString("SpecificName"));
                 }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        }
-        );
+
+        });
 
     }
 
@@ -397,8 +392,9 @@ public class AddClientInfoScreenController implements Initializable {
             } else {
              */
             try {
+                String providerDetail = (String) providerList.getSelectionModel().getSelectedItem();
                 ResultSet rs = dbConnection.executeStatement(provider.getSQLSelectByProvider(
-                        (String) providerList.getSelectionModel().getSelectedItem()));
+                        providerDetail.substring(providerDetail.indexOf(":") + 2)));
                 while (rs.next()) {
                     provideType.setText(rs.getString("Type"));
                     providerName.setText(rs.getString("Provider"));
@@ -1045,7 +1041,7 @@ public class AddClientInfoScreenController implements Initializable {
         alertList.getItems().clear();
         while (rs.next()) {
             alertList.getItems().addAll(rs.getString("AlertType")
-                    + ":" + rs.getString("AlertSpecific"));
+                    + ": " + rs.getString("AlertSpecific"));
         }
         rs.close();
     }
