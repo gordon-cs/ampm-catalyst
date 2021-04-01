@@ -976,9 +976,8 @@ public class AddClientInfoScreenController implements Initializable {
         clientName6.setText(name);
         clientName7.setText(name);
         //Seperate name to first name and last name
-        String[] arr = name.split(" ");
-        String fname = arr[0];
-        String lname = arr[1];
+        String fname = name.split(" (?!.* )")[0];
+        String lname = name.split(" (?!.* )")[1];
 
         //Set client with first name and last name 
         Client thisClient = new Client(fname, lname);
