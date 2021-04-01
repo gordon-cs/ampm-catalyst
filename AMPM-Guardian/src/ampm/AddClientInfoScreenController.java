@@ -249,6 +249,7 @@ public class AddClientInfoScreenController implements Initializable {
                         (String) diagnoseList.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
                     diagnoseDescription.setText(rs.getString("Diagnosis"));
+                    diagosedDate.setText(rs.getString("StartDate"));
                     diagnosisDoctor.setText(rs.getString("DiagnosedBy"));
                 }
                 //Make TextField editable
@@ -506,7 +507,7 @@ public class AddClientInfoScreenController implements Initializable {
             String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
             try {
                 ResultSet rs = dbConnection.executeStatement(alert.getSQLSelectByType(
-                        alertDetail.substring(alertDetail.indexOf(":") + 1)));
+                        alertDetail.substring(alertDetail.indexOf(":") + 2)));
                 while (rs.next()) {
                     alertsType.setText(rs.getString("AlertType"));
                     alertsSpecific.setText(rs.getString("AlertSpecific"));
@@ -653,6 +654,7 @@ public class AddClientInfoScreenController implements Initializable {
         //diagnosisDoctor.setEditable(true);
         diagnoseDescription.clear();
         diagnosisDoctor.clear();
+        diagosedDate.clear();
         diagnoseList.getSelectionModel().clearSelection();
         monitorList.getItems().clear();
         monitorSpecific.clear();

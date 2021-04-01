@@ -35,7 +35,6 @@ public class Client {
     }
 
     Client(String clientID, String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
-
         this.clientID = clientID;
         this.newClientID = DOB.replace("-", "") + firstName.toUpperCase().charAt(0) + lastName.toUpperCase().charAt(0);
         this.firstName = firstName;
@@ -52,12 +51,17 @@ public class Client {
         this.lastName = lastName;
     }
 
+    Client(String clientID) {
+        this.clientID = clientID;
+    }
+
     /**
      * Generates the sql string that can be used to insert this client into the
      * Client table
      *
      * @return
      */
+
     public String getSQLInsert() {
         String sqlInsert;
 
@@ -152,7 +156,7 @@ public class Client {
     }
 
     /**
-     * Returns the full name of a client
+     * Returns the information of a client
      *
      * @return
      */
