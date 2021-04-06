@@ -40,39 +40,53 @@ public class PDFPrint {
 
     //Print provider ioformation from the database for specific client to pdf file and save it
     public void printProviders(String clientID) throws SQLException {
+        //Set counter for item and page, i is item and j is page
         int i = 1;
-        //System.out.println("1");
+        int j = 1;
+        //System.out.println(i + "" + j);
+
+        Provider provider = new Provider(clientID);
+        ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
         try {
-            PDDocument pDDocument = PDDocument.load(new File("../src/ProvidersTemp.pdf"));
-            PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
-            Provider provider = new Provider(clientID);
-            ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
-            //System.out.println("2");
+            System.out.println("here");
+            //
+            while (i < 10 && rs.next()) {
+                System.out.println("Enter loop");
 
-            //Use while loop to put the data from database into pdf file
-            while (rs.next()) {
-                PDField field = pDAcroForm.getField("Provider_Type_" + i);
-                field.setValue(rs.getString("Type"));
-                //System.out.println(rs.getString("Type"));
+                PDDocument pDDocument = PDDocument.load(new File("./src/ProvidersTemp.pdf"));
+                PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
+                //Use while loop to put the data from database into pdf file
+                do {
+                    System.out.println(i + "" + j);
+                    PDField field = pDAcroForm.getField("Provider_Type_" + i);
+                    field.setValue(rs.getString("Type"));
+                    System.out.println(rs.getString("Type"));
 
-                field = pDAcroForm.getField("Provider_" + i);
-                field.setValue(rs.getString("Provider"));
-                //System.out.println(rs.getString("Provider"));
+                    field = pDAcroForm.getField("Provider_" + i);
+                    field.setValue(rs.getString("Provider"));
+                    //System.out.println(rs.getString("Provider"));
 
-                field = pDAcroForm.getField("Nurse_" + i);
-                field.setValue(rs.getString("Nurse"));
-                //System.out.println(rs.getString("Nurse"));
+                    field = pDAcroForm.getField("Nurse_" + i);
+                    field.setValue(rs.getString("Nurse"));
+                    //System.out.println(rs.getString("Nurse"));
 
-                field = pDAcroForm.getField("PANP_" + i);
-                field.setValue(rs.getString("PANP"));
-                //System.out.println(rs.getString("PANP"));
+                    field = pDAcroForm.getField("PANP_" + i);
+                    field.setValue(rs.getString("PANP"));
+                    //System.out.println(rs.getString("PANP"));
 
-                i++;
-                //System.out.println("3");
+                    i++;
+                    if (i == 11) {
+                        break;
+                    }
+                } while (rs.next());
+                pDDocument.save("./patient-cards/ProvidersCard/ProvidersCard-" + clientID + "-page" + j + ".pdf");
+                pDDocument.close();
+                if (i > 10) {
+                    i = 1;
+                    j++;
+                }
 
             }
-            pDDocument.save("../patient-cards/ProvidersCard/ProvidersCard-" + clientID + ".pdf");
-            pDDocument.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
