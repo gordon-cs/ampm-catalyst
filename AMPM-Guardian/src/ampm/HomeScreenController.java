@@ -12,8 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -70,6 +77,7 @@ public class HomeScreenController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void setupListView() throws SQLException {
@@ -125,7 +133,7 @@ public class HomeScreenController implements Initializable {
         // Launch the new client stage
         Stage homeStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("AddClientScreen.fxml"));
-
+        refresh();
         Scene scene = new Scene(root);
         homeStage.setScene(scene);
         homeStage.show();
@@ -152,6 +160,7 @@ public class HomeScreenController implements Initializable {
             Parent root = loader.load();
             AddClientInfoScreenController ac = loader.getController();
             ac.setUp(clientListView.getSelectionModel().getSelectedItem());
+            refresh();
             Scene scene = new Scene(root);
             homeStage.setScene(scene);
             homeStage.show();
@@ -168,6 +177,7 @@ public class HomeScreenController implements Initializable {
         clientName.setText(clientListView.getSelectionModel().getSelectedItem());
 
     }
+
     /*
     @FXML
     private void handleTestButtonClicked(MouseEvent event) throws IOException, SQLException {
@@ -178,4 +188,16 @@ public class HomeScreenController implements Initializable {
         }
     }
      */
+    //Use this method to refresh the client list
+    public void refresh() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+            try {
+                setupListView();
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
 }

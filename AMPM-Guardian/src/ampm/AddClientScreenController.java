@@ -225,13 +225,5 @@ public class AddClientScreenController implements Initializable {
         Stage stage = (Stage) addClientButton.getScene().getWindow();
         stage.close();
 
-        // Refresh home screen listview
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
-        Parent root = loader.load();
-        ListView clientListView = (ListView) loader.getNamespace().get("clientListView");
-        HomeScreenController hs = loader.getController();
-        clientListView.getItems().clear();
-        hs.setupListView();
-
     }
 }

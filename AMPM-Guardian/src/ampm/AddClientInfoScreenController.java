@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,7 +66,7 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField cellPhoneNumber;
     @FXML
-    private TextField dateOfBirth;
+    private DatePicker dateOfBirth;
     @FXML
     private Label accountNumber;
     @FXML
@@ -212,7 +213,7 @@ public class AddClientInfoScreenController implements Initializable {
         phoneNumber.setText(phone);
         emailAddress.setText(email);
         cellPhoneNumber.setText(cellPhone);
-        dateOfBirth.setText(DOB);
+        dateOfBirth.setValue(LocalDate.parse(DOB));
         clientIdentifer.setText(this.clientID);
 
         clientIdentifer.setEditable(false);
@@ -593,7 +594,7 @@ public class AddClientInfoScreenController implements Initializable {
 
         Client updateInfo = new Client(this.clientID, firstName.getText(), lastName.getText(),
                 emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime()).toString(),
-                cellPhoneNumber.getText(), dateOfBirth.getText());
+                cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
         dbConnection.addInfo(updateInfo.getSQLUpdate());
         clientIdentifer.setText(updateInfo.getID());
         firstName.setEditable(false);
