@@ -595,6 +595,7 @@ public class AddClientInfoScreenController implements Initializable {
                 emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime()).toString(),
                 cellPhoneNumber.getText(), dateOfBirth.getText());
         dbConnection.addInfo(updateInfo.getSQLUpdate());
+        clientIdentifer.setText(updateInfo.getID());
         firstName.setEditable(false);
         lastName.setEditable(false);
         phoneNumber.setEditable(false);
@@ -961,11 +962,14 @@ public class AddClientInfoScreenController implements Initializable {
         medicationList.getSelectionModel().clearSelection();
     }
 
-    public void setUp(String name) throws SQLException {
+    public void setUp(String nameID) throws SQLException {
         dbConnection = new DBConnection();
 
         //Get name that passed by home screen
+        String name = nameID.split(" (?!.* )")[0];
+        String id = nameID.split(" (?!.* )")[1].replaceAll("\\(|\\)", "");
         this.name = name;
+
         //Show client name in every tab
         clientName.setText(name);
         clientName1.setText(name);
@@ -976,16 +980,16 @@ public class AddClientInfoScreenController implements Initializable {
         clientName6.setText(name);
         clientName7.setText(name);
         //Seperate name to first name and last name
-        String fname = name.split(" (?!.* )")[0];
-        String lname = name.split(" (?!.* )")[1];
 
         //Set client with first name and last name 
-        Client thisClient = new Client(fname, lname);
-        ResultSet rs = dbConnection.executeStatement(thisClient.getByName());
+        Client thisClient = new Client(id);
+        ResultSet rs = dbConnection.executeStatement(thisClient.getByID());
 
         //Get clientID from result set
         if (rs.next()) {
             this.clientID = rs.getString("ClientID");
+            String fname = rs.getString("Firstname");
+            String lname = rs.getString("Lastname");
             String email = rs.getString("Email");
             String phone = rs.getString("Phone");
             String cell = rs.getString("Cell");

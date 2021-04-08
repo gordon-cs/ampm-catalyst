@@ -50,8 +50,10 @@ public class HomeScreenController implements Initializable {
     Label clientName;
 
     private ResultSet rs;
-    private ArrayList<String> clients;
+    private ArrayList<Client> clients;
     private ObservableList<String> items;
+    private String firstName;
+    private String lastName;
 
     /**
      * Initializes the controller class.
@@ -72,9 +74,9 @@ public class HomeScreenController implements Initializable {
 
     public void setupListView() throws SQLException {
         rs = DBConnection.getClients();
-        clients = new ArrayList<String>();
+        clients = new ArrayList<Client>();
         while (rs.next()) {
-            clients.add(rs.getString("FirstName") + " " + rs.getString("LastName"));
+            clients.add(new Client(rs.getString("ClientID"), rs.getString("FirstName"), rs.getString("Lastname")));
         }
         items = FXCollections.observableArrayList();
         clientListView.setItems(items);
@@ -82,11 +84,11 @@ public class HomeScreenController implements Initializable {
         // Add the first 10 clients to the ListView
         if (clients.size() > 10) {
             clients.subList(0, 10).forEach(client -> {
-                items.add(client);
+                items.add(client.getFullName() + " (" + client.getID() + ")");
             });
         } else {
             clients.forEach(client -> {
-                items.add(client);
+                items.add(client.getFullName() + " (" + client.getID() + ")");
             });
         }
         if (!clientListView.getItems().isEmpty()) {
@@ -107,9 +109,11 @@ public class HomeScreenController implements Initializable {
 
         items = FXCollections.observableArrayList();
         clients.forEach(client -> {
-            if (client.length() >= currSearch.length()) {
-                if (client.substring(0, currSearch.length()).equalsIgnoreCase(currSearch)) {
-                    items.add(client);
+            if (client.getFullName().length() >= currSearch.length()) {
+                if (client.getFullName().substring(0, currSearch.length()).equalsIgnoreCase(currSearch)) {
+                    items.add(client.getFullName() + " (" + client.getID() + ")");
+                } else if (client.getID().substring(0, currSearch.length()).equalsIgnoreCase(currSearch)) {
+                    items.add(client.getFullName() + " (" + client.getID() + ")");
                 }
             }
         });
@@ -142,13 +146,12 @@ public class HomeScreenController implements Initializable {
     @FXML
     private void handleNewClientInfoClicked(MouseEvent event) throws IOException, SQLException {
         if (!this.clientListView.getSelectionModel().getSelectedItem().isEmpty()) {
-            String name = this.clientListView.getSelectionModel().getSelectedItem();
             // Launch the new client stage
             Stage homeStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AddClientInfoScreen.fxml"));
             Parent root = loader.load();
             AddClientInfoScreenController ac = loader.getController();
-            ac.setUp(name);
+            ac.setUp(clientListView.getSelectionModel().getSelectedItem());
             Scene scene = new Scene(root);
             homeStage.setScene(scene);
             homeStage.show();

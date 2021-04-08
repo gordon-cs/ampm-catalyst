@@ -60,7 +60,7 @@ public class PDFPrint {
                     System.out.println(i + "" + j);
                     PDField field = pDAcroForm.getField("Provider_Type_" + i);
                     field.setValue(rs.getString("Type"));
-                    System.out.println(rs.getString("Type"));
+                    //System.out.println(rs.getString("Type"));
 
                     field = pDAcroForm.getField("Provider_" + i);
                     field.setValue(rs.getString("Provider"));

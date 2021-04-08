@@ -35,13 +35,13 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               
               <children>
-                <Button fx:id="newClientInfoButton" layoutX="487.0" layoutY="173.0" mnemonicParsing="false" onMouseClicked="#handleNewClientInfoClicked" prefWidth="150.0" text="Edit Client Info" />
-                        <Label fx:id="clientName" layoutX="24.0" layoutY="24.0" prefHeight="21.0" prefWidth="110.0" text="Client Name" />
+                <Button fx:id="newClientInfoButton" layoutX="469.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#handleNewClientInfoClicked" prefWidth="150.0" text="Edit Client Info" />
+                        <Label fx:id="clientName" layoutX="24.0" layoutY="24.0" prefHeight="21.0" prefWidth="192.0" text="Client Name" />
               </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               <children>
-                        <Button fx:id="newClientButton" layoutX="494.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="150.0" text="Add Client" />
+                        <Button fx:id="newClientButton" layoutX="469.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="150.0" text="Add Client" />
                         <!--<Button fx:id="addProviderButton" layoutX="387.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleAddProviderButton" text="Add Provider" />-->
     
               </children>
@@ -50,10 +50,10 @@
         </SplitPane>
       </center>
       <left>
-        <VBox prefHeight="508.0" prefWidth="154.0">
+        <VBox prefHeight="508.0" prefWidth="172.0">
           <children>
             <TextField fx:id="clientSearchField" onKeyTyped="#handleOnKeyTyped" prefWidth="200.0" promptText="Search for client" />
-            <ListView fx:id="clientListView" onMouseClicked="#handleClientListAction" prefHeight="400.0" prefWidth="154.00009999999747" VBox.vgrow="ALWAYS">
+            <ListView fx:id="clientListView" onMouseClicked="#handleClientListAction" prefHeight="485.0" prefWidth="189.0" VBox.vgrow="ALWAYS">
               <VBox.margin>
                 <Insets />
               </VBox.margin>

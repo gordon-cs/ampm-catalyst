@@ -139,7 +139,7 @@ public class DBConnection {
         if (offlineMode) {
             // if we are in offline mode, then we should probably 
         }
-        return stmt.executeQuery("Select FirstName, LastName, LastModified from Client ORDER BY LastModified DESC");
+        return stmt.executeQuery("Select * from Client ORDER BY LastModified DESC");
     }
 
     /**
