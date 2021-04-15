@@ -13,7 +13,6 @@ public class Client {
 
     // The private values for this object, each one represents a col in the DB
     private String clientID;
-    private String oldClientID;
     private String firstName;
     private String lastName;
     private String email;
@@ -36,10 +35,6 @@ public class Client {
 
     Client(String clientID, String firstName, String lastName, String email, String phone, String lastModified, String cell, String DOB) {
         this.clientID = clientID;
-        if (!clientID.equals(DOB.replace("-", "") + firstName.toUpperCase().charAt(0) + lastName.toUpperCase().charAt(0))) {
-            this.oldClientID = clientID;
-            this.clientID = DOB.replace("-", "") + firstName.toUpperCase().charAt(0) + lastName.toUpperCase().charAt(0);
-        }
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -124,17 +119,7 @@ public class Client {
                     + "DOB='" + this.DOB + "'"
                     + "WHERE ClientID ='" + this.clientID + "'";
         }
-        if (!this.oldClientID.isEmpty()) {
-            sqlUpdate = "UPDATE AMPM.Client SET ClientID ='" + this.clientID + "', "
-                    + "FirstName ='" + this.firstName + "', "
-                    + "LastName ='" + this.lastName + "', "
-                    + "Email ='" + this.email + "', "
-                    + "Phone ='" + this.phone + "', "
-                    + "LastModified ='" + this.lastModified + "', "
-                    + "Cell = NULL ,"
-                    + "DOB='" + this.DOB + "'"
-                    + "WHERE ClientID ='" + this.oldClientID + "'";
-        }
+       
         return sqlUpdate;
     }
 

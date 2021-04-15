@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -39,7 +41,7 @@ public class PDFPrint {
     PreparedStatement preparedStatement;
 
     //Print provider ioformation from the database for specific client to pdf file and save it
-    public void printProviders(String clientID) throws SQLException {
+    public boolean printProviders(String clientID) throws SQLException {
         //Set counter for item and page, i is item and j is page
         int i = 1;
         int j = 1;
@@ -57,7 +59,7 @@ public class PDFPrint {
                 PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
                 //Use while loop to put the data from database into pdf file
                 do {
-                    System.out.println(i + "" + j);
+                    //System.out.println(i + "" + j);
                     PDField field = pDAcroForm.getField("Provider_Type_" + i);
                     field.setValue(rs.getString("Type"));
                     //System.out.println(rs.getString("Type"));
@@ -89,8 +91,10 @@ public class PDFPrint {
                 }
 
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -204,7 +208,7 @@ public class PDFPrint {
         int i = 1;
         int j = 1;
         //System.out.println("1");
-        Alert alert = new Alert(clientID);
+        Alerts alert = new Alerts(clientID);
         ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
         try {
             while (i < 10 && rs.next()) {

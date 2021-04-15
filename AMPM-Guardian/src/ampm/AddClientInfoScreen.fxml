@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.AddClientInfoScreenController">
     <tabs>
         <Tab fx:id="tabBasicInfo" text="Basic Info">
             <content>
@@ -93,7 +93,7 @@
         </Tab>
         <Tab fx:id="tabProviders" text="Providers">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="720.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="799.0">
                     <children>
                         <Label layoutX="31.0" layoutY="24.0" prefHeight="49.0" prefWidth="155.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Providers">
                             <font>
@@ -145,7 +145,8 @@
                         <Button fx:id="editProviderInfo" layoutX="370.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#editProviderTab" prefHeight="27.0" prefWidth="58.0" text="New" />
                   <Text layoutX="576.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
                   <TextField fx:id="clientName" editable="false" layoutX="657.0" layoutY="20.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Button fx:id="printProviderCard" layoutX="631.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#printProviderCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
+                  <Button fx:id="printProviderCard" layoutX="617.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#printProviderCard" prefHeight="27.0" prefWidth="162.0" text="Save Full Cards in Local" />
+                  <Label fx:id="printProviderLabel" layoutX="15.0" layoutY="507.0" prefHeight="42.0" prefWidth="769.0" />
                     </children>
                 </AnchorPane>
             </content>

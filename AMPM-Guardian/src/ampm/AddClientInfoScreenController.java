@@ -5,6 +5,7 @@
  */
 package ampm;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,6 +26,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -129,6 +132,8 @@ public class AddClientInfoScreenController implements Initializable {
     private TextField nameOfPANP;
     @FXML
     private ListView providerList;
+    @FXML
+    private Label printProviderLabel;
 
 //Family History Tab
     @FXML
@@ -196,6 +201,7 @@ public class AddClientInfoScreenController implements Initializable {
     private String clientID;
     DBConnection dbConnection;
     PDFPrint pdfPrint;
+    Alert a = new Alert(AlertType.NONE);
 
     /**
      * Initializes the controller class.
@@ -502,7 +508,7 @@ public class AddClientInfoScreenController implements Initializable {
 
     private void alertsTabSetUp() throws SQLException {
         setUpAlertList();
-        Alert alert = new Alert(this.clientID);
+        Alerts alert = new Alerts(this.clientID);
         alertList.setOnMouseClicked(e -> {
 
             String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
@@ -596,7 +602,6 @@ public class AddClientInfoScreenController implements Initializable {
                 emailAddress.getText(), phoneNumber.getText(), new Timestamp(new Date().getTime()).toString(),
                 cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
         dbConnection.addInfo(updateInfo.getSQLUpdate());
-        clientIdentifer.setText(updateInfo.getID());
         firstName.setEditable(false);
         lastName.setEditable(false);
         phoneNumber.setEditable(false);
@@ -784,7 +789,21 @@ public class AddClientInfoScreenController implements Initializable {
 
     @FXML
     private void printProviderCard(MouseEvent event) throws SQLException {
-        pdfPrint.printProviders(this.clientID);
+        if (pdfPrint.printProviders(this.clientID)) {
+            printProviderLabel.setStyle("-fx-text-fill:green");
+            File f = new File("./patient-cards/ProvidersCard/ProvidersCard-19990101AA-page1");
+            //printProviderLabel.setText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+            // set content text
+            a.setAlertType(AlertType.INFORMATION);
+            a.setContentText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+            
+            // show the dialog
+            a.show();
+
+        } else {
+            printProviderLabel.setStyle("-fx-text-fill:red");
+            printProviderLabel.setText("Failed to save the provider information for this client ");
+        }
     }
 
     //Insert or update family history of client info to database
@@ -870,11 +889,11 @@ public class AddClientInfoScreenController implements Initializable {
 
             if (alertList.getSelectionModel().getSelectedIndex() > -1) {
                 String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
-                Alert alertInfo = new Alert(this.clientID, alertsType.getText(),
+                Alerts alertInfo = new Alerts(this.clientID, alertsType.getText(),
                         alertDetail.substring(alertDetail.indexOf(":") + 1), altersDescrption.getText());
                 dbConnection.addInfo(alertInfo.getSQLUpdateNewDetail(alertsSpecific.getText()));
             } else {
-                Alert alertInfo = new Alert(this.clientID, alertsType.getText(),
+                Alerts alertInfo = new Alerts(this.clientID, alertsType.getText(),
                         alertsSpecific.getText(), altersDescrption.getText());
                 dbConnection.addInfo(alertInfo.getSQLInsert());
             }
@@ -1042,7 +1061,7 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     public void setUpAlertList() throws SQLException {
-        Alert alert = new Alert(this.clientID);
+        Alerts alert = new Alerts(this.clientID);
         ResultSet rs = dbConnection.executeStatement(alert.getSQLSelect());
         alertList.getItems().clear();
         while (rs.next()) {

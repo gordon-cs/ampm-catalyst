@@ -5,7 +5,7 @@ package ampm;
  *
  * @author John Zhu
  */
-public class Alert {
+public class Alerts {
 
     // The private values for this object, each one represents a col in the DB
     private String clientID;
@@ -13,14 +13,14 @@ public class Alert {
     private String detail;
     private String description;
 
-    Alert(String clientID, String type, String detail, String description) {
+    Alerts(String clientID, String type, String detail, String description) {
         this.clientID = clientID;
         this.type = type;
         this.detail = detail;
         this.description = description;
     }
 
-    Alert(String clientID) {
+    Alerts(String clientID) {
         this.clientID = clientID;
     }
 

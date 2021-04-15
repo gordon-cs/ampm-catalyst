@@ -39,7 +39,7 @@ public class LoginScreenController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-    private Label invalidLabel;
+    private Label loginLabel;
     @FXML
     private CheckBox showPassword;
 
@@ -72,10 +72,12 @@ public class LoginScreenController implements Initializable {
         System.out.println(passField.getText());
         Boolean success = dbConnection.init(userField.getText(), passField.getText());
         if (!success) {
-            invalidLabel.setVisible(true);
+            loginLabel.setStyle("-fx-text-fill:red");
+            loginLabel.setText("Login failed: Username or Password is incorrect");
             System.out.println("Failure");
         } else {
-            invalidLabel.setVisible(false);
+            loginLabel.setStyle("-fx-text-fill:green");
+            loginLabel.setText("Login Successful");
             System.out.println("Success");
 
             // Launch the homescreen stage
