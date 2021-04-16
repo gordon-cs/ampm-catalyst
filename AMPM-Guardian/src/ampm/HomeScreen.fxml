@@ -7,60 +7,40 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.HomeScreenController">
-  <children>
-    <MenuBar prefWidth="807.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <BorderPane prefHeight="508.0" prefWidth="807.0" style="&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-      <center>
-        <SplitPane dividerPositions="0.4308300395256917" focusTraversable="true" orientation="VERTICAL" prefHeight="508.0" prefWidth="593.0">
-          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+<AnchorPane id="AnchorPane" onMouseClicked="#refreshListview" prefHeight="538.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ampm.HomeScreenController">
+      <children>
+        <BorderPane fx:id="refreshPanel" layoutY="27.0" prefHeight="511.0" prefWidth="807.0" style="&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+            <center>
+                <SplitPane dividerPositions="0.4308300395256917" focusTraversable="true" orientation="VERTICAL" prefHeight="525.0" prefWidth="597.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
               
-              <children>
-                <Button fx:id="newClientInfoButton" layoutX="431.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#handleNewClientInfoClicked" prefWidth="150.0" text="Edit Client Info" />
-                        <Label fx:id="clientName" layoutX="24.0" layoutY="24.0" prefHeight="21.0" prefWidth="192.0" text="Client Name" />
-              </children>
-            </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-              <children>
-                        <Button fx:id="newClientButton" layoutX="431.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="150.0" text="Add Client" />
-                        <!--<Button fx:id="addProviderButton" layoutX="387.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleAddProviderButton" text="Add Provider" />-->
-    
-              </children>
-            </AnchorPane>
-          </items>
-        </SplitPane>
-      </center>
-      <left>
-        <VBox prefHeight="508.0" prefWidth="210.0">
-          <children>
-            <TextField fx:id="clientSearchField" onKeyTyped="#handleOnKeyTyped" prefWidth="200.0" promptText="Search for client" />
-            <ListView fx:id="clientListView" onMouseClicked="#handleClientListAction" prefHeight="485.0" prefWidth="194.0" VBox.vgrow="ALWAYS">
-              <VBox.margin>
-                <Insets />
-              </VBox.margin>
-            </ListView>
-          </children>
-        </VBox>
-      </left>
-    </BorderPane>
-  </children>
+                            <children>
+                                <Button fx:id="newClientInfoButton" layoutX="431.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#handleNewClientInfoClicked" prefWidth="150.0" text="Edit Client Info" />
+                                <Label fx:id="clientName" layoutX="24.0" layoutY="24.0" prefHeight="21.0" prefWidth="192.0" text="Client Name" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                            <children>
+                                <Button fx:id="newClientButton" layoutX="431.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#handleNewClientClicked" prefWidth="150.0" text="Add Client" />
+                                <!--<Button fx:id="addProviderButton" layoutX="387.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleAddProviderButton" text="Add Provider" />-->
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </center>
+            <left>
+                <VBox prefHeight="508.0" prefWidth="210.0">
+                    <children>
+                        <TextField fx:id="clientSearchField" onKeyReleased="#handleOnKeyTyped" prefWidth="200.0" promptText="Search for client" />
+                        <ListView fx:id="clientListView" onMouseClicked="#handleClientListAction" prefHeight="485.0" prefWidth="194.0" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </ListView>
+                    </children>
+                </VBox>
+            </left>
+        </BorderPane>
+    </children>
 </AnchorPane>

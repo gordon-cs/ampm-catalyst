@@ -99,7 +99,7 @@ public class PDFPrint {
     }
 
     //Print medication ioformation from the database for specific client to pdf file and save it
-    public void printMedications(String clientID) throws SQLException {
+    public boolean printMedications(String clientID) throws SQLException {
         //Set counter for item and page, i is item and j is page
         int i = 1;
         int j = 1;
@@ -109,7 +109,7 @@ public class PDFPrint {
         try {
             while (i < 10 && rs.next()) {
 
-                PDDocument pDDocument = PDDocument.load(new File("./src/MedicationsTemp.pdf"));
+                PDDocument pDDocument = PDDocument.load(new File("../src/MedicationsTemp.pdf"));
                 PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
 
                 //Use while loop to put the data from database into pdf file
@@ -143,20 +143,24 @@ public class PDFPrint {
 
                 //field = pDAcroForm.getField("txt_2");
                 //field.setValue("This is a second field printed by Java");
-                pDDocument.save("./patient-cards/MedicationsCard/MedicationsCard-" + clientID + "-page" + j + ".pdf");
+                pDDocument.save("../patient-cards/MedicationsCard/MedicationsCard-" + clientID + "-page" + j + ".pdf");
                 pDDocument.close();
                 if (i > 10) {
                     i = 1;
                     j++;
                 }
             }
+            return true;
         } catch (IOException e) {
+
             e.printStackTrace();
+            return false;
         }
+
     }
     //Print medication ioformation from the database for specific client to pdf file and save it
 
-    public void printDiagnoses(String clientID) throws SQLException {
+    public boolean printDiagnoses(String clientID) throws SQLException {
         //Set counter for item and page, i is item and j is page
         int i = 1;
         int j = 1;
@@ -197,13 +201,15 @@ public class PDFPrint {
                     j++;
                 }
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
     //Print alert ioformation from the database for specific client to pdf file and save it
 
-    public void printAlerts(String clientID) throws SQLException {
+    public boolean printAlerts(String clientID) throws SQLException {
         //Set counter for item and page, i is item and j is page
         int i = 1;
         int j = 1;
@@ -242,8 +248,10 @@ public class PDFPrint {
                     j++;
                 }
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

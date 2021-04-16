@@ -22,6 +22,7 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +36,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 /**
@@ -55,6 +59,11 @@ public class HomeScreenController implements Initializable {
     Button testButton;
     @FXML
     Label clientName;
+    @FXML
+    BorderPane refreshPanel;
+
+    @FXML
+    private Parent root;
 
     private ResultSet rs;
     private ArrayList<Client> clients;
@@ -67,17 +76,30 @@ public class HomeScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        System.out.print(DBConnection.getStatement());
         try {
-            // TODO
-            System.out.print(DBConnection.getStatement());
-
             // should be able to do this from the DBConnection class
             setupListView();
-
         } catch (SQLException ex) {
             Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        /*
+        refreshPanel.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
 
+            public void handle(MouseEvent e) {
+                try {
+                    // TODO Auto-generated method stub
+                    setupListView();
+                } catch (SQLException ex) {
+                    Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        );
+         */
+        //tryRefresh();
     }
 
     public void setupListView() throws SQLException {
@@ -110,17 +132,18 @@ public class HomeScreenController implements Initializable {
     private void handleOnKeyTyped(KeyEvent event) throws SQLException {
         // If there's nothing in the textbox, just show the most recent clients
         String currSearch = clientSearchField.getText();
+        System.out.println(currSearch);
         if (currSearch.length() == 0) {
             setupListView();
             return;
         }
-
         items = FXCollections.observableArrayList();
         clients.forEach(client -> {
-            if (client.getFullName().length() >= currSearch.length()) {
-                if (client.getFullName().substring(0, currSearch.length()).equalsIgnoreCase(currSearch)) {
+            if (client.getFullName().length() >= currSearch.length() || client.getID().length() >= currSearch.length()) {
+                if (client.getFullName().contains(currSearch)) {
                     items.add(client.getFullName() + " (" + client.getID() + ")");
-                } else if (client.getID().substring(0, currSearch.length()).equalsIgnoreCase(currSearch)) {
+                }
+                if (client.getID().contains(currSearch)) {
                     items.add(client.getFullName() + " (" + client.getID() + ")");
                 }
             }
@@ -133,7 +156,7 @@ public class HomeScreenController implements Initializable {
         // Launch the new client stage
         Stage homeStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("AddClientScreen.fxml"));
-        refresh();
+        //refresh();
         Scene scene = new Scene(root);
         homeStage.setScene(scene);
         homeStage.show();
@@ -160,7 +183,7 @@ public class HomeScreenController implements Initializable {
             Parent root = loader.load();
             AddClientInfoScreenController ac = loader.getController();
             ac.setUp(clientListView.getSelectionModel().getSelectedItem());
-            refresh();
+            //refresh();
             Scene scene = new Scene(root);
             homeStage.setScene(scene);
             homeStage.show();
@@ -189,15 +212,17 @@ public class HomeScreenController implements Initializable {
     }
      */
     //Use this method to refresh the client list
-    public void refresh() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
-            try {
-                setupListView();
-            } catch (SQLException ex) {
-                Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
+    @FXML
+    public void refreshListview(MouseEvent event) throws SQLException {
+        setupListView();
+        System.out.println(event.getX());
+    }
+
+    private void tryRefresh() {
+        root.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent window) {
             }
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        });
     }
 }

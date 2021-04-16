@@ -83,6 +83,8 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField diagnosisDoctor;
     @FXML
+    private ComboBox diagnosisProvider;
+    @FXML
     private RadioButton diagonsisNone;
     @FXML
     private TextField monitorSpecific;
@@ -221,8 +223,7 @@ public class AddClientInfoScreenController implements Initializable {
         cellPhoneNumber.setText(cellPhone);
         dateOfBirth.setValue(LocalDate.parse(DOB));
         clientIdentifer.setText(this.clientID);
-
-        clientIdentifer.setEditable(false);
+        clientIdentifer.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
 
         firstName.setEditable(false);
         lastName.setEditable(false);
@@ -519,6 +520,7 @@ public class AddClientInfoScreenController implements Initializable {
                     alertsType.setText(rs.getString("AlertType"));
                     alertsSpecific.setText(rs.getString("AlertSpecific"));
                     altersDescrption.setText(rs.getString("AlertDescription"));
+                    altersDescrption.setWrapText(true);
                 }
                 //alertsSpecific.setEditable(false);
                 //altersDescrption.setEditable(false);
@@ -669,7 +671,22 @@ public class AddClientInfoScreenController implements Initializable {
 
     @FXML
     private void printDiagnoseCard(MouseEvent event) throws SQLException {
-        pdfPrint.printDiagnoses(this.clientID);
+        if (pdfPrint.printDiagnoses(this.clientID)) {
+            //printProviderLabel.setStyle("-fx-text-fill:green");
+            File f = new File("../patient-cards/DiagnosesCard/");
+            //printProviderLabel.setText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+            // set content text
+            a.setAlertType(AlertType.INFORMATION);
+            a.setContentText("Diagnoses information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+
+            // show the dialog
+            a.show();
+
+        } else {
+            a.setAlertType(AlertType.ERROR);
+            a.setContentText("Failed to save the diagnoses information for this client");
+        }
+
     }
 
     //Insert or update preventive info to database
@@ -790,19 +807,19 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void printProviderCard(MouseEvent event) throws SQLException {
         if (pdfPrint.printProviders(this.clientID)) {
-            printProviderLabel.setStyle("-fx-text-fill:green");
-            File f = new File("./patient-cards/ProvidersCard/ProvidersCard-19990101AA-page1");
+            //printProviderLabel.setStyle("-fx-text-fill:green");
+            File f = new File("./patient-cards/ProvidersCard");
             //printProviderLabel.setText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
             // set content text
             a.setAlertType(AlertType.INFORMATION);
             a.setContentText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
-            
+
             // show the dialog
             a.show();
 
         } else {
-            printProviderLabel.setStyle("-fx-text-fill:red");
-            printProviderLabel.setText("Failed to save the provider information for this client ");
+            a.setAlertType(AlertType.ERROR);
+            a.setContentText("Failed to save the provider information for this client");
         }
     }
 
@@ -879,7 +896,20 @@ public class AddClientInfoScreenController implements Initializable {
 
     @FXML
     private void printMedicalCard(MouseEvent event) throws SQLException {
-        pdfPrint.printMedications(this.clientID);
+        if (pdfPrint.printMedications(this.clientID)) {
+            File f = new File("./patient-cards/MedicationsCard/MedicationsCard-19990101AA-page1");
+            File parent = f.getAbsoluteFile().getParentFile();
+            // set content text
+            a.setAlertType(AlertType.INFORMATION);
+            a.setContentText("Medications information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+
+            // show the dialog
+            a.show();
+
+        } else {
+            a.setAlertType(AlertType.ERROR);
+            a.setContentText("Failed to save the medications information for this client");
+        }
     }
 
     @FXML
@@ -915,8 +945,19 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     @FXML
-    private void printAlertCard(MouseEvent event) throws SQLException {
-        pdfPrint.printAlerts(this.clientID);
+    private void printAlertsCard(MouseEvent event) throws SQLException {
+        if (pdfPrint.printAlerts(this.clientID)) {
+            File f = new File("./patient-cards/AlertsCard/");
+            // set alert info
+            a.setAlertType(AlertType.INFORMATION);
+            a.setContentText("Alerts information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+            // show the dialog
+            a.show();
+
+        } else {
+            a.setAlertType(AlertType.ERROR);
+            a.setContentText("Failed to save the Alert information for this client");
+        }
     }
 
     @FXML
@@ -992,6 +1033,7 @@ public class AddClientInfoScreenController implements Initializable {
 
         //Show client name in every tab
         clientName.setText(name);
+        clientName.setStyle("-fx-background-color: grey;");
         clientName1.setText(name);
         clientName2.setText(name);
         clientName3.setText(name);
@@ -1046,6 +1088,7 @@ public class AddClientInfoScreenController implements Initializable {
         providerList.getItems().clear();
         while (rs.next()) {
             providerList.getItems().addAll(rs.getString("Type") + ": " + rs.getString("Provider"));
+            diagnosisProvider.getItems().addAll(rs.getString("Provider"));
         }
         rs.close();
     }

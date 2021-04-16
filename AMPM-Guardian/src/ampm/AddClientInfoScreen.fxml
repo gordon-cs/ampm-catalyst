@@ -76,7 +76,7 @@
                         <Font size="12.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="clientIdentifer" layoutX="635.0" layoutY="13.0" prefHeight="23.0" prefWidth="149.0">
+                  <TextField fx:id="clientIdentifer" editable="false" layoutX="635.0" layoutY="13.0" prefHeight="23.0" prefWidth="149.0">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -211,6 +211,7 @@
                         <TextField fx:id="clientName1" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
                         <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
                         <Button fx:id="printDiagnoseCard" layoutX="660.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#printDiagnoseCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
+                        <ComboBox fx:id="diagnosisProvider" editable="true" layoutX="336.0" layoutY="235.0" prefWidth="150.0" />
                                
                             </children>
                         </AnchorPane>
@@ -381,7 +382,7 @@
                         <Button fx:id="editAlertInfo" layoutX="358.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#editAlertTab" prefHeight="27.0" prefWidth="58.0" text="New" />
                   <TextField fx:id="clientName3" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
                   <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
-                  <Button fx:id="printAlertCard" layoutX="644.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#printAlertCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
+                  <Button fx:id="printAlertCard" layoutX="644.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#printAlertsCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
                         
                     </children>
                 </AnchorPane>
