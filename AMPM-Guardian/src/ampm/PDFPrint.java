@@ -55,7 +55,7 @@ public class PDFPrint {
             while (i < 10 && rs.next()) {
                 //System.out.println("Enter loop");
 
-                PDDocument pDDocument = PDDocument.load(new File("./src/ProvidersTemp.pdf"));
+                PDDocument pDDocument = PDDocument.load(new File("../src/ProvidersTemp.pdf"));
                 PDAcroForm pDAcroForm = pDDocument.getDocumentCatalog().getAcroForm();
                 //Use while loop to put the data from database into pdf file
                 do {
@@ -82,7 +82,7 @@ public class PDFPrint {
                         break;
                     }
                 } while (rs.next());
-                pDDocument.save("./patient-cards/ProvidersCard/ProvidersCard-" + clientID + "-page" + j + ".pdf");
+                pDDocument.save("../patient-cards/ProvidersCard/ProvidersCard-" + clientID + "-page" + j + ".pdf");
                 pDDocument.close();
                 //Set item back to 1 and get extra page 
                 if (i > 10) {

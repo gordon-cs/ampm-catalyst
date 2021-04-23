@@ -81,9 +81,7 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField diagosedDate;
     @FXML
-    private TextField diagnosisDoctor;
-    @FXML
-    private ComboBox diagnosisProvider;
+    private ComboBox diagnosisType;
     @FXML
     private RadioButton diagonsisNone;
     @FXML
@@ -125,8 +123,6 @@ public class AddClientInfoScreenController implements Initializable {
 
 //Providers Tab
     @FXML
-    private TextField provideType;
-    @FXML
     private TextField providerName;
     @FXML
     private TextField nurseName;
@@ -136,6 +132,8 @@ public class AddClientInfoScreenController implements Initializable {
     private ListView providerList;
     @FXML
     private Label printProviderLabel;
+    @FXML
+    private ComboBox providerTypeBox;
 
 //Family History Tab
     @FXML
@@ -258,7 +256,7 @@ public class AddClientInfoScreenController implements Initializable {
                 while (rs.next()) {
                     diagnoseDescription.setText(rs.getString("Diagnosis"));
                     diagosedDate.setText(rs.getString("StartDate"));
-                    diagnosisDoctor.setText(rs.getString("DiagnosedBy"));
+                    diagnosisType.setValue(rs.getString("DiagnosedBy"));
                 }
                 //Make TextField editable
                 //diagnoseDescription.setEditable(false);
@@ -384,6 +382,8 @@ public class AddClientInfoScreenController implements Initializable {
     //Set up the TextField and ListView in Provider tab and make TextField uneditable before click edit button or new in the ListView
     private void providersTabSetUp() throws SQLException {
         setUpProviderList();
+        new AutoCompleteBox(providerTypeBox);
+        setUpProviderBox();
         Provider provider = new Provider(this.clientID);
         //Mouse Click event for list view of provider     
         providerList.setOnMouseClicked(e -> {
@@ -405,7 +405,7 @@ public class AddClientInfoScreenController implements Initializable {
                 ResultSet rs = dbConnection.executeStatement(provider.getSQLSelectByProvider(
                         providerDetail.substring(providerDetail.indexOf(":") + 2)));
                 while (rs.next()) {
-                    provideType.setText(rs.getString("Type"));
+                    providerTypeBox.setValue((rs.getString("Type")));
                     providerName.setText(rs.getString("Provider"));
                     nurseName.setText(rs.getString("Nurse"));
                     nameOfPANP.setText(rs.getString("PANP"));
@@ -626,15 +626,17 @@ public class AddClientInfoScreenController implements Initializable {
     //Insert or update diagnose info to database
     @FXML
     private void saveDiagnoseTab(MouseEvent event) throws SQLException, IOException {
+        new AutoCompleteBox(diagnosisType);
         //Only save information when it is valid
         if (!diagnoseDescription.getText().isEmpty()) {
             if (diagnoseList.getSelectionModel().getSelectedIndex() > -1) {
                 //Update infomation for current selected relative
-                Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), diagosedDate.getText(), diagnosisDoctor.getText());
+                Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), diagosedDate.getText(), diagnosisType.getItems().toString());
                 dbConnection.addInfo(diagnoseInfo.getSQLUpdateNewItem(diagnoseDescription.getText()));
+
             } else {
                 //Insert infomation for new relative
-                Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(), diagosedDate.getText(), diagnosisDoctor.getText());
+                Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(), diagosedDate.getText(), diagnosisType.getItems().toString());
                 dbConnection.addInfo(diagnoseInfo.getSQLInsert());
             }
             //Reset the ListView (auto update ListView)
@@ -643,7 +645,8 @@ public class AddClientInfoScreenController implements Initializable {
         //diagnoseDescription.setEditable(false);
         //diagnosisDoctor.setEditable(false);
 
-        if (!monitorSpecific.getText().isEmpty()) {
+        if (!monitorSpecific.getText()
+                .isEmpty()) {
             if (monitorList.getSelectionModel().getSelectedIndex() > -1) {
                 //Update infomation for current selected relative
                 Monitor monitorInfo = new Monitor(this.clientID, diagnoseDescription.getText(), (String) monitorList.getSelectionModel().getSelectedItem());
@@ -662,7 +665,7 @@ public class AddClientInfoScreenController implements Initializable {
         //diagnoseDescription.setEditable(true);
         //diagnosisDoctor.setEditable(true);
         diagnoseDescription.clear();
-        diagnosisDoctor.clear();
+        diagnosisType.getSelectionModel().clearSelection();
         diagosedDate.clear();
         diagnoseList.getSelectionModel().clearSelection();
         monitorList.getItems().clear();
@@ -673,11 +676,12 @@ public class AddClientInfoScreenController implements Initializable {
     private void printDiagnoseCard(MouseEvent event) throws SQLException {
         if (pdfPrint.printDiagnoses(this.clientID)) {
             //printProviderLabel.setStyle("-fx-text-fill:green");
-            File f = new File("../patient-cards/DiagnosesCard/");
+            File f = new File("/patient-cards/DiagnosesCard");
+            String localDir = System.getProperty("user.dir");
             //printProviderLabel.setText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
             // set content text
             a.setAlertType(AlertType.INFORMATION);
-            a.setContentText("Diagnoses information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
+            a.setContentText("Diagnoses information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath() + " " + localDir);
 
             // show the dialog
             a.show();
@@ -769,19 +773,29 @@ public class AddClientInfoScreenController implements Initializable {
     private void saveProviderTab(MouseEvent event) throws SQLException, IOException {
         //Only save information when it is valid
         if (!providerName.getText().isEmpty()) {
-
+            System.out.println(nurseName.getText() + nameOfPANP.getText());
             if (providerList.getSelectionModel().getSelectedIndex() > -1) {
                 //Update infomation for current selected relative
-                Provider providerInfo = new Provider(this.clientID, provideType.getText(),
-                        (String) providerList.getSelectionModel().getSelectedItem(), nurseName.getText(), nameOfPANP.getText());
+                String providerDetail = (String) providerList.getSelectionModel().getSelectedItem();
+                Provider providerInfo = new Provider(this.clientID, providerTypeBox.getValue().toString(),
+                        providerDetail.substring(providerDetail.indexOf(":") + 2), nurseName.getText(), nameOfPANP.getText());
                 dbConnection.addInfo(providerInfo.getSQLEdit(providerName.getText()));
             } else {
                 //Insert infomation for new relative
-                Provider providerInfo = new Provider(this.clientID, provideType.getText(),
+                Provider providerInfo = new Provider(this.clientID, providerTypeBox.getValue().toString(),
                         providerName.getText(), nurseName.getText(), nameOfPANP.getText());
                 dbConnection.addInfo(providerInfo.getSQLInsert());
             }
+            ProviderType providerType = new ProviderType();
+            //Check if this input type exist in provider type database or not,
+            //save if it do not exits
+            if (isEmpty(dbConnection.executeStatement(
+                    providerType.checkType(providerTypeBox.getValue().toString())))) {
+                dbConnection.addInfo(
+                        providerType.insertNewType(providerTypeBox.getValue().toString()));
+            }
             setUpProviderList();
+            setUpProviderBox();
         }
         //provideType.setEditable(false);
         //providerName.setEditable(false);
@@ -790,18 +804,12 @@ public class AddClientInfoScreenController implements Initializable {
     }
 
     @FXML
-    private void editProviderTab(MouseEvent event
-    ) {
-        //provideType.setEditable(true);
-        //providerName.setEditable(true);
-        //nurseName.setEditable(true);
-        //nameOfPANP.setEditable(true);
-
-        provideType.clear();
+    private void editProviderTab(MouseEvent event) {
         providerName.clear();
         nurseName.clear();
         nameOfPANP.clear();
         providerList.getSelectionModel().clearSelection();
+        providerTypeBox.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -1033,16 +1041,23 @@ public class AddClientInfoScreenController implements Initializable {
 
         //Show client name in every tab
         clientName.setText(name);
-        clientName.setStyle("-fx-background-color: grey;");
+        clientName.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName1.setText(name);
+        clientName1.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName2.setText(name);
+        clientName2.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName3.setText(name);
+        clientName3.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName4.setText(name);
+        clientName4.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName5.setText(name);
+        clientName5.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName6.setText(name);
+        clientName6.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
         clientName7.setText(name);
-        //Seperate name to first name and last name
+        clientName7.setStyle("-fx-text-fill:white; -fx-background-color: grey;");
 
+        //Seperate name to first name and last name
         //Set client with first name and last name 
         Client thisClient = new Client(id);
         ResultSet rs = dbConnection.executeStatement(thisClient.getByID());
@@ -1086,11 +1101,16 @@ public class AddClientInfoScreenController implements Initializable {
         Provider provider = new Provider(this.clientID);
         ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
         providerList.getItems().clear();
+        diagnosisType.getItems().clear();
         while (rs.next()) {
             providerList.getItems().addAll(rs.getString("Type") + ": " + rs.getString("Provider"));
-            diagnosisProvider.getItems().addAll(rs.getString("Provider"));
         }
         rs.close();
+        ResultSet rs2 = dbConnection.executeStatement(provider.getProviderType());
+        while (rs2.next()) {
+            diagnosisType.getItems().addAll(rs2.getString("Type"));
+        }
+        rs2.close();
     }
 
     public void setUpMedicalEquipList() throws SQLException {
@@ -1165,4 +1185,27 @@ public class AddClientInfoScreenController implements Initializable {
         rs.close();
     }
 
+    public void setUpProviderBox() throws SQLException {
+        ProviderType providerType = new ProviderType();
+        ResultSet rs = dbConnection.executeStatement(providerType.getProviderType());
+        System.out.println();
+        providerTypeBox.getItems().clear();
+        while (rs.next()) {
+            providerTypeBox.getItems().addAll(rs.getString("Type"));
+        }
+        rs.close();
+    }
+
+    // Check if rs is filled or not
+    public static boolean isEmpty(ResultSet rs) {
+        boolean isEmpty = true;
+        try {
+            while (rs.next()) {
+                isEmpty = false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isEmpty;
+    }
 }

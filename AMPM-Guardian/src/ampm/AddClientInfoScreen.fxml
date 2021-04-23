@@ -38,55 +38,54 @@
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        <Label layoutX="260.0" layoutY="195.0" text="Email Address">
+                        <Label layoutX="256.0" layoutY="194.0" text="Home Phone #">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="emailAddress" layoutX="354.0" layoutY="190.0" prefHeight="23.0" prefWidth="149.0">
+                        <TextField fx:id="phoneNumber" layoutX="354.0" layoutY="190.0" prefHeight="23.0" prefWidth="149.0">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        <Label layoutX="288.0" layoutY="229.0" text="Phone #">
+                        <Label layoutX="271.0" layoutY="229.0" prefHeight="17.0" prefWidth="75.0" text="Cell Phone #">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="phoneNumber" layoutX="354.0" layoutY="225.0" prefHeight="23.0" prefWidth="149.0">
+                        <TextField fx:id="cellPhoneNumber" layoutX="355.0" layoutY="225.0" prefHeight="23.0" prefWidth="149.0">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </TextField>
-                        
-                        <Button fx:id="saveBasicInfo" layoutX="440.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#saveBasicTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <Label layoutX="271.0" layoutY="267.0" text="Email Address">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="emailAddress" layoutX="354.0" layoutY="263.0" prefHeight="23.0" prefWidth="149.0">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="296.0" layoutY="300.0" prefHeight="15.0" prefWidth="31.0" text="DOB">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="dateOfBirth" layoutX="355.0" layoutY="296.0" prefHeight="23.0" prefWidth="148.0" />
                         <Button fx:id="editBasicInfo" layoutX="359.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#editBasicTab" prefHeight="27.0" prefWidth="58.0" text="Edit" />
-                  <Label layoutX="268.0" layoutY="267.0" prefHeight="15.0" prefWidth="88.0" text="Cell Phone #">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="296.0" layoutY="300.0" prefHeight="15.0" prefWidth="31.0" text="DOB">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="cellPhoneNumber" layoutX="354.0" layoutY="263.0" prefHeight="23.0" prefWidth="149.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="clientIdentifer" editable="false" layoutX="635.0" layoutY="13.0" prefHeight="23.0" prefWidth="149.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="538.0" layoutY="17.0" text="Client Identifier">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="dateOfBirth" layoutX="355.0" layoutY="296.0" prefHeight="23.0" prefWidth="148.0" />
+                        <Button fx:id="saveBasicInfo" layoutX="440.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#saveBasicTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                        <Label layoutX="538.0" layoutY="17.0" text="Client Identifier">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="clientIdentifer" editable="false" layoutX="635.0" layoutY="13.0" prefHeight="23.0" prefWidth="149.0">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </TextField>
                     </children>
                 </AnchorPane>
             </content>
@@ -106,11 +105,6 @@
                                 <Font size="12.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="provideType" layoutX="372.0" layoutY="145.0" prefHeight="25.0" prefWidth="153.0">
-                            <font>
-                                <Font size="12.0" />
-                            </font>
-                        </TextField>
                         <Label layoutX="273.0" layoutY="185.0" text="Provider Name">
                             <font>
                                 <Font size="12.0" />
@@ -143,10 +137,11 @@
                         </TextField>
                         <Button fx:id="saveProviderInfo" layoutX="449.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#saveProviderTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                         <Button fx:id="editProviderInfo" layoutX="370.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#editProviderTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                  <Text layoutX="576.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
-                  <TextField fx:id="clientName" editable="false" layoutX="657.0" layoutY="20.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Button fx:id="printProviderCard" layoutX="617.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#printProviderCard" prefHeight="27.0" prefWidth="162.0" text="Save Full Cards in Local" />
-                  <Label fx:id="printProviderLabel" layoutX="15.0" layoutY="507.0" prefHeight="42.0" prefWidth="769.0" />
+                        <Text layoutX="576.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                        <TextField fx:id="clientName" editable="false" layoutX="657.0" layoutY="20.0" prefHeight="23.0" prefWidth="117.0" />
+                        <Button fx:id="printProviderCard" layoutX="617.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#printProviderCard" prefHeight="27.0" prefWidth="162.0" text="Save Full Cards in Local" />
+                        <Label fx:id="printProviderLabel" layoutX="15.0" layoutY="507.0" prefHeight="42.0" prefWidth="769.0" />
+                  <ComboBox fx:id="providerTypeBox" editable="true" layoutX="371.0" layoutY="146.0" prefHeight="25.0" prefWidth="156.0" />
                     </children>
                 </AnchorPane>
             </content>
@@ -187,11 +182,6 @@
                                         <Font size="12.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="diagnosisDoctor" layoutX="334.0" layoutY="200.0" prefHeight="25.0" prefWidth="153.0">
-                                    <font>
-                                        <Font size="12.0" />
-                                    </font>
-                                </TextField>
                                 <Label layoutX="58.0" layoutY="313.0" prefHeight="33.0" prefWidth="81.0" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Monitor">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
@@ -208,10 +198,10 @@
                                 <ListView fx:id="diagnoseList" layoutX="31.0" layoutY="103.0" prefHeight="199.0" prefWidth="134.0" />
                                 <ListView fx:id="monitorList" layoutX="32.0" layoutY="357.0" prefHeight="111.0" prefWidth="133.0" />
                                 <Button fx:id="editDiagnoseInfo" layoutX="332.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#editDiagnoseTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                        <TextField fx:id="clientName1" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
-                        <Button fx:id="printDiagnoseCard" layoutX="660.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#printDiagnoseCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
-                        <ComboBox fx:id="diagnosisProvider" editable="true" layoutX="336.0" layoutY="235.0" prefWidth="150.0" />
+                                <TextField fx:id="clientName1" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                                <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                                <Button fx:id="printDiagnoseCard" layoutX="660.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#printDiagnoseCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
+                                <ComboBox fx:id="diagnosisType" editable="true" layoutX="336.0" layoutY="201.0" prefWidth="150.0" />
                                
                             </children>
                         </AnchorPane>
@@ -331,9 +321,9 @@
                         <ListView fx:id="medicationList" layoutX="31.0" layoutY="103.0" prefHeight="254.0" prefWidth="134.0" />
                         <Button fx:id="editMedicalInfo" layoutX="291.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#editMedicalTab" prefHeight="27.0" prefWidth="58.0" text="New" />
                         <Button fx:id="saveMedicalInfo" layoutX="370.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#saveMedicalTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
-                                          <Button fx:id="printMedicalCard" layoutX="621.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#printMedicalCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
-                  <TextField fx:id="clientName2" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                        <Button fx:id="printMedicalCard" layoutX="621.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#printMedicalCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
+                        <TextField fx:id="clientName2" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
                     </children>
                 </AnchorPane>
             </content>
@@ -380,9 +370,9 @@
                         </TextArea>
                         <Button fx:id="saveAlertInfo" layoutX="446.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#saveAlertTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                         <Button fx:id="editAlertInfo" layoutX="358.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#editAlertTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                  <TextField fx:id="clientName3" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
-                  <Button fx:id="printAlertCard" layoutX="644.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#printAlertsCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
+                        <TextField fx:id="clientName3" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                        <Button fx:id="printAlertCard" layoutX="644.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#printAlertsCard" prefHeight="27.0" prefWidth="128.0" text="Print Full Cards" />
                         
                     </children>
                 </AnchorPane>
@@ -462,8 +452,8 @@
                                 </TextField>
                                 <Button fx:id="savePreventiveInfo" layoutX="372.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#savePreventiveTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                                 <Button fx:id="editPreventiveInfo" layoutX="296.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#editPreventiveTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                        <TextField fx:id="clientName4" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                                <TextField fx:id="clientName4" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                                <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -522,8 +512,8 @@
                         </TextField>
                         <Button fx:id="savePreventionImmunInfo" layoutX="427.0" layoutY="294.0" mnemonicParsing="false" onMouseClicked="#savePreventionImmunTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                         <Button fx:id="editPreventionImmunInfo" layoutX="350.0" layoutY="294.0" mnemonicParsing="false" onMouseClicked="#editPreventionImmunTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                  <TextField fx:id="clientName5" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                        <TextField fx:id="clientName5" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
                     </children>
                 </AnchorPane>
             </content>
@@ -560,28 +550,28 @@
                         </Label>
                         <Button fx:id="saveFamilyHistoryInfo" layoutX="348.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#saveFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                         <Button fx:id="editFamilyHistoryInfo" layoutX="273.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#editFamilyHistoryTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                  <TextField fx:id="familyRelative" layoutX="348.0" layoutY="181.0" prefHeight="25.0" prefWidth="153.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </TextField>
-                  <TabPane layoutX="31.0" layoutY="100.0" prefHeight="285.0" prefWidth="166.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="Relation">
-                           <content>
-                                    <ListView fx:id="relativeList" prefHeight="256.0" prefWidth="163.0" />
-                           </content>
-                        </Tab>
-                      <Tab text="Diagnosis">
-                           <content>
-                              <ListView fx:id="diagnosesList" prefHeight="200.0" prefWidth="200.0" />
-                           </content>
-                        </Tab>
-                    </tabs>
-                  </TabPane>
-                  <TextField fx:id="clientName6" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
-                  <Text layoutX="31.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by" />
+                        <TextField fx:id="familyRelative" layoutX="348.0" layoutY="181.0" prefHeight="25.0" prefWidth="153.0">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </TextField>
+                        <TabPane layoutX="31.0" layoutY="100.0" prefHeight="285.0" prefWidth="166.0" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                                <Tab text="Relation">
+                                    <content>
+                                        <ListView fx:id="relativeList" prefHeight="256.0" prefWidth="163.0" />
+                                    </content>
+                                </Tab>
+                                <Tab text="Diagnosis">
+                                    <content>
+                                        <ListView fx:id="diagnosesList" prefHeight="200.0" prefWidth="200.0" />
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                        <TextField fx:id="clientName6" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                        <Text layoutX="31.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by" />
                     </children>
                 </AnchorPane>
             </content>
@@ -648,8 +638,8 @@
                         </TextArea>
                         <Button fx:id="saveMedicalEquipInfo" layoutX="410.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#saveMedicalEquipTab" prefHeight="27.0" prefWidth="58.0" text="Save" />
                         <Button fx:id="editMedicalEquipInfo" layoutX="331.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#editMedicalEquipTab" prefHeight="27.0" prefWidth="58.0" text="New" />
-                  <TextField fx:id="clientName7" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
-                  <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
+                        <TextField fx:id="clientName7" editable="false" layoutX="667.0" layoutY="30.0" prefHeight="23.0" prefWidth="117.0" />
+                        <Text layoutX="586.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name:" />
                     </children>
                 </AnchorPane>
             </content>

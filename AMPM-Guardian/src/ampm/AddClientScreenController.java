@@ -20,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -57,8 +59,8 @@ public class AddClientScreenController implements Initializable {
     DBConnection dbConnection;
     //Format for date
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     PreparedStatement preparedStatement;
+    Alert alert = new Alert(AlertType.NONE);
 
     /**
      * Initializes the controller class.
@@ -84,23 +86,23 @@ public class AddClientScreenController implements Initializable {
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
                 || phoneNumber.getText().isEmpty() || emailAddress.getText().isEmpty() || dateOfBirth.getValue().toString().isEmpty()) {
             infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Please complete the form");
+            infoLabel.setText("Please complete all the requir field");
         } //Validating the input of name
         else if (!isValidName(firstName.getText()) || !isValidName(lastName.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid Name");
+            infoLabel.setText("Name only alowes alphabet characters");
         } //Validating the input of phone number
         else if (!isValidPhone(phoneNumber.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid home phone number");
+            infoLabel.setText("Not accept this phone number");
         } //Validating the input of email
         else if (!isValidEmail(emailAddress.getText())) {
             infoLabel.setStyle("-fx-text-fill:red");
-            infoLabel.setText("Invalid email address");
+            infoLabel.setText("Not accept this email address");
         } else if (!(cellPhoneNumber.getText().isEmpty())) {
             if (!isValidPhone(cellPhoneNumber.getText())) {
                 infoLabel.setStyle("-fx-text-fill:red");
-                infoLabel.setText("Invalid cell phone number");
+                infoLabel.setText("Not accept this cell phone number");
             } else {
                 //Command to check if the client is already exist in databse
                 rs = dbConnection.checkClients(firstName.getText(), lastName.getText(),
@@ -111,10 +113,10 @@ public class AddClientScreenController implements Initializable {
                     try {
                         Client client = new Client(firstName.getText(), lastName.getText(),
                                 emailAddress.getText(), phoneNumber.getText(), formatter.format(date), cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
+                        System.out.println(dateOfBirth.getValue().toString());
                         dbConnection.addInfo(client.getSQLInsert());
-                        infoLabel.setStyle("-fx-text-fill:green");
-                        infoLabel.setText("A new client was inserted successfully!");
-
+                        alert.setAlertType(AlertType.INFORMATION);
+                        alert.setContentText("A new client was insertion successfully!");
                         finalizeInsert();
                     } catch (SQLException e) {
                         // TODO: handle exception
@@ -137,9 +139,8 @@ public class AddClientScreenController implements Initializable {
                     Client client = new Client(firstName.getText(), lastName.getText(),
                             emailAddress.getText(), phoneNumber.getText(), formatter.format(date), cellPhoneNumber.getText(), dateOfBirth.getValue().toString());
                     dbConnection.addInfo(client.getSQLInsert());
-                    infoLabel.setStyle("-fx-text-fill:green");
-                    infoLabel.setText("A new client was inserted successfully!");
-
+                    alert.setAlertType(AlertType.INFORMATION);
+                    alert.setContentText("A new client was insertion successfully!");
                     finalizeInsert();
 
                 } catch (SQLException e) {
@@ -172,6 +173,8 @@ public class AddClientScreenController implements Initializable {
             return true;
         } //validating phone number where area code is in braces ()
         else if (phoneNo.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")) {
+            return true;
+        } else if (phoneNo.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
             return true;
         } //return false if nothing matches the input
         else {

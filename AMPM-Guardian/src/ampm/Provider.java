@@ -2,9 +2,10 @@ package ampm;
 
 /**
  * This one is for provide information
+ *
  * @author john.zhu
  */
-public class Provider{
+public class Provider {
     // The private values for this object, each one represents a col in the DB
 
     private String clientID;
@@ -12,7 +13,7 @@ public class Provider{
     private String providerName;
     private String nurseName;
     private String nameOfPANP;
-    
+
     Provider(String clientID, String type, String providerName, String nurseName, String nameOfPANP) {
         this.clientID = clientID;
         this.type = type;
@@ -118,6 +119,12 @@ public class Provider{
                 + "'AND Provider = '"
                 + provider + "'";
 
+        return sqlSelect;
+    }
+
+    public String getProviderType() {
+        String sqlSelect = "SELECT distinct Type FROM AMPM.Provider "
+                + "WHERE ClientID ='" + this.clientID + "'";
         return sqlSelect;
     }
 }

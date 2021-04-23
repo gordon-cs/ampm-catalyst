@@ -149,9 +149,6 @@ public class DBConnection {
      * @throws SQLException
      */
     public static ResultSet checkClients(String firstName, String lastName, String emailAddress, String phoneNumber) throws SQLException {
-        if (offlineMode) {
-            // if we are in offline mode, then we should probably 
-        }
         return stmt.executeQuery("SELECT * FROM Client WHERE FirstName = '" + firstName
                 + "' AND LastName = '" + lastName
                 + "' AND Email = '" + emailAddress

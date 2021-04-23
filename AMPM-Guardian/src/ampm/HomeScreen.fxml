@@ -14,7 +14,6 @@
                 <SplitPane dividerPositions="0.4308300395256917" focusTraversable="true" orientation="VERTICAL" prefHeight="525.0" prefWidth="597.0">
                     <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-              
                             <children>
                                 <Button fx:id="newClientInfoButton" layoutX="431.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#handleNewClientInfoClicked" prefWidth="150.0" text="Edit Client Info" />
                                 <Label fx:id="clientName" layoutX="24.0" layoutY="24.0" prefHeight="21.0" prefWidth="192.0" text="Client Name" />

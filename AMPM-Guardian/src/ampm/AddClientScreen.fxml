@@ -20,7 +20,7 @@
         <TextField id="usernameField" fx:id="firstName" layoutX="187.0" layoutY="200.0" prefWidth="200.0" />
         <Label id="usernameLabel" layoutX="186.0" layoutY="175.0" text="First name" />
         <TextField id="usernameField" fx:id="lastName" layoutX="187.0" layoutY="260.0" prefWidth="200.0" />
-        <TextField id="usernameField" fx:id="phoneNumber" layoutX="187.0" layoutY="320.0" prefWidth="200.0" />
+        <TextField id="usernameField" fx:id="phoneNumber" layoutX="187.0" layoutY="320.0" prefWidth="200.0" promptText="XXX-XXX-XXXX" />
         <TextField id="usernameField" fx:id="cellPhoneNumber" layoutX="187.0" layoutY="380.0" prefWidth="200.0" />
         <TextField id="usernameField" fx:id="emailAddress" layoutX="187.0" layoutY="440.0" prefWidth="200.0" />
         <Label id="usernameLabel" layoutX="186.0" layoutY="235.0" text="Last name" />
