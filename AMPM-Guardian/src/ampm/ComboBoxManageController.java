@@ -29,13 +29,13 @@ import javafx.stage.Stage;
 public class ComboBoxManageController implements Initializable {
 
     @FXML
-    public TableView<ProviderBox> providerTable;
+    public TableView<ProviderList> providerTable;
     @FXML
-    public TableColumn<ProviderBox, String> columnType;
+    public TableColumn<ProviderList, String> columnType;
     @FXML
-    public TableColumn<ProviderBox, String> columnProvider;
+    public TableColumn<ProviderList, String> columnProvider;
     DBConnection dbConnection;
-    private ObservableList<ProviderBox> items;
+    private ObservableList<ProviderList> items;
 
     ;
 
@@ -56,7 +56,7 @@ public class ComboBoxManageController implements Initializable {
             ResultSet rs = dbConnection.executeStatement("SELECT * FROM AMPM.ProviderList");
             while (rs.next()) {
                 //get strings
-                items.add(new ProviderBox(rs.getString("Type"), rs.getString("Provider")));
+                items.add(new ProviderList(rs.getString("Type"), rs.getString("Provider")));
                 providerTable.setItems(items);
                 System.out.println(rs.getString("Type") + " " + rs.getString("Provider"));
             }
@@ -65,8 +65,8 @@ public class ComboBoxManageController implements Initializable {
             System.err.println("Error" + ex);
         }
 
-        columnType.setCellValueFactory(new PropertyValueFactory<ProviderBox, String>("Type"));
-        columnProvider.setCellValueFactory(new PropertyValueFactory<ProviderBox, String>("Provider"));
+        columnType.setCellValueFactory(new PropertyValueFactory<ProviderList, String>("Type"));
+        columnProvider.setCellValueFactory(new PropertyValueFactory<ProviderList, String>("Provider"));
 
         //tableview.getColumns().addAll(columnType, columnProvider);
     }

@@ -61,7 +61,7 @@ public class Diagnose {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.Diagnose (ClientID, Diagnosis, StartDate, DiagnosedBy) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Diagnoses (ClientID, Diagnosis, StartDate, DiagnosedBy) Values ('"
                 + this.clientID + "','"
                 + this.description + "','"
                 + this.diagnosedDate + "','"
@@ -74,7 +74,7 @@ public class Diagnose {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis = '" + this.description + "',"
+        sqlUpdate = "UPDATE AMPM.Diagnoses SET Diagnosis = '" + this.description + "',"
                 + "StartDate = '" + this.diagnosedDate + "', "
                 + "DiagnosedBy = '" + this.byWho + "'"
                 + "WHERE ClientID = '" + this.clientID + "'";
@@ -85,7 +85,7 @@ public class Diagnose {
     public String getSQLUpdateNewItem(String newItem) {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.Diagnose SET Diagnosis = '" + newItem + "',"
+        sqlUpdate = "UPDATE AMPM.Diagnoses SET Diagnosis = '" + newItem + "',"
                 + "StartDate = '" + this.diagnosedDate + "', "
                 + "DiagnosedBy = '" + this.byWho + "'"
                 + "WHERE ClientID = '" + this.clientID + "'"
@@ -95,14 +95,14 @@ public class Diagnose {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID = '"
+        String sqlSelect = "SELECT * FROM AMPM.Diagnoses WHERE ClientID = '"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByDiagnosis(String diagnosis) {
-        String sqlSelect = "SELECT * FROM AMPM.Diagnose WHERE ClientID  = '" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Diagnoses WHERE ClientID  = '" + this.clientID
                 + "'AND Diagnosis = '" + diagnosis + "'";
 
         return sqlSelect;

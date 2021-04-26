@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
@@ -41,5 +42,6 @@
                 </VBox>
             </left>
         </BorderPane>
+      <Text layoutX="307.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click this bar to refresh client list" wrappingWidth="192.13671875" />
     </children>
 </AnchorPane>

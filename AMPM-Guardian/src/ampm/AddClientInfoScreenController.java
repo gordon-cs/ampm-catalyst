@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +42,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -79,7 +81,7 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private TextField diagnoseDescription;
     @FXML
-    private TextField diagosedDate;
+    private DatePicker diagosedDate;
     @FXML
     private ComboBox diagnosisType;
     @FXML
@@ -92,6 +94,8 @@ public class AddClientInfoScreenController implements Initializable {
     private ListView diagnoseList;
     @FXML
     private ListView monitorList;
+    @FXML
+    private TextArea printDiagnoseLabel;
 
 //Preventive Tab
     @FXML
@@ -131,7 +135,7 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private ListView providerList;
     @FXML
-    private Label printProviderLabel;
+    private TextArea printProviderLabel;
     @FXML
     private ComboBox providerTypeBox;
 
@@ -163,7 +167,7 @@ public class AddClientInfoScreenController implements Initializable {
 
 //Alerts Tab
     @FXML
-    private TextField alertsType;
+    private ComboBox alertsType;
     @FXML
     private TextField alertsSpecific;
     @FXML
@@ -172,36 +176,41 @@ public class AddClientInfoScreenController implements Initializable {
     private Button addNewAlert;
     @FXML
     private ListView alertList;
+    @FXML
+    private TextArea printAlertLabel;
 
 //Medication Tab
     @FXML
-    private TextField medicationClass;
+    private ComboBox medicationClass;
     @FXML
-    private TextField medicationGenericName;
+    private ComboBox medicationGenericName;
     @FXML
-    private TextField medicationBrandName;
+    private ComboBox medicationBrandName;
     @FXML
     private TextField medicationDose;
     @FXML
     private TextField medicationFrequency;
     @FXML
-    private TextField medicationStartDate;
+    private DatePicker medicationStartDate;
     @FXML
-    private TextField medicationPrescribedBy;
+    private ComboBox medicationPrescribedBy;
     @FXML
     private TextField medicationUsedFor;
     @FXML
-    private TextField medicationStoppedDate;
+    private DatePicker medicationStoppedDate;
     @FXML
-    private TextField medicationProvider;
+    private ComboBox medicationProvider;
     @FXML
     private ListView medicationList;
+    @FXML
+    private TextArea printMedicationLabel;
 
     private String name;
     private String clientID;
     DBConnection dbConnection;
     PDFPrint pdfPrint;
     Alert a = new Alert(AlertType.NONE);
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Initializes the controller class.
@@ -255,7 +264,7 @@ public class AddClientInfoScreenController implements Initializable {
                         (String) diagnoseList.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
                     diagnoseDescription.setText(rs.getString("Diagnosis"));
-                    diagosedDate.setText(rs.getString("StartDate"));
+                    diagosedDate.setValue(LocalDate.parse(rs.getString("StartDate")));
                     diagnosisType.setValue(rs.getString("DiagnosedBy"));
                 }
                 //Make TextField editable
@@ -476,18 +485,6 @@ public class AddClientInfoScreenController implements Initializable {
         setUpMedicalEquipList();
         MedicalEquipment medicalEquip = new MedicalEquipment(this.clientID);
         equipmentList.setOnMouseClicked(e -> {
-            /*
-            if (equipmentList.getSelectionModel().getSelectedItem().equals("New")) {
-                medicalEquipType.clear();
-                medicalEquipPrescribe.clear();
-                medicalEquipReason.clear();
-                medicalEquipNotes.clear();
-                //medicalEquipType.setEditable(true);
-                //medicalEquipPrescribe.setEditable(true);
-                //medicalEquipReason.setEditable(true);
-                //medicalEquipNotes.setEditable(true);
-            } else {
-             */
             try {
                 ResultSet rs = dbConnection.executeStatement(medicalEquip.getSQLSelectByType(
                         (String) equipmentList.getSelectionModel().getSelectedItem()));
@@ -505,10 +502,12 @@ public class AddClientInfoScreenController implements Initializable {
                 ex.printStackTrace();
             }
         });
+
     }
 
     private void alertsTabSetUp() throws SQLException {
         setUpAlertList();
+        setUpAlertTypeBox();
         Alerts alert = new Alerts(this.clientID);
         alertList.setOnMouseClicked(e -> {
 
@@ -517,7 +516,7 @@ public class AddClientInfoScreenController implements Initializable {
                 ResultSet rs = dbConnection.executeStatement(alert.getSQLSelectByType(
                         alertDetail.substring(alertDetail.indexOf(":") + 2)));
                 while (rs.next()) {
-                    alertsType.setText(rs.getString("AlertType"));
+                    alertsType.setValue(rs.getString("AlertType"));
                     alertsSpecific.setText(rs.getString("AlertSpecific"));
                     altersDescrption.setText(rs.getString("AlertDescription"));
                     altersDescrption.setWrapText(true);
@@ -533,67 +532,43 @@ public class AddClientInfoScreenController implements Initializable {
 
     private void medicationTabSetUp() throws SQLException {
         setUpMedicationList();
+        setUpMedicationClassBox();
         Medication medication = new Medication(this.clientID);
         medicationList.setOnMouseClicked(e -> {
-            /*
-            if (medicationList.getSelectionModel().getSelectedItem().equals("New")) {
-                medicationClass.clear();
-                medicationGenericName.clear();
-                medicationBrandName.clear();
-                medicationDose.clear();
-                medicationFrequency.clear();
-                medicationStartDate.clear();
-                medicationPrescribedBy.clear();
-                medicationUsedFor.clear();
-                medicationStoppedDate.clear();
-                medicationProvider.clear();
-                //medicationClass.setEditable(true);
-                //medicationGenericName.setEditable(true);
-                //medicationBrandName.setEditable(true);
-                //medicationDose.setEditable(true);
-                //medicationFrequency.setEditable(true);
-                //medicationStartDate.setEditable(true);
-                //medicationPrescribedBy.setEditable(true);
-                //medicationUsedFor.setEditable(true);
-                //medicationStoppedDate.setEditable(true);
-                //medicationProvider.setEditable(true);
-            } else {
-             */
             try {
                 ResultSet rs = dbConnection.executeStatement(medication.getSQLSelectByGenericName(
                         (String) medicationList.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
-                    medicationClass.setText(rs.getString("Class"));
-                    medicationGenericName.setText(rs.getString("GenericName"));
-                    medicationBrandName.setText(rs.getString("BrandName"));
+                    medicationClass.setValue(rs.getString("Class"));
+                    medicationGenericName.setValue(rs.getString("GenericName"));
+                    medicationBrandName.setValue(rs.getString("BrandName"));
                     medicationDose.setText(rs.getString("Dose"));
                     medicationFrequency.setText(rs.getString("Frequency"));
-                    medicationStartDate.setText(rs.getString("StartDate"));
-                    medicationPrescribedBy.setText(rs.getString("PrescribedBy"));
+                    medicationStartDate.setValue(LocalDate.parse(rs.getString("StartDate")));
+                    medicationPrescribedBy.setValue(rs.getString("PrescribedBy"));
                     medicationUsedFor.setText(rs.getString("UsedFor"));
-                    medicationStoppedDate.setText(rs.getString("DateStopped"));
-                    medicationProvider.setText(rs.getString("Provider"));
+                    medicationStoppedDate.setValue(LocalDate.parse(rs.getString("DateStopped")));
+                    medicationProvider.setValue(rs.getString("Provider"));
                 }
-                //medicationClass.setEditable(false);
-                //medicationGenericName.setEditable(false);
-                //medicationBrandName.setEditable(false);
-                //medicationDose.setEditable(false);
-                //medicationFrequency.setEditable(false);
-                //medicationStartDate.setEditable(false);
-                //medicationPrescribedBy.setEditable(false);
-                //medicationUsedFor.setEditable(false);
-                //medicationStoppedDate.setEditable(false);
-                //medicationProvider.setEditable(false);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         });
-        Medication medicaiton = new Medication(this.clientID);
-        ResultSet rs = dbConnection.executeStatement(medicaiton.getSQLSelect());
-
-        if (rs.next()) {
-
-        }
+        medicationClass.getSelectionModel().selectedItemProperty().addListener(e -> {
+            medicationBrandName.getSelectionModel().clearSelection();
+            try {
+                setUpGenericNameBox(medicationClass.getSelectionModel().getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(AddClientInfoScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        medicationGenericName.getSelectionModel().selectedItemProperty().addListener(e -> {
+            try {
+                setUpBrandNameBox(medicationGenericName.getSelectionModel().getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(AddClientInfoScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     //Update client basic info
@@ -626,17 +601,16 @@ public class AddClientInfoScreenController implements Initializable {
     //Insert or update diagnose info to database
     @FXML
     private void saveDiagnoseTab(MouseEvent event) throws SQLException, IOException {
-        new AutoCompleteBox(diagnosisType);
         //Only save information when it is valid
         if (!diagnoseDescription.getText().isEmpty()) {
             if (diagnoseList.getSelectionModel().getSelectedIndex() > -1) {
                 //Update infomation for current selected relative
-                Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), diagosedDate.getText(), diagnosisType.getItems().toString());
+                Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), diagosedDate.getValue().toString(), diagnosisType.getValue().toString());
                 dbConnection.addInfo(diagnoseInfo.getSQLUpdateNewItem(diagnoseDescription.getText()));
 
             } else {
                 //Insert infomation for new relative
-                Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(), diagosedDate.getText(), diagnosisType.getItems().toString());
+                Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getText(), diagosedDate.getValue().toString(), diagnosisType.getValue().toString());
                 dbConnection.addInfo(diagnoseInfo.getSQLInsert());
             }
             //Reset the ListView (auto update ListView)
@@ -666,7 +640,7 @@ public class AddClientInfoScreenController implements Initializable {
         //diagnosisDoctor.setEditable(true);
         diagnoseDescription.clear();
         diagnosisType.getSelectionModel().clearSelection();
-        diagosedDate.clear();
+        diagosedDate.setValue(null);
         diagnoseList.getSelectionModel().clearSelection();
         monitorList.getItems().clear();
         monitorSpecific.clear();
@@ -675,20 +649,14 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void printDiagnoseCard(MouseEvent event) throws SQLException {
         if (pdfPrint.printDiagnoses(this.clientID)) {
-            //printProviderLabel.setStyle("-fx-text-fill:green");
-            File f = new File("/patient-cards/DiagnosesCard");
-            String localDir = System.getProperty("user.dir");
-            //printProviderLabel.setText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
-            // set content text
-            a.setAlertType(AlertType.INFORMATION);
-            a.setContentText("Diagnoses information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath() + " " + localDir);
-
-            // show the dialog
-            a.show();
+            printDiagnoseLabel.setStyle("-fx-text-fill:green");
+            File f = new File("../patient-cards/DiagnosesCard");
+            Date date = new Date();
+            printDiagnoseLabel.setText("Diagnose information for this client was saved into the pdf file at " + formatter.format(date) + ". The location is \n " + f.getAbsolutePath());
 
         } else {
-            a.setAlertType(AlertType.ERROR);
-            a.setContentText("Failed to save the diagnoses information for this client");
+            printDiagnoseLabel.setStyle("-fx-text-fill:red");
+            printDiagnoseLabel.setText("Failed to save the diagnoses information for this client");
         }
 
     }
@@ -815,19 +783,14 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void printProviderCard(MouseEvent event) throws SQLException {
         if (pdfPrint.printProviders(this.clientID)) {
-            //printProviderLabel.setStyle("-fx-text-fill:green");
-            File f = new File("./patient-cards/ProvidersCard");
-            //printProviderLabel.setText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
-            // set content text
-            a.setAlertType(AlertType.INFORMATION);
-            a.setContentText("Provider information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
-
-            // show the dialog
-            a.show();
+            printProviderLabel.setStyle("-fx-text-fill:green");
+            File f = new File("../patient-cards/ProvidersCard");
+            Date date = new Date();
+            printProviderLabel.setText("Provider information for this client was saved into the pdf file at " + formatter.format(date) + ". The location is \n " + f.getAbsolutePath());
 
         } else {
-            a.setAlertType(AlertType.ERROR);
-            a.setContentText("Failed to save the provider information for this client");
+            printProviderLabel.setStyle("-fx-text-fill:red");
+            printProviderLabel.setText("Failed to save the provider information for this client");
         }
     }
 
@@ -905,18 +868,13 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void printMedicalCard(MouseEvent event) throws SQLException {
         if (pdfPrint.printMedications(this.clientID)) {
-            File f = new File("./patient-cards/MedicationsCard/MedicationsCard-19990101AA-page1");
-            File parent = f.getAbsoluteFile().getParentFile();
-            // set content text
-            a.setAlertType(AlertType.INFORMATION);
-            a.setContentText("Medications information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
-
-            // show the dialog
-            a.show();
-
+            printMedicationLabel.setStyle("-fx-text-fill:green");
+            File f = new File("../patient-cards/MedicationsCard");
+            Date date = new Date();
+            printMedicationLabel.setText("Medication information for this client was saved into the pdf file at " + formatter.format(date) + ". The location is \n " + f.getAbsolutePath());
         } else {
-            a.setAlertType(AlertType.ERROR);
-            a.setContentText("Failed to save the medications information for this client");
+            printMedicationLabel.setStyle("-fx-text-fill:red");
+            printMedicationLabel.setText("Failed to save the medications information for this client");
         }
     }
 
@@ -927,15 +885,24 @@ public class AddClientInfoScreenController implements Initializable {
 
             if (alertList.getSelectionModel().getSelectedIndex() > -1) {
                 String alertDetail = (String) alertList.getSelectionModel().getSelectedItem();
-                Alerts alertInfo = new Alerts(this.clientID, alertsType.getText(),
-                        alertDetail.substring(alertDetail.indexOf(":") + 1), altersDescrption.getText());
+                Alerts alertInfo = new Alerts(this.clientID, alertsType.getValue().toString(),
+                        alertDetail.substring(alertDetail.indexOf(":") + 2), altersDescrption.getText());
                 dbConnection.addInfo(alertInfo.getSQLUpdateNewDetail(alertsSpecific.getText()));
             } else {
-                Alerts alertInfo = new Alerts(this.clientID, alertsType.getText(),
+                Alerts alertInfo = new Alerts(this.clientID, alertsType.getValue().toString(),
                         alertsSpecific.getText(), altersDescrption.getText());
                 dbConnection.addInfo(alertInfo.getSQLInsert());
             }
+            AlertList alertList = new AlertList();
+            //Check if this input type exist in provider type database or not,
+            //save if it do not exits
+            if (isEmpty(dbConnection.executeStatement(
+                    alertList.checkType(alertsType.getValue().toString())))) {
+                dbConnection.addInfo(
+                        alertList.insertNewType(alertsType.getValue().toString()));
+            }
             setUpAlertList();
+            setUpAlertTypeBox();
         }
         //alertsSpecific.setEditable(false);
         //altersDescrption.setEditable(false);
@@ -946,7 +913,7 @@ public class AddClientInfoScreenController implements Initializable {
     ) {
         //alertsSpecific.setEditable(true);
         //altersDescrption.setEditable(true);
-        alertsType.clear();
+        alertsType.getSelectionModel().clearSelection();
         alertsSpecific.clear();
         altersDescrption.clear();
         alertList.getSelectionModel().clearSelection();
@@ -955,39 +922,36 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void printAlertsCard(MouseEvent event) throws SQLException {
         if (pdfPrint.printAlerts(this.clientID)) {
-            File f = new File("./patient-cards/AlertsCard/");
-            // set alert info
-            a.setAlertType(AlertType.INFORMATION);
-            a.setContentText("Alerts information for this client was saved into the pdf file. The location is \n " + f.getAbsolutePath());
-            // show the dialog
-            a.show();
-
+            printAlertLabel.setStyle("-fx-text-fill:green");
+            File f = new File("../patient-cards/AlertsCard");
+            Date date = new Date();
+            printAlertLabel.setText("Alert information for this client was saved into the pdf file at " + formatter.format(date) + ". The location is \n " + f.getAbsolutePath());
         } else {
-            a.setAlertType(AlertType.ERROR);
-            a.setContentText("Failed to save the Alert information for this client");
+            printAlertLabel.setStyle("-fx-text-fill:red");
+            printAlertLabel.setText("Failed to save the Alert information for this client");
         }
     }
 
     @FXML
     private void saveMedicalTab(MouseEvent event) throws SQLException, IOException {
         //Only save information when it is valid
-        if (!medicationGenericName.getText().isEmpty()) {
+        if (!medicationGenericName.getItems().toString().isEmpty()) {
 
             if (medicationList.getSelectionModel().getSelectedIndex() > -1) {
-                Medication medicationInfo = new Medication(this.clientID, medicationClass.getText(),
+                Medication medicationInfo = new Medication(this.clientID, medicationClass.getValue().toString(),
                         (String) medicationList.getSelectionModel().getSelectedItem(),
-                        medicationBrandName.getText(), medicationDose.getText(),
-                        medicationFrequency.getText(), medicationStartDate.getText(),
-                        medicationPrescribedBy.getText(), medicationUsedFor.getText(),
-                        medicationStoppedDate.getText(), medicationProvider.getText());
-                dbConnection.addInfo(medicationInfo.getSQLUpdateNewItem(medicationGenericName.getText()));
+                        medicationBrandName.getValue().toString(), medicationDose.getText(),
+                        medicationFrequency.getText(), medicationStartDate.getValue().toString(),
+                        medicationPrescribedBy.getValue().toString(), medicationUsedFor.getText(),
+                        medicationStoppedDate.getValue().toString(), medicationProvider.getValue().toString());
+                dbConnection.addInfo(medicationInfo.getSQLUpdateNewItem(medicationGenericName.getValue().toString()));
             } else {
-                Medication medicationInfo = new Medication(this.clientID, medicationClass.getText(),
-                        medicationGenericName.getText(), medicationBrandName.getText(),
+                Medication medicationInfo = new Medication(this.clientID, medicationClass.getValue().toString(),
+                        medicationGenericName.getValue().toString(), medicationBrandName.getValue().toString(),
                         medicationDose.getText(), medicationFrequency.getText(),
-                        medicationStartDate.getText(), medicationPrescribedBy.getText(),
-                        medicationUsedFor.getText(), medicationStoppedDate.getText(),
-                        medicationProvider.getText());
+                        medicationStartDate.getValue().toString(), medicationPrescribedBy.getValue().toString(),
+                        medicationUsedFor.getText(), medicationStoppedDate.getValue().toString(),
+                        medicationProvider.getValue().toString());
                 dbConnection.addInfo(medicationInfo.getSQLInsert());
             }
             setUpMedicationList();
@@ -1018,16 +982,16 @@ public class AddClientInfoScreenController implements Initializable {
         //medicationStoppedDate.setEditable(true);
         //medicationProvider.setEditable(true);
 
-        medicationClass.clear();
-        medicationGenericName.clear();
-        medicationBrandName.clear();
+        medicationClass.getSelectionModel().clearSelection();
+        medicationGenericName.getSelectionModel().clearSelection();
+        medicationBrandName.getSelectionModel().clearSelection();
         medicationDose.clear();
         medicationFrequency.clear();
-        medicationStartDate.clear();
-        medicationPrescribedBy.clear();
+        medicationStartDate.setValue(null);
+        medicationPrescribedBy.getSelectionModel().clearSelection();
         medicationUsedFor.clear();
-        medicationStoppedDate.clear();
-        medicationProvider.clear();
+        medicationStoppedDate.setValue(null);
+        medicationProvider.getSelectionModel().clearSelection();
         medicationList.getSelectionModel().clearSelection();
     }
 
@@ -1102,14 +1066,22 @@ public class AddClientInfoScreenController implements Initializable {
         ResultSet rs = dbConnection.executeStatement(provider.getSQLSelect());
         providerList.getItems().clear();
         diagnosisType.getItems().clear();
+        medicationProvider.getItems().clear();
+        medicationPrescribedBy.getItems().clear();
         while (rs.next()) {
             providerList.getItems().addAll(rs.getString("Type") + ": " + rs.getString("Provider"));
         }
         rs.close();
+        //Set up combo box for provider information
         ResultSet rs2 = dbConnection.executeStatement(provider.getProviderType());
         while (rs2.next()) {
             diagnosisType.getItems().addAll(rs2.getString("Type"));
+            medicationProvider.getItems().addAll(rs2.getString("Type"));
+            medicationPrescribedBy.getItems().addAll(rs2.getString("Type"));
         }
+        new AutoCompleteBox(diagnosisType);
+        new AutoCompleteBox(medicationProvider);
+        new AutoCompleteBox(medicationPrescribedBy);
         rs2.close();
     }
 
@@ -1193,6 +1165,51 @@ public class AddClientInfoScreenController implements Initializable {
         while (rs.next()) {
             providerTypeBox.getItems().addAll(rs.getString("Type"));
         }
+        rs.close();
+    }
+
+    public void setUpAlertTypeBox() throws SQLException {
+        AlertList alertType = new AlertList();
+        ResultSet rs = dbConnection.executeStatement(alertType.getProviderType());
+        System.out.println();
+        alertsType.getItems().clear();
+        while (rs.next()) {
+            alertsType.getItems().addAll(rs.getString("AlertType"));
+        }
+        new AutoCompleteBox(alertsType);
+        rs.close();
+    }
+
+    public void setUpMedicationClassBox() throws SQLException {
+        MedicationList medicationList = new MedicationList();
+        ResultSet rs = dbConnection.executeStatement(medicationList.getMedicationClass());
+        medicationClass.getItems().clear();
+        while (rs.next()) {
+            medicationClass.getItems().addAll(rs.getString("Class"));
+        }
+        new AutoCompleteBox(medicationClass);
+        rs.close();
+    }
+
+    public void setUpGenericNameBox(String geneClass) throws SQLException {
+        MedicationList medicationList = new MedicationList();
+        ResultSet rs = dbConnection.executeStatement(medicationList.getGenericaNameByClass(geneClass));
+        medicationGenericName.getItems().clear();
+        while (rs.next()) {
+            medicationGenericName.getItems().addAll(rs.getString("Generic_Name"));
+        }
+        //new AutoCompleteBox(medicationGenericName);
+        rs.close();
+    }
+
+    public void setUpBrandNameBox(String geneName) throws SQLException {
+        MedicationList medicationList = new MedicationList();
+        ResultSet rs = dbConnection.executeStatement(medicationList.getBrandNameByGenericaName(geneName));
+        medicationBrandName.getItems().clear();
+        while (rs.next()) {
+            medicationBrandName.getItems().addAll(rs.getString("Brand_Name"));
+        }
+        //new AutoCompleteBox(medicationBrandName);
         rs.close();
     }
 

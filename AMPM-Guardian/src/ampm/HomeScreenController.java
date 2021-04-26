@@ -62,9 +62,6 @@ public class HomeScreenController implements Initializable {
     @FXML
     BorderPane refreshPanel;
 
-    @FXML
-    private Parent root;
-
     private ResultSet rs;
     private ArrayList<Client> clients;
     private ObservableList<String> items;
@@ -215,14 +212,20 @@ public class HomeScreenController implements Initializable {
     @FXML
     public void refreshListview(MouseEvent event) throws SQLException {
         setupListView();
-        System.out.println(event.getX());
+        //System.out.println(event.getX());
     }
-
+    /*
     private void tryRefresh() {
-        root.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>() {
+        root1.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent window) {
+                try {
+                    setupListView();
+                } catch (SQLException ex) {
+                    Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
+     */
 }
