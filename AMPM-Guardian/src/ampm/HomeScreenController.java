@@ -106,8 +106,8 @@ public class HomeScreenController implements Initializable {
             clients.add(new Client(rs.getString("ClientID"), rs.getString("FirstName"), rs.getString("Lastname")));
         }
         items = FXCollections.observableArrayList();
+        items.clear();
         clientListView.setItems(items);
-
         // Add the first 10 clients to the ListView
         if (clients.size() > 10) {
             clients.subList(0, 10).forEach(client -> {
@@ -135,12 +135,12 @@ public class HomeScreenController implements Initializable {
             return;
         }
         items = FXCollections.observableArrayList();
+        items.clear();
         clients.forEach(client -> {
             if (client.getFullName().length() >= currSearch.length() || client.getID().length() >= currSearch.length()) {
                 if (client.getFullName().contains(currSearch)) {
                     items.add(client.getFullName() + " (" + client.getID() + ")");
-                }
-                if (client.getID().contains(currSearch)) {
+                } else if (client.getID().contains(currSearch)) {
                     items.add(client.getFullName() + " (" + client.getID() + ")");
                 }
             }
