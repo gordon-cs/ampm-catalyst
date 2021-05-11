@@ -13,20 +13,20 @@ public class AlertList {
 
     //Insert new alert type to AlertList database table
     public String insertNewType(String type) {
-        String sqlSelect = "INSERT INTO AMPM.AlertList (AlertType) VALUES ('"
+        String sqlSelect = "INSERT INTO AMPM.Alert_List (AlertType) VALUES ('"
                 + type + "')";
         return sqlSelect;
     }
 
     //Check if this type exist in database table
     public String checkType(String type) {
-        String sqlSelect = "SELECT * FROM AMPM.AlertList WHERE AlertType = '" + type + "'";
+        String sqlSelect = "SELECT * FROM AMPM.Alert_List WHERE AlertType = '" + type + "'";
         return sqlSelect;
     }
 
     //Get all the type from AlertList database table
     public String getProviderType() {
-        String sqlSelect = "SELECT * FROM AMPM.AlertList";
+        String sqlSelect = "SELECT * FROM AMPM.Alert_List";
         return sqlSelect;
     }
 }

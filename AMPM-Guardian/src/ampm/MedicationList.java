@@ -16,7 +16,6 @@ public class MedicationList {
     private String brandName;
     private String genericClass;
     private String uses;
-    private String alerts;
 
     MedicationList(String genericClass, String genericName, String brandName) {
         this.genericClass = genericClass;
@@ -28,54 +27,44 @@ public class MedicationList {
 
     }
 
-    public String getMedicationClass() {
-        String sqlSelect = "SELECT distinct Class FROM AMPM.Generic_Class";
+    public String getMedicationClassByGeneName(String geneName) {
+        String sqlSelect = "SELECT distinct Class FROM AMPM.Medication_List "
+                + "WHERE GenericName ='" + geneName + "'";
         return sqlSelect;
     }
 
-    public String getGenericaNameByClass(String geneClass) {
-        String sqlSelect = "SELECT distinct Generic_Name FROM AMPM.Generic_Class "
-                + "WHERE Class ='" + geneClass + "'";
+    public String getMedicationClassByBrandName(String brandName) {
+        String sqlSelect = "SELECT distinct Class FROM AMPM.Medication_List "
+                + "WHERE BrandName ='" + brandName + "'";
         return sqlSelect;
     }
 
-    public String getBrandNameByGenericaName(String geneName) {
-        String sqlSelect = "SELECT distinct Brand_Name FROM AMPM.Brand_Name "
-                + "WHERE Generic_Name ='" + geneName + "'";
+    public String getGenericaName() {
+        String sqlSelect = "SELECT distinct GenericName FROM AMPM.Medication_List";
         return sqlSelect;
     }
 
-    public String getUsesByGenericaName(String geneName) {
-        String sqlSelect = "SELECT Uses FROM AMPM.Generic_Uses "
-                + "WHERE Generic_Name ='" + geneName + "'";
+    public String getBrandName() {
+        String sqlSelect = "SELECT distinct BrandName FROM AMPM.Medication_List ";
         return sqlSelect;
     }
 
-    public String getAlertsByGenericaName(String geneName) {
-        String sqlSelect = "SELECT distinct Alerts FROM AMPM.Generic_Uses "
-                + "WHERE Generic_Name ='" + geneName + "'";
+    public String getBrandNameByGenericName(String geneName) {
+        String sqlSelect = "SELECT distinct BrandName FROM AMPM.Medication_List "
+                + "WHERE GenericName ='" + geneName + "'";
         return sqlSelect;
     }
 
-    public String insertBrandName() {
-        String sqlInsert = "INSERT INTO AMPM.Brand_Name (Generic_Name, Brand_Name) Values ('"
+    public String getGenericNameByBrandName(String brandName) {
+        String sqlSelect = "SELECT distinct GenericName FROM AMPM.Medication_List "
+                + "WHERE BrandName ='" + brandName + "'";
+        return sqlSelect;
+    }
+
+    public String insertMedication() {
+        String sqlInsert = "INSERT INTO AMPM.Medication_List (Class, GenericName, BrandName, UsedFor) Values ('"
                 + this.genericName + "', '"
                 + this.brandName + "')";
-        return sqlInsert;
-    }
-
-    public String insertClass() {
-        String sqlInsert = "INSERT INTO AMPM.Generic_Class (Generic_Name, Class) Values ('"
-                + this.genericName + "', '"
-                + this.genericClass + "')";
-        return sqlInsert;
-    }
-
-    public String insertUses(String uses, String alerts) {
-        String sqlInsert = "INSERT INTO AMPM.Generic_Uses (Generic_Name, Uses, Alerts) Values ('"
-                + this.genericName + "', '"
-                + this.uses + "', '"
-                + this.alerts + "')";
         return sqlInsert;
     }
 }

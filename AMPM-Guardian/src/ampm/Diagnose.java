@@ -107,4 +107,19 @@ public class Diagnose {
 
         return sqlSelect;
     }
+
+    public String getDiagnosesList() {
+        String sqlSelect = "SELECT * FROM AMPM.Diagnoses_List";
+        return sqlSelect;
+    }
+
+    public String checkDianosesList(String diagnosis) {
+        String sqlSelect = "SELECT * FROM AMPM.Diagnoses_List WHERE Diagnosis = '" + diagnosis + "'";
+        return sqlSelect;
+    }
+
+    public String insertDiagnosesToList(String diagnosis) {
+        String sqlSelect = "INSERT INTO AMPM.Diagnoses_List (Diagnosis) VALUES ('" + diagnosis + "')";
+        return sqlSelect;
+    }
 }

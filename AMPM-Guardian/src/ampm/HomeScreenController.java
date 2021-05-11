@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
 import java.util.Timer;
@@ -74,6 +75,7 @@ public class HomeScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Locale.setDefault(Locale.ENGLISH);
         System.out.print(DBConnection.getStatement());
         try {
             // should be able to do this from the DBConnection class

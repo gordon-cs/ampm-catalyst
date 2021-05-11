@@ -13,20 +13,20 @@ public class ProviderType {
 
     //Insert new type to ProviderType database table
     public String insertNewType(String type) {
-        String sqlSelect = "INSERT INTO AMPM.ProviderType (Type) VALUES ('"
+        String sqlSelect = "INSERT INTO AMPM.Provider_Type (Type) VALUES ('"
                 + type + "')";
         return sqlSelect;
     }
 
     //Check if this type exist in database table
     public String checkType(String type) {
-        String sqlSelect = "SELECT * FROM AMPM.ProviderType WHERE Type = '" + type + "'";
+        String sqlSelect = "SELECT * FROM AMPM.Provider_Type WHERE Type = '" + type + "'";
         return sqlSelect;
     }
 
     //Get all the type from ProviderType database table
     public String getProviderType() {
-        String sqlSelect = "SELECT * FROM AMPM.ProviderType";
+        String sqlSelect = "SELECT * FROM AMPM.Provider_Type";
         return sqlSelect;
     }
 }

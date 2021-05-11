@@ -95,7 +95,7 @@ public class PreventionImmunizations {
     }
 
     public String getSQLUpdateNewItem(String newItem) {
-        String sqlUpdate = "UPDATE AMPM.PreventionImmunizations SET Type ='" + this.type + "',"
+        String sqlUpdate = "UPDATE AMPM.Prevention_Immunizations SET Type ='" + this.type + "',"
                 + "Name ='" + newItem + "', "
                 + "DateGiven ='" + this.dateGiven + "', "
                 + "whereGiven ='" + this.whereGiven + "'"
@@ -106,14 +106,14 @@ public class PreventionImmunizations {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='"
+        String sqlSelect = "SELECT * FROM AMPM.Prevention_Immunizations WHERE ClientID ='"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByDiagnosisName(String diagnosisName) {
-        String sqlSelect = "SELECT * FROM AMPM.PreventionImmunizations WHERE ClientID ='" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Prevention_Immunizations WHERE ClientID ='" + this.clientID
                 + "'AND Name = '" + diagnosisName + "'";
 
         return sqlSelect;

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.fxml.FXML;
@@ -68,6 +69,7 @@ public class AddClientScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dbConnection = new DBConnection();
+        Locale.setDefault(Locale.ENGLISH);
 
     }
 
@@ -118,6 +120,10 @@ public class AddClientScreenController implements Initializable {
                         alert.setAlertType(AlertType.INFORMATION);
                         alert.setContentText("A new client was insertion successfully!");
                         finalizeInsert();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+                        Parent root = (Parent) loader.load();
+                        HomeScreenController refresh = loader.getController();
+                        refresh.setupListView();
                     } catch (SQLException e) {
                         // TODO: handle exception
                         e.printStackTrace();
@@ -142,7 +148,10 @@ public class AddClientScreenController implements Initializable {
                     alert.setAlertType(AlertType.INFORMATION);
                     alert.setContentText("A new client was insertion successfully!");
                     finalizeInsert();
-
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+                    Parent root = (Parent) loader.load();
+                    HomeScreenController refresh = loader.getController();
+                    refresh.setupListView();
                 } catch (SQLException e) {
                     // TODO: handle exception
                     e.printStackTrace();
@@ -208,6 +217,7 @@ public class AddClientScreenController implements Initializable {
     // Handle the logic after a successful insert. 
     private void finalizeInsert() throws IOException, SQLException {
         // Close current screen
+
         Stage stage = (Stage) addClientButton.getScene().getWindow();
         stage.close();
 

@@ -90,7 +90,7 @@ public class MedicalEquipment {
     public String getSQLInsert() {
         String sqlInsert;
 
-        sqlInsert = "INSERT INTO AMPM.MedicalEquipment (ClientID, EquipType, PrescribedBy, UsedFor, StartDate, Notes) Values ('"
+        sqlInsert = "INSERT INTO AMPM.Medical_Equipment (ClientID, EquipType, PrescribedBy, UsedFor, StartDate, Notes) Values ('"
                 + this.clientID + "','"
                 + this.type + "','"
                 + this.prescribedBy + "','"
@@ -105,7 +105,7 @@ public class MedicalEquipment {
     public String getSQLUpdate() {
         String sqlUpdate;
 
-        sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType ='" + this.type + "',"
+        sqlUpdate = "UPDATE AMPM.Medical_Equipment SET EquipType ='" + this.type + "',"
                 + "PrescribedBy ='" + this.prescribedBy + "', "
                 + "UsedFor ='" + this.usedFor + "', "
                 + "StartDate ='" + this.startDate + "', "
@@ -116,7 +116,7 @@ public class MedicalEquipment {
     }
 
     public String getSQLUpdateEquipType(String newEquipType) {
-        String sqlUpdate = "UPDATE AMPM.MedicalEquipment SET EquipType ='" + newEquipType + "',"
+        String sqlUpdate = "UPDATE AMPM.Medical_Equipment SET EquipType ='" + newEquipType + "',"
                 + "PrescribedBy ='" + this.prescribedBy + "', "
                 + "UsedFor ='" + this.usedFor + "', "
                 + "StartDate ='" + this.startDate + "', "
@@ -128,14 +128,14 @@ public class MedicalEquipment {
     }
 
     public String getSQLSelect() {
-        String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID ='"
+        String sqlSelect = "SELECT * FROM AMPM.Medical_Equipment WHERE ClientID ='"
                 + this.clientID + "'";
 
         return sqlSelect;
     }
 
     public String getSQLSelectByType(String equipType) {
-        String sqlSelect = "SELECT * FROM AMPM.MedicalEquipment WHERE ClientID ='" + this.clientID
+        String sqlSelect = "SELECT * FROM AMPM.Medical_Equipment WHERE ClientID ='" + this.clientID
                 + "'AND EquipType = '"
                 + equipType + "'";
 
