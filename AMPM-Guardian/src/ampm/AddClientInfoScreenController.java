@@ -997,7 +997,7 @@ public class AddClientInfoScreenController implements Initializable {
                         medicationBrandName.getValue().toString(), medicationDose.getText(),
                         medicationFrequency.getText(), startDate,
                         (medicationPrescribedBy.getValue() != null ? medicationPrescribedBy.getValue().toString() : ""),
-                        medicationUsedFor.getValue().toString(), stoppedDate,
+                        (medicationUsedFor.getValue() != null ? medicationProvider.getValue().toString() : ""), stoppedDate,
                         (medicationProvider.getValue() != null ? medicationProvider.getValue().toString() : ""));
                 dbConnection.addInfo(medicationInfo.getSQLUpdateNewItem(medicationGenericName.getValue().toString()));
             } else {
@@ -1005,9 +1005,18 @@ public class AddClientInfoScreenController implements Initializable {
                         medicationGenericName.getValue().toString(), medicationBrandName.getValue().toString(),
                         medicationDose.getText(), medicationFrequency.getText(),
                         startDate, (medicationPrescribedBy.getValue() != null ? medicationPrescribedBy.getValue().toString() : ""),
-                        medicationUsedFor.getValue().toString(), stoppedDate,
+                        (medicationUsedFor.getValue() != null ? medicationProvider.getValue().toString() : ""), stoppedDate,
                         (medicationProvider.getValue() != null ? medicationProvider.getValue().toString() : ""));
                 dbConnection.addInfo(medicationInfo.getSQLInsert());
+            }
+            //Insert new medication if that is not in database
+            MedicationList medication = new MedicationList(medicationClass.getValue() != null ? medicationClass.getValue().toString() : "",
+                    medicationGenericName.getValue() != null ? medicationGenericName.getValue().toString() : "",
+                    medicationBrandName.getValue() != null ? medicationBrandName.getValue().toString() : "");
+            if (isEmpty(dbConnection.executeStatement(medication.checkMedication()))) {
+                dbConnection.addInfo(medication.insertMedication());
+                setUpGenericNameBox();
+                setUpBrandNameBox();
             }
             setUpMedicationList();
         } else {

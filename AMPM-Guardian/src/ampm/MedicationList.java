@@ -14,11 +14,11 @@ public class MedicationList {
     //The private values for this object, each one represents a col in the DB
     private String genericName;
     private String brandName;
-    private String genericClass;
+    private String medicationClass;
     private String uses;
 
-    MedicationList(String genericClass, String genericName, String brandName) {
-        this.genericClass = genericClass;
+    MedicationList(String medicationClass, String genericName, String brandName) {
+        this.medicationClass = medicationClass;
         this.genericName = genericName;
         this.brandName = brandName;
     }
@@ -61,8 +61,17 @@ public class MedicationList {
         return sqlSelect;
     }
 
+    public String checkMedication() {
+        String sqlInsert = "SELECT * FROM AMPM.Medication_List "
+                + "WHERE Class ='" + this.medicationClass + "'"
+                + "AND GenericName ='" + this.genericName + "'"
+                + "AND BrandName ='" + this.brandName + "'";
+        return sqlInsert;
+    }
+
     public String insertMedication() {
-        String sqlInsert = "INSERT INTO AMPM.Medication_List (Class, GenericName, BrandName, UsedFor) Values ('"
+        String sqlInsert = "INSERT INTO AMPM.Medication_List (Class, GenericName, BrandName) Values ('"
+                + this.medicationClass + "', '"
                 + this.genericName + "', '"
                 + this.brandName + "')";
         return sqlInsert;
