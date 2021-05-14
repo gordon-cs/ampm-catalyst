@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * This is for medication information
+ *
  * @author john.zhu
  */
 public class Medication {
@@ -18,10 +19,10 @@ public class Medication {
     private String prescribedBy;
     private String usedFor;
     private String dateStopped;
-    private String provider;
+    private String stoppedBy;
 
     Medication(String clientID, String medicationClass, String genericName, String brandName, String dose, String frequency,
-            String startDate, String prescribedBy, String usedFor, String dateStopped, String provider) {
+            String startDate, String prescribedBy, String usedFor, String dateStopped, String stoppedBy) {
         this.clientID = clientID;
         this.medicationClass = medicationClass;
         this.genericName = genericName;
@@ -32,7 +33,7 @@ public class Medication {
         this.prescribedBy = prescribedBy;
         this.usedFor = usedFor;
         this.dateStopped = dateStopped;
-        this.provider = provider;
+        this.stoppedBy = stoppedBy;
     }
 
     Medication(String clientID) {
@@ -45,7 +46,7 @@ public class Medication {
         String sqlInsert;
 
         sqlInsert = "INSERT INTO AMPM.Medication (ClientID, Class, GenericName, BrandName, Dose, "
-                + "Frequency,StartDate, PrescribedBy,UsedFor,DateStopped, Provider) Values ('"
+                + "Frequency, StartDate, PrescribedBy, UsedFor, DateStopped, StoppedBy) Values ('"
                 + this.clientID + "', '"
                 + this.medicationClass + "', '"
                 + this.genericName + "', '"
@@ -56,7 +57,7 @@ public class Medication {
                 + this.prescribedBy + "', '"
                 + this.usedFor + "', '"
                 + this.dateStopped + "', '"
-                + this.provider + "')";
+                + this.stoppedBy + "')";
         System.out.println(sqlInsert);
         return sqlInsert;
     }
@@ -75,7 +76,7 @@ public class Medication {
                 + "PrescribedBy = '" + this.prescribedBy + "', "
                 + "UsedFor = '" + this.usedFor + "', "
                 + "DateStopped = '" + this.dateStopped + "', "
-                + "Provider = '" + this.provider + "' "
+                + "StoppedBy = '" + this.stoppedBy + "' "
                 + "WHERE ClientID = '" + this.clientID + "'";
         return sqlUpdate;
     }
@@ -92,7 +93,7 @@ public class Medication {
                 + "PrescribedBy = '" + this.prescribedBy + "', "
                 + "UsedFor = '" + this.usedFor + "', "
                 + "DateStopped = '" + this.dateStopped + "', "
-                + "Provider = '" + this.provider + "' "
+                + "StoppedBy = '" + this.stoppedBy + "' "
                 + "WHERE ClientID = '" + this.clientID + "' "
                 + "AND GenericName = '" + this.genericName + "'";
         System.out.println(sqlUpdate);

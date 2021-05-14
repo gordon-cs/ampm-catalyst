@@ -83,10 +83,9 @@ public class AddClientScreenController implements Initializable {
      */
     @FXML
     public void addNewClient(MouseEvent event) throws SQLException, IOException {
-
         //Input should not be empty
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()
-                || phoneNumber.getText().isEmpty() || emailAddress.getText().isEmpty() || dateOfBirth.getValue().toString().isEmpty()) {
+                || phoneNumber.getText().isEmpty() || emailAddress.getText().isEmpty() || dateOfBirth.getValue() == null) {
             infoLabel.setStyle("-fx-text-fill:red");
             infoLabel.setText("Please complete all the requir field");
         } //Validating the input of name
@@ -118,7 +117,9 @@ public class AddClientScreenController implements Initializable {
                         System.out.println(dateOfBirth.getValue().toString());
                         dbConnection.addInfo(client.getSQLInsert());
                         alert.setAlertType(AlertType.INFORMATION);
+                        alert.setHeaderText(null);
                         alert.setContentText("A new client was insertion successfully!");
+                        alert.showAndWait();
                         finalizeInsert();
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
                         Parent root = (Parent) loader.load();
