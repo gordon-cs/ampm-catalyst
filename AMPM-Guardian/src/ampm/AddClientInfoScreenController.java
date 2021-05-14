@@ -255,7 +255,11 @@ public class AddClientInfoScreenController implements Initializable {
                         (String) diagnoseList.getSelectionModel().getSelectedItem()));
                 while (rs.next()) {
                     diagnoseDescription.setValue(rs.getString("Diagnosis"));
-                    diagosedDate.setValue(LocalDate.parse(rs.getString("StartDate")));
+                    if (!rs.getString("StartDate").equals("0000-00-00")) {
+                        diagosedDate.setValue(LocalDate.parse(rs.getString("StartDate")));
+                    } else {
+                        diagosedDate.setValue(null);
+                    }
                     diagnosisType.setValue(rs.getString("DiagnosedBy"));
                 }
                 //Make TextField editable
@@ -622,18 +626,21 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void saveDiagnoseTab(MouseEvent event) throws SQLException, IOException {
         //Only save information when it is valid
-        if (diagosedDate.getValue() == null) {
-            diagosedDate.setValue(LocalDate.now());
-        }
-        if (!diagnoseDescription.getValue().toString().isEmpty() && diagosedDate.getValue() != null) {
+        if (diagnoseDescription.getValue() != null) {
+            String diagDate = "0000-00-00";
+            if (diagosedDate.getValue() != null) {
+                diagDate = diagosedDate.getValue().toString();
+            }
             if (diagnoseList.getSelectionModel().getSelectedIndex() > -1) {
                 //Update infomation for current selected relative
-                Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(), diagosedDate.getValue().toString(), diagnosisType.getValue().toString());
+                Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(),
+                        diagDate,(diagnosisType.getValue() != null ? diagnosisType.getValue().toString() : ""));
                 dbConnection.addInfo(diagnoseInfo.getSQLUpdateNewItem(diagnoseDescription.getValue().toString()));
 
             } else {
                 //Insert infomation for new relative
-                Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getValue().toString(), diagosedDate.getValue().toString(), diagnosisType.getValue().toString());
+                Diagnose diagnoseInfo = new Diagnose(this.clientID, diagnoseDescription.getValue().toString(),
+                        diagDate, (diagnosisType.getValue() != null ? diagnosisType.getValue().toString() : ""));
                 dbConnection.addInfo(diagnoseInfo.getSQLInsert());
             }
 
@@ -982,7 +989,7 @@ public class AddClientInfoScreenController implements Initializable {
     @FXML
     private void saveMedicalTab(MouseEvent event) throws SQLException, IOException {
         //Only save information when it is valid
-        if (!medicationGenericName.getItems().toString().isEmpty() && medicationGenericName.getValue() != null) {
+        if (medicationGenericName.getValue() != null) {
             String startDate = "0000-00-00";
             String stoppedDate = "0000-00-00";
             if (medicationStartDate.getValue() != null) {
@@ -1015,6 +1022,7 @@ public class AddClientInfoScreenController implements Initializable {
                     medicationBrandName.getValue() != null ? medicationBrandName.getValue().toString() : "");
             if (isEmpty(dbConnection.executeStatement(medication.checkMedication()))) {
                 dbConnection.addInfo(medication.insertMedication());
+
                 setUpGenericNameBox();
                 setUpBrandNameBox();
             }
