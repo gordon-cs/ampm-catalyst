@@ -61,13 +61,6 @@ public class LoginScreenController implements Initializable {
     }
 
     @FXML
-    private void showPassword(ActionEvent event) {
-        if (showPassword.isSelected()) {
-            passField.setStyle("-fx-echo-char: -;");
-        }
-    }
-
-    @FXML
     private void handleLoginClick(MouseEvent event) throws SQLException, IOException {
         System.out.println(passField.getText());
         Boolean success = dbConnection.init(userField.getText(), passField.getText());

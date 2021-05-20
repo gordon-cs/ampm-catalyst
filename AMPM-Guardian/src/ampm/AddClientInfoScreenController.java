@@ -575,7 +575,7 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
-    //Get all the brand name from database 
+    //Get all the brand name from database by specific generic name
     private void getMedicationBrandName() {
         try {
             setUpBrandNameBox(medicationGenericName.getSelectionModel().getSelectedItem().toString());
@@ -586,7 +586,7 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
     
-    //Get all the generic name from database 
+    //Get all the generic name from database by specific brand name
     private void getMedicationGenericName() {
         try {
             setUpGenericNameBox(medicationBrandName.getSelectionModel().getSelectedItem().toString());
@@ -881,7 +881,7 @@ public class AddClientInfoScreenController implements Initializable {
         familyRealtionAge.clear();
     }
 
-    //Insert or update family history of client info to database
+    //Insert or update medical equipment of client info to database
     @FXML
     private void saveMedicalEquipTab(MouseEvent event) throws SQLException, IOException {
         //Only save information when it is valid
