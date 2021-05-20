@@ -11,7 +11,7 @@ package ampm;
  */
 public class ProviderType {
 
-    //Insert new type to ProviderType database table
+    //Insert new type to Provider_Type database table
     public String insertNewType(String type) {
         String sqlSelect = "INSERT INTO AMPM.Provider_Type (Type) VALUES ('"
                 + type + "')";

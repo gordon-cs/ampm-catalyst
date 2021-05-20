@@ -541,18 +541,21 @@ public class AddClientInfoScreenController implements Initializable {
 
     }
 
+    //Get other information by generic name 
     private void getMedicationInfoByGeneric() {
         medicationBrandName.setOnAction(null);
         getMedicationClassByGeneric();
         getMedicationBrandName();
     }
 
+    //Get other information by brand name 
     private void getMedicationInfoByBrand() {
         medicationGenericName.setOnAction(null);
         getMedicationClassByBrand();
         getMedicationGenericName();
     }
 
+    //Autofill the dropdown box by specific generic name
     private void getMedicationClassByGeneric() {
         try {
             setUpMedicationClassBoxByGeneric(medicationGenericName.getSelectionModel().getSelectedItem().toString());
@@ -562,6 +565,7 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
+    //Autofill the dropdown box by specific brand name
     private void getMedicationClassByBrand() {
         try {
             setUpMedicationClassBoxByBrand(medicationBrandName.getSelectionModel().getSelectedItem().toString());
@@ -571,6 +575,7 @@ public class AddClientInfoScreenController implements Initializable {
         }
     }
 
+    //Get all the brand name from database 
     private void getMedicationBrandName() {
         try {
             setUpBrandNameBox(medicationGenericName.getSelectionModel().getSelectedItem().toString());
@@ -580,7 +585,8 @@ public class AddClientInfoScreenController implements Initializable {
             ex.printStackTrace();
         }
     }
-
+    
+    //Get all the generic name from database 
     private void getMedicationGenericName() {
         try {
             setUpGenericNameBox(medicationBrandName.getSelectionModel().getSelectedItem().toString());
@@ -634,7 +640,7 @@ public class AddClientInfoScreenController implements Initializable {
             if (diagnoseList.getSelectionModel().getSelectedIndex() > -1) {
                 //Update infomation for current selected relative
                 Diagnose diagnoseInfo = new Diagnose(this.clientID, (String) diagnoseList.getSelectionModel().getSelectedItem(),
-                        diagDate,(diagnosisType.getValue() != null ? diagnosisType.getValue().toString() : ""));
+                        diagDate, (diagnosisType.getValue() != null ? diagnosisType.getValue().toString() : ""));
                 dbConnection.addInfo(diagnoseInfo.getSQLUpdateNewItem(diagnoseDescription.getValue().toString()));
 
             } else {
